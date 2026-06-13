@@ -28,7 +28,7 @@ class CheckboxField extends BaseField {
 	 * Render the checkbox input array or single toggle element.
 	 *
 	 * Determines rendering logic based on whether choices were supplied
-	 * in the Smart Product Options and Addons schema. Adds `data-price` properties on an
+	 * in the OptionBay - Product Options and Addons schema. Adds `data-price` properties on an
 	 * individual element basis for JS evaluation.
 	 *
 	 * @since 1.0.0
@@ -115,12 +115,12 @@ class CheckboxField extends BaseField {
 			$allowed = array_column( $options, 'value' );
 			foreach ( $value as $v ) {
 				if ( ! in_array( $v, $allowed, true ) ) {
-					smart_product_options_addons_log( "CheckboxField Validation: Submited value '{$v}' not in allowed set.", 'WARNING' );
+					woo_product_options_addons_log( "CheckboxField Validation: Submited value '{$v}' not in allowed set.", 'WARNING' );
 					return new \WP_Error(
 						'invalid_option',
 						sprintf(
 							/* translators: %s: field label */
-							__( 'Invalid selection for %s.', 'smart-product-options-addons' ),
+							__( 'Invalid selection for %s.', 'woo-product-options-addons' ),
 							$this->get( 'label', $this->get( 'id' ) )
 						)
 					);
@@ -157,7 +157,7 @@ class CheckboxField extends BaseField {
 
 		// Single toggle
 		if ( empty( $options ) ) {
-			return $value ? __( 'Yes', 'smart-product-options-addons' ) : __( 'No', 'smart-product-options-addons' );
+			return $value ? __( 'Yes', 'woo-product-options-addons' ) : __( 'No', 'woo-product-options-addons' );
 		}
 
 		// Multi-checkbox

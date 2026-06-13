@@ -8,7 +8,7 @@ function SettingsApp() {
     <WpabProvider>
       <ToastProvider>
         <ToastContainer />
-        <div className="spoa-mt-2">
+        <div className="wpab-wpoa-mt-2">
           <Settings />
         </div>
       </ToastProvider>

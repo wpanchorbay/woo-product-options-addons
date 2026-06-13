@@ -469,13 +469,13 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 		<div
 			className={ `${ sizeClass } ${ className } ${
 				classNames?.container || ''
-			} spoa-align-middle`.trim() }
+			} wpab-wpoa-align-middle`.trim() }
 			ref={ containerRef }
 		>
 			{ label && (
 				<label
 					htmlFor={ selectId }
-					className={ `spoa-block spoa-mb-1 ${
+					className={ `wpab-wpoa-block wpab-wpoa-mb-1 ${
 						classNames?.label || ''
 					}`.trim() }
 				>
@@ -484,7 +484,7 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 			) }
 
 			<div
-				className={ `spoa-relative ${ classNames?.innerContainer }` }
+				className={ `wpab-wpoa-relative ${ classNames?.innerContainer }` }
 				style={ { width: explicitWidth } }
 			>
 				{ /* Trigger that looks like WP native select */ }
@@ -496,37 +496,37 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 					onClick={ () => ! disabled && setIsOpen( ! isOpen ) }
 					onKeyDown={ handleTriggerKeyDown }
 					className={ `
-            spoa-flex spoa-items-center spoa-justify-between 
-            spoa-appearance-none spoa-border spoa-border-[#8c8f94] 
-            spoa-rounded-[3px] spoa-px-2 spoa-pr-6 spoa-min-h-[30px] 
-            spoa-leading-loose spoa-transition-all spoa-duration-100 
-            spoa-select-none spoa-relative spoa-box-border spoa-w-full 
+            wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-justify-between 
+            wpab-wpoa-appearance-none wpab-wpoa-border wpab-wpoa-border-[#8c8f94] 
+            wpab-wpoa-rounded-[3px] wpab-wpoa-px-2 wpab-wpoa-pr-6 wpab-wpoa-min-h-[30px] 
+            wpab-wpoa-leading-loose wpab-wpoa-transition-all wpab-wpoa-duration-100 
+            wpab-wpoa-select-none wpab-wpoa-relative wpab-wpoa-box-border wpab-wpoa-w-full 
             ${
 				disabled
-					? `spoa-cursor-not-allowed spoa-bg-[#f0f0f1] spoa-text-[#a7aaad] ${
+					? `wpab-wpoa-cursor-not-allowed wpab-wpoa-bg-[#f0f0f1] wpab-wpoa-text-[#a7aaad] ${
 							classNames?.triggerDisabled || ''
 					  }`
-					: `spoa-cursor-pointer spoa-bg-white spoa-text-[#2c3338]`
+					: `wpab-wpoa-cursor-pointer wpab-wpoa-bg-white wpab-wpoa-text-[#2c3338]`
 			} 
             ${
 				isOpen
-					? `!spoa-border-[#2271b1] spoa-shadow-[0_0_0_1px_#2271b1] spoa-outline-none ${
+					? `!wpab-wpoa-border-[#2271b1] wpab-wpoa-shadow-[0_0_0_1px_#2271b1] wpab-wpoa-outline-none ${
 							classNames?.triggerOpen || ''
 					  }`
-					: 'spoa-shadow-none'
+					: 'wpab-wpoa-shadow-none'
 			} 
             ${
 				isError && ! isOpen
-					? '!spoa-border-red-400 !spoa-shadow-none'
+					? '!wpab-wpoa-border-red-400 !wpab-wpoa-shadow-none'
 					: ''
 			}
             ${ classNames?.trigger || '' }
           `.trim() }
 				>
 					<span
-						className={ `spoa-flex-1 ${
+						className={ `wpab-wpoa-flex-1 ${
 							! renderOption
-								? 'spoa-overflow-hidden spoa-text-ellipsis spoa-whitespace-nowrap'
+								? 'wpab-wpoa-overflow-hidden wpab-wpoa-text-ellipsis wpab-wpoa-whitespace-nowrap'
 								: ''
 						} ${ classNames?.value || '' }`.trim() }
 					>
@@ -537,14 +537,14 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 							: placeholder }
 					</span>
 
-					<div className="spoa-absolute spoa-right-1.5 spoa-flex spoa-items-center spoa-gap-1">
+					<div className="wpab-wpoa-absolute wpab-wpoa-right-1.5 wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-1">
 						{ allowClear && value !== null && ! disabled && (
 							<button
 								onClick={ ( e ) => {
 									e.stopPropagation();
 									onChange( '' );
 								} }
-								className="spoa-p-0.5 spoa-bg-transparent spoa-border-none spoa-text-[#8c8f94] hover:spoa-text-red-500 spoa-cursor-pointer spoa-flex spoa-items-center"
+								className="wpab-wpoa-p-0.5 wpab-wpoa-bg-transparent wpab-wpoa-border-none wpab-wpoa-text-[#8c8f94] hover:wpab-wpoa-text-red-500 wpab-wpoa-cursor-pointer wpab-wpoa-flex wpab-wpoa-items-center"
 							>
 								<X size={ 12 } />
 							</button>
@@ -558,12 +558,12 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 					createPortal(
 						<div
 							ref={ dropdownRef }
-							className={ `spoa-fixed spoa-z-[999999] spoa-bg-white spoa-border-2 spoa-border-[#2271b1] ${
+							className={ `wpab-wpoa-fixed wpab-wpoa-z-[999999] wpab-wpoa-bg-white wpab-wpoa-border-2 wpab-wpoa-border-[#2271b1] ${
 								differentDropdownWidth
-									? 'spoa-rounded-[3px]'
-									: 'spoa-border-t-0 spoa-mt-[-3px] spoa-rounded-b-[3px]'
+									? 'wpab-wpoa-rounded-[3px]'
+									: 'wpab-wpoa-border-t-0 wpab-wpoa-mt-[-3px] wpab-wpoa-rounded-b-[3px]'
 							} 
-              spoa-rounded-b-[3px] spoa-shadow-[0_3px_5px_rgba(0,0,0,0.2)] spoa-p-0 spoa-box-border ${
+              wpab-wpoa-rounded-b-[3px] wpab-wpoa-shadow-[0_3px_5px_rgba(0,0,0,0.2)] wpab-wpoa-p-0 wpab-wpoa-box-border ${
 					classNames?.dropdown || ''
 				}`.trim() }
 							style={ {
@@ -576,14 +576,14 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 							} }
 						>
 							{ dropdownHeader && (
-								<div className="spoa-border-b spoa-border-[#ccd0d4]">
+								<div className="wpab-wpoa-border-b wpab-wpoa-border-[#ccd0d4]">
 									{ dropdownHeader }
 								</div>
 							) }
 
 							{ enableSearch && (
 								<div
-									className={ `spoa-p-1.5 ${
+									className={ `wpab-wpoa-p-1.5 ${
 										classNames?.searchContainer || ''
 									}`.trim() }
 								>
@@ -598,7 +598,7 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 										onKeyDown={ handleSearchKeyDown }
 										onClick={ ( e ) => e.stopPropagation() }
 										placeholder="Search..."
-										className={ `spoa-w-full spoa-px-2 spoa-leading-loose spoa-min-h-[26px] spoa-border spoa-border-[#aaaaaa] spoa-bg-[#fcfcfc] spoa-rounded-[3px] spoa-box-border spoa-text-[13px] focus:spoa-outline-none focus:spoa-shadow-none ${
+										className={ `wpab-wpoa-w-full wpab-wpoa-px-2 wpab-wpoa-leading-loose wpab-wpoa-min-h-[26px] wpab-wpoa-border wpab-wpoa-border-[#aaaaaa] wpab-wpoa-bg-[#fcfcfc] wpab-wpoa-rounded-[3px] wpab-wpoa-box-border wpab-wpoa-text-[13px] focus:wpab-wpoa-outline-none focus:wpab-wpoa-shadow-none ${
 											classNames?.searchInput || ''
 										}`.trim() }
 									/>
@@ -608,7 +608,7 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 							<ul
 								ref={ listRef }
 								role="listbox"
-								className={ `spoa-max-h-[220px] spoa-overflow-y-auto spoa-m-0 spoa-p-0 spoa-list-none ${
+								className={ `wpab-wpoa-max-h-[220px] wpab-wpoa-overflow-y-auto wpab-wpoa-m-0 wpab-wpoa-p-0 wpab-wpoa-list-none ${
 									classNames?.list || ''
 								}`.trim() }
 								style={ {
@@ -616,15 +616,15 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 								} }
 							>
 								{ isLoading ? (
-									<li className="spoa-px-3 spoa-py-3 spoa-text-[#646970] spoa-text-[13px] spoa-flex spoa-items-center spoa-gap-2 spoa-justify-center">
+									<li className="wpab-wpoa-px-3 wpab-wpoa-py-3 wpab-wpoa-text-[#646970] wpab-wpoa-text-[13px] wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-2 wpab-wpoa-justify-center">
 										<Hourglass
 											size={ 14 }
-											className="spoa-animate-spin"
+											className="wpab-wpoa-animate-spin"
 										/>
 										Loading...
 									</li>
 								) : filteredOptions.length === 0 ? (
-									<li className="spoa-px-3 spoa-py-1.5 spoa-text-[#646970] spoa-italic spoa-text-[13px] spoa-m-0">
+									<li className="wpab-wpoa-px-3 wpab-wpoa-py-1.5 wpab-wpoa-text-[#646970] wpab-wpoa-italic wpab-wpoa-text-[13px] wpab-wpoa-m-0">
 										{ searchQuery
 											? 'No results found'
 											: 'No options available' }
@@ -670,27 +670,27 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 													handleSelect( opt );
 												} }
 												className={ `
-                        spoa-px-3 spoa-py-1.5 spoa-flex spoa-items-center 
-                        spoa-justify-between spoa-text-[13px] spoa-m-0 
+                        wpab-wpoa-px-3 wpab-wpoa-py-1.5 wpab-wpoa-flex wpab-wpoa-items-center 
+                        wpab-wpoa-justify-between wpab-wpoa-text-[13px] wpab-wpoa-m-0 
                         ${
 							isDisabled
-								? 'spoa-cursor-not-allowed'
-								: 'spoa-cursor-pointer'
+								? 'wpab-wpoa-cursor-not-allowed'
+								: 'wpab-wpoa-cursor-pointer'
 						} 
                         ${
 							isHighlighted
-								? `spoa-bg-[#2271b1] spoa-text-white ${
+								? `wpab-wpoa-bg-[#2271b1] wpab-wpoa-text-white ${
 										classNames?.optionHighlighted || ''
 								  }`
 								: isDisabled
-								? 'spoa-bg-transparent spoa-text-[#a7aaad]'
-								: `spoa-bg-transparent spoa-text-[#2c3338]`
+								? 'wpab-wpoa-bg-transparent wpab-wpoa-text-[#a7aaad]'
+								: `wpab-wpoa-bg-transparent wpab-wpoa-text-[#2c3338]`
 						} 
                         ${ isSelected ? classNames?.optionSelected || '' : '' }
                         ${ classNames?.option || '' }
                       `.trim() }
 											>
-												<div className="spoa-flex-1 spoa-overflow-hidden">
+												<div className="wpab-wpoa-flex-1 wpab-wpoa-overflow-hidden">
 													{ renderOption
 														? renderOption( opt )
 														: opt.label }
@@ -699,10 +699,10 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 												{ /* Icons for variants */ }
 												{ isPro && (
 													<span
-														className={ `spoa-ml-2 spoa-flex ${
+														className={ `wpab-wpoa-ml-2 wpab-wpoa-flex ${
 															isHighlighted
-																? 'spoa-text-white'
-																: 'spoa-text-[#ffb900]'
+																? 'wpab-wpoa-text-white'
+																: 'wpab-wpoa-text-[#ffb900]'
 														}` }
 													>
 														<Lock size={ 14 } />
@@ -710,10 +710,10 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 												) }
 												{ isComingSoon && (
 													<span
-														className={ `spoa-ml-2 spoa-text-[10px] spoa-uppercase spoa-px-1.5 spoa-py-0.5 spoa-rounded-[10px] spoa-font-semibold spoa-flex spoa-items-center spoa-gap-1 ${
+														className={ `wpab-wpoa-ml-2 wpab-wpoa-text-[10px] wpab-wpoa-uppercase wpab-wpoa-px-1.5 wpab-wpoa-py-0.5 wpab-wpoa-rounded-[10px] wpab-wpoa-font-semibold wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-1 ${
 															isHighlighted
-																? 'spoa-bg-white/20 spoa-text-white'
-																: 'spoa-bg-[#f0f0f1] spoa-text-[#646970]'
+																? 'wpab-wpoa-bg-white/20 wpab-wpoa-text-white'
+																: 'wpab-wpoa-bg-[#f0f0f1] wpab-wpoa-text-[#646970]'
 														}` }
 													>
 														<Hourglass
@@ -729,7 +729,7 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 							</ul>
 
 							{ dropdownFooter && (
-								<div className="spoa-border-t spoa-border-[#ccd0d4]">
+								<div className="wpab-wpoa-border-t wpab-wpoa-border-[#ccd0d4]">
 									{ dropdownFooter }
 								</div>
 							) }
@@ -741,7 +741,7 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 
 			{ description && (
 				<p
-					className={ `description spoa-mt-1 ${
+					className={ `description wpab-wpoa-mt-1 ${
 						classNames?.description || ''
 					}`.trim() }
 				>
@@ -752,7 +752,7 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 			{ /* Portal Tooltip or absolute Tooltip for variants */ }
 			{ tooltipState?.visible && (
 				<div
-					className="spoa-fixed spoa-bg-[#1d2327] spoa-text-white spoa-px-2.5 spoa-py-1 spoa-rounded-[3px] spoa-text-[12px] spoa-pointer-events-none spoa-z-[100000] spoa-whitespace-nowrap"
+					className="wpab-wpoa-fixed wpab-wpoa-bg-[#1d2327] wpab-wpoa-text-white wpab-wpoa-px-2.5 wpab-wpoa-py-1 wpab-wpoa-rounded-[3px] wpab-wpoa-text-[12px] wpab-wpoa-pointer-events-none wpab-wpoa-z-[100000] wpab-wpoa-whitespace-nowrap"
 					style={ {
 						top: tooltipState.top - 8,
 						left: tooltipState.left,
@@ -761,7 +761,7 @@ export const ClassicSelect: React.FC< ClassicSelectProps > = ( {
 				>
 					{ tooltipState.text }
 					{ /* Tooltip caret */ }
-					<div className="spoa-absolute -spoa-bottom-1 spoa-left-1/2 -spoa-translate-x-1/2 spoa-border-x-4 spoa-border-t-4 spoa-border-x-transparent spoa-border-b-transparent spoa-border-t-[#1d2327]" />
+					<div className="wpab-wpoa-absolute -wpab-wpoa-bottom-1 wpab-wpoa-left-1/2 -wpab-wpoa-translate-x-1/2 wpab-wpoa-border-x-4 wpab-wpoa-border-t-4 wpab-wpoa-border-x-transparent wpab-wpoa-border-b-transparent wpab-wpoa-border-t-[#1d2327]" />
 				</div>
 			) }
 		</div>

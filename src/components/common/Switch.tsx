@@ -22,19 +22,19 @@ export const Switch: React.FC< SwitchProps > = ( {
 } ) => {
 	const sizeConfig = {
 		small: {
-			switch: 'spoa-h-4 spoa-w-7',
-			thumb: 'spoa-h-3 spoa-w-3',
-			translate: 'spoa-translate-x-3',
+			switch: 'wpab-wpoa-h-4 wpab-wpoa-w-7',
+			thumb: 'wpab-wpoa-h-3 wpab-wpoa-w-3',
+			translate: 'wpab-wpoa-translate-x-3',
 		},
 		medium: {
-			switch: 'spoa-h-6 spoa-w-11',
-			thumb: 'spoa-h-5 spoa-w-5',
-			translate: 'spoa-translate-x-5',
+			switch: 'wpab-wpoa-h-6 wpab-wpoa-w-11',
+			thumb: 'wpab-wpoa-h-5 wpab-wpoa-w-5',
+			translate: 'wpab-wpoa-translate-x-5',
 		},
 		large: {
-			switch: 'spoa-h-7 spoa-w-14',
-			thumb: 'spoa-h-6 spoa-w-6',
-			translate: 'spoa-translate-x-7',
+			switch: 'wpab-wpoa-h-7 wpab-wpoa-w-14',
+			thumb: 'wpab-wpoa-h-6 wpab-wpoa-w-6',
+			translate: 'wpab-wpoa-translate-x-7',
 		},
 	};
 
@@ -48,21 +48,21 @@ export const Switch: React.FC< SwitchProps > = ( {
 			onClick={ () => ! disabled && onChange( ! checked ) }
 			disabled={ disabled }
 			className={ `
-        spoa-group spoa-relative spoa-inline-flex spoa-shrink-0 spoa-cursor-pointer spoa-items-center spoa-rounded-full spoa-border-2 spoa-border-transparent spoa-transition-colors spoa-duration-200 spoa-ease-in-out focus:spoa-outline-none focus:spoa-ring-2 focus:spoa-ring-primary focus:spoa-ring-offset-2
+        wpab-wpoa-group wpab-wpoa-relative wpab-wpoa-inline-flex wpab-wpoa-shrink-0 wpab-wpoa-cursor-pointer wpab-wpoa-items-center wpab-wpoa-rounded-full wpab-wpoa-border-2 wpab-wpoa-border-transparent wpab-wpoa-transition-colors wpab-wpoa-duration-200 wpab-wpoa-ease-in-out focus:wpab-wpoa-outline-none focus:wpab-wpoa-ring-2 focus:wpab-wpoa-ring-primary focus:wpab-wpoa-ring-offset-2
         ${ currentSize.switch }
-        ${ checked ? 'spoa-bg-green-500' : 'spoa-bg-black' }
-        ${ disabled ? 'spoa-opacity-50 spoa-cursor-not-allowed' : '' }
+        ${ checked ? 'wpab-wpoa-bg-green-500' : 'wpab-wpoa-bg-black' }
+        ${ disabled ? 'wpab-wpoa-opacity-50 wpab-wpoa-cursor-not-allowed' : '' }
         ${ className }
         ${ classNames?.root || '' }
       ` }
 		>
-			<span className="spoa-sr-only">Toggle setting</span>
+			<span className="wpab-wpoa-sr-only">Toggle setting</span>
 			<span
 				aria-hidden="true"
 				className={ `
-          spoa-pointer-events-none spoa-inline-block spoa-transform spoa-rounded-full spoa-bg-white spoa-shadow spoa-ring-0 spoa-transition spoa-duration-200 spoa-ease-in-out
+          wpab-wpoa-pointer-events-none wpab-wpoa-inline-block wpab-wpoa-transform wpab-wpoa-rounded-full wpab-wpoa-bg-white wpab-wpoa-shadow wpab-wpoa-ring-0 wpab-wpoa-transition wpab-wpoa-duration-200 wpab-wpoa-ease-in-out
           ${ currentSize.thumb }
-          ${ checked ? currentSize.translate : 'spoa-translate-x-0' }
+          ${ checked ? currentSize.translate : 'wpab-wpoa-translate-x-0' }
           ${ classNames?.thumb || '' }
         ` }
 			/>

@@ -43,7 +43,7 @@ class Cron {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	const HOOK_PREFIX = 'smart_product_options_addons_cron_';
+	const HOOK_PREFIX = 'woo_product_options_addons_cron_';
 
 	/**
 	 * Option key that stores the last-run timestamps for fallback detection.
@@ -51,7 +51,7 @@ class Cron {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	const LAST_RUN_OPTION = 'smart_product_options_addons_cron_last_run';
+	const LAST_RUN_OPTION = 'woo_product_options_addons_cron_last_run';
 
 	/**
 	 * Registry of dynamically scheduled callbacks.
@@ -118,12 +118,12 @@ class Cron {
 		 * Filters the list of cron jobs registered by the plugin.
 		 *
 		 * @since 1.0.0
-		 * @hook smart_product_options_addons_cron_jobs
+		 * @hook woo_product_options_addons_cron_jobs
 		 * @param array $jobs The array of cron job definitions.
 		 * @return array
 		 */
 		return apply_filters(
-			'smart_product_options_addons_cron_jobs',
+			'woo_product_options_addons_cron_jobs',
 			array()
 		);
 	}
@@ -172,7 +172,7 @@ class Cron {
 
 			foreach ( $hooks as $hook => $events ) {
 				// Only handle our own plugin hooks.
-				if ( strpos( $hook, 'smart_product_options_addons_' ) !== 0 ) {
+				if ( strpos( $hook, 'woo_product_options_addons_' ) !== 0 ) {
 					continue;
 				}
 
@@ -231,7 +231,7 @@ class Cron {
 		}
 
 		$scheduled = wp_schedule_single_event( time() + $delay, $hook, $args );
-		smart_product_options_addons_log( 'Cron: scheduled single event "' . $hook . '" to run in ' . $delay . 's.', 'INFO' );
+		woo_product_options_addons_log( 'Cron: scheduled single event "' . $hook . '" to run in ' . $delay . 's.', 'INFO' );
 		return (bool) $scheduled;
 	}
 
@@ -259,7 +259,7 @@ class Cron {
 		}
 
 		$scheduled = wp_schedule_event( time(), $interval, $hook, $args );
-		smart_product_options_addons_log( 'Cron: scheduled recurring event "' . $hook . '" with interval "' . $interval . '".', 'INFO' );
+		woo_product_options_addons_log( 'Cron: scheduled recurring event "' . $hook . '" with interval "' . $interval . '".', 'INFO' );
 		return (bool) $scheduled;
 	}
 
@@ -290,8 +290,8 @@ class Cron {
 	 * @return string
 	 */
 	private function maybe_prefix_hook( $hook ) {
-		if ( strpos( $hook, 'smart_product_options_addons_' ) !== 0 ) {
-			$hook = 'smart_product_options_addons_' . $hook;
+		if ( strpos( $hook, 'woo_product_options_addons_' ) !== 0 ) {
+			$hook = 'woo_product_options_addons_' . $hook;
 		}
 		return $hook;
 	}
@@ -340,7 +340,7 @@ class Cron {
 	 * @return void
 	 */
 	public function test_job() {
-		smart_product_options_addons_log( 'Test cron job executed successfully.', 'ERROR' );
+		woo_product_options_addons_log( 'Test cron job executed successfully.', 'ERROR' );
 	}
 
 	// ------------------------------------------------------------------
@@ -386,6 +386,6 @@ class Cron {
 		}
 
 		// Register the test cron callback.
-		add_action( 'smart_product_options_addons_test_cron', array( $this, 'test_job' ) );
+		add_action( 'woo_product_options_addons_test_cron', array( $this, 'test_job' ) );
 	}
 }

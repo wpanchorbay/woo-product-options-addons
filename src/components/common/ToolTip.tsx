@@ -157,10 +157,10 @@ export const Tooltip: React.FC< TooltipProps > = ( {
 	}, [] );
 
 	const arrowClasses = {
-		top: 'spoa-top-full spoa-left-1/2 spoa--translate-x-1/2 spoa-border-t-gray-900',
-		bottom: 'spoa-bottom-full spoa-left-1/2 spoa--translate-x-1/2 spoa-border-b-gray-900',
-		left: 'spoa-left-full spoa-top-1/2 spoa--translate-y-1/2 spoa-border-l-gray-900',
-		right: 'spoa-right-full spoa-top-1/2 spoa--translate-y-1/2 spoa-border-r-gray-900',
+		top: 'wpab-wpoa-top-full wpab-wpoa-left-1/2 wpab-wpoa--translate-x-1/2 wpab-wpoa-border-t-gray-900',
+		bottom: 'wpab-wpoa-bottom-full wpab-wpoa-left-1/2 wpab-wpoa--translate-x-1/2 wpab-wpoa-border-b-gray-900',
+		left: 'wpab-wpoa-left-full wpab-wpoa-top-1/2 wpab-wpoa--translate-y-1/2 wpab-wpoa-border-l-gray-900',
+		right: 'wpab-wpoa-right-full wpab-wpoa-top-1/2 wpab-wpoa--translate-y-1/2 wpab-wpoa-border-r-gray-900',
 	}[ position ];
 
 	return (
@@ -171,7 +171,7 @@ export const Tooltip: React.FC< TooltipProps > = ( {
 				onMouseLeave={ handleMouseLeave }
 				onFocus={ handleMouseEnter }
 				onBlur={ handleMouseLeave }
-				className={ `spoa-inline-block ${
+				className={ `wpab-wpoa-inline-block ${
 					classNames?.trigger || ''
 				}` }
 			>
@@ -184,7 +184,7 @@ export const Tooltip: React.FC< TooltipProps > = ( {
 						onMouseEnter={ handleMouseEnter }
 						onMouseLeave={ handleMouseLeave }
 						className={ `
-            spoa-fixed spoa-z-[60] spoa-max-w-[300px]
+            wpab-wpoa-fixed wpab-wpoa-z-[60] wpab-wpoa-max-w-[300px]
             ${ className }
             ${ classNames?.root || '' }
           ` }
@@ -194,7 +194,7 @@ export const Tooltip: React.FC< TooltipProps > = ( {
 						} }
 					>
 						<div
-							className={ `spoa-animate-tooltip spoa-relative spoa-px-2.5 spoa-py-1.5 spoa-bg-gray-900 spoa-text-white spoa-text-xs spoa-rounded spoa-shadow-lg ${
+							className={ `wpab-wpoa-animate-tooltip wpab-wpoa-relative wpab-wpoa-px-2.5 wpab-wpoa-py-1.5 wpab-wpoa-bg-gray-900 wpab-wpoa-text-white wpab-wpoa-text-xs wpab-wpoa-rounded wpab-wpoa-shadow-lg ${
 								classNames?.content || ''
 							}` }
 						>
@@ -206,7 +206,7 @@ export const Tooltip: React.FC< TooltipProps > = ( {
 										href={ docLink }
 										target="_blank"
 										rel="noopener noreferrer"
-										className="spoa-text-blue-400 hover:spoa-text-blue-300 spoa-underline"
+										className="wpab-wpoa-text-blue-400 hover:wpab-wpoa-text-blue-300 wpab-wpoa-underline"
 									>
 										Read More
 									</a>
@@ -214,7 +214,7 @@ export const Tooltip: React.FC< TooltipProps > = ( {
 							) }
 							<div
 								className={ `
-                spoa-absolute spoa-border-[5px] spoa-border-transparent
+                wpab-wpoa-absolute wpab-wpoa-border-[5px] wpab-wpoa-border-transparent
                 ${ arrowClasses }
                 ${ classNames?.arrow || '' }
               ` }

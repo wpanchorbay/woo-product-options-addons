@@ -58,7 +58,7 @@ class ResourceController extends ApiController {
 	 * @since 1.0.0
 	 */
 	public function run() {
-		$this->type = 'smart_product_options_addons_api_resources';
+		$this->type = 'woo_product_options_addons_api_resources';
 
 		add_action( 'rest_api_init', array( $this, 'register_routes' ) );
 	}
@@ -127,7 +127,7 @@ class ResourceController extends ApiController {
 		$search = ! empty( $search ) ? sanitize_text_field( $search ) : '';
 		$ids    = $request->get_param( 'ids' );
 
-		smart_product_options_addons_log( 'ResourceController: Searching products with term: ' . $search, 'DEBUG' );
+		woo_product_options_addons_log( 'ResourceController: Searching products with term: ' . $search, 'DEBUG' );
 
 		// If specific IDs requested, return only those (for resolving pre-selected values)
 		if ( ! empty( $ids ) ) {
@@ -187,7 +187,7 @@ class ResourceController extends ApiController {
 			$products[] = $this->format_product( $wc_product );
 		}
 
-		smart_product_options_addons_log( 'ResourceController: Found ' . count( $products ) . ' products', 'DEBUG' );
+		woo_product_options_addons_log( 'ResourceController: Found ' . count( $products ) . ' products', 'DEBUG' );
 
 		return rest_ensure_response( $products );
 	}
@@ -311,7 +311,7 @@ class ResourceController extends ApiController {
 			}
 		}
 
-		smart_product_options_addons_log( 'ResourceController: Found ' . count( $categories ) . ' categories', 'DEBUG' );
+		woo_product_options_addons_log( 'ResourceController: Found ' . count( $categories ) . ' categories', 'DEBUG' );
 
 		return rest_ensure_response( $categories );
 	}
@@ -377,7 +377,7 @@ class ResourceController extends ApiController {
 			}
 		}
 
-		smart_product_options_addons_log( 'ResourceController: Found ' . count( $tags ) . ' tags', 'DEBUG' );
+		woo_product_options_addons_log( 'ResourceController: Found ' . count( $tags ) . ' tags', 'DEBUG' );
 
 		return rest_ensure_response( $tags );
 	}

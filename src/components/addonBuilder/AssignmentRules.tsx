@@ -77,17 +77,17 @@ export const AssignmentRules: React.FC = () => {
   // ─── Shared multi-select row renderer ───
 
   const renderSearchFields = () => (
-    <div className="spoa-grid spoa-grid-cols-1 lg:spoa-grid-cols-3 spoa-gap-x-4 spoa-gap-y-3">
+    <div className="wpab-wpoa-grid wpab-wpoa-grid-cols-1 lg:wpab-wpoa-grid-cols-3 wpab-wpoa-gap-x-4 wpab-wpoa-gap-y-3">
       {/* Products */}
       <div>
-        <label className="spoa-block spoa-text-[12px] spoa-font-semibold spoa-mb-0.5">
-          {__("Products", "smart-product-options-addons")}
+        <label className="wpab-wpoa-block wpab-wpoa-text-[12px] wpab-wpoa-font-semibold wpab-wpoa-mb-0.5">
+          {__("Products", "woo-product-options-addons")}
         </label>
         <ClassicMultiSelect
           value={getIds("product")}
           onChange={(ids) => setIds("product", ids as number[])}
-          endpoint="/smart-product-options-addons/v1/resources/products"
-          placeholder={__("Search products…", "smart-product-options-addons")}
+          endpoint="/woo-product-options-addons/v1/resources/products"
+          placeholder={__("Search products…", "woo-product-options-addons")}
           renderOption={renderProductOption}
           size="regular"
         />
@@ -99,31 +99,31 @@ export const AssignmentRules: React.FC = () => {
 
   return (
     <ClassicSettingsTable
-      title={__("Assignment Rules", "smart-product-options-addons")}
+      title={__("Assignment Rules", "woo-product-options-addons")}
       description={__(
         "Control where this option group appears on your store.",
-        "smart-product-options-addons",
+        "woo-product-options-addons",
       )}
       fields={[
         // ── Section 1: Visibility ──
         {
-          label: __("Visibility", "smart-product-options-addons"),
+          label: __("Visibility", "woo-product-options-addons"),
           tooltip: __(
             "The broad scope of where this option group is active.",
-            "smart-product-options-addons",
+            "woo-product-options-addons",
           ),
           render: () => (
-            <div className="spoa-flex spoa-flex-col spoa-gap-1.5">
-              <label className="spoa-flex spoa-items-center spoa-gap-2 spoa-cursor-pointer">
+            <div className="wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-1.5">
+              <label className="wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-2 wpab-wpoa-cursor-pointer">
                 <input
                   type="radio"
                   name="ob-visibility"
                   checked={isGlobal}
                   onChange={() => setGlobal()}
                 />
-                <span>{__("Apply to all products", "smart-product-options-addons")}</span>
+                <span>{__("Apply to all products", "woo-product-options-addons")}</span>
               </label>
-              <label className="spoa-flex spoa-items-center spoa-gap-2 spoa-cursor-pointer">
+              <label className="wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-2 wpab-wpoa-cursor-pointer">
                 <input
                   type="radio"
                   name="ob-visibility"
@@ -131,7 +131,7 @@ export const AssignmentRules: React.FC = () => {
                   onChange={() => setTargeted()}
                 />
                 <span>
-                  {__("Apply to specific products", "smart-product-options-addons")}
+                  {__("Apply to specific products", "woo-product-options-addons")}
                 </span>
               </label>
             </div>
@@ -142,10 +142,10 @@ export const AssignmentRules: React.FC = () => {
         ...(!isGlobal
           ? [
               {
-                label: __("Reach", "smart-product-options-addons"),
+                label: __("Reach", "woo-product-options-addons"),
                 tooltip: __(
                   "Specific targets for displaying this group.",
-                  "smart-product-options-addons",
+                  "woo-product-options-addons",
                 ),
                 render: () => (
                   <div>

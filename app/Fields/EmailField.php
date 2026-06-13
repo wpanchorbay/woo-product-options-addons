@@ -75,12 +75,12 @@ class EmailField extends TextField {
 		}
 
 		if ( ! $this->is_empty_value( $value ) && ! is_email( $value ) ) {
-			smart_product_options_addons_log( sprintf( 'EmailField Validation: Invalid email address "%s" submitted.', $value ), 'WARNING' );
+			woo_product_options_addons_log( sprintf( 'EmailField Validation: Invalid email address "%s" submitted.', $value ), 'WARNING' );
 			return new \WP_Error(
 				'invalid_email',
 				sprintf(
 					/* translators: %s: field label */
-					__( '%s must be a valid email address.', 'smart-product-options-addons' ),
+					__( '%s must be a valid email address.', 'woo-product-options-addons' ),
 					$this->get( 'label', $this->get( 'id' ) )
 				)
 			);

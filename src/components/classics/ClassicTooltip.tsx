@@ -57,7 +57,7 @@ export const ClassicTooltip: React.FC<ClassicTooltipProps> = ({
       {visible &&
         createPortal(
           <div
-            className="spoa-fixed spoa-z-[999999] spoa-bg-[#333] spoa-text-white spoa-px-2 spoa-py-1 spoa-rounded spoa-text-xs spoa-leading-snug spoa-max-w-[200px] spoa-text-center spoa-pointer-events-none spoa-shadow-sm"
+            className="wpab-wpoa-fixed wpab-wpoa-z-[999999] wpab-wpoa-bg-[#333] wpab-wpoa-text-white wpab-wpoa-px-2 wpab-wpoa-py-1 wpab-wpoa-rounded wpab-wpoa-text-xs wpab-wpoa-leading-snug wpab-wpoa-max-w-[200px] wpab-wpoa-text-center wpab-wpoa-pointer-events-none wpab-wpoa-shadow-sm"
             style={{
               top: coords.top,
               left: coords.left,
@@ -66,7 +66,7 @@ export const ClassicTooltip: React.FC<ClassicTooltipProps> = ({
           >
             {tip}
             <div
-              className="spoa-absolute spoa-border-[5px] spoa-border-solid spoa-border-t-[#333] spoa-border-x-transparent spoa-border-b-transparent"
+              className="wpab-wpoa-absolute wpab-wpoa-border-[5px] wpab-wpoa-border-solid wpab-wpoa-border-t-[#333] wpab-wpoa-border-x-transparent wpab-wpoa-border-b-transparent"
               style={{
                 top: "100%",
                 left: "50%",

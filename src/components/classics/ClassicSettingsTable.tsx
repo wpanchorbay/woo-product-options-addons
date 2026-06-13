@@ -32,9 +32,9 @@ export const ClassicSettingsTable: React.FC< ClassicSettingsTableProps > = ( {
 	className = '',
 } ) => {
 	return (
-		<div className={ `spoa-settings-section ${ className }` }>
+		<div className={ `wpab-wpoa-settings-section ${ className }` }>
 			{ title && (
-				<h2 className="spoa-ignore-preflight">{ title }</h2>
+				<h2 className="wpab-wpoa-ignore-preflight">{ title }</h2>
 			) }
 			{ description && <p className="description ">{ description }</p> }
 
@@ -45,15 +45,15 @@ export const ClassicSettingsTable: React.FC< ClassicSettingsTableProps > = ( {
 							<th scope="row">
 								<label
 									htmlFor={ field.id }
-									className="!spoa-flex spoa-items-center"
+									className="!wpab-wpoa-flex wpab-wpoa-items-center"
 								>
-									<span className="spoa-w-full">
+									<span className="wpab-wpoa-w-full">
 										{ field.label }
 									</span>
 									{ field.tooltip && (
 										<ClassicTooltip
 											tip={ field.tooltip }
-											className="spoa-ml-1"
+											className="wpab-wpoa-ml-1"
 										/>
 									) }
 								</label>

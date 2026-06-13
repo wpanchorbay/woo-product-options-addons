@@ -1,12 +1,12 @@
 /* This file contains ONLY the styles needed for the admin menu icon. */
 
-#adminmenu #toplevel_page_smart-product-options-addons .wp-menu-image img {
+#adminmenu #toplevel_page_woo-product-options-addons .wp-menu-image img {
     width: 20px;
     height: 20px;
     padding: 7px 0 0;
 }
 
-#adminmenu #toplevel_page_smart-product-options-addons .wp-menu-open .wp-menu-image {
+#adminmenu #toplevel_page_woo-product-options-addons .wp-menu-open .wp-menu-image {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -17,13 +17,13 @@
     }
 }
 
-.spoa-loader-container {
+.wpab-wpoa-loader-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
-.spoa-newtons-cradle {
+.wpab-wpoa-newtons-cradle {
  --uib-size: 50px;
  --uib-speed: 1.2s;
  --uib-color: #f02a74;
@@ -35,7 +35,7 @@
  height: var(--uib-size);
 }
 
-.spoa-newtons-cradle__dot {
+.wpab-wpoa-newtons-cradle__dot {
  position: relative;
  display: flex;
  align-items: center;
@@ -44,7 +44,7 @@
  transform-origin: center top;
 }
 
-.spoa-newtons-cradle__dot::after {
+.wpab-wpoa-newtons-cradle__dot::after {
  content: '';
  display: block;
  width: 100%;
@@ -53,15 +53,15 @@
  background-color: var(--uib-color);
 }
 
-.spoa-newtons-cradle__dot:first-child {
- animation: spoa-swing var(--uib-speed) linear infinite;
+.wpab-wpoa-newtons-cradle__dot:first-child {
+ animation: wpab-wpoa-swing var(--uib-speed) linear infinite;
 }
 
-.spoa-newtons-cradle__dot:last-child {
- animation: spoa-swing2 var(--uib-speed) linear infinite;
+.wpab-wpoa-newtons-cradle__dot:last-child {
+ animation: wpab-wpoa-swing2 var(--uib-speed) linear infinite;
 }
 
-@keyframes spoa-swing {
+@keyframes wpab-wpoa-swing {
  0% {
   transform: rotate(0deg);
   animation-timing-function: ease-out;
@@ -78,7 +78,7 @@
  }
 }
 
-@keyframes spoa-swing2 {
+@keyframes wpab-wpoa-swing2 {
  0% {
   transform: rotate(0deg);
   animation-timing-function: linear;

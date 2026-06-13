@@ -131,7 +131,7 @@ class ExportImportController extends ApiController {
 		$params = $request->get_json_params();
 
 		if ( empty( $params ) ) {
-			return new WP_Error( 'invalid_payload', __( 'Invalid JSON payload.', 'smart-product-options-addons' ), array( 'status' => 400 ) );
+			return new WP_Error( 'invalid_payload', __( 'Invalid JSON payload.', 'woo-product-options-addons' ), array( 'status' => 400 ) );
 		}
 
 		try {
@@ -139,7 +139,7 @@ class ExportImportController extends ApiController {
 			return rest_ensure_response(
 				array(
 					'success' => true,
-					'message' => __( 'Data imported successfully.', 'smart-product-options-addons' ),
+					'message' => __( 'Data imported successfully.', 'woo-product-options-addons' ),
 				)
 			);
 		} catch ( \Exception $e ) {

@@ -56,7 +56,7 @@ const Settings: React.FC = () => {
 	const fetchSettings = async () => {
 		try {
 			const response: any = await apiFetch({
-				path: 'smart-product-options-addons/v1/settings',
+				path: 'woo-product-options-addons/v1/settings',
 			});
 			if (response.success) {
 				setSettings(response.data);
@@ -64,7 +64,7 @@ const Settings: React.FC = () => {
 			}
 		} catch (error) {
 			console.error('Error fetching settings:', error);
-			addToast(__('Failed to load settings.', 'smart-product-options-addons'), 'error');
+			addToast(__('Failed to load settings.', 'woo-product-options-addons'), 'error');
 		} finally {
 			setIsLoading(false);
 		}
@@ -77,7 +77,7 @@ const Settings: React.FC = () => {
 		setIsSaving(true);
 		try {
 			const response: any = await apiFetch({
-				path: 'smart-product-options-addons/v1/settings',
+				path: 'woo-product-options-addons/v1/settings',
 				method: 'POST',
 				data: settings,
 			});
@@ -85,7 +85,7 @@ const Settings: React.FC = () => {
 				setSettings(response.data);
 				setOriginalSettings(response.data);
 				addToast(
-					__('Settings saved successfully.', 'smart-product-options-addons'),
+					__('Settings saved successfully.', 'woo-product-options-addons'),
 					'success'
 				);
 
@@ -100,7 +100,7 @@ const Settings: React.FC = () => {
 			}
 		} catch (error) {
 			console.error('Error saving settings:', error);
-			addToast(__('Failed to save settings.', 'smart-product-options-addons'), 'error');
+			addToast(__('Failed to save settings.', 'woo-product-options-addons'), 'error');
 		} finally {
 			setIsSaving(false);
 			// Remove "is-busy" class from native WooCommerce button
@@ -128,7 +128,7 @@ const Settings: React.FC = () => {
 
 	if (isLoading) {
 		return (
-			<div className="spoa-p-page-default">
+			<div className="wpab-wpoa-p-page-default">
 				<SkeletonSettings />
 			</div>
 		);
@@ -136,36 +136,36 @@ const Settings: React.FC = () => {
 
 	if (!settings) {
 		return (
-			<div className="spoa-p-page-default">
-				<p>{__('Failed to load settings.', 'smart-product-options-addons')}</p>
+			<div className="wpab-wpoa-p-page-default">
+				<p>{__('Failed to load settings.', 'woo-product-options-addons')}</p>
 			</div>
 		);
 	}
 
 	return (
-		<div className="spoa-p-page-default spoa-ignore-preflight">
+		<div className="wpab-wpoa-p-page-default wpab-wpoa-ignore-preflight">
 			<input
 				type="hidden"
-				name="smart_product_options_addons_has_changes"
+				name="woo_product_options_addons_has_changes"
 				value={hasChanges ? '1' : '0'}
 			/>
 			<TopProgressBar isSaving={isSaving} />
 			<ClassicSettingsTable
-				title={__('General Settings', 'smart-product-options-addons')}
+				title={__('General Settings', 'woo-product-options-addons')}
 				description={__(
 					'Manage global display and layout preferences for your product options.',
-					'smart-product-options-addons'
+					'woo-product-options-addons'
 				)}
 				fields={[
 					{
 						id: 'global_optionsOrientation',
-						label: __('Options Orientation', 'smart-product-options-addons'),
+						label: __('Options Orientation', 'woo-product-options-addons'),
 						tooltip: __(
 							'The visual arrangement of radio and checkbox groups.',
-							'smart-product-options-addons'
+							'woo-product-options-addons'
 						),
 						render: () => (
-							<div className="spoa-max-w-[300px]">
+							<div className="wpab-wpoa-max-w-[300px]">
 								<ClassicSelect
 									value={settings.global_optionsOrientation}
 									onChange={(val) =>
@@ -181,21 +181,21 @@ const Settings: React.FC = () => {
 											value: 'vertical',
 											label: __(
 												'Vertical',
-												'smart-product-options-addons'
+												'woo-product-options-addons'
 											),
 										},
 										{
 											value: 'horizontal',
 											label: __(
 												'Horizontal',
-												'smart-product-options-addons'
+												'woo-product-options-addons'
 											),
 										},
 									]}
 									size="regular"
 									description={__(
 										'How options inside a group are arranged.',
-										'smart-product-options-addons'
+										'woo-product-options-addons'
 									)}
 								/>
 							</div>
@@ -203,10 +203,10 @@ const Settings: React.FC = () => {
 					},
 					{
 						id: 'global_fontSizeLabel',
-						label: __('Label Font Size', 'smart-product-options-addons'),
+						label: __('Label Font Size', 'woo-product-options-addons'),
 						tooltip: __(
 							'Font size for field labels.',
-							'smart-product-options-addons'
+							'woo-product-options-addons'
 						),
 						render: () => (
 							<ClassicInput
@@ -219,7 +219,7 @@ const Settings: React.FC = () => {
 								}
 								description={__(
 									"Use 'inherit' or a value like '14px', '1rem'.",
-									'smart-product-options-addons'
+									'woo-product-options-addons'
 								)}
 								size="regular"
 							/>
@@ -227,10 +227,10 @@ const Settings: React.FC = () => {
 					},
 					{
 						id: 'global_fontSizeInput',
-						label: __('Input Font Size', 'smart-product-options-addons'),
+						label: __('Input Font Size', 'woo-product-options-addons'),
 						tooltip: __(
 							'Font size for inputs and choice labels.',
-							'smart-product-options-addons'
+							'woo-product-options-addons'
 						),
 						render: () => (
 							<ClassicInput
@@ -243,7 +243,7 @@ const Settings: React.FC = () => {
 								}
 								description={__(
 									"Use 'inherit' or a value like '14px', '1rem'.",
-									'smart-product-options-addons'
+									'woo-product-options-addons'
 								)}
 								size="regular"
 							/>
@@ -251,10 +251,10 @@ const Settings: React.FC = () => {
 					},
 					{
 						id: 'global_swatchSize',
-						label: __('Color Swatch Size', 'smart-product-options-addons'),
+						label: __('Color Swatch Size', 'woo-product-options-addons'),
 						tooltip: __(
 							'Width and height of color swatches.',
-							'smart-product-options-addons'
+							'woo-product-options-addons'
 						),
 						render: () => (
 							<ClassicInput
@@ -267,7 +267,7 @@ const Settings: React.FC = () => {
 								}
 								description={__(
 									"Default is '32px'.",
-									'smart-product-options-addons'
+									'woo-product-options-addons'
 								)}
 								size="regular"
 							/>
@@ -275,10 +275,10 @@ const Settings: React.FC = () => {
 					},
 					{
 						id: 'global_swatchImageSize',
-						label: __('Image Swatch Size', 'smart-product-options-addons'),
+						label: __('Image Swatch Size', 'woo-product-options-addons'),
 						tooltip: __(
 							'Width and height of image swatches.',
-							'smart-product-options-addons'
+							'woo-product-options-addons'
 						),
 						render: () => (
 							<ClassicInput
@@ -291,7 +291,7 @@ const Settings: React.FC = () => {
 								}
 								description={__(
 									"Default is '64px'.",
-									'smart-product-options-addons'
+									'woo-product-options-addons'
 								)}
 								size="regular"
 							/>
@@ -299,10 +299,10 @@ const Settings: React.FC = () => {
 					},
 					{
 						id: 'global_swatchRadius',
-						label: __('Color Swatch Roundness', 'smart-product-options-addons'),
+						label: __('Color Swatch Roundness', 'woo-product-options-addons'),
 						tooltip: __(
 							'Border radius of color swatches.',
-							'smart-product-options-addons'
+							'woo-product-options-addons'
 						),
 						render: () => (
 							<ClassicInput
@@ -315,7 +315,7 @@ const Settings: React.FC = () => {
 								}
 								description={__(
 									"Use '4px' or '50%'.",
-									'smart-product-options-addons'
+									'woo-product-options-addons'
 								)}
 								size="regular"
 							/>
@@ -323,10 +323,10 @@ const Settings: React.FC = () => {
 					},
 					{
 						id: 'global_swatchImageRadius',
-						label: __('Image Swatch Roundness', 'smart-product-options-addons'),
+						label: __('Image Swatch Roundness', 'woo-product-options-addons'),
 						tooltip: __(
 							'Border radius of image swatches.',
-							'smart-product-options-addons'
+							'woo-product-options-addons'
 						),
 						render: () => (
 							<ClassicInput
@@ -340,7 +340,7 @@ const Settings: React.FC = () => {
 								}
 								description={__(
 									"Use '4px' or '50%'.",
-									'smart-product-options-addons'
+									'woo-product-options-addons'
 								)}
 								size="regular"
 							/>
@@ -350,15 +350,15 @@ const Settings: React.FC = () => {
 			/>
 
 			<ClassicSettingsTable
-				title={__('System & Maintenance', 'smart-product-options-addons')}
+				title={__('System & Maintenance', 'woo-product-options-addons')}
 				description={__(
 					'Advanced configurations for data persistence and troubleshooting.',
-					'smart-product-options-addons'
+					'woo-product-options-addons'
 				)}
 				fields={[
 					{
 						id: 'debug_enableMode',
-						label: __('Debug Mode', 'smart-product-options-addons'),
+						label: __('Debug Mode', 'woo-product-options-addons'),
 						render: () => (
 							<ClassicCheckbox
 								checked={settings.debug_enableMode}
@@ -370,18 +370,18 @@ const Settings: React.FC = () => {
 								}
 								label={__(
 									'Enable developer logging',
-									'smart-product-options-addons'
+									'woo-product-options-addons'
 								)}
 								description={__(
 									'Detailed logs will be written to the database for troubleshooting.',
-									'smart-product-options-addons'
+									'woo-product-options-addons'
 								)}
 							/>
 						),
 					},
 					{
 						id: 'advanced_deleteAllOnUninstall',
-						label: __('Delete Data on Uninstall', 'smart-product-options-addons'),
+						label: __('Delete Data on Uninstall', 'woo-product-options-addons'),
 						render: () => (
 							<ClassicCheckbox
 								checked={
@@ -395,11 +395,11 @@ const Settings: React.FC = () => {
 								}
 								label={__(
 									'Purge data on plugin deletion',
-									'smart-product-options-addons'
+									'woo-product-options-addons'
 								)}
 								description={__(
-									'CAUTION: If enabled, all Smart Product Options and Addons data (groups, assignments, settings) will be permanently deleted when the plugin is uninstalled.',
-									'smart-product-options-addons'
+									'CAUTION: If enabled, all OptionBay - Product Options and Addons data (groups, assignments, settings) will be permanently deleted when the plugin is uninstalled.',
+									'woo-product-options-addons'
 								)}
 							/>
 						),
@@ -408,7 +408,7 @@ const Settings: React.FC = () => {
 			/>
 
 
-			<div className="spoa-mt-8">
+			<div className="wpab-wpoa-mt-8">
 				{ /* Native WooCommerce save button is used instead */}
 			</div>
 		</div>

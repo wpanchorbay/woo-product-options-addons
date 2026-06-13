@@ -40,24 +40,24 @@ class Preloader {
 			return;
 		}
 
-		smart_product_options_addons_log( 'Starting data preloading from JSON templates...', 'INFO' );
+		woo_product_options_addons_log( 'Starting data preloading from JSON templates...', 'INFO' );
 
-		$preload_file = SMART_PRODUCT_OPTIONS_ADDONS_PATH . 'assets/preloads/preloads.json';
+		$preload_file = WOO_PRODUCT_OPTIONS_ADDONS_PATH . 'assets/preloads/preloads.json';
 		if ( ! file_exists( $preload_file ) ) {
-			smart_product_options_addons_log( 'Preload file not found: ' . $preload_file, 'WARNING' );
+			woo_product_options_addons_log( 'Preload file not found: ' . $preload_file, 'WARNING' );
 			return;
 		}
 
 		// phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
 		$content = file_get_contents( $preload_file );
 		if ( ! $content ) {
-			smart_product_options_addons_log( 'Failed to read preload file.', 'ERROR' );
+			woo_product_options_addons_log( 'Failed to read preload file.', 'ERROR' );
 			return;
 		}
 
 		$groups = json_decode( $content, true );
 		if ( ! is_array( $groups ) ) {
-			smart_product_options_addons_log( 'Failed to decode JSON from preloads.json', 'ERROR' );
+			woo_product_options_addons_log( 'Failed to decode JSON from preloads.json', 'ERROR' );
 			return;
 		}
 
@@ -77,7 +77,7 @@ class Preloader {
 			);
 
 			if ( is_wp_error( $post_id ) ) {
-				smart_product_options_addons_log( 'Failed to create preloaded group: ' . $group_data['title'], 'ERROR' );
+				woo_product_options_addons_log( 'Failed to create preloaded group: ' . $group_data['title'], 'ERROR' );
 				continue;
 			}
 
@@ -105,6 +105,6 @@ class Preloader {
 		// Mark as preloaded
 		$settings->update_settings( array( 'global_isPreloaded' => true ) );
 
-		smart_product_options_addons_log( "Successfully preloaded {$created_count} option groups.", 'INFO' );
+		woo_product_options_addons_log( "Successfully preloaded {$created_count} option groups.", 'INFO' );
 	}
 }

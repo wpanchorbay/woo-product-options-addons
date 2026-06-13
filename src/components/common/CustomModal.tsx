@@ -25,7 +25,7 @@ const CustomModal: React.FC< CustomModalProps > = ( {
 	title,
 	children,
 	footer,
-	maxWidth = 'spoa-max-w-2xl',
+	maxWidth = 'wpab-wpoa-max-w-2xl',
 	closeOnOutsideClick = true,
 	className = '',
 	showHeader = true,
@@ -60,20 +60,20 @@ const CustomModal: React.FC< CustomModalProps > = ( {
 	}
 
 	return createPortal(
-		<div className="spoa-fixed spoa-inset-0 spoa-z-[9998] spoa-flex spoa-items-center spoa-justify-center spoa-p-4 spoa-bg-black/75 spoa-transition-opacity spoa-duration-300">
+		<div className="wpab-wpoa-fixed wpab-wpoa-inset-0 wpab-wpoa-z-[9998] wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-justify-center wpab-wpoa-p-4 wpab-wpoa-bg-black/75 wpab-wpoa-transition-opacity wpab-wpoa-duration-300">
 			{ /* Backdrop click handler */ }
 			<div
-				className="spoa-absolute spoa-inset-0"
+				className="wpab-wpoa-absolute wpab-wpoa-inset-0"
 				onClick={ closeOnOutsideClick ? onClose : undefined }
 			/>
 
 			{ /* Modal Content */ }
 			<div
 				className={ `
-          spoa-relative spoa-w-full ${ maxWidth } 
-          spoa-bg-white spoa-shadow-2xl spoa-rounded-xl 
-          spoa-flex spoa-flex-col spoa-max-h-[90vh]
-          spoa-animate-in spoa-fade-in spoa-zoom-in-95 spoa-duration-200
+          wpab-wpoa-relative wpab-wpoa-w-full ${ maxWidth } 
+          wpab-wpoa-bg-white wpab-wpoa-shadow-2xl wpab-wpoa-rounded-xl 
+          wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-max-h-[90vh]
+          wpab-wpoa-animate-in wpab-wpoa-fade-in wpab-wpoa-zoom-in-95 wpab-wpoa-duration-200
           ${ className }
         ` }
 				role="dialog"
@@ -82,24 +82,24 @@ const CustomModal: React.FC< CustomModalProps > = ( {
 				{ /* Header */ }
 				{ showHeader && (
 					<div
-						className={ `spoa-flex spoa-items-center spoa-justify-between spoa-px-6 spoa-py-4 spoa-border-b spoa-border-gray-100 ${ classNames.header }` }
+						className={ `wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-justify-between wpab-wpoa-px-6 wpab-wpoa-py-4 wpab-wpoa-border-b wpab-wpoa-border-gray-100 ${ classNames.header }` }
 					>
-						<h3 className="spoa-text-lg spoa-font-semibold spoa-text-gray-900">
+						<h3 className="wpab-wpoa-text-lg wpab-wpoa-font-semibold wpab-wpoa-text-gray-900">
 							{ title }
 						</h3>
 						<button
 							onClick={ onClose }
-							className="spoa-p-1.5 spoa-text-gray-400 hover:spoa-text-gray-600 spoa-transition-colors hover:spoa-bg-gray-100 spoa-rounded-full"
+							className="wpab-wpoa-p-1.5 wpab-wpoa-text-gray-400 hover:wpab-wpoa-text-gray-600 wpab-wpoa-transition-colors hover:wpab-wpoa-bg-gray-100 wpab-wpoa-rounded-full"
 							aria-label="Close modal"
 						>
-							<X className="spoa-w-5 spoa-h-5" />
+							<X className="wpab-wpoa-w-5 wpab-wpoa-h-5" />
 						</button>
 					</div>
 				) }
 
 				{ /* Body */ }
 				<div
-					className={ `spoa-p-6 spoa-overflow-y-auto spoa-flex-1 ${ classNames.body }` }
+					className={ `wpab-wpoa-p-6 wpab-wpoa-overflow-y-auto wpab-wpoa-flex-1 ${ classNames.body }` }
 				>
 					{ children }
 				</div>
@@ -107,7 +107,7 @@ const CustomModal: React.FC< CustomModalProps > = ( {
 				{ /* Footer */ }
 				{ footer && (
 					<div
-						className={ `spoa-flex spoa-items-center spoa-justify-end spoa-gap-3 spoa-px-6 spoa-py-4 spoa-bg-gray-50 spoa-border-t spoa-border-gray-100 spoa-rounded-b-xl ${ classNames.footer }` }
+						className={ `wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-justify-end wpab-wpoa-gap-3 wpab-wpoa-px-6 wpab-wpoa-py-4 wpab-wpoa-bg-gray-50 wpab-wpoa-border-t wpab-wpoa-border-gray-100 wpab-wpoa-rounded-b-xl ${ classNames.footer }` }
 					>
 						{ footer }
 					</div>

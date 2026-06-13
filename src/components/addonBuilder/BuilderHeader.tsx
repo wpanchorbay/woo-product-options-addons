@@ -31,7 +31,7 @@ export const BuilderHeader: React.FC<BuilderHeaderProps> = ({
       dispatch({ type: "SET_SAVING", payload: true });
       try {
         await apiFetch({
-          path: `smart-product-options-addons/v1/groups/${state.id}/status`,
+          path: `woo-product-options-addons/v1/groups/${state.id}/status`,
           method: "PUT",
           data: {
             status: newStatus,
@@ -39,13 +39,13 @@ export const BuilderHeader: React.FC<BuilderHeaderProps> = ({
         });
         addToast(
           newStatus === "publish"
-            ? __("Option group published.", "smart-product-options-addons")
-            : __("Option group moved to draft.", "smart-product-options-addons"),
+            ? __("Option group published.", "woo-product-options-addons")
+            : __("Option group moved to draft.", "woo-product-options-addons"),
           "success",
         );
       } catch (err: any) {
         addToast(
-          err.message || __("Failed to update status.", "smart-product-options-addons"),
+          err.message || __("Failed to update status.", "woo-product-options-addons"),
           "error",
         );
         // Revert local status if request fails
@@ -57,56 +57,56 @@ export const BuilderHeader: React.FC<BuilderHeaderProps> = ({
   };
 
   return (
-    <div className="spoa-flex spoa-flex-col sm:spoa-flex-row spoa-justify-between spoa-items-start sm:spoa-items-center spoa-gap-4 spoa-mb-6 spoa-bg-white spoa-p-[15px_20px] spoa-rounded-lg spoa-shadow-sm">
+    <div className="wpab-wpoa-flex wpab-wpoa-flex-col sm:wpab-wpoa-flex-row wpab-wpoa-justify-between wpab-wpoa-items-start sm:wpab-wpoa-items-center wpab-wpoa-gap-4 wpab-wpoa-mb-6 wpab-wpoa-bg-white wpab-wpoa-p-[15px_20px] wpab-wpoa-rounded-lg wpab-wpoa-shadow-sm">
       <Link
         to="/"
-        className="button button-secondary !spoa-inline-flex spoa-items-center spoa-gap-1.5 spoa-no-underline"
+        className="button button-secondary !wpab-wpoa-inline-flex wpab-wpoa-items-center wpab-wpoa-gap-1.5 wpab-wpoa-no-underline"
       >
-        <ArrowLeft size={14} className="spoa-w-3.5 spoa-h-3.5" />
-        {__("Back to List", "smart-product-options-addons")}
+        <ArrowLeft size={14} className="wpab-wpoa-w-3.5 wpab-wpoa-h-3.5" />
+        {__("Back to List", "woo-product-options-addons")}
       </Link>
-      <div className="spoa-flex spoa-flex-wrap spoa-items-center spoa-gap-4">
-        <div className="spoa-flex spoa-items-center spoa-gap-2">
-          <span className="spoa-text-[13px] spoa-text-[#646970] spoa-mr-1">
-            {__("Status:", "smart-product-options-addons")}
+      <div className="wpab-wpoa-flex wpab-wpoa-flex-wrap wpab-wpoa-items-center wpab-wpoa-gap-4">
+        <div className="wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-2">
+          <span className="wpab-wpoa-text-[13px] wpab-wpoa-text-[#646970] wpab-wpoa-mr-1">
+            {__("Status:", "woo-product-options-addons")}
           </span>
           <button
             type="button"
             onClick={handleStatusToggle}
             disabled={state.isSaving}
-            className={`spoa-relative spoa-inline-flex spoa-h-5 spoa-w-10 spoa-items-center spoa-rounded-full spoa-transition-colors focus:spoa-outline-none ${
+            className={`wpab-wpoa-relative wpab-wpoa-inline-flex wpab-wpoa-h-5 wpab-wpoa-w-10 wpab-wpoa-items-center wpab-wpoa-rounded-full wpab-wpoa-transition-colors focus:wpab-wpoa-outline-none ${
               state.status === "publish"
-                ? "spoa-bg-blue-600"
-                : "spoa-bg-gray-400"
+                ? "wpab-wpoa-bg-blue-600"
+                : "wpab-wpoa-bg-gray-400"
             } ${
               state.isSaving
-                ? "spoa-opacity-50 spoa-cursor-not-allowed"
-                : "spoa-cursor-pointer"
+                ? "wpab-wpoa-opacity-50 wpab-wpoa-cursor-not-allowed"
+                : "wpab-wpoa-cursor-pointer"
             }`}
             title={
               state.status === "publish"
-                ? __("Published", "smart-product-options-addons")
-                : __("Draft", "smart-product-options-addons")
+                ? __("Published", "woo-product-options-addons")
+                : __("Draft", "woo-product-options-addons")
             }
           >
             <span
-              className={`spoa-inline-block spoa-h-3.5 spoa-w-3.5 spoa-transform spoa-rounded-full spoa-bg-white spoa-transition-transform ${
+              className={`wpab-wpoa-inline-block wpab-wpoa-h-3.5 wpab-wpoa-w-3.5 wpab-wpoa-transform wpab-wpoa-rounded-full wpab-wpoa-bg-white wpab-wpoa-transition-transform ${
                 state.status === "publish"
-                  ? "spoa-translate-x-5"
-                  : "spoa-translate-x-1"
+                  ? "wpab-wpoa-translate-x-5"
+                  : "wpab-wpoa-translate-x-1"
               }`}
             />
           </button>
           <span
-            className={`spoa-text-[13px] spoa-min-w-[45px] ${
+            className={`wpab-wpoa-text-[13px] wpab-wpoa-min-w-[45px] ${
               state.status === "publish"
-                ? "spoa-text-[#1d2327]"
-                : "spoa-text-[#646970]"
+                ? "wpab-wpoa-text-[#1d2327]"
+                : "wpab-wpoa-text-[#646970]"
             }`}
           >
             {state.status === "publish"
-              ? __("Published", "smart-product-options-addons")
-              : __("Draft", "smart-product-options-addons")}
+              ? __("Published", "woo-product-options-addons")
+              : __("Draft", "woo-product-options-addons")}
           </span>
         </div>
         <ClassicButton
@@ -115,10 +115,10 @@ export const BuilderHeader: React.FC<BuilderHeaderProps> = ({
           disabled={state.isSaving}
         >
           {state.isSaving
-            ? __("Saving…", "smart-product-options-addons")
+            ? __("Saving…", "woo-product-options-addons")
             : isEdit
-            ? __("Update Group", "smart-product-options-addons")
-            : __("Create Group", "smart-product-options-addons")}
+            ? __("Update Group", "woo-product-options-addons")
+            : __("Create Group", "woo-product-options-addons")}
         </ClassicButton>
       </div>
     </div>

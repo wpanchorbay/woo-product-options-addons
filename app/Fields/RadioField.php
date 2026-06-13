@@ -83,12 +83,12 @@ class RadioField extends BaseField {
 		if ( ! $this->is_empty_value( $value ) ) {
 			$allowed = array_column( $this->get( 'options', array() ), 'value' );
 			if ( ! in_array( $value, $allowed, true ) ) {
-				smart_product_options_addons_log( "RadioField Validation: Submited value '{$value}' not in allowed set.", 'WARNING' );
+				woo_product_options_addons_log( "RadioField Validation: Submited value '{$value}' not in allowed set.", 'WARNING' );
 					return new \WP_Error(
 						'invalid_option',
 						sprintf(
 							/* translators: %s: field label */
-							__( 'Invalid selection for %s.', 'smart-product-options-addons' ),
+							__( 'Invalid selection for %s.', 'woo-product-options-addons' ),
 							$this->get( 'label', $this->get( 'id' ) )
 						)
 					);

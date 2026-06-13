@@ -70,12 +70,12 @@ class TextareaField extends BaseField {
 		if ( ! $this->is_empty_value( $value ) ) {
 			$max = $this->get( 'max_length', 0 );
 			if ( $max > 0 && mb_strlen( $value ) > $max ) {
-				smart_product_options_addons_log( "TextareaField Validation: Value length exceeds maximum {$max}.", 'WARNING' );
+				woo_product_options_addons_log( "TextareaField Validation: Value length exceeds maximum {$max}.", 'WARNING' );
 					return new \WP_Error(
 						'max_length',
 						sprintf(
 							/* translators: 1: field label, 2: max length */
-							__( '%1$s must be at most %2$d characters.', 'smart-product-options-addons' ),
+							__( '%1$s must be at most %2$d characters.', 'woo-product-options-addons' ),
 							$this->get( 'label', $this->get( 'id' ) ),
 							$max
 						)

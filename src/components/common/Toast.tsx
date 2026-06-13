@@ -31,46 +31,46 @@ export const Toast: FC< ToastProps > = ( { toast, onDismiss } ) => {
 	const getToastTypeClasses = () => {
 		switch ( toast.type ) {
 			case 'success':
-				return 'spoa-bg-[#f0fff4] spoa-border-l-[#228b22] spoa-text-[#1a472a]';
+				return 'wpab-wpoa-bg-[#f0fff4] wpab-wpoa-border-l-[#228b22] wpab-wpoa-text-[#1a472a]';
 			case 'error':
-				return 'spoa-bg-[#fff5f5] spoa-border-l-[#cc0000] spoa-text-[#5c2121]';
+				return 'wpab-wpoa-bg-[#fff5f5] wpab-wpoa-border-l-[#cc0000] wpab-wpoa-text-[#5c2121]';
 			case 'info':
 			default:
-				return 'spoa-bg-white spoa-border-l-[#2271b1] spoa-text-[#1d2327]';
+				return 'wpab-wpoa-bg-white wpab-wpoa-border-l-[#2271b1] wpab-wpoa-text-[#1d2327]';
 		}
 	};
 
 	const toastClasses = `
-    spoa-relative spoa-p-5 spoa-rounded-[4px] spoa-shadow-[0_4px_12px_rgba(0,0,0,0.15)] 
-    spoa-flex spoa-items-start spoa-justify-between spoa-gap-[15px] 
-    spoa-border-l-[5px] spoa-backdrop-blur-[3px] spoa-max-w-[360px] spoa-w-[360px] spoa-pointer-events-auto
+    wpab-wpoa-relative wpab-wpoa-p-5 wpab-wpoa-rounded-[4px] wpab-wpoa-shadow-[0_4px_12px_rgba(0,0,0,0.15)] 
+    wpab-wpoa-flex wpab-wpoa-items-start wpab-wpoa-justify-between wpab-wpoa-gap-[15px] 
+    wpab-wpoa-border-l-[5px] wpab-wpoa-backdrop-blur-[3px] wpab-wpoa-max-w-[360px] wpab-wpoa-w-[360px] wpab-wpoa-pointer-events-auto
     ${
-		isClosing ? 'spoa-animate-slide-out' : 'spoa-animate-slide-in'
+		isClosing ? 'wpab-wpoa-animate-slide-out' : 'wpab-wpoa-animate-slide-in'
 	}
     ${ getToastTypeClasses() }
   `;
 
 	return (
 		<div className={ toastClasses }>
-			<div className="spoa-flex-1">
+			<div className="wpab-wpoa-flex-1">
 				{ toast.meta ? (
-					<div className="spoa-flex spoa-flex-col spoa-gap-1.5 spoa-w-full">
+					<div className="wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-1.5 wpab-wpoa-w-full">
 						{/* Header row with badges */}
-						<div className="spoa-flex spoa-items-center spoa-gap-1.5 spoa-flex-wrap">
-							<span className="spoa-bg-[#fee2e2] spoa-text-[#991b1b] spoa-text-[11px] spoa-font-bold spoa-px-2 spoa-py-0.5 spoa-rounded spoa-uppercase spoa-tracking-wider">
-								{ toast.meta.fieldName || __( 'Validation Error', 'smart-product-options-addons' ) }
+						<div className="wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-1.5 wpab-wpoa-flex-wrap">
+							<span className="wpab-wpoa-bg-[#fee2e2] wpab-wpoa-text-[#991b1b] wpab-wpoa-text-[11px] wpab-wpoa-font-bold wpab-wpoa-px-2 wpab-wpoa-py-0.5 wpab-wpoa-rounded wpab-wpoa-uppercase wpab-wpoa-tracking-wider">
+								{ toast.meta.fieldName || __( 'Validation Error', 'woo-product-options-addons' ) }
 							</span>
 							{ toast.meta.section && (
-								<span className="spoa-bg-[#eaeaea] spoa-text-[#444] spoa-text-[10px] spoa-font-semibold spoa-px-1.5 spoa-py-0.5 spoa-rounded spoa-capitalize">
+								<span className="wpab-wpoa-bg-[#eaeaea] wpab-wpoa-text-[#444] wpab-wpoa-text-[10px] wpab-wpoa-font-semibold wpab-wpoa-px-1.5 wpab-wpoa-py-0.5 wpab-wpoa-rounded wpab-wpoa-capitalize">
 									{ toast.meta.section }
 								</span>
 							) }
 						</div>
 
 						{/* Error Message */}
-						<div className="spoa-flex spoa-items-start spoa-gap-2 spoa-mt-1">
-							<AlertCircle className="spoa-text-[#cc0000] spoa-shrink-0 spoa-mt-0.5" size={15} />
-							<p className="spoa-m-0 spoa-text-[13px] spoa-font-medium spoa-leading-[1.4] spoa-text-[#3c1e1e]">
+						<div className="wpab-wpoa-flex wpab-wpoa-items-start wpab-wpoa-gap-2 wpab-wpoa-mt-1">
+							<AlertCircle className="wpab-wpoa-text-[#cc0000] wpab-wpoa-shrink-0 wpab-wpoa-mt-0.5" size={15} />
+							<p className="wpab-wpoa-m-0 wpab-wpoa-text-[13px] wpab-wpoa-font-medium wpab-wpoa-leading-[1.4] wpab-wpoa-text-[#3c1e1e]">
 								{ toast.meta.errorText || toast.message }
 							</p>
 						</div>
@@ -87,36 +87,36 @@ export const Toast: FC< ToastProps > = ( { toast, onDismiss } ) => {
 										
 										// Auto expand if collapsed
 										if ( el.getAttribute( 'data-expanded' ) !== 'true' ) {
-											const header = el.querySelector( '.spoa-cursor-pointer' );
+											const header = el.querySelector( '.wpab-wpoa-cursor-pointer' );
 											if ( header ) {
 												( header as HTMLElement ).click();
 											}
 										}
 
 										// Apply pulse flash animation
-										el.classList.remove( 'spoa-flash-highlight' );
+										el.classList.remove( 'wpab-wpoa-flash-highlight' );
 										void el.offsetWidth; // Force CSS reflow
-										el.classList.add( 'spoa-flash-highlight' );
+										el.classList.add( 'wpab-wpoa-flash-highlight' );
 										setTimeout( () => {
-											el.classList.remove( 'spoa-flash-highlight' );
+											el.classList.remove( 'wpab-wpoa-flash-highlight' );
 										}, 2000 );
 									}
 								} }
-								className="spoa-self-start spoa-mt-2 spoa-flex spoa-items-center spoa-gap-1 spoa-text-[11px] spoa-font-bold spoa-text-[#cc0000] hover:spoa-text-white spoa-bg-transparent hover:spoa-bg-[#cc0000] spoa-border spoa-border-[#cc0000] spoa-px-2.5 spoa-py-1 spoa-rounded spoa-transition-all spoa-cursor-pointer"
+								className="wpab-wpoa-self-start wpab-wpoa-mt-2 wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-1 wpab-wpoa-text-[11px] wpab-wpoa-font-bold wpab-wpoa-text-[#cc0000] hover:wpab-wpoa-text-white wpab-wpoa-bg-transparent hover:wpab-wpoa-bg-[#cc0000] wpab-wpoa-border wpab-wpoa-border-[#cc0000] wpab-wpoa-px-2.5 wpab-wpoa-py-1 wpab-wpoa-rounded wpab-wpoa-transition-all wpab-wpoa-cursor-pointer"
 							>
 								<Eye size={12} />
-								{ __( 'Locate & Edit Field', 'smart-product-options-addons' ) }
+								{ __( 'Locate & Edit Field', 'woo-product-options-addons' ) }
 							</button>
 						) }
 					</div>
 				) : (
-					<p className="spoa-m-0 spoa-text-[14px] spoa-leading-[1.5] spoa-flex-1">
+					<p className="wpab-wpoa-m-0 wpab-wpoa-text-[14px] wpab-wpoa-leading-[1.5] wpab-wpoa-flex-1">
 						{ toast.message }
 					</p>
 				) }
 			</div>
 			<button
-				className="spoa-bg-none spoa-border-none spoa-text-inherit spoa-opacity-60 hover:spoa-opacity-100 spoa-cursor-pointer spoa-text-[20px] spoa-leading-none spoa-px-[5px] spoa-self-start -spoa-mt-[5px] -spoa-mr-[5px] -spoa-mb-[5px] spoa-ml-0"
+				className="wpab-wpoa-bg-none wpab-wpoa-border-none wpab-wpoa-text-inherit wpab-wpoa-opacity-60 hover:wpab-wpoa-opacity-100 wpab-wpoa-cursor-pointer wpab-wpoa-text-[20px] wpab-wpoa-leading-none wpab-wpoa-px-[5px] wpab-wpoa-self-start -wpab-wpoa-mt-[5px] -wpab-wpoa-mr-[5px] -wpab-wpoa-mb-[5px] wpab-wpoa-ml-0"
 				onClick={ handleDismiss }
 				aria-label="Dismiss"
 			>

@@ -79,13 +79,13 @@ class AddonRenderer extends Base {
 		}
 
 		$product_id = $product->get_id();
-		smart_product_options_addons_log( "Rendering options for Product ID: {$product_id}", 'DEBUG' );
+		woo_product_options_addons_log( "Rendering options for Product ID: {$product_id}", 'DEBUG' );
 
 		$group_ids = $this->get_groups_for_product( $product_id );
 
 		// Stop rendering if no groups are assigned
 		if ( empty( $group_ids ) ) {
-			smart_product_options_addons_log( "No option groups assigned to Product ID: {$product_id}", 'DEBUG' );
+			woo_product_options_addons_log( "No option groups assigned to Product ID: {$product_id}", 'DEBUG' );
 			return;
 		}
 
@@ -115,7 +115,7 @@ class AddonRenderer extends Base {
 			return;
 		}
 
-		smart_product_options_addons_log( "Successfully built option fields HTML for Product ID: {$product_id}", 'INFO' );
+		woo_product_options_addons_log( "Successfully built option fields HTML for Product ID: {$product_id}", 'INFO' );
 
 		// Retrieve global UI settings
 		$settings            = Settings::get_instance();
@@ -140,7 +140,7 @@ class AddonRenderer extends Base {
 
 		// Output the fully rendered fields wrapper
 		printf(
-			'<div class="ob-options-wrapper" id="spoa-options" data-orientation="%s" style="%s">',
+			'<div class="ob-options-wrapper" id="wpab-wpoa-options" data-orientation="%s" style="%s">',
 			esc_attr( $orientation ),
 			esc_attr( $style_attr )
 		);
@@ -178,18 +178,18 @@ class AddonRenderer extends Base {
 			$field = FieldFactory::create( $group_id, $field_schema );
 			if ( $field ) {
 				$field_html = $field->render();
-				$html      .= apply_filters( 'smart_product_options_addons_render_field_html', $field_html, $field_schema, $group_id );
+				$html      .= apply_filters( 'woo_product_options_addons_render_field_html', $field_html, $field_schema, $group_id );
 			} else {
 				$type = $field_schema['type'] ?? 'unknown';
-				smart_product_options_addons_log( "Warning: Unrecognized field type '{$type}' in group {$group_id}", 'ERROR' );
+				woo_product_options_addons_log( "Warning: Unrecognized field type '{$type}' in group {$group_id}", 'ERROR' );
 			}
 		}
 
 		// Setup the live pricing display container at the bottom of the group
-		$html .= '<div class="spoa-live-total" style="display:none;">';
+		$html .= '<div class="wpab-wpoa-live-total" style="display:none;">';
 		$html .= sprintf(
 			'<span class="ob-total-label">%s</span> ',
-			esc_html__( 'Total Product Price:', 'smart-product-options-addons' )
+			esc_html__( 'Total Product Price:', 'woo-product-options-addons' )
 		);
 		$html .= '<span class="amount"></span>';
 		$html .= '</div>';
@@ -263,13 +263,13 @@ class AddonRenderer extends Base {
 			'priceFormat' => $price_format,
 			'inventory'   => $inventory_data,
 			'i18n'        => array(
-				'outOfStock' => __( 'Out of stock', 'smart-product-options-addons' ),
+				'outOfStock' => __( 'Out of stock', 'woo-product-options-addons' ),
 			),
 		);
 
 		// Hydrate JS state using the standard WordPress inline script method
 		wp_add_inline_script(
-			'spoa-frontend',
+			'wpab-wpoa-frontend',
 			'window.spoaSchema = ' . wp_json_encode( $hydration_data ) . ';',
 			'before'
 		);
@@ -287,7 +287,7 @@ class AddonRenderer extends Base {
 	 */
 	private function get_groups_for_product( int $product_id ) {
 		$cache_key = 'ob_assignments_product_' . $product_id;
-		$cached    = wp_cache_get( $cache_key, 'smart-product-options-addons' );
+		$cached    = wp_cache_get( $cache_key, 'woo-product-options-addons' );
 
 		if ( false !== $cached ) {
 			return $cached;
@@ -304,7 +304,7 @@ class AddonRenderer extends Base {
 			$tag_ids
 		);
 
-		wp_cache_set( $cache_key, $group_ids, 'smart-product-options-addons', 300 ); // 5 min TTL
+		wp_cache_set( $cache_key, $group_ids, 'woo-product-options-addons', 300 ); // 5 min TTL
 
 		return $group_ids;
 	}
@@ -318,7 +318,7 @@ class AddonRenderer extends Base {
 	 */
 	private function get_group_schema( int $group_id ) {
 		$cache_key = 'ob_schema_group_' . $group_id;
-		$cached    = wp_cache_get( $cache_key, 'smart-product-options-addons' );
+		$cached    = wp_cache_get( $cache_key, 'woo-product-options-addons' );
 
 		if ( false !== $cached ) {
 			return $cached;
@@ -331,7 +331,7 @@ class AddonRenderer extends Base {
 			$schema = array();
 		}
 
-		wp_cache_set( $cache_key, $schema, 'smart-product-options-addons', 600 ); // 10 min TTL
+		wp_cache_set( $cache_key, $schema, 'woo-product-options-addons', 600 ); // 10 min TTL
 
 		return $schema;
 	}
@@ -361,7 +361,7 @@ class AddonRenderer extends Base {
 		$product = wc_get_product( $post->ID );
 		// Determine which groups are assigned to this product
 		$group_ids = $this->get_groups_for_product( $product->get_id() );
-		$group_ids = apply_filters( 'smart_product_options_addons_product_group_ids', $group_ids, $product->get_id() );
+		$group_ids = apply_filters( 'woo_product_options_addons_product_group_ids', $group_ids, $product->get_id() );
 
 		if ( empty( $group_ids ) ) {
 			return;
@@ -369,18 +369,18 @@ class AddonRenderer extends Base {
 
 		// Frontend CSS
 		wp_enqueue_style(
-			'spoa-frontend',
-			SMART_PRODUCT_OPTIONS_ADDONS_URL . 'assets/css/frontend.css',
+			'wpab-wpoa-frontend',
+			WOO_PRODUCT_OPTIONS_ADDONS_URL . 'assets/css/frontend.css',
 			array(),
-			SMART_PRODUCT_OPTIONS_ADDONS_VERSION
+			WOO_PRODUCT_OPTIONS_ADDONS_VERSION
 		);
 
 		// Frontend JS
 		wp_enqueue_script(
-			'spoa-frontend',
-			SMART_PRODUCT_OPTIONS_ADDONS_URL . 'assets/js/frontend.js',
+			'wpab-wpoa-frontend',
+			WOO_PRODUCT_OPTIONS_ADDONS_URL . 'assets/js/frontend.js',
 			array( 'jquery' ),
-			SMART_PRODUCT_OPTIONS_ADDONS_VERSION,
+			WOO_PRODUCT_OPTIONS_ADDONS_VERSION,
 			true
 		);
 

@@ -72,7 +72,7 @@ export const InventoryPicker: React.FC<InventoryPickerProps> = ({
     },
   ) => {
     const isTmp = String(opt.value).startsWith("tmp_") || opt.is_new;
-    const idLabel = isTmp ? __("[New]", "smart-product-options-addons") : `#${opt.value}`;
+    const idLabel = isTmp ? __("[New]", "woo-product-options-addons") : `#${opt.value}`;
 
     const isOutOfStock =
       opt.stock_count !== undefined &&
@@ -81,28 +81,28 @@ export const InventoryPicker: React.FC<InventoryPickerProps> = ({
 
     const stockLabel =
       opt.stock_count !== undefined
-        ? ` • ${formatStock(opt.stock_count)} ${__("in stock", "smart-product-options-addons")}`
+        ? ` • ${formatStock(opt.stock_count)} ${__("in stock", "woo-product-options-addons")}`
         : "";
 
     return (
-      <div className="spoa-flex spoa-justify-between spoa-items-center spoa-w-full">
-        <div className="spoa-flex spoa-flex-col spoa-py-0.5">
-          <span className="spoa-font-semibold spoa-text-sm spoa-leading-tight">
+      <div className="wpab-wpoa-flex wpab-wpoa-justify-between wpab-wpoa-items-center wpab-wpoa-w-full">
+        <div className="wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-py-0.5">
+          <span className="wpab-wpoa-font-semibold wpab-wpoa-text-sm wpab-wpoa-leading-tight">
             {opt.label}
           </span>
           <span
-            className={`spoa-text-[11px] spoa-leading-tight ${
+            className={`wpab-wpoa-text-[11px] wpab-wpoa-leading-tight ${
               isOutOfStock
-                ? "spoa-text-red-500 spoa-font-medium"
-                : "spoa-text-gray-400"
+                ? "wpab-wpoa-text-red-500 wpab-wpoa-font-medium"
+                : "wpab-wpoa-text-gray-400"
             }`}
           >
             {`${idLabel}${stockLabel}`}
           </span>
         </div>
         {isOutOfStock && (
-          <span className="spoa-bg-red-50 spoa-text-red-600 spoa-text-[9px] spoa-font-bold spoa-px-1.5 spoa-py-0.5 spoa-rounded-full spoa-border spoa-border-red-100">
-            {__("OUT OF STOCK", "smart-product-options-addons")}
+          <span className="wpab-wpoa-bg-red-50 wpab-wpoa-text-red-600 wpab-wpoa-text-[9px] wpab-wpoa-font-bold wpab-wpoa-px-1.5 wpab-wpoa-py-0.5 wpab-wpoa-rounded-full wpab-wpoa-border wpab-wpoa-border-red-100">
+            {__("OUT OF STOCK", "woo-product-options-addons")}
           </span>
         )}
       </div>
@@ -117,58 +117,58 @@ export const InventoryPicker: React.FC<InventoryPickerProps> = ({
         isError={isError}
         onChange={(val) => onChange(val)}
         options={localOptions}
-        endpoint="smart-product-options-addons/v1/inventory"
+        endpoint="woo-product-options-addons/v1/inventory"
         enableSearch
         allowClear
-        placeholder={__("Select inventory pool…", "smart-product-options-addons")}
+        placeholder={__("Select inventory pool…", "woo-product-options-addons")}
         renderOption={renderInventoryOption as any}
         dropdownFooter={
           <div
-            className="spoa-p-2 spoa-text-[#2271b1] hover:spoa-bg-[#f0f6fc] spoa-cursor-pointer spoa-text-sm spoa-font-medium spoa-flex spoa-items-center spoa-gap-2"
+            className="wpab-wpoa-p-2 wpab-wpoa-text-[#2271b1] hover:wpab-wpoa-bg-[#f0f6fc] wpab-wpoa-cursor-pointer wpab-wpoa-text-sm wpab-wpoa-font-medium wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-2"
             onClick={() => setIsCreating(true)}
           >
             <Plus size={14} />
-            {__("Create New Pool", "smart-product-options-addons")}
+            {__("Create New Pool", "woo-product-options-addons")}
           </div>
         }
       />
 
       {isCreating && (
         <div
-          className="spoa-fixed spoa-inset-0 spoa-bg-black/50 spoa-z-[9999999] spoa-flex spoa-items-center spoa-justify-center"
+          className="wpab-wpoa-fixed wpab-wpoa-inset-0 wpab-wpoa-bg-black/50 wpab-wpoa-z-[9999999] wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-justify-center"
           onClick={() => setIsCreating(false)}
         >
           <div
-            className="spoa-bg-white spoa-p-5 spoa-rounded-lg spoa-shadow-xl spoa-w-[400px] spoa-max-w-[90vw] spoa-flex spoa-flex-col spoa-gap-4"
+            className="wpab-wpoa-bg-white wpab-wpoa-p-5 wpab-wpoa-rounded-lg wpab-wpoa-shadow-xl wpab-wpoa-w-[400px] wpab-wpoa-max-w-[90vw] wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <h4 className="spoa-m-0 spoa-text-sm spoa-font-semibold">
-              {__("New Inventory Pool", "smart-product-options-addons")}
+            <h4 className="wpab-wpoa-m-0 wpab-wpoa-text-sm wpab-wpoa-font-semibold">
+              {__("New Inventory Pool", "woo-product-options-addons")}
             </h4>
 
             <div>
               <label
                 htmlFor="ob-new-inventory-name"
-                className="spoa-text-xs spoa-font-medium spoa-mb-1 spoa-block"
+                className="wpab-wpoa-text-xs wpab-wpoa-font-medium wpab-wpoa-mb-1 wpab-wpoa-block"
               >
-                {__("Pool Name", "smart-product-options-addons")}
+                {__("Pool Name", "woo-product-options-addons")}
               </label>
               <ClassicInput
                 id="ob-new-inventory-name"
                 size="regular"
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
-                placeholder={__("e.g. Premium Material", "smart-product-options-addons")}
+                placeholder={__("e.g. Premium Material", "woo-product-options-addons")}
               />
             </div>
 
-            <div className="spoa-flex spoa-gap-4">
-              <div className="spoa-flex-1">
+            <div className="wpab-wpoa-flex wpab-wpoa-gap-4">
+              <div className="wpab-wpoa-flex-1">
                 <label
                   htmlFor="ob-new-inventory-stock"
-                  className="spoa-text-xs spoa-font-medium spoa-mb-1 spoa-block"
+                  className="wpab-wpoa-text-xs wpab-wpoa-font-medium wpab-wpoa-mb-1 wpab-wpoa-block"
                 >
-                  {__("Initial Stock", "smart-product-options-addons")}
+                  {__("Initial Stock", "woo-product-options-addons")}
                 </label>
                 <ClassicInput
                   id="ob-new-inventory-stock"
@@ -179,28 +179,28 @@ export const InventoryPicker: React.FC<InventoryPickerProps> = ({
                   onChange={(e) => setNewStock(e.target.value)}
                 />
               </div>
-              <div className="spoa-flex-1 spoa-pt-5">
+              <div className="wpab-wpoa-flex-1 wpab-wpoa-pt-5">
                 <ClassicCheckbox
-                  label={__("Backorders?", "smart-product-options-addons")}
+                  label={__("Backorders?", "woo-product-options-addons")}
                   checked={newBackorders}
                   onChange={setNewBackorders}
                 />
               </div>
             </div>
 
-            <div className="spoa-flex spoa-gap-2 spoa-justify-end spoa-mt-2">
+            <div className="wpab-wpoa-flex wpab-wpoa-gap-2 wpab-wpoa-justify-end wpab-wpoa-mt-2">
               <ClassicButton
                 variant="secondary"
                 onClick={() => setIsCreating(false)}
               >
-                {__("Cancel", "smart-product-options-addons")}
+                {__("Cancel", "woo-product-options-addons")}
               </ClassicButton>
               <ClassicButton
                 variant="primary"
                 onClick={handleCreate}
                 disabled={!newName.trim()}
               >
-                {__("Add & Select", "smart-product-options-addons")}
+                {__("Add & Select", "woo-product-options-addons")}
               </ClassicButton>
             </div>
           </div>

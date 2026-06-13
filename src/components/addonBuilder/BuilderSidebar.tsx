@@ -55,32 +55,32 @@ export const BuilderSidebar: React.FC = () => {
 	}, [ fabOpen ] );
 
 	return (
-		<div className="spoa-w-full lg:spoa-w-[520px] spoa-flex spoa-flex-col spoa-gap-5 lg:spoa-sticky lg:spoa-top-[78px] lg:spoa-self-start lg:spoa-max-h-[calc(100vh-132px)] lg:spoa-overflow-auto lg:spoa-pr-[4px] spoa-z-[10]">
+		<div className="wpab-wpoa-w-full lg:wpab-wpoa-w-[520px] wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-5 lg:wpab-wpoa-sticky lg:wpab-wpoa-top-[78px] lg:wpab-wpoa-self-start lg:wpab-wpoa-max-h-[calc(100vh-132px)] lg:wpab-wpoa-overflow-auto lg:wpab-wpoa-pr-[4px] wpab-wpoa-z-[10]">
 			{ /* Add Field Section */ }
 			<div
 				ref={ addFieldsRef }
-				className="spoa-bg-white spoa-border spoa-border-[#c3c4c7] spoa-rounded-[8px] lg:spoa-sticky lg:spoa-top-[78px] "
+				className="wpab-wpoa-bg-white wpab-wpoa-border wpab-wpoa-border-[#c3c4c7] wpab-wpoa-rounded-[8px] lg:wpab-wpoa-sticky lg:wpab-wpoa-top-[78px] "
 			>
-				<div className="spoa-px-[15px] spoa-py-[12px] spoa-bg-[#f8f9fa] spoa-border-b spoa-border-[#e5e7eb] spoa-font-semibold spoa-text-[14px] spoa-rounded-t-[8px] spoa-flex spoa-items-center spoa-gap-2">
-					<CirclePlus className="spoa-size-4 spoa-text-[#2271b1]" />
-					{ __( 'Add Fields', 'smart-product-options-addons' ) }
+				<div className="wpab-wpoa-px-[15px] wpab-wpoa-py-[12px] wpab-wpoa-bg-[#f8f9fa] wpab-wpoa-border-b wpab-wpoa-border-[#e5e7eb] wpab-wpoa-font-semibold wpab-wpoa-text-[14px] wpab-wpoa-rounded-t-[8px] wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-2">
+					<CirclePlus className="wpab-wpoa-size-4 wpab-wpoa-text-[#2271b1]" />
+					{ __( 'Add Fields', 'woo-product-options-addons' ) }
 				</div>
-				<div className="spoa-p-[15px]">
-					<div className="spoa-grid spoa-grid-cols-2 spoa-gap-2">
+				<div className="wpab-wpoa-p-[15px]">
+					<div className="wpab-wpoa-grid wpab-wpoa-grid-cols-2 wpab-wpoa-gap-2">
 						{ FIELD_TYPES.map( ( ft ) => (
 							<ClassicButton
 								key={ ft.value }
 								variant="secondary"
 								onClick={ () => addField( ft.value ) }
-								className="!spoa-justify-center !spoa-py-4 !spoa-px-2 !spoa-h-auto !spoa-text-[13px] !spoa-gap-2 !spoa-flex !spoa-text-[#2271b1] !spoa-border-[#2271b1] hover:!spoa-text-[#135e96] hover:!spoa-bg-[#f6f7f7] !spoa-rounded-[3px] !spoa-font-medium"
+								className="!wpab-wpoa-justify-center !wpab-wpoa-py-4 !wpab-wpoa-px-2 !wpab-wpoa-h-auto !wpab-wpoa-text-[13px] !wpab-wpoa-gap-2 !wpab-wpoa-flex !wpab-wpoa-text-[#2271b1] !wpab-wpoa-border-[#2271b1] hover:!wpab-wpoa-text-[#135e96] hover:!wpab-wpoa-bg-[#f6f7f7] !wpab-wpoa-rounded-[3px] !wpab-wpoa-font-medium"
 							>
-								<span className="spoa-flex spoa-flex-col spoa-justify-center spoa-items-center">
+								<span className="wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-justify-center wpab-wpoa-items-center">
 									{ FIELD_TYPE_ICONS[ ft.value ] &&
 										React.createElement(
 											FIELD_TYPE_ICONS[ ft.value ],
 											{
 												className:
-													'spoa-size-5 spoa-shrink-0',
+													'wpab-wpoa-size-5 wpab-wpoa-shrink-0',
 											}
 										) }
 									<span>{ ft.label }</span>
@@ -94,7 +94,7 @@ export const BuilderSidebar: React.FC = () => {
 			{ /* Floating Action Button — shown when Add Fields card is out of view */ }
 			{ ! isAddFieldsVisible && (
 				<div
-					className="lg:spoa-hidden"
+					className="lg:wpab-wpoa-hidden"
 					style={ {
 						position: 'fixed',
 						bottom: '32px',
@@ -106,25 +106,25 @@ export const BuilderSidebar: React.FC = () => {
 					{ fabOpen && (
 						<div
 							id="ob-fab-popover"
-							className="spoa-bg-white spoa-border spoa-border-[#c3c4c7] spoa-rounded-[8px] spoa-mb-3"
+							className="wpab-wpoa-bg-white wpab-wpoa-border wpab-wpoa-border-[#c3c4c7] wpab-wpoa-rounded-[8px] wpab-wpoa-mb-3"
 							style={ {
 								boxShadow: '0 8px 32px rgba(0,0,0,0.18)',
 								width: '450px',
 								animation: 'ob-fab-slide-up 0.2s ease-out',
 							} }
 						>
-							<div className="spoa-px-[12px] spoa-py-[10px] spoa-bg-[#f8f9fa] spoa-border-b spoa-border-[#e5e7eb] spoa-font-semibold spoa-text-[13px] spoa-rounded-t-[8px] spoa-flex spoa-items-center spoa-justify-between">
-								<span>{ __( 'Add Field', 'smart-product-options-addons' ) }</span>
+							<div className="wpab-wpoa-px-[12px] wpab-wpoa-py-[10px] wpab-wpoa-bg-[#f8f9fa] wpab-wpoa-border-b wpab-wpoa-border-[#e5e7eb] wpab-wpoa-font-semibold wpab-wpoa-text-[13px] wpab-wpoa-rounded-t-[8px] wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-justify-between">
+								<span>{ __( 'Add Field', 'woo-product-options-addons' ) }</span>
 								<button
 									type="button"
 									onClick={ () => setFabOpen( false ) }
-									className="spoa-bg-transparent spoa-border-none spoa-cursor-pointer spoa-p-0 spoa-text-[#666] hover:spoa-text-[#1d2327]"
+									className="wpab-wpoa-bg-transparent wpab-wpoa-border-none wpab-wpoa-cursor-pointer wpab-wpoa-p-0 wpab-wpoa-text-[#666] hover:wpab-wpoa-text-[#1d2327]"
 								>
-									<X className="spoa-size-4" />
+									<X className="wpab-wpoa-size-4" />
 								</button>
 							</div>
-							<div className="spoa-p-[12px]">
-								<div className="spoa-grid spoa-grid-cols-2 spoa-gap-2">
+							<div className="wpab-wpoa-p-[12px]">
+								<div className="wpab-wpoa-grid wpab-wpoa-grid-cols-2 wpab-wpoa-gap-2">
 									{ FIELD_TYPES.map( ( ft ) => (
 										<ClassicButton
 											key={ ft.value }
@@ -132,7 +132,7 @@ export const BuilderSidebar: React.FC = () => {
 											onClick={ () =>
 												addField( ft.value )
 											}
-											className="!spoa-justify-center !spoa-text-center !spoa-py-4 !spoa-px-2 !spoa-h-auto !spoa-text-[13px] !spoa-gap-2 !spoa-flex !spoa-flex-col !spoa-items-center !spoa-text-[#2271b1] !spoa-border-[#2271b1] hover:!spoa-text-[#135e96] hover:!spoa-bg-[#f6f7f7] !spoa-rounded-[3px] !spoa-font-medium"
+											className="!wpab-wpoa-justify-center !wpab-wpoa-text-center !wpab-wpoa-py-4 !wpab-wpoa-px-2 !wpab-wpoa-h-auto !wpab-wpoa-text-[13px] !wpab-wpoa-gap-2 !wpab-wpoa-flex !wpab-wpoa-flex-col !wpab-wpoa-items-center !wpab-wpoa-text-[#2271b1] !wpab-wpoa-border-[#2271b1] hover:!wpab-wpoa-text-[#135e96] hover:!wpab-wpoa-bg-[#f6f7f7] !wpab-wpoa-rounded-[3px] !wpab-wpoa-font-medium"
 										>
 											{ FIELD_TYPE_ICONS[ ft.value ] &&
 												React.createElement(
@@ -141,7 +141,7 @@ export const BuilderSidebar: React.FC = () => {
 													],
 													{
 														className:
-															'spoa-size-5 spoa-shrink-0',
+															'wpab-wpoa-size-5 wpab-wpoa-shrink-0',
 													}
 												) }
 											<span>+ { ft.label }</span>
@@ -157,7 +157,7 @@ export const BuilderSidebar: React.FC = () => {
 						id="ob-fab-button"
 						type="button"
 						onClick={ () => setFabOpen( ( prev ) => ! prev ) }
-						title={ __( 'Add Field', 'smart-product-options-addons' ) }
+						title={ __( 'Add Field', 'woo-product-options-addons' ) }
 						style={ {
 							width: '48px',
 							height: '48px',

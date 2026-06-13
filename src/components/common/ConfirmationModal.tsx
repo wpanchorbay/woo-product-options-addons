@@ -56,31 +56,31 @@ export const ConfirmationModal: React.FC<ConfirmationModalProps> = ({
 
   return (
     <div
-      className={`spoa-fixed spoa-inset-0 spoa-z-[60000] spoa-flex spoa-items-center spoa-justify-center spoa-bg-black/50 spoa-backdrop-blur-sm spoa-transition-opacity ${
+      className={`wpab-wpoa-fixed wpab-wpoa-inset-0 wpab-wpoa-z-[60000] wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-justify-center wpab-wpoa-bg-black/50 wpab-wpoa-backdrop-blur-sm wpab-wpoa-transition-opacity ${
         classNames.overlay || ""
       }`}
     >
       <div
-        className={`spoa-bg-white spoa-rounded-lg spoa-shadow-xl spoa-py-2 spoa-px-4 spoa-max-w-sm spoa-w-full spoa-mx-4 spoa-transform spoa-transition-all spoa-scale-100 ${
+        className={`wpab-wpoa-bg-white wpab-wpoa-rounded-lg wpab-wpoa-shadow-xl wpab-wpoa-py-2 wpab-wpoa-px-4 wpab-wpoa-max-w-sm wpab-wpoa-w-full wpab-wpoa-mx-4 wpab-wpoa-transform wpab-wpoa-transition-all wpab-wpoa-scale-100 ${
           classNames.content || ""
         }`}
       >
         <h3
-          className={`spoa-ignore-preflight spoa-mb-2 spoa-mt-0 spoa-text-nowrap ${
+          className={`wpab-wpoa-ignore-preflight wpab-wpoa-mb-2 wpab-wpoa-mt-0 wpab-wpoa-text-nowrap ${
             classNames.title || ""
           }`}
         >
           {title}
         </h3>
         <p
-          className={`spoa-text-gray-600 spoa-mb-6 spoa-text-sm spoa-leading-relaxed ${
+          className={`wpab-wpoa-text-gray-600 wpab-wpoa-mb-6 wpab-wpoa-text-sm wpab-wpoa-leading-relaxed ${
             classNames.message || ""
           }`}
         >
           {message}
         </p>
         <div
-          className={`spoa-flex spoa-justify-end spoa-gap-3 spoa-mt-3 ${
+          className={`wpab-wpoa-flex wpab-wpoa-justify-end wpab-wpoa-gap-3 wpab-wpoa-mt-3 ${
             classNames.footer || ""
           }`}
         >

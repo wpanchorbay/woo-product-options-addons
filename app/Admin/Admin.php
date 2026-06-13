@@ -68,10 +68,10 @@ class Admin {
 	 */
 	private function get_plugin_data() {
 		return array(
-			'plugin_name' => esc_html__( 'Smart Product Options and Addons', 'smart-product-options-addons' ),
-			'short_name'  => esc_html__( 'Smart Product Options and Addons', 'smart-product-options-addons' ),
-			'menu_label'  => esc_html__( 'Smart Product Options and Addons', 'smart-product-options-addons' ),
-			'custom_icon' => SMART_PRODUCT_OPTIONS_ADDONS_URL . 'assets/img/icon.svg',
+			'plugin_name' => esc_html__( 'OptionBay - Product Options and Addons', 'woo-product-options-addons' ),
+			'short_name'  => esc_html__( 'OptionBay - Product Options and Addons', 'woo-product-options-addons' ),
+			'menu_label'  => esc_html__( 'OptionBay - Product Options and Addons', 'woo-product-options-addons' ),
+			'custom_icon' => WOO_PRODUCT_OPTIONS_ADDONS_URL . 'assets/img/icon.svg',
 			'menu_icon'   => 'dashicons-admin-plugins',
 			'author_name' => 'WP Anchor Bay',
 			'author_uri'  => 'https://wpanchorbay.com',
@@ -89,15 +89,15 @@ class Admin {
 	 * @return void
 	 */
 	public function add_admin_menu() {
-		smart_product_options_addons_log( 'Admin: Registering Smart Product Options and Addons menus', 'INFO' );
+		woo_product_options_addons_log( 'Admin: Registering OptionBay - Product Options and Addons menus', 'INFO' );
 
 		// 1. Add "Options" submenu under Products (edit.php?post_type=product)
 		add_submenu_page(
 			'edit.php?post_type=product',
-			__( 'Options', 'smart-product-options-addons' ),
-			__( 'Options', 'smart-product-options-addons' ),
+			__( 'Options', 'woo-product-options-addons' ),
+			__( 'Options', 'woo-product-options-addons' ),
 			'manage_woocommerce',
-			'spoa-options',
+			'wpab-wpoa-options',
 			array( $this, 'add_setting_root_div' )
 		);
 
@@ -113,7 +113,7 @@ class Admin {
 	 * @return array
 	 */
 	public function add_products_section( $sections ) {
-		$sections['smart-product-options-addons'] = __( 'Options', 'smart-product-options-addons' );
+		$sections['woo-product-options-addons'] = __( 'Options', 'woo-product-options-addons' );
 		return $sections;
 	}
 
@@ -126,10 +126,10 @@ class Admin {
 	 * @return array
 	 */
 	public function filter_products_settings( $settings, $current_section ) {
-		if ( 'smart-product-options-addons' === $current_section ) {
+		if ( 'woo-product-options-addons' === $current_section ) {
 			return array(
 				array(
-					'type' => 'smart_product_options_addons_settings_root',
+					'type' => 'woo_product_options_addons_settings_root',
 				),
 			);
 		}
@@ -143,7 +143,7 @@ class Admin {
 	 * @return void
 	 */
 	public function redirect_to_dashboard() {
-		$redirect_url = admin_url( 'admin.php?page=' . SMART_PRODUCT_OPTIONS_ADDONS_PLUGIN_NAME );
+		$redirect_url = admin_url( 'admin.php?page=' . WOO_PRODUCT_OPTIONS_ADDONS_PLUGIN_NAME );
 		wp_safe_redirect( $redirect_url );
 		exit;
 	}
@@ -161,14 +161,14 @@ class Admin {
 			return false;
 		}
 
-		// Handle Smart Product Options and Addons pages (Option Groups list/builder) under Products
-		if ( 'product_page_spoa-options' === $screen->base ) {
+		// Handle OptionBay - Product Options and Addons pages (Option Groups list/builder) under Products
+		if ( 'product_page_wpab-wpoa-options' === $screen->base ) {
 			return true;
 		}
 
 		// Handle WooCommerce Settings tab
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended
-		if ( 'woocommerce_page_wc-settings' === $screen->base && isset( $_GET['tab'] ) && 'products' === $_GET['tab'] && isset( $_GET['section'] ) && 'smart-product-options-addons' === $_GET['section'] ) {
+		if ( 'woocommerce_page_wc-settings' === $screen->base && isset( $_GET['tab'] ) && 'products' === $_GET['tab'] && isset( $_GET['section'] ) && 'woo-product-options-addons' === $_GET['section'] ) {
 			return true;
 		}
 
@@ -198,9 +198,9 @@ class Admin {
 	 * @return void
 	 */
 	public function add_setting_root_div() {
-		echo '<div id="' . esc_attr( SMART_PRODUCT_OPTIONS_ADDONS_PLUGIN_NAME ) . '">
-			<div class="spoa-loader-container">
-				<p>' . esc_html__( 'Loading...', 'smart-product-options-addons' ) . '</p>
+		echo '<div id="' . esc_attr( WOO_PRODUCT_OPTIONS_ADDONS_PLUGIN_NAME ) . '">
+			<div class="wpab-wpoa-loader-container">
+				<p>' . esc_html__( 'Loading...', 'woo-product-options-addons' ) . '</p>
 			</div>
 		</div>';
 	}
@@ -219,25 +219,25 @@ class Admin {
 
 		$screen  = get_current_screen();
 		$context = ( isset( $screen->base ) && 'woocommerce_page_wc-settings' === $screen->base ) ? 'settings' : 'options';
-		$handle  = SMART_PRODUCT_OPTIONS_ADDONS_PLUGIN_NAME . '-' . $context;
+		$handle  = WOO_PRODUCT_OPTIONS_ADDONS_PLUGIN_NAME . '-' . $context;
 
-		smart_product_options_addons_log( "Admin: Enqueueing resources for context: {$context}", 'DEBUG' );
+		woo_product_options_addons_log( "Admin: Enqueueing resources for context: {$context}", 'DEBUG' );
 
-		$deps_file  = SMART_PRODUCT_OPTIONS_ADDONS_PATH . "build/{$context}.asset.php";
+		$deps_file  = WOO_PRODUCT_OPTIONS_ADDONS_PATH . "build/{$context}.asset.php";
 		$dependency = array( 'wp-i18n' );
-		$version    = SMART_PRODUCT_OPTIONS_ADDONS_VERSION;
+		$version    = WOO_PRODUCT_OPTIONS_ADDONS_VERSION;
 		if ( file_exists( $deps_file ) ) {
 			$deps_file  = require $deps_file;
 			$dependency = $deps_file['dependencies'];
 			$version    = $deps_file['version'];
 		}
 
-		$admin_script = apply_filters( "smart_product_options_addons_admin_script_{$context}", SMART_PRODUCT_OPTIONS_ADDONS_URL . "build/{$context}.js" );
+		$admin_script = apply_filters( "woo_product_options_addons_admin_script_{$context}", WOO_PRODUCT_OPTIONS_ADDONS_URL . "build/{$context}.js" );
 		wp_enqueue_script( $handle, $admin_script, $dependency, $version, true );
 		wp_enqueue_editor();
 		wp_enqueue_media();
 
-		$admin_css = apply_filters( "smart_product_options_addons_admin_css_{$context}", SMART_PRODUCT_OPTIONS_ADDONS_URL . "build/{$context}.css" );
+		$admin_css = apply_filters( "woo_product_options_addons_admin_css_{$context}", WOO_PRODUCT_OPTIONS_ADDONS_URL . "build/{$context}.css" );
 		wp_enqueue_style( $handle, $admin_css, array(), $version );
 		wp_style_add_data( $handle, 'rtl', 'replace' );
 
@@ -245,12 +245,12 @@ class Admin {
 		wp_enqueue_style( 'woocommerce_admin_styles' );
 
 		$localize = apply_filters(
-			'smart_product_options_addons_admin_localize',
+			'woo_product_options_addons_admin_localize',
 			array(
 				'version'         => $version,
-				'root_id'         => SMART_PRODUCT_OPTIONS_ADDONS_PLUGIN_NAME,
+				'root_id'         => WOO_PRODUCT_OPTIONS_ADDONS_PLUGIN_NAME,
 				'nonce'           => wp_create_nonce( 'wp_rest' ),
-				'store'           => SMART_PRODUCT_OPTIONS_ADDONS_PLUGIN_NAME,
+				'store'           => WOO_PRODUCT_OPTIONS_ADDONS_PLUGIN_NAME,
 				'rest_url'        => get_rest_url(),
 				'pluginData'      => $this->get_plugin_data(),
 				'wpSettings'      => array(
@@ -259,17 +259,17 @@ class Admin {
 				),
 				'plugin_settings' => \SmartProductOptionsAddons\Core\Settings::get_instance()->get_settings(),
 				'products_url'    => admin_url( 'edit.php?post_type=product' ),
-				'settings_url'    => admin_url( 'admin.php?page=wc-settings&tab=products&section=smart-product-options-addons' ),
+				'settings_url'    => admin_url( 'admin.php?page=wc-settings&tab=products&section=woo-product-options-addons' ),
 				'context'         => $context,
 			)
 		);
 
 		wp_localize_script( $handle, 'spoaPlugin_Localize', $localize );
 
-		$path_to_check = SMART_PRODUCT_OPTIONS_ADDONS_PATH . 'languages';
+		$path_to_check = WOO_PRODUCT_OPTIONS_ADDONS_PATH . 'languages';
 		wp_set_script_translations(
 			$handle,
-			'smart-product-options-addons',
+			'woo-product-options-addons',
 			$path_to_check
 		);
 	}
@@ -283,9 +283,9 @@ class Admin {
 	 * @return array
 	 */
 	public function add_plugin_action_links( $actions ) {
-		$actions[] = '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=products&section=smart-product-options-addons' ) ) . '">' . esc_html__( 'Settings', 'smart-product-options-addons' ) . '</a>';
-		$actions[] = '<a href="' . esc_url( 'https://docs.wpanchorbay.com/smart-product-options-addons/' ) . '" target="_blank">' . esc_html__( 'Documentation', 'smart-product-options-addons' ) . '</a>';
-		$actions[] = '<a href="' . esc_url( 'https://wpanchorbay.com/support/' ) . '" target="_blank">' . esc_html__( 'Support', 'smart-product-options-addons' ) . '</a>';
+		$actions[] = '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=products&section=woo-product-options-addons' ) ) . '">' . esc_html__( 'Settings', 'woo-product-options-addons' ) . '</a>';
+		$actions[] = '<a href="' . esc_url( 'https://docs.wpanchorbay.com/woo-product-options-addons/' ) . '" target="_blank">' . esc_html__( 'Documentation', 'woo-product-options-addons' ) . '</a>';
+		$actions[] = '<a href="' . esc_url( 'https://wpanchorbay.com/support/' ) . '" target="_blank">' . esc_html__( 'Support', 'woo-product-options-addons' ) . '</a>';
 		return $actions;
 	}
 
@@ -302,11 +302,11 @@ class Admin {
 		$loader->add_action( 'admin_menu', $this, 'add_admin_menu' );
 		$loader->add_filter( 'woocommerce_get_sections_products', $this, 'add_products_section' );
 		$loader->add_filter( 'woocommerce_get_settings_products', $this, 'filter_products_settings', 10, 2 );
-		$loader->add_action( 'woocommerce_admin_field_smart_product_options_addons_settings_root', $this, 'add_setting_root_div' );
+		$loader->add_action( 'woocommerce_admin_field_woo_product_options_addons_settings_root', $this, 'add_setting_root_div' );
 		$loader->add_filter( 'admin_body_class', $this, 'add_has_sticky_header' );
 		$loader->add_action( 'admin_enqueue_scripts', $this, 'enqueue_resources' );
 
-		$plugin_basename = plugin_basename( SMART_PRODUCT_OPTIONS_ADDONS_PATH . 'smart-product-options-addons.php' );
+		$plugin_basename = plugin_basename( WOO_PRODUCT_OPTIONS_ADDONS_PATH . 'woo-product-options-addons.php' );
 		$loader->add_filter( 'plugin_action_links_' . $plugin_basename, $this, 'add_plugin_action_links', 10, 1 );
 	}
 }

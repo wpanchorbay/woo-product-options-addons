@@ -27,22 +27,22 @@ export const ClassicButton: React.FC< ClassicButtonProps > = ( {
 		<button
 			className={ `${ variantClass } ${ className } ${
 				loading
-					? 'spoa-opacity-70 spoa-cursor-not-allowed'
+					? 'wpab-wpoa-opacity-70 wpab-wpoa-cursor-not-allowed'
 					: ''
 			}` }
 			disabled={ loading || props.disabled }
 			{ ...props }
 		>
-			<span className="spoa-flex spoa-items-center spoa-gap-2">
+			<span className="wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-2">
 				{ loading && (
 					<svg
-						className="spoa-animate-spin spoa-h-3 spoa-w-3 spoa-text-current"
+						className="wpab-wpoa-animate-spin wpab-wpoa-h-3 wpab-wpoa-w-3 wpab-wpoa-text-current"
 						xmlns="http://www.w3.org/2000/svg"
 						fill="none"
 						viewBox="0 0 24 24"
 					>
 						<circle
-							className="spoa-opacity-25"
+							className="wpab-wpoa-opacity-25"
 							cx="12"
 							cy="12"
 							r="10"
@@ -50,7 +50,7 @@ export const ClassicButton: React.FC< ClassicButtonProps > = ( {
 							strokeWidth="4"
 						></circle>
 						<path
-							className="spoa-opacity-75"
+							className="wpab-wpoa-opacity-75"
 							fill="currentColor"
 							d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
 						></path>

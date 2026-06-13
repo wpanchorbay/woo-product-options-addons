@@ -73,11 +73,11 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
           {...provided.draggableProps}
           id={`ob-field-row-${field.id}`}
           data-expanded={isExpanded}
-          className={`spoa-w-full spoa-border-b spoa-border-[#c3c4c7] spoa-transition-all ${
+          className={`wpab-wpoa-w-full wpab-wpoa-border-b wpab-wpoa-border-[#c3c4c7] wpab-wpoa-transition-all ${
             isExpanded
-              ? "spoa-border-l-[1px] spoa-border-l-[#2271b1] spoa-bg-[#f0f6fc]"
+              ? "wpab-wpoa-border-l-[1px] wpab-wpoa-border-l-[#2271b1] wpab-wpoa-bg-[#f0f6fc]"
               : hasError
-              ? "!spoa-border-b-[#d63638]"
+              ? "!wpab-wpoa-border-b-[#d63638]"
               : ""
           }`}
           style={{ ...provided.draggableProps.style }}
@@ -89,30 +89,30 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                 payload: field.id,
               })
             }
-            className={`spoa-flex spoa-items-center spoa-py-3 spoa-px-4 spoa-transition-colors spoa-cursor-pointer spoa-group ${
-              snapshot.isDragging ? "spoa-shadow-md" : ""
+            className={`wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-py-3 wpab-wpoa-px-4 wpab-wpoa-transition-colors wpab-wpoa-cursor-pointer wpab-wpoa-group ${
+              snapshot.isDragging ? "wpab-wpoa-shadow-md" : ""
             } ${
               isExpanded
-                ? "spoa-bg-[#f0f6fc]"
-                : "spoa-bg-white hover:spoa-bg-[#f9f9f9]"
+                ? "wpab-wpoa-bg-[#f0f6fc]"
+                : "wpab-wpoa-bg-white hover:wpab-wpoa-bg-[#f9f9f9]"
             }`}
           >
             {/* Col 1: Drag Handle */}
             <div
-              className="spoa-w-10"
+              className="wpab-wpoa-w-10"
               onClick={(e) => e.stopPropagation()}
             >
               <span
                 {...provided.dragHandleProps}
-                className={`spoa-cursor-grab active:spoa-cursor-grabbing spoa-flex spoa-items-center spoa-justify-center spoa-w-8 spoa-h-8 spoa-rounded-[6px] spoa-border spoa-transition-colors ${
+                className={`wpab-wpoa-cursor-grab active:wpab-wpoa-cursor-grabbing wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-justify-center wpab-wpoa-w-8 wpab-wpoa-h-8 wpab-wpoa-rounded-[6px] wpab-wpoa-border wpab-wpoa-transition-colors ${
                   hasError && !isExpanded
-                    ? "spoa-bg-[#fcf0f1] spoa-border-[#f8c1c2] spoa-text-[#d63638]"
-                    : "spoa-bg-[#f6f7f7] spoa-border-[#dcdcde] spoa-text-[#646970] hover:spoa-bg-white hover:spoa-border-[#c3c4c7] hover:spoa-text-[#2271b1]"
+                    ? "wpab-wpoa-bg-[#fcf0f1] wpab-wpoa-border-[#f8c1c2] wpab-wpoa-text-[#d63638]"
+                    : "wpab-wpoa-bg-[#f6f7f7] wpab-wpoa-border-[#dcdcde] wpab-wpoa-text-[#646970] hover:wpab-wpoa-bg-white hover:wpab-wpoa-border-[#c3c4c7] hover:wpab-wpoa-text-[#2271b1]"
                 }`}
                 title={
                   hasError && !isExpanded
-                    ? __("This field has errors", "smart-product-options-addons")
-                    : __("Drag to reorder", "smart-product-options-addons")
+                    ? __("This field has errors", "woo-product-options-addons")
+                    : __("Drag to reorder", "woo-product-options-addons")
                 }
               >
                 {hasError && !isExpanded ? (
@@ -128,20 +128,20 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
             </div>
 
             {/* Col 2: Name (Label) */}
-            <div className="spoa-flex-1">
-              <span className="spoa-text-[#2271b1] hover:spoa-text-[#135e96] spoa-font-semibold spoa-text-[14px]">
-                {field.label || __("(No name)", "smart-product-options-addons")}
+            <div className="wpab-wpoa-flex-1">
+              <span className="wpab-wpoa-text-[#2271b1] hover:wpab-wpoa-text-[#135e96] wpab-wpoa-font-semibold wpab-wpoa-text-[14px]">
+                {field.label || __("(No name)", "woo-product-options-addons")}
                 {field.required && (
-                  <span className="spoa-text-[#c00] spoa-ml-1">
+                  <span className="wpab-wpoa-text-[#c00] wpab-wpoa-ml-1">
                     *
                   </span>
                 )}
               </span>
 
               {/* Hover Actions (WordPress style) */}
-              <div className="spoa-row-actions spoa-text-[12px] spoa-flex spoa-gap-1 spoa-opacity-0 group-hover:spoa-opacity-100 spoa-transition-opacity">
+              <div className="wpab-wpoa-row-actions wpab-wpoa-text-[12px] wpab-wpoa-flex wpab-wpoa-gap-1 wpab-wpoa-opacity-0 group-hover:wpab-wpoa-opacity-100 wpab-wpoa-transition-opacity">
                 <span
-                  className="spoa-text-[#2271b1] hover:spoa-underline"
+                  className="wpab-wpoa-text-[#2271b1] hover:wpab-wpoa-underline"
                   onClick={(e) => {
                     e.stopPropagation();
                     dispatch({
@@ -150,11 +150,11 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                     });
                   }}
                 >
-                  {__("Edit field", "smart-product-options-addons")}
+                  {__("Edit field", "woo-product-options-addons")}
                 </span>
-                <span className="spoa-text-[#ddd]">|</span>
+                <span className="wpab-wpoa-text-[#ddd]">|</span>
                 <span
-                  className="spoa-text-[#2271b1] hover:spoa-underline"
+                  className="wpab-wpoa-text-[#2271b1] hover:wpab-wpoa-underline"
                   onClick={(e) => {
                     e.stopPropagation();
                     dispatch({
@@ -163,34 +163,34 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                     });
                   }}
                 >
-                  {__("Duplicate", "smart-product-options-addons")}
+                  {__("Duplicate", "woo-product-options-addons")}
                 </span>
-                <span className="spoa-text-[#ddd]">|</span>
+                <span className="wpab-wpoa-text-[#ddd]">|</span>
                 <span
-                  className="spoa-text-[#d63638] hover:spoa-text-[#b32d2e] hover:spoa-underline"
+                  className="wpab-wpoa-text-[#d63638] hover:wpab-wpoa-text-[#b32d2e] hover:wpab-wpoa-underline"
                   onClick={(e) => {
                     e.stopPropagation();
                     setIsDeleteModalOpen(true);
                   }}
                 >
-                  {__("Delete", "smart-product-options-addons")}
+                  {__("Delete", "woo-product-options-addons")}
                 </span>
               </div>
             </div>
 
             {/* Col 3: Type */}
-            <div className="spoa-w-1/3">
-              <span className="spoa-text-[#646970] spoa-text-[13px]">
+            <div className="wpab-wpoa-w-1/3">
+              <span className="wpab-wpoa-text-[#646970] wpab-wpoa-text-[13px]">
                 {FIELD_TYPES.find((t) => t.value === field.type)?.label ||
                   field.type}
               </span>
             </div>
 
             {/* Col 4: Actions */}
-            <div className="spoa-w-32 spoa-flex spoa-justify-end spoa-gap-1 spoa-items-center">
+            <div className="wpab-wpoa-w-32 wpab-wpoa-flex wpab-wpoa-justify-end wpab-wpoa-gap-1 wpab-wpoa-items-center">
               {/* Move Up */}
               <Tooltip
-                content={__("Move up", "smart-product-options-addons")}
+                content={__("Move up", "woo-product-options-addons")}
                 disabled={index === 0}
               >
                 <button
@@ -203,10 +203,10 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                       payload: index,
                     });
                   }}
-                  className={`spoa-bg-transparent spoa-border-none spoa-cursor-pointer spoa-p-1 spoa-flex spoa-items-center spoa-transition-colors ${
+                  className={`wpab-wpoa-bg-transparent wpab-wpoa-border-none wpab-wpoa-cursor-pointer wpab-wpoa-p-1 wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-transition-colors ${
                     index === 0
-                      ? "spoa-text-[#ccd0d4] spoa-cursor-not-allowed"
-                      : "spoa-text-[#646970] hover:spoa-text-[#2271b1]"
+                      ? "wpab-wpoa-text-[#ccd0d4] wpab-wpoa-cursor-not-allowed"
+                      : "wpab-wpoa-text-[#646970] hover:wpab-wpoa-text-[#2271b1]"
                   }`}
                 >
                   <ChevronUp size={16} />
@@ -215,7 +215,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
 
               {/* Move Down */}
               <Tooltip
-                content={__("Move down", "smart-product-options-addons")}
+                content={__("Move down", "woo-product-options-addons")}
                 disabled={index === state.schema.length - 1}
               >
                 <button
@@ -228,10 +228,10 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                       payload: index,
                     });
                   }}
-                  className={`spoa-bg-transparent spoa-border-none spoa-cursor-pointer spoa-p-1 spoa-flex spoa-items-center spoa-transition-colors ${
+                  className={`wpab-wpoa-bg-transparent wpab-wpoa-border-none wpab-wpoa-cursor-pointer wpab-wpoa-p-1 wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-transition-colors ${
                     index === state.schema.length - 1
-                      ? "spoa-text-[#ccd0d4] spoa-cursor-not-allowed"
-                      : "spoa-text-[#646970] hover:spoa-text-[#2271b1]"
+                      ? "wpab-wpoa-text-[#ccd0d4] wpab-wpoa-cursor-not-allowed"
+                      : "wpab-wpoa-text-[#646970] hover:wpab-wpoa-text-[#2271b1]"
                   }`}
                 >
                   <ChevronDown size={16} />
@@ -239,14 +239,14 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
               </Tooltip>
 
               {/* Delete Field */}
-              <Tooltip content={__("Delete field", "smart-product-options-addons")}>
+              <Tooltip content={__("Delete field", "woo-product-options-addons")}>
                 <button
                   type="button"
                   onClick={(e) => {
                     e.stopPropagation();
                     setIsDeleteModalOpen(true);
                   }}
-                  className="spoa-bg-transparent spoa-border-none spoa-cursor-pointer spoa-p-1 spoa-flex spoa-items-center spoa-text-[#d63638] hover:spoa-text-[#b32d2e] spoa-transition-colors"
+                  className="wpab-wpoa-bg-transparent wpab-wpoa-border-none wpab-wpoa-cursor-pointer wpab-wpoa-p-1 wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-text-[#d63638] hover:wpab-wpoa-text-[#b32d2e] wpab-wpoa-transition-colors"
                 >
                   <Trash2 size={16} />
                 </button>
@@ -256,12 +256,12 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
 
           {/* Body */}
           {isExpanded && (
-            <div className="spoa-pl-4 spoa-bg-[#f0f0f1] spoa-border-t spoa-border-[#e2e8f0] spoa-pb-2">
+            <div className="wpab-wpoa-pl-4 wpab-wpoa-bg-[#f0f0f1] wpab-wpoa-border-t wpab-wpoa-border-[#e2e8f0] wpab-wpoa-pb-2">
               <ClassicSettingsTable
                 className=""
                 fields={[
                   {
-                    label: __("Field Type", "smart-product-options-addons"),
+                    label: __("Field Type", "woo-product-options-addons"),
                     tooltip: FIELD_TOOLTIPS.type,
                     render: () => (
                       <ClassicSelect
@@ -269,7 +269,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                         value={field.type}
                         isError={!!state.errors?.[`schema.${index}.type`]}
                         classNames={{
-                          innerContainer: "!spoa-w-[120px]",
+                          innerContainer: "!wpab-wpoa-w-[120px]",
                         }}
                         onChange={(val) => {
                           const newType = String(val);
@@ -298,7 +298,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                   ...(field.type === "static_content"
                     ? [
                         {
-                          label: __("Label", "smart-product-options-addons"),
+                          label: __("Label", "woo-product-options-addons"),
                           tooltip: FIELD_TOOLTIPS.label,
                           render: () => (
                             <>
@@ -307,7 +307,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                                 value={field.label}
                                 description={__(
                                   "The label for static content is for internal admin reference only and will not be displayed on the frontend.",
-                                  "smart-product-options-addons"
+                                  "woo-product-options-addons"
                                 )}
                                 isError={
                                   !!state.errors?.[`schema.${index}.label`]
@@ -319,7 +319,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                                 }
                                 placeholder={__(
                                   "Enter field label",
-                                  "smart-product-options-addons",
+                                  "woo-product-options-addons",
                                 )}
                               />
                               <FormError
@@ -331,17 +331,17 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                           ),
                         },
                         {
-                          label: __("Content", "smart-product-options-addons"),
+                          label: __("Content", "woo-product-options-addons"),
                           tooltip: __(
                             "The static content to be displayed on the product page.",
-                            "smart-product-options-addons",
+                            "woo-product-options-addons",
                           ),
                           render: () => (
                             <WPEditor
                               id={`ob-editor-${field.id}`}
                               description={__(
                                 "Enter text, images, or other static content using the visual editor.",
-                                "smart-product-options-addons",
+                                "woo-product-options-addons",
                               )}
                               value={field.content || ""}
                               onChange={(html: string) =>
@@ -355,7 +355,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                       ]
                     : [
                         {
-                          label: __("Label", "smart-product-options-addons"),
+                          label: __("Label", "woo-product-options-addons"),
                           tooltip: FIELD_TOOLTIPS.label,
                           render: () => (
                             <>
@@ -372,7 +372,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                                 }
                                 placeholder={__(
                                   "Enter field label",
-                                  "smart-product-options-addons",
+                                  "woo-product-options-addons",
                                 )}
                               />
                               <FormError
@@ -384,12 +384,12 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                           ),
                         },
                         {
-                          label: __("Description", "smart-product-options-addons"),
+                          label: __("Description", "woo-product-options-addons"),
                           tooltip: FIELD_TOOLTIPS.description,
                           render: () => (
                             <>
                               <textarea
-                                className="large-text spoa-p-1.5"
+                                className="large-text wpab-wpoa-p-1.5"
                                 rows={2}
                                 value={field.description}
                                 onChange={(e) =>
@@ -399,7 +399,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                                 }
                                 placeholder={__(
                                   "Help text shown below the field",
-                                  "smart-product-options-addons",
+                                  "woo-product-options-addons",
                                 )}
                               />
                               <FormError
@@ -415,12 +415,12 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                     ? []
                     : [
                         {
-                          label: __("Validation", "smart-product-options-addons"),
+                          label: __("Validation", "woo-product-options-addons"),
                           tooltip: FIELD_TOOLTIPS.required,
                           render: () => (
                             <>
                               <ClassicCheckbox
-                                label={__("Field is Required", "smart-product-options-addons")}
+                                label={__("Field is Required", "woo-product-options-addons")}
                                 checked={field.required}
                                 isError={
                                   !!state.errors?.[`schema.${index}.required`]
@@ -443,7 +443,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                   ...(!hasOptions && field.type !== "static_content"
                     ? [
                         {
-                          label: __("Pricing Logic", "smart-product-options-addons"),
+                          label: __("Pricing Logic", "woo-product-options-addons"),
                           tooltip: FIELD_TOOLTIPS.price_type,
                           render: () => (
                             <>
@@ -482,7 +482,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                         ...(field.price_type !== "none"
                           ? [
                                 {
-                                  label: __("Price Amount", "smart-product-options-addons"),
+                                  label: __("Price Amount", "woo-product-options-addons"),
                                   tooltip: FIELD_TOOLTIPS.price,
                                   render: () => (
                                     <>
@@ -524,7 +524,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
 
                     ? [
                         {
-                          label: __("Placeholder", "smart-product-options-addons"),
+                          label: __("Placeholder", "woo-product-options-addons"),
                           tooltip: FIELD_TOOLTIPS.placeholder,
                           render: () => (
                             <>
@@ -543,7 +543,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                                 }
                                 placeholder={__(
                                   "Optional placeholder text",
-                                  "smart-product-options-addons",
+                                  "woo-product-options-addons",
                                 )}
                               />
                               <FormError
@@ -559,13 +559,13 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                   ...(["text", "textarea"].includes(field.type)
                     ? [
                         {
-                          label: __("Restrictions", "smart-product-options-addons"),
+                          label: __("Restrictions", "woo-product-options-addons"),
                           tooltip: FIELD_TOOLTIPS.restrictions,
                           render: () => (
-                            <div className="spoa-flex spoa-flex-col spoa-gap-1">
-                              <div className="spoa-flex spoa-gap-2.5 spoa-items-center">
-                                <label className="spoa-text-xs">
-                                  {__("Min Length:", "smart-product-options-addons")}{" "}
+                            <div className="wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-1">
+                              <div className="wpab-wpoa-flex wpab-wpoa-gap-2.5 wpab-wpoa-items-center">
+                                <label className="wpab-wpoa-text-xs">
+                                  {__("Min Length:", "woo-product-options-addons")}{" "}
                                   <ClassicInput
                                     type="number"
                                     size="small"
@@ -584,8 +584,8 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                                     min={0}
                                   />
                                 </label>
-                                <label className="spoa-text-xs">
-                                  {__("Max Length:", "smart-product-options-addons")}{" "}
+                                <label className="wpab-wpoa-text-xs">
+                                  {__("Max Length:", "woo-product-options-addons")}{" "}
                                   <ClassicInput
                                     type="number"
                                     size="small"
@@ -623,13 +623,13 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                   ...(field.type === "number"
                     ? [
                         {
-                          label: __("Restrictions", "smart-product-options-addons"),
+                          label: __("Restrictions", "woo-product-options-addons"),
                           tooltip: FIELD_TOOLTIPS.restrictions,
                           render: () => (
-                            <div className="spoa-flex spoa-flex-col spoa-gap-1">
-                              <div className="spoa-flex spoa-gap-2.5 spoa-items-center spoa-mb-2">
-                                <label className="spoa-text-xs">
-                                  {__("Min:", "smart-product-options-addons")}{" "}
+                            <div className="wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-1">
+                              <div className="wpab-wpoa-flex wpab-wpoa-gap-2.5 wpab-wpoa-items-center wpab-wpoa-mb-2">
+                                <label className="wpab-wpoa-text-xs">
+                                  {__("Min:", "woo-product-options-addons")}{" "}
                                   <ClassicInput
                                     type="number"
                                     size="small"
@@ -647,8 +647,8 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                                     }
                                   />
                                 </label>
-                                <label className="spoa-text-xs">
-                                  {__("Max:", "smart-product-options-addons")}{" "}
+                                <label className="wpab-wpoa-text-xs">
+                                  {__("Max:", "woo-product-options-addons")}{" "}
                                   <ClassicInput
                                     type="number"
                                     size="small"
@@ -667,8 +667,8 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                                   />
                                 </label>
                               </div>
-                              <label className="spoa-text-xs">
-                                {__("Step Value:", "smart-product-options-addons")}{" "}
+                              <label className="wpab-wpoa-text-xs">
+                                {__("Step Value:", "woo-product-options-addons")}{" "}
                                 <ClassicInput
                                   type="number"
                                   size="small"
@@ -709,10 +709,10 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                         )
                           ? [
                               {
-                                label: __("Display Style", "smart-product-options-addons"),
+                                label: __("Display Style", "woo-product-options-addons"),
                                 tooltip: __(
                                   "The visual presentation of swatches on the frontend.",
-                                  "smart-product-options-addons",
+                                  "woo-product-options-addons",
                                 ),
                                 render: () => (
                                   <ClassicSelect
@@ -720,7 +720,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                                     value={field.display_style || "swatch_only"}
                                     description={__(
                                       "Choose whether to show just the swatch or the swatch with the label name.",
-                                      "smart-product-options-addons",
+                                      "woo-product-options-addons",
                                     )}
                                     isError={
                                       !!state.errors?.[
@@ -737,13 +737,13 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                                     options={[
                                       {
                                         value: "swatch_only",
-                                        label: __("Swatch Only", "smart-product-options-addons"),
+                                        label: __("Swatch Only", "woo-product-options-addons"),
                                       },
                                       {
                                         value: "swatch_label",
                                         label: __(
                                           "Swatch + Label",
-                                          "smart-product-options-addons",
+                                          "woo-product-options-addons",
                                         ),
                                       },
                                     ]}
@@ -753,7 +753,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                             ]
                           : []),
                         {
-                          label: __("Choices", "smart-product-options-addons"),
+                          label: __("Choices", "woo-product-options-addons"),
                           tooltip: FIELD_TOOLTIPS.choices,
                           render: () => (
                             <OptionEditorAccordion
@@ -770,18 +770,18 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                   ...(!anyOptionHasStock && field.type !== "static_content"
                     ? [
                         {
-                          label: __("Inventory Management", "smart-product-options-addons"),
+                          label: __("Inventory Management", "woo-product-options-addons"),
                           tooltip: __(
                             "Stock tracking and automatic reduction rules for this field.",
-                            "smart-product-options-addons",
+                            "woo-product-options-addons",
                           ),
                           render: () => (
-                            <div className="spoa-flex spoa-flex-col spoa-gap-3">
+                            <div className="wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-3">
                               <ClassicCheckbox
-                                label={__("Enable Stock Tracking", "smart-product-options-addons")}
+                                label={__("Enable Stock Tracking", "woo-product-options-addons")}
                                 description={__(
                                   "If enabled, stock is reduced automatically when an order is placed.",
-                                  "smart-product-options-addons",
+                                  "woo-product-options-addons",
                                 )}
                                 checked={field.enable_stock || false}
                                 isError={
@@ -797,10 +797,10 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                               />
 
                               {field.enable_stock && (
-                                <div className="spoa-ml-6 spoa-flex spoa-flex-col spoa-gap-3 spoa-p-3 spoa-bg-white spoa-rounded-md spoa-border spoa-border-[#ddd]">
+                                <div className="wpab-wpoa-ml-6 wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-3 wpab-wpoa-p-3 wpab-wpoa-bg-white wpab-wpoa-rounded-md wpab-wpoa-border wpab-wpoa-border-[#ddd]">
                                   <div>
-                                    <label className="spoa-text-xs spoa-font-medium spoa-mb-1 spoa-block">
-                                      {__("Select Pool", "smart-product-options-addons")}
+                                    <label className="wpab-wpoa-text-xs wpab-wpoa-font-medium wpab-wpoa-mb-1 wpab-wpoa-block">
+                                      {__("Select Pool", "woo-product-options-addons")}
                                     </label>
                                     <InventoryPicker
                                       value={field.inventory_id}
@@ -817,10 +817,10 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                                     />
                                   </div>
 
-                                  <div className="spoa-flex spoa-gap-4">
-                                    <div className="spoa-flex-1">
-                                      <label className="spoa-text-xs spoa-font-medium spoa-mb-1 spoa-block">
-                                        {__("Reduction Mode", "smart-product-options-addons")}
+                                  <div className="wpab-wpoa-flex wpab-wpoa-gap-4">
+                                    <div className="wpab-wpoa-flex-1">
+                                      <label className="wpab-wpoa-text-xs wpab-wpoa-font-medium wpab-wpoa-mb-1 wpab-wpoa-block">
+                                        {__("Reduction Mode", "woo-product-options-addons")}
                                       </label>
                                       <ClassicSelect
                                         differentDropdownWidth
@@ -849,7 +849,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                       ]
                     : []),
                   {
-                    label: __("Conditional Logic", "smart-product-options-addons"),
+                    label: __("Conditional Logic", "woo-product-options-addons"),
                     tooltip: FIELD_TOOLTIPS.conditional_logic,
                     render: () => (
                       <div className="">
@@ -867,13 +867,13 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
           )}
           <ConfirmationModal
             isOpen={isDeleteModalOpen}
-            title={__("Delete Field", "smart-product-options-addons")}
+            title={__("Delete Field", "woo-product-options-addons")}
             message={__(
               "Are you sure you want to remove this field?",
-              "smart-product-options-addons",
+              "woo-product-options-addons",
             )}
-            confirmLabel={__("Delete", "smart-product-options-addons")}
-            cancelLabel={__("Cancel", "smart-product-options-addons")}
+            confirmLabel={__("Delete", "woo-product-options-addons")}
+            cancelLabel={__("Cancel", "woo-product-options-addons")}
             onConfirm={() => {
               dispatch({
                 type: "REMOVE_FIELD",

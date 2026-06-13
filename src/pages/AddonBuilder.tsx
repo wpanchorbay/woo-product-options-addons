@@ -41,7 +41,7 @@ function BuilderInner() {
       dispatch({ type: "SET_LOADING", payload: true });
       try {
         const data = (await apiFetch({
-          path: `smart-product-options-addons/v1/groups/${params.id}`,
+          path: `woo-product-options-addons/v1/groups/${params.id}`,
           method: "GET",
         })) as any;
 
@@ -63,7 +63,7 @@ function BuilderInner() {
       } catch (err) {
         dispatch({
           type: "SET_ERROR",
-          payload: __("Failed to load option group.", "smart-product-options-addons"),
+          payload: __("Failed to load option group.", "woo-product-options-addons"),
         });
       } finally {
         dispatch({ type: "SET_LOADING", payload: false });
@@ -107,20 +107,20 @@ function BuilderInner() {
             const parts = path.split(".");
             const fieldIndex = parseInt(parts[1]);
             const field = state.schema[fieldIndex];
-            const fieldDisplayName = field?.label || `${__("Field", "smart-product-options-addons")} #${fieldIndex + 1}`;
+            const fieldDisplayName = field?.label || `${__("Field", "woo-product-options-addons")} #${fieldIndex + 1}`;
 
             let section = "";
             if (parts[2] === "options" && parts[3]) {
               const optionIndex = parseInt(parts[3]);
               const option = field?.options?.[optionIndex];
-              const optionDisplayName = option?.label || `${__("Choice", "smart-product-options-addons")} #${optionIndex + 1}`;
+              const optionDisplayName = option?.label || `${__("Choice", "woo-product-options-addons")} #${optionIndex + 1}`;
               const propertyName = parts[4] || "";
-              section = `${__("Choices", "smart-product-options-addons")} > ${optionDisplayName} (${propertyName})`;
-              readablePath = `${__("Field", "smart-product-options-addons")} #${fieldIndex + 1} (${fieldDisplayName}) -> ${__("Choice", "smart-product-options-addons")} #${optionIndex + 1} (${optionDisplayName}) ${propertyName} : `.trim();
+              section = `${__("Choices", "woo-product-options-addons")} > ${optionDisplayName} (${propertyName})`;
+              readablePath = `${__("Field", "woo-product-options-addons")} #${fieldIndex + 1} (${fieldDisplayName}) -> ${__("Choice", "woo-product-options-addons")} #${optionIndex + 1} (${optionDisplayName}) ${propertyName} : `.trim();
             } else {
               const propertyName = parts[2] || "";
               section = propertyName.toString();
-              readablePath = `${__("Field", "smart-product-options-addons")} #${fieldIndex + 1} (${fieldDisplayName}) ${propertyName} : `.trim();
+              readablePath = `${__("Field", "woo-product-options-addons")} #${fieldIndex + 1} (${fieldDisplayName}) ${propertyName} : `.trim();
             }
 
             meta = {
@@ -135,15 +135,15 @@ function BuilderInner() {
               firstErrorFieldId = field.id;
             }
           } else if (path === "title") {
-            readablePath = __("Group Title : ", "smart-product-options-addons");
+            readablePath = __("Group Title : ", "woo-product-options-addons");
             meta = {
-              fieldName: __("Option Group Title", "smart-product-options-addons"),
+              fieldName: __("Option Group Title", "woo-product-options-addons"),
               errorText: issue.message,
             };
           } else if (path.startsWith("assignments")) {
-            readablePath = __("Assignment Rules : ", "smart-product-options-addons");
+            readablePath = __("Assignment Rules : ", "woo-product-options-addons");
             meta = {
-              fieldName: __("Assignment Rules", "smart-product-options-addons"),
+              fieldName: __("Assignment Rules", "woo-product-options-addons"),
               errorText: issue.message,
             };
           }
@@ -162,7 +162,7 @@ function BuilderInner() {
 
         const topMessage = __(
           "Please fix the validation errors below.",
-          "smart-product-options-addons",
+          "woo-product-options-addons",
         );
         dispatch({ type: "SET_ERROR", payload: topMessage });
 
@@ -177,21 +177,21 @@ function BuilderInner() {
 
       if (isEdit && state.id) {
         await apiFetch({
-          path: `smart-product-options-addons/v1/groups/${state.id}`,
+          path: `woo-product-options-addons/v1/groups/${state.id}`,
           method: "PUT",
           data: payload,
         });
         dispatch({ type: "MARK_CLEAN" });
-        addToast(__("Option group updated.", "smart-product-options-addons"), "success");
+        addToast(__("Option group updated.", "woo-product-options-addons"), "success");
       } else {
         const response = (await apiFetch({
-          path: "smart-product-options-addons/v1/groups",
+          path: "woo-product-options-addons/v1/groups",
           method: "POST",
           data: payload,
         })) as any;
 
         if (response.id) {
-          addToast(__("Option group created.", "smart-product-options-addons"), "success");
+          addToast(__("Option group created.", "woo-product-options-addons"), "success");
           navigate(`/option-groups/${response.id}`, {
             replace: true,
           });
@@ -212,20 +212,20 @@ function BuilderInner() {
             const parts = path.split(".");
             const fieldIndex = parseInt(parts[1]);
             const field = state.schema[fieldIndex];
-            const fieldDisplayName = field?.label || `${__("Field", "smart-product-options-addons")} #${fieldIndex + 1}`;
+            const fieldDisplayName = field?.label || `${__("Field", "woo-product-options-addons")} #${fieldIndex + 1}`;
 
             let section = "";
             if (parts[2] === "options" && parts[3]) {
               const optionIndex = parseInt(parts[3]);
               const option = field?.options?.[optionIndex];
-              const optionDisplayName = option?.label || `${__("Choice", "smart-product-options-addons")} #${optionIndex + 1}`;
+              const optionDisplayName = option?.label || `${__("Choice", "woo-product-options-addons")} #${optionIndex + 1}`;
               const propertyName = parts[4] || "";
-              section = `${__("Choices", "smart-product-options-addons")} > ${optionDisplayName} (${propertyName})`;
-              readablePath = `${__("Field", "smart-product-options-addons")} #${fieldIndex + 1} (${fieldDisplayName}) -> ${__("Choice", "smart-product-options-addons")} #${optionIndex + 1} (${optionDisplayName}) ${propertyName} : `.trim();
+              section = `${__("Choices", "woo-product-options-addons")} > ${optionDisplayName} (${propertyName})`;
+              readablePath = `${__("Field", "woo-product-options-addons")} #${fieldIndex + 1} (${fieldDisplayName}) -> ${__("Choice", "woo-product-options-addons")} #${optionIndex + 1} (${optionDisplayName}) ${propertyName} : `.trim();
             } else {
               const propertyName = parts[2] || "";
               section = propertyName.toString();
-              readablePath = `${__("Field", "smart-product-options-addons")} #${fieldIndex + 1} (${fieldDisplayName}) ${propertyName} : `.trim();
+              readablePath = `${__("Field", "woo-product-options-addons")} #${fieldIndex + 1} (${fieldDisplayName}) ${propertyName} : `.trim();
             }
 
             meta = {
@@ -240,15 +240,15 @@ function BuilderInner() {
               firstErrorFieldId = field.id;
             }
           } else if (path === "title") {
-            readablePath = __("Group Title : ", "smart-product-options-addons");
+            readablePath = __("Group Title : ", "woo-product-options-addons");
             meta = {
-              fieldName: __("Option Group Title", "smart-product-options-addons"),
+              fieldName: __("Option Group Title", "woo-product-options-addons"),
               errorText: message as string,
             };
           } else if (path.startsWith("assignments")) {
-            readablePath = __("Assignment Rules : ", "smart-product-options-addons");
+            readablePath = __("Assignment Rules : ", "woo-product-options-addons");
             meta = {
-              fieldName: __("Assignment Rules", "smart-product-options-addons"),
+              fieldName: __("Assignment Rules", "woo-product-options-addons"),
               errorText: message as string,
             };
           }
@@ -267,7 +267,7 @@ function BuilderInner() {
           type: "SET_ERROR",
           payload: __(
             "Please fix the validation errors reported by the server.",
-            "smart-product-options-addons",
+            "woo-product-options-addons",
           ),
         });
 
@@ -277,7 +277,7 @@ function BuilderInner() {
         });
       } else {
         const errMsg =
-          err?.message || __("Failed to save option group.", "smart-product-options-addons");
+          err?.message || __("Failed to save option group.", "woo-product-options-addons");
         dispatch({
           type: "SET_ERROR",
           payload: errMsg,
@@ -302,18 +302,18 @@ function BuilderInner() {
 
   if (state.isLoading) {
     return (
-      <div className="spoa-p-6">
+      <div className="wpab-wpoa-p-6">
         <SkeletonBuilder />
       </div>
     );
   }
 
   return (
-    <div className="spoa-ignore-preflight ">
+    <div className="wpab-wpoa-ignore-preflight ">
       <TopProgressBar isSaving={state.isSaving} />
       {/* Error notice */}
       {state.error && (
-        <div className="notice notice-error is-dismissible spoa-mb-5">
+        <div className="notice notice-error is-dismissible wpab-wpoa-mb-5">
           <p>{state.error}</p>
         </div>
       )}
@@ -322,14 +322,14 @@ function BuilderInner() {
       <BuilderHeader handleSave={handleSave} isEdit={isEdit} />
 
       {/* Main content: 2-column layout */}
-      <div className="spoa-flex spoa-flex-col 2xl:spoa-flex-row spoa-gap-6 spoa-items-start">
+      <div className="wpab-wpoa-flex wpab-wpoa-flex-col 2xl:wpab-wpoa-flex-row wpab-wpoa-gap-6 wpab-wpoa-items-start">
         {/* Left: Title + Fields */}
-        <div className="spoa-w-full spoa-min-w-0 spoa-flex spoa-flex-col spoa-gap-6">
+        <div className="wpab-wpoa-w-full wpab-wpoa-min-w-0 wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-6">
           {/* Group Title */}
           <div>
-            <div className="inside !spoa-p-0">
+            <div className="inside !wpab-wpoa-p-0">
               <ClassicInput
-                className="spoa-w-full !spoa-text-[20px] !spoa-font-semibold !spoa-py-3 !spoa-px-4 !spoa-border !spoa-border-[#ddd] !spoa-rounded-md focus:!spoa-border-[#2271b1] focus:!spoa-shadow-[0_0_0_1px_#2271b1] focus:!spoa-outline-none"
+                className="wpab-wpoa-w-full !wpab-wpoa-text-[20px] !wpab-wpoa-font-semibold !wpab-wpoa-py-3 !wpab-wpoa-px-4 !wpab-wpoa-border !wpab-wpoa-border-[#ddd] !wpab-wpoa-rounded-md focus:!wpab-wpoa-border-[#2271b1] focus:!wpab-wpoa-shadow-[0_0_0_1px_#2271b1] focus:!wpab-wpoa-outline-none"
                 size="large"
                 value={state.title}
                 onChange={(e) =>
@@ -338,7 +338,7 @@ function BuilderInner() {
                     payload: e.target.value,
                   })
                 }
-                placeholder={__("Enter Option Group Title", "smart-product-options-addons")}
+                placeholder={__("Enter Option Group Title", "woo-product-options-addons")}
               />
               <FormError message={state.errors?.title} />
             </div>
@@ -348,24 +348,24 @@ function BuilderInner() {
           <AssignmentRules />
 
           <div>
-            <h2 className="spoa-ignore-preflight">
-              {__("Fields", "smart-product-options-addons")}
+            <h2 className="wpab-wpoa-ignore-preflight">
+              {__("Fields", "woo-product-options-addons")}
             </h2>
             <p className="description">
-              {__("Drag and drop fields to reorder them.", "smart-product-options-addons")}
+              {__("Drag and drop fields to reorder them.", "woo-product-options-addons")}
             </p>
           </div>
 
           {/* Fields list mit header and table layout */}
-          <div className="spoa-border spoa-border-[#c3c4c7] !spoa-m-0 spoa-rounded-[12px] spoa-overflow-x-hidden spoa-overflow-y-visible">
+          <div className="wpab-wpoa-border wpab-wpoa-border-[#c3c4c7] !wpab-wpoa-m-0 wpab-wpoa-rounded-[12px] wpab-wpoa-overflow-x-hidden wpab-wpoa-overflow-y-visible">
             {/* Table Header */}
-            <div className="spoa-flex spoa-items-center spoa-bg-[#f6f7f7] spoa-border-b spoa-border-[#c3c4c7] spoa-px-4 spoa-py-2 spoa-font-semibold spoa-text-[#1d2327]">
-              <div className="spoa-w-10">
-                <span className="dashicons dashicons-editor-help spoa-text-[#9ca3af] !spoa-flex !spoa-items-center !spoa-w-full !spoa-h-full"></span>
+            <div className="wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-bg-[#f6f7f7] wpab-wpoa-border-b wpab-wpoa-border-[#c3c4c7] wpab-wpoa-px-4 wpab-wpoa-py-2 wpab-wpoa-font-semibold wpab-wpoa-text-[#1d2327]">
+              <div className="wpab-wpoa-w-10">
+                <span className="dashicons dashicons-editor-help wpab-wpoa-text-[#9ca3af] !wpab-wpoa-flex !wpab-wpoa-items-center !wpab-wpoa-w-full !wpab-wpoa-h-full"></span>
               </div>
-              <div className="spoa-flex-1">{__("Name", "smart-product-options-addons")}</div>
-              <div className="spoa-w-1/3">{__("Type", "smart-product-options-addons")}</div>
-              <div className="spoa-w-32 spoa-text-right"></div>
+              <div className="wpab-wpoa-flex-1">{__("Name", "woo-product-options-addons")}</div>
+              <div className="wpab-wpoa-w-1/3">{__("Type", "woo-product-options-addons")}</div>
+              <div className="wpab-wpoa-w-32 wpab-wpoa-text-right"></div>
             </div>
 
             <DragDropContext onDragEnd={handleDragEnd}>
@@ -374,17 +374,17 @@ function BuilderInner() {
                   <div
                     ref={provided.innerRef}
                     {...provided.droppableProps}
-                    className="spoa-flex spoa-flex-col spoa-min-h-[50px]"
+                    className="wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-min-h-[50px]"
                   >
                     {state.schema.length === 0 ? (
-                      <div className="spoa-text-center spoa-px-5 spoa-py-[60px] spoa-text-[#999] spoa-border-dashed spoa-border-[#c3c4c7] spoa-m-4 spoa-rounded-lg">
-                        <p className="spoa-text-base spoa-mb-2">
-                          {__("Your group is empty", "smart-product-options-addons")}
+                      <div className="wpab-wpoa-text-center wpab-wpoa-px-5 wpab-wpoa-py-[60px] wpab-wpoa-text-[#999] wpab-wpoa-border-dashed wpab-wpoa-border-[#c3c4c7] wpab-wpoa-m-4 wpab-wpoa-rounded-lg">
+                        <p className="wpab-wpoa-text-base wpab-wpoa-mb-2">
+                          {__("Your group is empty", "woo-product-options-addons")}
                         </p>
-                        <p className="spoa-text-[13px]">
+                        <p className="wpab-wpoa-text-[13px]">
                           {__(
                             "Click the field buttons in the sidebar to start building.",
-                            "smart-product-options-addons",
+                            "woo-product-options-addons",
                           )}
                         </p>
                       </div>
@@ -400,7 +400,7 @@ function BuilderInner() {
             </DragDropContext>
 
             {/* Table Footer */}
-            <div className="spoa-p-3 spoa-bg-[#f6f7f7]">
+            <div className="wpab-wpoa-p-3 wpab-wpoa-bg-[#f6f7f7]">
               <button
                 type="button"
                 className="button button-secondary"
@@ -415,7 +415,7 @@ function BuilderInner() {
                   });
                 }}
               >
-                {__("Add field", "smart-product-options-addons")}
+                {__("Add field", "woo-product-options-addons")}
               </button>
             </div>
           </div>

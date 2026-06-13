@@ -1,5 +1,5 @@
 /**
- * Type definitions for the Smart Product Options and Addons plugin.
+ * Type definitions for the OptionBay - Product Options and Addons plugin.
  *
  * Customize these types for your own plugin's data structures.
  */

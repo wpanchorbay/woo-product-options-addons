@@ -1,5 +1,5 @@
 {
-    "name": "wpanchorbay/smart-product-options-addons",
+    "name": "wpanchorbay/woo-product-options-addons",
     "description": "WooCommerce product options and add-ons with advanced pricing, inventory, and conditional logic.",
     "type": "wordpress-plugin",
     "license": "GPL-2.0-or-later",

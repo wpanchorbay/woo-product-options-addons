@@ -2,8 +2,8 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Smart Product Options and Addons 1.0.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/smart-product-options-addons\n"
+"Project-Id-Version: OptionBay - Product Options and Addons 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/woo-product-options-addons\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -12,30 +12,30 @@ msgstr ""
 "POT-Creation-Date: 2026-05-23T07:13:19+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
-"X-Domain: smart-product-options-addons\n"
+"X-Domain: woo-product-options-addons\n"
 
 #. Plugin Name of the plugin
-#: smart-product-options-addons.php
+#: woo-product-options-addons.php
 #: app/Admin/Admin.php:71
 #: app/Admin/Admin.php:72
 #: app/Admin/Admin.php:73
 #: build/options.js:10
-msgid "Smart Product Options and Addons"
+msgid "OptionBay - Product Options and Addons"
 msgstr ""
 
 #. Plugin URI of the plugin
 #. Author URI of the plugin
-#: smart-product-options-addons.php
+#: woo-product-options-addons.php
 msgid "https://wpanchorbay.com"
 msgstr ""
 
 #. Description of the plugin
-#: smart-product-options-addons.php
+#: woo-product-options-addons.php
 msgid "Add custom product options, add-ons, and extra fields to WooCommerce products with advanced pricing, inventory, and conditional logic."
 msgstr ""
 
 #. Author of the plugin
-#: smart-product-options-addons.php
+#: woo-product-options-addons.php
 msgid "WPAnchorBay"
 msgstr ""
 
@@ -322,7 +322,7 @@ msgstr ""
 #. translators: 1: inventory ID, 2: reduction amount
 #: app/Core/CartManager.php:791
 #, php-format
-msgid "Smart Product Options and Addons: Failed to reduce stock for inventory #%1$d (Amount: %2$s). Order halted."
+msgid "OptionBay - Product Options and Addons: Failed to reduce stock for inventory #%1$d (Amount: %2$s). Order halted."
 msgstr ""
 
 #: app/Fields/BaseField.php:170
@@ -554,7 +554,7 @@ msgid "Import Data"
 msgstr ""
 
 #: build/options.js:10
-msgid "Upload an Smart Product Options and Addons JSON export file to restore data."
+msgid "Upload an OptionBay - Product Options and Addons JSON export file to restore data."
 msgstr ""
 
 #: build/options.js:10
@@ -1754,5 +1754,5 @@ msgid "Purge data on plugin deletion"
 msgstr ""
 
 #: build/settings.js:10
-msgid "CAUTION: If enabled, all Smart Product Options and Addons data (groups, assignments, settings) will be permanently deleted when the plugin is uninstalled."
+msgid "CAUTION: If enabled, all OptionBay - Product Options and Addons data (groups, assignments, settings) will be permanently deleted when the plugin is uninstalled."
 msgstr ""

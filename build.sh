@@ -39,7 +39,7 @@ fi
 
 # 4. Add headers
 HEADER="/*
- * Smart Product Options and Addons
+ * OptionBay - Product Options and Addons
  * Copyright (c) $(date +%Y) WP Anchor Bay - https://wpanchorbay.com
  *
  * This software is licensed under the GPLv2 or later.

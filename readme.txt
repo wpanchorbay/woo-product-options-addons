@@ -1,4 +1,4 @@
-=== Smart Product Options and Addons ===
+=== OptionBay - Product Options and Addons ===
 Contributors: wpanchorbay
 Tags: woocommerce, product options, addons, product fields, inventory
 Requires at least: 6.8
@@ -14,7 +14,7 @@ Add custom product options, add-ons, and extra fields to WooCommerce products wi
 
 == Description ==
 
-**Smart Product Options and Addons** helps WooCommerce stores add flexible product fields, paid add-ons, swatches, conditional logic, and inventory-aware options to product pages.
+**OptionBay - Product Options and Addons** helps WooCommerce stores add flexible product fields, paid add-ons, swatches, conditional logic, and inventory-aware options to product pages.
 
 **Key Features:**
 

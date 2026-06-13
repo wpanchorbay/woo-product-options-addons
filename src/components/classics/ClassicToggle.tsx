@@ -22,7 +22,7 @@ export const ClassicToggle: React.FC< ClassicToggleProps > = ( {
 
 	return (
 		<div
-			className={ `spoa-relative spoa-inline-block spoa-w-10 spoa-align-middle spoa-select-none spoa-transition spoa-duration-200 spoa-ease-in ${ className }` }
+			className={ `wpab-wpoa-relative wpab-wpoa-inline-block wpab-wpoa-w-10 wpab-wpoa-align-middle wpab-wpoa-select-none wpab-wpoa-transition wpab-wpoa-duration-200 wpab-wpoa-ease-in ${ className }` }
 		>
 			<input
 				type="checkbox"
@@ -30,29 +30,29 @@ export const ClassicToggle: React.FC< ClassicToggleProps > = ( {
 				checked={ checked }
 				onChange={ ( e ) => onChange( e.target.checked ) }
 				disabled={ disabled }
-				className="spoa-toggle-checkbox spoa-absolute spoa-block spoa-w-5 spoa-h-5 spoa-rounded-full spoa-bg-white spoa-border-4 spoa-appearance-none spoa-cursor-pointer checked:spoa-right-0 checked:spoa-border-[#2271b1] spoa-right-5 spoa-border-[#8c8f94] spoa-transition-all spoa-duration-200"
+				className="wpab-wpoa-toggle-checkbox wpab-wpoa-absolute wpab-wpoa-block wpab-wpoa-w-5 wpab-wpoa-h-5 wpab-wpoa-rounded-full wpab-wpoa-bg-white wpab-wpoa-border-4 wpab-wpoa-appearance-none wpab-wpoa-cursor-pointer checked:wpab-wpoa-right-0 checked:wpab-wpoa-border-[#2271b1] wpab-wpoa-right-5 wpab-wpoa-border-[#8c8f94] wpab-wpoa-transition-all wpab-wpoa-duration-200"
 			/>
 			<label
 				htmlFor={ toggleId }
-				className={ `spoa-toggle-label spoa-block spoa-overflow-hidden spoa-h-5 spoa-rounded-full spoa-cursor-pointer transition-colors duration-200 ${
+				className={ `wpab-wpoa-toggle-label wpab-wpoa-block wpab-wpoa-overflow-hidden wpab-wpoa-h-5 wpab-wpoa-rounded-full wpab-wpoa-cursor-pointer transition-colors duration-200 ${
 					checked
-						? isError ? '!spoa-bg-red-400' : 'spoa-bg-[#2271b1]'
-						: isError ? '!spoa-bg-red-400' : 'spoa-bg-[#8c8f94]'
+						? isError ? '!wpab-wpoa-bg-red-400' : 'wpab-wpoa-bg-[#2271b1]'
+						: isError ? '!wpab-wpoa-bg-red-400' : 'wpab-wpoa-bg-[#8c8f94]'
 				} ${
 					disabled
-						? 'spoa-opacity-50 spoa-cursor-not-allowed'
+						? 'wpab-wpoa-opacity-50 wpab-wpoa-cursor-not-allowed'
 						: ''
 				}` }
 			></label>
 			<style>{ `
-        .spoa-toggle-checkbox:checked {
+        .wpab-wpoa-toggle-checkbox:checked {
           right: 0;
           border-color: ${isError ? '#f87171' : '#2271b1'};
         }
-        .spoa-toggle-checkbox:focus {
+        .wpab-wpoa-toggle-checkbox:focus {
             outline: none;
         }
-        ${isError ? `.spoa-toggle-checkbox { border-color: #f87171 !important; }` : ''}
+        ${isError ? `.wpab-wpoa-toggle-checkbox { border-color: #f87171 !important; }` : ''}
       ` }</style>
 		</div>
 	);

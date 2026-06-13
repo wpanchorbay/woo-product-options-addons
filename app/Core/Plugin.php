@@ -85,9 +85,9 @@ class Plugin {
 	 * @return void
 	 */
 	private function define_core_hooks() {
-		smart_product_options_addons_log( 'Plugin: Bootstrapping REST API controllers.', 'DEBUG' );
+		woo_product_options_addons_log( 'Plugin: Bootstrapping REST API controllers.', 'DEBUG' );
 		// Initialize API controllers from config
-		$api_controllers = include SMART_PRODUCT_OPTIONS_ADDONS_PATH . 'config/api.php';
+		$api_controllers = include WOO_PRODUCT_OPTIONS_ADDONS_PATH . 'config/api.php';
 		// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
 		if ( is_array( $api_controllers ) ) {
 			foreach ( $api_controllers as $controller ) {
@@ -133,7 +133,7 @@ class Plugin {
 	 * @return void
 	 */
 	public function enqueue_public_styles() {
-		wp_enqueue_style( SMART_PRODUCT_OPTIONS_ADDONS_OPTION_NAME . '_public', SMART_PRODUCT_OPTIONS_ADDONS_URL . 'assets/css/public.css', array(), SMART_PRODUCT_OPTIONS_ADDONS_VERSION );
+		wp_enqueue_style( WOO_PRODUCT_OPTIONS_ADDONS_OPTION_NAME . '_public', WOO_PRODUCT_OPTIONS_ADDONS_URL . 'assets/css/public.css', array(), WOO_PRODUCT_OPTIONS_ADDONS_VERSION );
 	}
 
 	/**
@@ -145,9 +145,9 @@ class Plugin {
 	 * @return void
 	 */
 	private function define_admin_hooks() {
-		smart_product_options_addons_log( 'Plugin: Bootstrapping Core classes.', 'DEBUG' );
+		woo_product_options_addons_log( 'Plugin: Bootstrapping Core classes.', 'DEBUG' );
 		// Initialize Core classes from config
-		$core_classes = include SMART_PRODUCT_OPTIONS_ADDONS_PATH . 'config/core.php';
+		$core_classes = include WOO_PRODUCT_OPTIONS_ADDONS_PATH . 'config/core.php';
 		if ( is_array( $core_classes ) ) {
 			foreach ( $core_classes as $class ) {
 				if ( class_exists( $class ) && method_exists( $class, 'get_instance' ) ) {
@@ -172,10 +172,10 @@ class Plugin {
 	 * @return array The modified array of plugin data.
 	 */
 	public function change_plugin_display_name( $plugins ) {
-		$plugin_basename = plugin_basename( SMART_PRODUCT_OPTIONS_ADDONS_PATH . 'smart-product-options-addons.php' );
+		$plugin_basename = plugin_basename( WOO_PRODUCT_OPTIONS_ADDONS_PATH . 'woo-product-options-addons.php' );
 
 		if ( isset( $plugins[ $plugin_basename ] ) ) {
-			$plugins[ $plugin_basename ]['Name'] = 'Smart Product Options and Addons';
+			$plugins[ $plugin_basename ]['Name'] = 'OptionBay - Product Options and Addons';
 		}
 
 		return $plugins;
@@ -189,7 +189,7 @@ class Plugin {
 	 * @return void
 	 */
 	public function run() {
-		smart_product_options_addons_log( 'Plugin: Smart Product Options and Addons is fully loaded and running.', 'INFO' );
+		woo_product_options_addons_log( 'Plugin: OptionBay - Product Options and Addons is fully loaded and running.', 'INFO' );
 		$this->loader->run();
 	}
 

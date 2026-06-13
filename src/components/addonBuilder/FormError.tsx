@@ -5,7 +5,7 @@ export const FormError = ( { message }: { message?: string } ) => {
 		return null;
 	}
 	return (
-		<div className="spoa-text-[#d63638] spoa-text-xs spoa-mt-1">
+		<div className="wpab-wpoa-text-[#d63638] wpab-wpoa-text-xs wpab-wpoa-mt-1">
 			{ message }
 		</div>
 	);

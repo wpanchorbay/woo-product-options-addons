@@ -20,14 +20,14 @@ export const ExportCard: React.FC = () => {
 			if (exportSettings) entities.push('settings');
 
 			if (entities.length === 0) {
-				addToast(__('Please select at least one entity to export.', 'smart-product-options-addons'), 'error');
+				addToast(__('Please select at least one entity to export.', 'woo-product-options-addons'), 'error');
 				setIsExporting(false);
 				return;
 			}
 
 			const query = entities.join(',');
 			const response = await apiFetch({
-				path: `smart-product-options-addons/v1/export?entities=${query}`,
+				path: `woo-product-options-addons/v1/export?entities=${query}`,
 				method: 'GET',
 			});
 
@@ -37,57 +37,57 @@ export const ExportCard: React.FC = () => {
 			
 			const a = document.createElement('a');
 			a.href = url;
-			a.download = `spoa-export-${new Date().toISOString().split('T')[0]}.json`;
+			a.download = `wpab-wpoa-export-${new Date().toISOString().split('T')[0]}.json`;
 			document.body.appendChild(a);
 			a.click();
 			document.body.removeChild(a);
 			URL.revokeObjectURL(url);
 			
-			addToast(__('Export downloaded successfully.', 'smart-product-options-addons'), 'success');
+			addToast(__('Export downloaded successfully.', 'woo-product-options-addons'), 'success');
 		} catch (error: any) {
 			console.error('Export failed:', error);
-			addToast(error.message || __('Failed to export data.', 'smart-product-options-addons'), 'error');
+			addToast(error.message || __('Failed to export data.', 'woo-product-options-addons'), 'error');
 		} finally {
 			setIsExporting(false);
 		}
 	};
 
 	return (
-		<div className="spoa-settings-section spoa-mt-8">
-			<h2 className="spoa-ignore-preflight">{__('Export Data', 'smart-product-options-addons')}</h2>
-			<p className="description">{__('Select which entities you want to export to a JSON file.', 'smart-product-options-addons')}</p>
+		<div className="wpab-wpoa-settings-section wpab-wpoa-mt-8">
+			<h2 className="wpab-wpoa-ignore-preflight">{__('Export Data', 'woo-product-options-addons')}</h2>
+			<p className="description">{__('Select which entities you want to export to a JSON file.', 'woo-product-options-addons')}</p>
 			
 			<table className="form-table">
 				<tbody>
 					<tr>
 						<th scope="row">
-							<label>{__('Entities to Export', 'smart-product-options-addons')}</label>
+							<label>{__('Entities to Export', 'woo-product-options-addons')}</label>
 						</th>
 						<td>
-							<div className="spoa-flex spoa-flex-col spoa-gap-3">
+							<div className="wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-3">
 								<ClassicCheckbox
 									checked={exportGroups}
 									onChange={setExportGroups}
-									label={__('Option Groups', 'smart-product-options-addons')}
+									label={__('Option Groups', 'woo-product-options-addons')}
 								/>
 								<ClassicCheckbox
 									checked={exportInventory}
 									onChange={setExportInventory}
-									label={__('Inventory Pools', 'smart-product-options-addons')}
+									label={__('Inventory Pools', 'woo-product-options-addons')}
 								/>
 								<ClassicCheckbox
 									checked={exportSettings}
 									onChange={setExportSettings}
-									label={__('Plugin Settings', 'smart-product-options-addons')}
+									label={__('Plugin Settings', 'woo-product-options-addons')}
 								/>
 							</div>
-							<div className="spoa-mt-4">
+							<div className="wpab-wpoa-mt-4">
 								<ClassicButton
 									variant="primary"
 									onClick={handleExport}
 									disabled={isExporting || (!exportGroups && !exportInventory && !exportSettings)}
 								>
-									{isExporting ? __('Exporting...', 'smart-product-options-addons') : __('Download JSON Export', 'smart-product-options-addons')}
+									{isExporting ? __('Exporting...', 'woo-product-options-addons') : __('Download JSON Export', 'woo-product-options-addons')}
 								</ClassicButton>
 							</div>
 						</td>

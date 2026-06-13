@@ -11,18 +11,18 @@ const ClassicLayout: FC = () => {
 	const getPageTitle = () => {
 		const path = location.pathname;
 		if (path === '/option-groups/new') {
-			return __('New Option Group', 'smart-product-options-addons');
+			return __('New Option Group', 'woo-product-options-addons');
 		}
 		if (path.startsWith('/option-groups/')) {
-			return __('Edit Option Group', 'smart-product-options-addons');
+			return __('Edit Option Group', 'woo-product-options-addons');
 		}
 		if (path === '/' || path === '/option-groups') {
-			return __('Option Groups', 'smart-product-options-addons');
+			return __('Option Groups', 'woo-product-options-addons');
 		}
 		if (path === '/settings') {
-			return __('Settings', 'smart-product-options-addons');
+			return __('Settings', 'woo-product-options-addons');
 		}
-		return store.pluginData?.plugin_name || __('Smart Product Options and Addons', 'smart-product-options-addons');
+		return store.pluginData?.plugin_name || __('OptionBay - Product Options and Addons', 'woo-product-options-addons');
 	};
 
 	const context =
@@ -31,11 +31,11 @@ const ClassicLayout: FC = () => {
 	return (
 		<div className="">
 			{context !== 'settings' && (
-				<h1 className="spoa-ignore-preflight spoa-font-[600] spoa-text-[16px] spoa-p-x-page-default spoa-bg-white spoa-m-0 spoa-py-[18px]">
+				<h1 className="wpab-wpoa-ignore-preflight wpab-wpoa-font-[600] wpab-wpoa-text-[16px] wpab-wpoa-p-x-page-default wpab-wpoa-bg-white wpab-wpoa-m-0 wpab-wpoa-py-[18px]">
 					{getPageTitle()}
 				</h1>
 			)}
-			<div className="spoa-mt-2 spoa-p-x-page-default">
+			<div className="wpab-wpoa-mt-2 wpab-wpoa-p-x-page-default">
 				<Outlet />
 			</div>
 		</div>

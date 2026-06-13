@@ -118,7 +118,7 @@ export default function AddonList() {
     setLoading(true);
     try {
       const data = (await apiFetch({
-        path: `smart-product-options-addons/v1/groups?page=${page}&per_page=20&status=${statusFilter}&search=${encodeURIComponent(searchParam)}`,
+        path: `woo-product-options-addons/v1/groups?page=${page}&per_page=20&status=${statusFilter}&search=${encodeURIComponent(searchParam)}`,
         method: "GET",
       })) as ListResponse;
       setGroups(data.items || []);
@@ -167,19 +167,19 @@ export default function AddonList() {
     const actionText =
       bulkAction === "delete"
         ? statusFilter === "trash"
-          ? __("permanently delete", "smart-product-options-addons")
-          : __("move to trash", "smart-product-options-addons")
+          ? __("permanently delete", "woo-product-options-addons")
+          : __("move to trash", "woo-product-options-addons")
         : bulkAction === "restore"
-        ? __("restore", "smart-product-options-addons")
+        ? __("restore", "woo-product-options-addons")
         : bulkAction === "activate"
-        ? __("publish", "smart-product-options-addons")
-        : __("draft", "smart-product-options-addons");
+        ? __("publish", "woo-product-options-addons")
+        : __("draft", "woo-product-options-addons");
 
     setConfirmModal({
       isOpen: true,
-      title: __("Confirm Action", "smart-product-options-addons"),
+      title: __("Confirm Action", "woo-product-options-addons"),
       message: sprintf(
-        __("Are you sure you want to %s %d selected items?", "smart-product-options-addons"),
+        __("Are you sure you want to %s %d selected items?", "woo-product-options-addons"),
         actionText,
         selectedGroups.length,
       ),
@@ -190,7 +190,7 @@ export default function AddonList() {
         setIsActioning(true);
         try {
           await apiFetch({
-            path: `smart-product-options-addons/v1/groups/bulk`,
+            path: `woo-product-options-addons/v1/groups/bulk`,
             method: "POST",
             data: {
               action: bulkAction,
@@ -200,13 +200,13 @@ export default function AddonList() {
           setSelectedGroups([]);
           setBulkAction("");
           addToast(
-            __("Bulk action applied successfully.", "smart-product-options-addons"),
+            __("Bulk action applied successfully.", "woo-product-options-addons"),
             "success",
           );
           fetchGroups();
         } catch (err: any) {
           addToast(
-            err.message || __("Failed to execute bulk action.", "smart-product-options-addons"),
+            err.message || __("Failed to execute bulk action.", "woo-product-options-addons"),
             "error",
           );
         } finally {
@@ -221,16 +221,16 @@ export default function AddonList() {
     setConfirmModal({
       isOpen: true,
       title: isTrash
-        ? __("Permanently Delete", "smart-product-options-addons")
-        : __("Move to Trash", "smart-product-options-addons"),
+        ? __("Permanently Delete", "woo-product-options-addons")
+        : __("Move to Trash", "woo-product-options-addons"),
       message: isTrash
         ? __(
             "Are you sure you want to permanently delete this option group? This action cannot be undone.",
-            "smart-product-options-addons",
+            "woo-product-options-addons",
           )
         : __(
             "Are you sure you want to move this option group to trash?",
-            "smart-product-options-addons",
+            "woo-product-options-addons",
           ),
       confirmColor: "danger",
       autoFocus: "cancel",
@@ -239,19 +239,19 @@ export default function AddonList() {
         setIsActioning(true);
         try {
           await apiFetch({
-            path: `smart-product-options-addons/v1/groups/${id}`,
+            path: `woo-product-options-addons/v1/groups/${id}`,
             method: "DELETE",
           });
           addToast(
             isTrash
-              ? __("Option group permanently deleted.", "smart-product-options-addons")
-              : __("Option group moved to trash.", "smart-product-options-addons"),
+              ? __("Option group permanently deleted.", "woo-product-options-addons")
+              : __("Option group moved to trash.", "woo-product-options-addons"),
             "success",
           );
           fetchGroups();
         } catch (err: any) {
           addToast(
-            err.message || __("Failed to delete group.", "smart-product-options-addons"),
+            err.message || __("Failed to delete group.", "woo-product-options-addons"),
             "error",
           );
         } finally {
@@ -265,14 +265,14 @@ export default function AddonList() {
     setIsActioning(true);
     try {
       await apiFetch({
-        path: `smart-product-options-addons/v1/groups/${id}/duplicate`,
+        path: `woo-product-options-addons/v1/groups/${id}/duplicate`,
         method: "POST",
       });
-      addToast(__("Option group duplicated.", "smart-product-options-addons"), "success");
+      addToast(__("Option group duplicated.", "woo-product-options-addons"), "success");
       fetchGroups();
     } catch (err: any) {
       addToast(
-        err.message || __("Failed to duplicate group.", "smart-product-options-addons"),
+        err.message || __("Failed to duplicate group.", "woo-product-options-addons"),
         "error",
       );
     } finally {
@@ -284,18 +284,18 @@ export default function AddonList() {
     setIsActioning(true);
     try {
       await apiFetch({
-        path: `smart-product-options-addons/v1/groups/bulk`,
+        path: `woo-product-options-addons/v1/groups/bulk`,
         method: "POST",
         data: {
           action: "restore",
           ids: [id],
         },
       });
-      addToast(__("Option group restored.", "smart-product-options-addons"), "success");
+      addToast(__("Option group restored.", "woo-product-options-addons"), "success");
       fetchGroups();
     } catch (err: any) {
       addToast(
-        err.message || __("Failed to restore group.", "smart-product-options-addons"),
+        err.message || __("Failed to restore group.", "woo-product-options-addons"),
         "error",
       );
     } finally {
@@ -308,7 +308,7 @@ export default function AddonList() {
     setIsActioning(true);
     try {
       await apiFetch({
-        path: `smart-product-options-addons/v1/groups/${id}/status`,
+        path: `woo-product-options-addons/v1/groups/${id}/status`,
         method: "PUT",
         data: {
           status: newStatus,
@@ -316,8 +316,8 @@ export default function AddonList() {
       });
       addToast(
         newStatus === "publish"
-          ? __("Option group published.", "smart-product-options-addons")
-          : __("Option group moved to draft.", "smart-product-options-addons"),
+          ? __("Option group published.", "woo-product-options-addons")
+          : __("Option group moved to draft.", "woo-product-options-addons"),
         "success",
       );
       setGroups((prev) =>
@@ -325,7 +325,7 @@ export default function AddonList() {
       );
     } catch (err: any) {
       addToast(
-        err.message || __("Failed to update status.", "smart-product-options-addons"),
+        err.message || __("Failed to update status.", "woo-product-options-addons"),
         "error",
       );
     } finally {
@@ -335,12 +335,12 @@ export default function AddonList() {
 
   const getAssignmentSummary = (assignments: GroupListItem["assignments"]) => {
     if (!assignments || assignments.length === 0) {
-      return __("None", "smart-product-options-addons");
+      return __("None", "woo-product-options-addons");
     }
 
     const hasGlobal = assignments.some((a) => a.target_type === "global");
     if (hasGlobal) {
-      return __("All Products", "smart-product-options-addons");
+      return __("All Products", "woo-product-options-addons");
     }
 
     const cats = assignments.filter(
@@ -351,12 +351,12 @@ export default function AddonList() {
     ).length;
     const parts: string[] = [];
     if (cats > 0) {
-      parts.push(`${cats} ${__("categories", "smart-product-options-addons")}`);
+      parts.push(`${cats} ${__("categories", "woo-product-options-addons")}`);
     }
     if (products > 0) {
-      parts.push(`${products} ${__("products", "smart-product-options-addons")}`);
+      parts.push(`${products} ${__("products", "woo-product-options-addons")}`);
     }
-    return parts.join(", ") || __("None", "smart-product-options-addons");
+    return parts.join(", ") || __("None", "woo-product-options-addons");
   };
 
   const formatDate = (dateString: string) => {
@@ -375,31 +375,31 @@ export default function AddonList() {
 
   const renderBulkActions = (position: "top" | "bottom") => (
     <div
-      className={`alignleft actions bulkactions spoa-flex spoa-items-center spoa-gap-2 ${
+      className={`alignleft actions bulkactions wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-2 ${
         position === "bottom"
-          ? "spoa-mt-4"
-          : "spoa-mt-4 sm:spoa-mt-0"
+          ? "wpab-wpoa-mt-4"
+          : "wpab-wpoa-mt-4 sm:wpab-wpoa-mt-0"
       }`}
     >
       <select
         value={position === "bottom" ? "" : bulkAction} // Only bind value to top to prevent double selection issues
         onChange={(e) => setBulkAction(e.target.value)}
-        className="spoa-h-[30px]"
+        className="wpab-wpoa-h-[30px]"
         disabled={isActioning}
       >
-        <option value="">{__("Bulk actions", "smart-product-options-addons")}</option>
+        <option value="">{__("Bulk actions", "woo-product-options-addons")}</option>
         {statusFilter === "trash" ? (
           <>
-            <option value="restore">{__("Restore", "smart-product-options-addons")}</option>
+            <option value="restore">{__("Restore", "woo-product-options-addons")}</option>
             <option value="delete">
-              {__("Delete Permanently", "smart-product-options-addons")}
+              {__("Delete Permanently", "woo-product-options-addons")}
             </option>
           </>
         ) : (
           <>
-            <option value="activate">{__("Publish", "smart-product-options-addons")}</option>
-            <option value="draft">{__("Draft", "smart-product-options-addons")}</option>
-            <option value="delete">{__("Move to Trash", "smart-product-options-addons")}</option>
+            <option value="activate">{__("Publish", "woo-product-options-addons")}</option>
+            <option value="draft">{__("Draft", "woo-product-options-addons")}</option>
+            <option value="delete">{__("Move to Trash", "woo-product-options-addons")}</option>
           </>
         )}
       </select>
@@ -408,12 +408,12 @@ export default function AddonList() {
         onClick={handleBulkAction}
         disabled={!bulkAction || selectedGroups.length === 0 || isActioning}
       >
-        {__("Apply", "smart-product-options-addons")}
+        {__("Apply", "woo-product-options-addons")}
       </ClassicButton>
       {selectedGroups.length > 0 && (
-        <span className="spoa-text-sm spoa-text-gray-500">
+        <span className="wpab-wpoa-text-sm wpab-wpoa-text-gray-500">
           {sprintf(
-            __("%1$d of %2$d selected", "smart-product-options-addons"),
+            __("%1$d of %2$d selected", "woo-product-options-addons"),
             selectedGroups.length,
             total,
           )}
@@ -425,38 +425,38 @@ export default function AddonList() {
   const renderPagination = (position: "top" | "bottom") => {
     return (
       <div
-        className={`tablenav-pages spoa-flex spoa-items-center spoa-gap-2 ${
-          position === "bottom" ? "spoa-mt-4" : ""
+        className={`tablenav-pages wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-2 ${
+          position === "bottom" ? "wpab-wpoa-mt-4" : ""
         }`}
       >
-        <span className="displaying-num spoa-text-[13px] spoa-mr-2">
-          {total} {__("items", "smart-product-options-addons")}
+        <span className="displaying-num wpab-wpoa-text-[13px] wpab-wpoa-mr-2">
+          {total} {__("items", "woo-product-options-addons")}
         </span>
         <ClassicButton
           variant="secondary"
           onClick={() => setPage((p) => Math.max(1, p - 1))}
           disabled={page <= 1}
         >
-          {__("← Previous", "smart-product-options-addons")}
+          {__("← Previous", "woo-product-options-addons")}
         </ClassicButton>
-        <span className="spoa-leading-[30px] spoa-px-2">
-          {__("Page", "smart-product-options-addons")} {page} {__("of", "smart-product-options-addons")} {totalPages}
+        <span className="wpab-wpoa-leading-[30px] wpab-wpoa-px-2">
+          {__("Page", "woo-product-options-addons")} {page} {__("of", "woo-product-options-addons")} {totalPages}
         </span>
         <ClassicButton
           variant="secondary"
           onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
           disabled={page >= totalPages}
         >
-          {__("Next →", "smart-product-options-addons")}
+          {__("Next →", "woo-product-options-addons")}
         </ClassicButton>
 
-        <div className="spoa-ml-2">
+        <div className="wpab-wpoa-ml-2">
           <Popover
             align="bottom-right"
             trigger={
-              <div className="spoa-p-1 spoa-rounded hover:spoa-bg-gray-100 spoa-text-gray-500">
+              <div className="wpab-wpoa-p-1 wpab-wpoa-rounded hover:wpab-wpoa-bg-gray-100 wpab-wpoa-text-gray-500">
                 <svg
-                  className="spoa-w-5 spoa-h-5"
+                  className="wpab-wpoa-w-5 wpab-wpoa-h-5"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
@@ -465,49 +465,49 @@ export default function AddonList() {
               </div>
             }
             content={
-              <div className="spoa-p-3 spoa-flex spoa-flex-col spoa-gap-2">
-                <p className="spoa-font-semibold spoa-text-xs spoa-uppercase spoa-text-gray-400 spoa-mb-1">
-                  {__("Display Columns", "smart-product-options-addons")}
+              <div className="wpab-wpoa-p-3 wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-2">
+                <p className="wpab-wpoa-font-semibold wpab-wpoa-text-xs wpab-wpoa-uppercase wpab-wpoa-text-gray-400 wpab-wpoa-mb-1">
+                  {__("Display Columns", "woo-product-options-addons")}
                 </p>
                 {[
                   {
                     id: "fields",
-                    label: __("Fields", "smart-product-options-addons"),
+                    label: __("Fields", "woo-product-options-addons"),
                   },
                   {
                     id: "assigned",
-                    label: __("Assigned To", "smart-product-options-addons"),
+                    label: __("Assigned To", "woo-product-options-addons"),
                   },
                   {
                     id: "status",
-                    label: __("Status", "smart-product-options-addons"),
+                    label: __("Status", "woo-product-options-addons"),
                   },
                   {
                     id: "created_by",
-                    label: __("Created By", "smart-product-options-addons"),
+                    label: __("Created By", "woo-product-options-addons"),
                   },
                   {
                     id: "created_at",
-                    label: __("Created At", "smart-product-options-addons"),
+                    label: __("Created At", "woo-product-options-addons"),
                   },
                   {
                     id: "updated_by",
-                    label: __("Updated By", "smart-product-options-addons"),
+                    label: __("Updated By", "woo-product-options-addons"),
                   },
                   {
                     id: "updated_at",
-                    label: __("Updated At", "smart-product-options-addons"),
+                    label: __("Updated At", "woo-product-options-addons"),
                   },
                 ].map((col) => (
                   <label
                     key={col.id}
-                    className="spoa-flex spoa-items-center spoa-gap-2 spoa-cursor-pointer hover:spoa-text-primary"
+                    className="wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-2 wpab-wpoa-cursor-pointer hover:wpab-wpoa-text-primary"
                   >
                     <Checkbox
                       checked={visibleColumns.includes(col.id)}
                       onChange={() => toggleColumn(col.id)}
                     />
-                    <span className="spoa-text-sm">{col.label}</span>
+                    <span className="wpab-wpoa-text-sm">{col.label}</span>
                   </label>
                 ))}
               </div>
@@ -519,10 +519,10 @@ export default function AddonList() {
   };
 
   return (
-    <div className="spoa-ignore-preflight">
+    <div className="wpab-wpoa-ignore-preflight">
       <TopProgressBar isSaving={isActioning} />
       {/* WordPress-style Inline Header Row */}
-      <div className="wrap spoa-mb-4" style={{ margin: "0 0 20px 0", padding: 0 }}>
+      <div className="wrap wpab-wpoa-mb-4" style={{ margin: "0 0 20px 0", padding: 0 }}>
         <h1 className="wp-heading-inline" style={{
           fontSize: "23px",
           fontWeight: 400,
@@ -532,7 +532,7 @@ export default function AddonList() {
           display: "inline-block",
           fontFamily: '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif'
         }}>
-          {__("Option Groups", "smart-product-options-addons")}
+          {__("Option Groups", "woo-product-options-addons")}
         </h1>
         <a
           href="#/option-groups/new"
@@ -556,7 +556,7 @@ export default function AddonList() {
             verticalAlign: "middle"
           }}
         >
-          {__("Add new group", "smart-product-options-addons")}
+          {__("Add new group", "woo-product-options-addons")}
         </a>
         <button
           type="button"
@@ -583,7 +583,7 @@ export default function AddonList() {
             setShowExportPanel(false);
           }}
         >
-          {__("Import", "smart-product-options-addons")}
+          {__("Import", "woo-product-options-addons")}
         </button>
         <button
           type="button"
@@ -610,19 +610,19 @@ export default function AddonList() {
             setShowImportPanel(false);
           }}
         >
-          {__("Export", "smart-product-options-addons")}
+          {__("Export", "woo-product-options-addons")}
         </button>
         <hr className="wp-header-end" style={{ clear: "both", border: 0, margin: 0, padding: 0 }} />
       </div>
 
       {/* Toggleable Import Panel */}
       {showImportPanel && (
-        <div className="spoa-bg-white spoa-border spoa-border-gray-200 spoa-rounded-lg spoa-p-6 spoa-mb-6 spoa-shadow-sm spoa-animate-fadeIn">
-          <div className="spoa-flex spoa-justify-between spoa-items-center spoa-border-b spoa-border-gray-100 spoa-pb-3 spoa-mb-4">
-            <h3 className="spoa-m-0 spoa-text-lg spoa-font-medium">{__("Import Option Groups", "smart-product-options-addons")}</h3>
+        <div className="wpab-wpoa-bg-white wpab-wpoa-border wpab-wpoa-border-gray-200 wpab-wpoa-rounded-lg wpab-wpoa-p-6 wpab-wpoa-mb-6 wpab-wpoa-shadow-sm wpab-wpoa-animate-fadeIn">
+          <div className="wpab-wpoa-flex wpab-wpoa-justify-between wpab-wpoa-items-center wpab-wpoa-border-b wpab-wpoa-border-gray-100 wpab-wpoa-pb-3 wpab-wpoa-mb-4">
+            <h3 className="wpab-wpoa-m-0 wpab-wpoa-text-lg wpab-wpoa-font-medium">{__("Import Option Groups", "woo-product-options-addons")}</h3>
             <button
               onClick={() => setShowImportPanel(false)}
-              className="spoa-text-gray-400 hover:spoa-text-gray-600 spoa-border-0 spoa-bg-transparent spoa-cursor-pointer spoa-text-lg"
+              className="wpab-wpoa-text-gray-400 hover:wpab-wpoa-text-gray-600 wpab-wpoa-border-0 wpab-wpoa-bg-transparent wpab-wpoa-cursor-pointer wpab-wpoa-text-lg"
             >
               ✕
             </button>
@@ -633,12 +633,12 @@ export default function AddonList() {
 
       {/* Toggleable Export Panel */}
       {showExportPanel && (
-        <div className="spoa-bg-white spoa-border spoa-border-gray-200 spoa-rounded-lg spoa-p-6 spoa-mb-6 spoa-shadow-sm spoa-animate-fadeIn">
-          <div className="spoa-flex spoa-justify-between spoa-items-center spoa-border-b spoa-border-gray-100 spoa-pb-3 spoa-mb-4">
-            <h3 className="spoa-m-0 spoa-text-lg spoa-font-medium">{__("Export Option Groups", "smart-product-options-addons")}</h3>
+        <div className="wpab-wpoa-bg-white wpab-wpoa-border wpab-wpoa-border-gray-200 wpab-wpoa-rounded-lg wpab-wpoa-p-6 wpab-wpoa-mb-6 wpab-wpoa-shadow-sm wpab-wpoa-animate-fadeIn">
+          <div className="wpab-wpoa-flex wpab-wpoa-justify-between wpab-wpoa-items-center wpab-wpoa-border-b wpab-wpoa-border-gray-100 wpab-wpoa-pb-3 wpab-wpoa-mb-4">
+            <h3 className="wpab-wpoa-m-0 wpab-wpoa-text-lg wpab-wpoa-font-medium">{__("Export Option Groups", "woo-product-options-addons")}</h3>
             <button
               onClick={() => setShowExportPanel(false)}
-              className="spoa-text-gray-400 hover:spoa-text-gray-600 spoa-border-0 spoa-bg-transparent spoa-cursor-pointer spoa-text-lg"
+              className="wpab-wpoa-text-gray-400 hover:wpab-wpoa-text-gray-600 wpab-wpoa-border-0 wpab-wpoa-bg-transparent wpab-wpoa-cursor-pointer wpab-wpoa-text-lg"
             >
               ✕
             </button>
@@ -648,13 +648,13 @@ export default function AddonList() {
       )}
 
       {/* Filters, View Inventory, and Search Row */}
-      <div className="spoa-flex spoa-flex-col lg:spoa-flex-row spoa-justify-between spoa-items-start lg:spoa-items-center spoa-gap-2 spoa-mb-4">
+      <div className="wpab-wpoa-flex wpab-wpoa-flex-col lg:wpab-wpoa-flex-row wpab-wpoa-justify-between wpab-wpoa-items-start lg:wpab-wpoa-items-center wpab-wpoa-gap-2 wpab-wpoa-mb-4">
         {/* Left side: Subsubsub filters */}
-        <p className="spoa-text-gray-600 spoa-m-0">
+        <p className="wpab-wpoa-text-gray-600 wpab-wpoa-m-0">
           {loading ? (
-            __("Loading…", "smart-product-options-addons")
+            __("Loading…", "woo-product-options-addons")
           ) : (
-            <ul className="subsubsub spoa-w-full spoa-list-none spoa-p-0 spoa-flex spoa-gap-2 spoa-text-sm spoa-m-0">
+            <ul className="subsubsub wpab-wpoa-w-full wpab-wpoa-list-none wpab-wpoa-p-0 wpab-wpoa-flex wpab-wpoa-gap-2 wpab-wpoa-text-sm wpab-wpoa-m-0">
               <li>
                 <a
                   href="#"
@@ -665,11 +665,11 @@ export default function AddonList() {
                   }}
                   className={
                     statusFilter === "any"
-                      ? "current spoa-font-bold"
-                      : "!spoa-text-[#50a9e0]"
+                      ? "current wpab-wpoa-font-bold"
+                      : "!wpab-wpoa-text-[#50a9e0]"
                   }
                 >
-                  {__("All", "smart-product-options-addons")}{" "}
+                  {__("All", "woo-product-options-addons")}{" "}
                   <span className="count">({counts.all})</span>
                 </a>{" "}
                 |
@@ -684,11 +684,11 @@ export default function AddonList() {
                   }}
                   className={
                     statusFilter === "publish"
-                      ? "current spoa-font-bold"
-                      : "!spoa-text-[#50a9e0]"
+                      ? "current wpab-wpoa-font-bold"
+                      : "!wpab-wpoa-text-[#50a9e0]"
                   }
                 >
-                  {__("Published", "smart-product-options-addons")}{" "}
+                  {__("Published", "woo-product-options-addons")}{" "}
                   <span className="count">({counts.publish})</span>
                 </a>{" "}
                 |
@@ -703,11 +703,11 @@ export default function AddonList() {
                   }}
                   className={
                     statusFilter === "draft"
-                      ? "current spoa-font-bold"
-                      : "!spoa-text-[#50a9e0]"
+                      ? "current wpab-wpoa-font-bold"
+                      : "!wpab-wpoa-text-[#50a9e0]"
                   }
                 >
-                  {__("Draft", "smart-product-options-addons")}{" "}
+                  {__("Draft", "woo-product-options-addons")}{" "}
                   <span className="count">({counts.draft})</span>
                 </a>{" "}
                 {counts.trash > 0 && "|"}
@@ -723,11 +723,11 @@ export default function AddonList() {
                     }}
                     className={
                       statusFilter === "trash"
-                        ? "current spoa-font-bold"
-                        : "!spoa-text-[#50a9e0]"
+                        ? "current wpab-wpoa-font-bold"
+                        : "!wpab-wpoa-text-[#50a9e0]"
                     }
                   >
-                    {__("Trash", "smart-product-options-addons")}{" "}
+                    {__("Trash", "woo-product-options-addons")}{" "}
                     <span className="count">({counts.trash})</span>
                   </a>
                 </li>
@@ -737,22 +737,22 @@ export default function AddonList() {
         </p>
 
         {/* Right side: View Inventory & Search controls */}
-        <div className="spoa-flex spoa-items-center spoa-flex-wrap spoa-gap-2 spoa-w-full lg:spoa-w-auto spoa-justify-end">
+        <div className="wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-flex-wrap wpab-wpoa-gap-2 wpab-wpoa-w-full lg:wpab-wpoa-w-auto wpab-wpoa-justify-end">
           <ClassicButton
             variant="secondary"
             onClick={() => setIsInventoryModalOpen(true)}
-            className="spoa-flex spoa-items-center spoa-gap-2 spoa-h-[30px]"
+            className="wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-2 wpab-wpoa-h-[30px]"
           >
             <Package size={14} />
-            {__("View Inventory", "smart-product-options-addons")}
+            {__("View Inventory", "woo-product-options-addons")}
           </ClassicButton>
 
           {/* WordPress-style Search Box */}
-          <div className="spoa-flex spoa-items-center spoa-gap-1">
+          <div className="wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-1">
             <input
               type="search"
-              className="spoa-h-[30px] spoa-px-3 spoa-border spoa-border-gray-300 spoa-rounded spoa-text-sm spoa-bg-white"
-              placeholder={__("Search option groups...", "smart-product-options-addons")}
+              className="wpab-wpoa-h-[30px] wpab-wpoa-px-3 wpab-wpoa-border wpab-wpoa-border-gray-300 wpab-wpoa-rounded wpab-wpoa-text-sm wpab-wpoa-bg-white"
+              placeholder={__("Search option groups...", "woo-product-options-addons")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               onKeyDown={(e) => {
@@ -763,10 +763,10 @@ export default function AddonList() {
             />
             <button
               type="button"
-              className="button spoa-h-[30px] spoa-px-3 spoa-bg-[#f6f7f7] hover:spoa-bg-[#f0f0f1] spoa-border spoa-border-gray-300 spoa-rounded spoa-text-sm spoa-cursor-pointer spoa-text-[#2271b1] hover:spoa-text-[#0a4b78] spoa-font-medium"
+              className="button wpab-wpoa-h-[30px] wpab-wpoa-px-3 wpab-wpoa-bg-[#f6f7f7] hover:wpab-wpoa-bg-[#f0f0f1] wpab-wpoa-border wpab-wpoa-border-gray-300 wpab-wpoa-rounded wpab-wpoa-text-sm wpab-wpoa-cursor-pointer wpab-wpoa-text-[#2271b1] hover:wpab-wpoa-text-[#0a4b78] wpab-wpoa-font-medium"
               onClick={handleSearch}
             >
-              {__("Search groups", "smart-product-options-addons")}
+              {__("Search groups", "woo-product-options-addons")}
             </button>
           </div>
         </div>
@@ -774,17 +774,17 @@ export default function AddonList() {
 
 
       {/* Top Controls */}
-      <div className="spoa-flex spoa-flex-wrap spoa-w-full spoa-justify-between spoa-mb-2">
+      <div className="wpab-wpoa-flex wpab-wpoa-flex-wrap wpab-wpoa-w-full wpab-wpoa-justify-between wpab-wpoa-mb-2">
         {renderBulkActions("top")}
         {renderPagination("top")}
       </div>
 
       {/* Table */}
-      <div className="spoa-table-responsive">
+      <div className="wpab-wpoa-table-responsive">
         <table className="wp-list-table widefat fixed striped">
           <thead>
             <tr>
-              <td className="!spoa-w-[2.2em]">
+              <td className="!wpab-wpoa-w-[2.2em]">
                 <ClassicCheckbox
                   checked={
                     groups.length > 0 && selectedGroups.length === groups.length
@@ -792,27 +792,27 @@ export default function AddonList() {
                   onChange={(e) => toggleSelectAll(e)}
                 />
               </td>
-              <th className="spoa-w-[40%]">{__("Title", "smart-product-options-addons")}</th>
+              <th className="wpab-wpoa-w-[40%]">{__("Title", "woo-product-options-addons")}</th>
               {visibleColumns.includes("fields") && (
-                <th>{__("Fields", "smart-product-options-addons")}</th>
+                <th>{__("Fields", "woo-product-options-addons")}</th>
               )}
               {visibleColumns.includes("assigned") && (
-                <th>{__("Assigned To", "smart-product-options-addons")}</th>
+                <th>{__("Assigned To", "woo-product-options-addons")}</th>
               )}
               {visibleColumns.includes("status") && (
-                <th>{__("Status", "smart-product-options-addons")}</th>
+                <th>{__("Status", "woo-product-options-addons")}</th>
               )}
               {visibleColumns.includes("created_by") && (
-                <th>{__("Created By", "smart-product-options-addons")}</th>
+                <th>{__("Created By", "woo-product-options-addons")}</th>
               )}
               {visibleColumns.includes("created_at") && (
-                <th>{__("Created At", "smart-product-options-addons")}</th>
+                <th>{__("Created At", "woo-product-options-addons")}</th>
               )}
               {visibleColumns.includes("updated_by") && (
-                <th>{__("Updated By", "smart-product-options-addons")}</th>
+                <th>{__("Updated By", "woo-product-options-addons")}</th>
               )}
               {visibleColumns.includes("updated_at") && (
-                <th>{__("Updated At", "smart-product-options-addons")}</th>
+                <th>{__("Updated At", "woo-product-options-addons")}</th>
               )}
             </tr>
           </thead>
@@ -823,15 +823,15 @@ export default function AddonList() {
               <tr>
                 <td
                   colSpan={5}
-                  className="spoa-text-center spoa-p-10"
+                  className="wpab-wpoa-text-center wpab-wpoa-p-10"
                 >
-                  <p>{__("No option groups found.", "smart-product-options-addons")}</p>
+                  <p>{__("No option groups found.", "woo-product-options-addons")}</p>
                   <ClassicButton
                     variant="primary"
                     onClick={() => navigate("/option-groups/new")}
-                    className="spoa-mt-2"
+                    className="wpab-wpoa-mt-2"
                   >
-                    {__("Create your first option group", "smart-product-options-addons")}
+                    {__("Create your first option group", "woo-product-options-addons")}
                   </ClassicButton>
                 </td>
               </tr>
@@ -840,70 +840,70 @@ export default function AddonList() {
                 <tr key={group.id}>
                   <th
                     scope="row"
-                    className="spoa-flex spoa-justify-start spoa-mt-[1px]"
+                    className="wpab-wpoa-flex wpab-wpoa-justify-start wpab-wpoa-mt-[1px]"
                   >
                     <ClassicCheckbox
                       checked={selectedGroups.includes(group.id)}
                       onChange={(e) => toggleSelectGroup(group.id, e)}
-                      className="spoa-mt-0"
+                      className="wpab-wpoa-mt-0"
                     />
                   </th>
-                  <td className="spoa-group">
+                  <td className="wpab-wpoa-group">
                     <a
                       href={`#/option-groups/${group.id}`}
                       onClick={(e) => {
                         e.preventDefault();
                         navigate(`/option-groups/${group.id}`);
                       }}
-                      className="spoa-font-semibold spoa-text-[#2271b1] hover:spoa-text-[#135e96]"
+                      className="wpab-wpoa-font-semibold wpab-wpoa-text-[#2271b1] hover:wpab-wpoa-text-[#135e96]"
                     >
-                      {group.title || __("(Untitled)", "smart-product-options-addons")}
+                      {group.title || __("(Untitled)", "woo-product-options-addons")}
                     </a>
 
                     {/* Hover Actions */}
-                    <div className="spoa-row-actions spoa-text-[12px] spoa-flex spoa-gap-1 spoa-opacity-0 group-hover:spoa-opacity-100 spoa-transition-opacity spoa-mt-1">
-                      <span className="spoa-text-[#999]">
+                    <div className="wpab-wpoa-row-actions wpab-wpoa-text-[12px] wpab-wpoa-flex wpab-wpoa-gap-1 wpab-wpoa-opacity-0 group-hover:wpab-wpoa-opacity-100 wpab-wpoa-transition-opacity wpab-wpoa-mt-1">
+                      <span className="wpab-wpoa-text-[#999]">
                         ID: {group.id}
                       </span>
                       {statusFilter === "trash" ? (
                         <>
-                          <span className="spoa-text-[#ddd]">|</span>
+                          <span className="wpab-wpoa-text-[#ddd]">|</span>
                           <span
-                            className="spoa-text-[#2271b1] hover:spoa-underline spoa-cursor-pointer"
+                            className="wpab-wpoa-text-[#2271b1] hover:wpab-wpoa-underline wpab-wpoa-cursor-pointer"
                             onClick={() => handleRestore(group.id)}
                           >
-                            {__("Restore", "smart-product-options-addons")}
+                            {__("Restore", "woo-product-options-addons")}
                           </span>
-                          <span className="spoa-text-[#ddd]">|</span>
+                          <span className="wpab-wpoa-text-[#ddd]">|</span>
                           <span
-                            className="spoa-text-[#d63638] hover:spoa-text-[#b32d2e] hover:spoa-underline spoa-cursor-pointer"
+                            className="wpab-wpoa-text-[#d63638] hover:wpab-wpoa-text-[#b32d2e] hover:wpab-wpoa-underline wpab-wpoa-cursor-pointer"
                             onClick={() => handleDelete(group.id)}
                           >
-                            {__("Delete Permanently", "smart-product-options-addons")}
+                            {__("Delete Permanently", "woo-product-options-addons")}
                           </span>
                         </>
                       ) : (
                         <>
-                          <span className="spoa-text-[#ddd]">|</span>
+                          <span className="wpab-wpoa-text-[#ddd]">|</span>
                           <a
-                            className="spoa-text-[#2271b1] hover:spoa-underline spoa-cursor-pointer"
+                            className="wpab-wpoa-text-[#2271b1] hover:wpab-wpoa-underline wpab-wpoa-cursor-pointer"
                             href={`#/option-groups/${group.id}`}
                           >
-                            {__("Edit", "smart-product-options-addons")}
+                            {__("Edit", "woo-product-options-addons")}
                           </a>
-                          <span className="spoa-text-[#ddd]">|</span>
+                          <span className="wpab-wpoa-text-[#ddd]">|</span>
                           <span
-                            className="spoa-text-[#2271b1] hover:spoa-underline spoa-cursor-pointer"
+                            className="wpab-wpoa-text-[#2271b1] hover:wpab-wpoa-underline wpab-wpoa-cursor-pointer"
                             onClick={() => handleDuplicate(group.id)}
                           >
-                            {__("Duplicate", "smart-product-options-addons")}
+                            {__("Duplicate", "woo-product-options-addons")}
                           </span>
-                          <span className="spoa-text-[#ddd]">|</span>
+                          <span className="wpab-wpoa-text-[#ddd]">|</span>
                           <span
-                            className="spoa-text-[#d63638] hover:spoa-text-[#b32d2e] hover:spoa-underline spoa-cursor-pointer"
+                            className="wpab-wpoa-text-[#d63638] hover:wpab-wpoa-text-[#b32d2e] hover:wpab-wpoa-underline wpab-wpoa-cursor-pointer"
                             onClick={() => handleDelete(group.id)}
                           >
-                            {__("Trash", "smart-product-options-addons")}
+                            {__("Trash", "woo-product-options-addons")}
                           </span>
                         </>
                       )}
@@ -917,10 +917,10 @@ export default function AddonList() {
                   )}
                   {visibleColumns.includes("status") && (
                     <td>
-                      <div className="spoa-flex spoa-items-center spoa-gap-3">
+                      <div className="wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-3">
                         {statusFilter === "trash" ? (
-                          <span className="spoa-inline-block spoa-px-2 spoa-py-0.5 spoa-rounded spoa-text-xs spoa-bg-gray-100 spoa-text-gray-600">
-                            {__("Trash", "smart-product-options-addons")}
+                          <span className="wpab-wpoa-inline-block wpab-wpoa-px-2 wpab-wpoa-py-0.5 wpab-wpoa-rounded wpab-wpoa-text-xs wpab-wpoa-bg-gray-100 wpab-wpoa-text-gray-600">
+                            {__("Trash", "woo-product-options-addons")}
                           </span>
                         ) : (
                           <>
@@ -933,15 +933,15 @@ export default function AddonList() {
                               size="small"
                             />
                             <span
-                              className={`spoa-inline-block spoa-px-2 spoa-py-0.5 spoa-rounded spoa-text-xs ${
+                              className={`wpab-wpoa-inline-block wpab-wpoa-px-2 wpab-wpoa-py-0.5 wpab-wpoa-rounded wpab-wpoa-text-xs ${
                                 group.status === "publish"
-                                  ? "spoa-bg-[#dff0d8] spoa-text-[#3c763d]"
-                                  : "spoa-bg-[#f2dede] spoa-text-[#a94442]"
+                                  ? "wpab-wpoa-bg-[#dff0d8] wpab-wpoa-text-[#3c763d]"
+                                  : "wpab-wpoa-bg-[#f2dede] wpab-wpoa-text-[#a94442]"
                               }`}
                             >
                               {group.status === "publish"
-                                ? __("Published", "smart-product-options-addons")
-                                : __("Draft", "smart-product-options-addons")}
+                                ? __("Published", "woo-product-options-addons")
+                                : __("Draft", "woo-product-options-addons")}
                             </span>
                           </>
                         )}
@@ -968,7 +968,7 @@ export default function AddonList() {
       </div>
 
       {/* Bottom Controls */}
-      <div className="spoa-flex spoa-justify-between spoa-flex-wrap">
+      <div className="wpab-wpoa-flex wpab-wpoa-justify-between wpab-wpoa-flex-wrap">
         {renderBulkActions("bottom")}
         {renderPagination("bottom")}
       </div>

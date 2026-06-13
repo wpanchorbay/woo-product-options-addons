@@ -66,14 +66,14 @@ abstract class BaseField implements InterfaceField {
 	/**
 	 * Get the HTML input name attribute.
 	 *
-	 * Format: smart_product_options_addons_addons[{group_id}][{field_id}]
+	 * Format: woo_product_options_addons_addons[{group_id}][{field_id}]
 	 *
 	 * @since 1.0.0
 	 * @return string
 	 */
 	protected function get_name() {
 		return sprintf(
-			'smart_product_options_addons_addons[%d][%s]',
+			'woo_product_options_addons_addons[%d][%s]',
 			$this->group_id,
 			esc_attr( $this->get( 'id' ) )
 		);
@@ -92,7 +92,7 @@ abstract class BaseField implements InterfaceField {
 	/**
 	 * Render the full field HTML (wrapper + label + input + description).
 	 *
-	 * Builds out the container standard across all Smart Product Options and Addons fields, configuring
+	 * Builds out the container standard across all OptionBay - Product Options and Addons fields, configuring
 	 * HTML `data-*` attributes for JavaScript processing based on pricing and conditions.
 	 * Callers like AddonRenderer rely on this abstract layout instead of ad-hoc rendering.
 	 *
@@ -167,7 +167,7 @@ abstract class BaseField implements InterfaceField {
 		$label = $this->get( 'label' );
 		if ( ! empty( $label ) && ! in_array( $field_type, array( 'single_checkbox', 'heading', 'static_content' ), true ) ) {
 			$price_label   = $this->format_price_label( $this->get( 'price', 0 ), $this->get( 'price_type', 'none' ) );
-			$required_mark = $this->get( 'required' ) ? ' <abbr class="ob-required" title="' . esc_attr__( 'required', 'smart-product-options-addons' ) . '">*</abbr>' : '';
+			$required_mark = $this->get( 'required' ) ? ' <abbr class="ob-required" title="' . esc_attr__( 'required', 'woo-product-options-addons' ) . '">*</abbr>' : '';
 			$html         .= sprintf(
 				'<label class="ob-field__label" for="%s">%s%s%s</label>',
 				$this->get_html_id(),
@@ -214,12 +214,12 @@ abstract class BaseField implements InterfaceField {
 	public function validate( $value ) {
 		if ( $this->get( 'required' ) && $this->is_empty_value( $value ) ) {
 			$label = $this->get( 'label', $this->get( 'id' ) );
-			smart_product_options_addons_log( sprintf( 'BaseField: Validation failed. Required field "%s" is empty.', $label ), 'WARNING' );
+			woo_product_options_addons_log( sprintf( 'BaseField: Validation failed. Required field "%s" is empty.', $label ), 'WARNING' );
 			return new \WP_Error(
 				'required_field',
 				sprintf(
 					/* translators: %s: field label */
-					__( '%s is required.', 'smart-product-options-addons' ),
+					__( '%s is required.', 'woo-product-options-addons' ),
 					$label
 				)
 			);
@@ -311,7 +311,7 @@ abstract class BaseField implements InterfaceField {
 			$formatted = $prefix . number_format( $abs_price, \SmartProductOptionsAddons\Helper\WooCommerce::get_price_decimals(), \SmartProductOptionsAddons\Helper\WooCommerce::get_price_decimal_separator(), \SmartProductOptionsAddons\Helper\WooCommerce::get_price_thousand_separator() ) . '%';
 		} elseif ( 'formula' === $price_type ) {
 			// For formula, the static amount might be 0, but we want to indicate calculation
-			$formatted = __( 'Dynamic', 'smart-product-options-addons' );
+			$formatted = __( 'Dynamic', 'woo-product-options-addons' );
 		} elseif ( function_exists( 'wc_price' ) ) {
 			// For flat, character_count, etc. we use native WooCommerce price formatting
 			$formatted = $prefix . wp_strip_all_tags( wc_price( $abs_price ) );
@@ -320,7 +320,7 @@ abstract class BaseField implements InterfaceField {
 		}
 
 		if ( 'character_count' === $price_type ) {
-			$formatted .= __( ' / character', 'smart-product-options-addons' );
+			$formatted .= __( ' / character', 'woo-product-options-addons' );
 		}
 
 		if ( $html ) {

@@ -33,14 +33,14 @@ class Deactivator {
 	 * @return void
 	 */
 	public static function deactivate() {
-		smart_product_options_addons_log( 'Deactivator: Firing Smart Product Options and Addons deactivation steps.', 'INFO' );
+		woo_product_options_addons_log( 'Deactivator: Firing OptionBay - Product Options and Addons deactivation steps.', 'INFO' );
 
 		self::remove_custom_capabilities();
 
 		// Unschedule all plugin cron events.
 		Cron::get_instance()->unschedule_all();
 
-		smart_product_options_addons_log( 'Deactivator: Smart Product Options and Addons deactivated successfully.', 'INFO' );
+		woo_product_options_addons_log( 'Deactivator: OptionBay - Product Options and Addons deactivated successfully.', 'INFO' );
 	}
 
 	/**

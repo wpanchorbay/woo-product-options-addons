@@ -9,7 +9,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Define the slug and zip filename
-PLUGIN_SLUG="smart-product-options-addons"
+PLUGIN_SLUG="woo-product-options-addons"
 ZIP_NAME="$PLUGIN_SLUG.zip"
 
 # Cleanup previous build if exists
@@ -38,7 +38,7 @@ copy_plugin_files() {
     cp readme.txt "$DEST/"
     cp changelog.txt "$DEST/"
     cp uninstall.php "$DEST/"
-    cp smart-product-options-addons.php "$DEST/"
+    cp woo-product-options-addons.php "$DEST/"
     cp composer.json "$DEST/"
 }
 

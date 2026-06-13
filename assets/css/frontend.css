@@ -1,5 +1,5 @@
 /**
- * Smart Product Options and Addons Frontend Styles
+ * OptionBay - Product Options and Addons Frontend Styles
  *
  * Minimal CSS for the product page option fields.
  * Uses CSS variables for easy customization.
@@ -202,7 +202,7 @@
 }
 
 /* ─── Live Pricing ─────────────────────────────────────────────────── */
-.spoa-live-total {
+.wpab-wpoa-live-total {
     margin-top: var(--ob-gap-field);
     padding: 10px 14px;
     background: var(--ob-bg-alt);
@@ -216,7 +216,7 @@
     font-weight: 600;
 }
 
-.spoa-live-total .amount {
+.wpab-wpoa-live-total .amount {
     font-weight: 700;
     color: var(--ob-success);
 }

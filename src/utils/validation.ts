@@ -5,7 +5,7 @@ export const conditionRuleSchema = z
 	.object({
 		target_field_id: z
 			.string()
-			.min(1, { message: __('Target field is required', 'smart-product-options-addons') }),
+			.min(1, { message: __('Target field is required', 'woo-product-options-addons') }),
 		operator: z.string(),
 		value: z.string().optional().nullable(),
 	})
@@ -14,7 +14,7 @@ export const conditionRuleSchema = z
 			if (!data.value || data.value.trim() === '') {
 				ctx.addIssue({
 					code: z.ZodIssueCode.custom,
-					message: __('Value is required', 'smart-product-options-addons'),
+					message: __('Value is required', 'woo-product-options-addons'),
 					path: ['value'],
 				});
 			}
@@ -34,7 +34,7 @@ export const fieldConditionsSchema = z
 				code: z.ZodIssueCode.custom,
 				message: __(
 					'At least one rule is required when logic is active',
-					'smart-product-options-addons'
+					'woo-product-options-addons'
 				),
 				path: ['rules'],
 			});
@@ -45,10 +45,10 @@ export const fieldOptionSchema = z
 	.object({
 		label: z
 			.string()
-			.min(1, { message: __("Choice label is required", "smart-product-options-addons") }),
+			.min(1, { message: __("Choice label is required", "woo-product-options-addons") }),
 		value: z
 			.string()
-			.min(1, { message: __("Choice value is required", "smart-product-options-addons") }),
+			.min(1, { message: __("Choice value is required", "woo-product-options-addons") }),
 		price_type: z.string().optional(),
 		price: z.number().optional(),
 		formula: z.string().optional(),
@@ -65,7 +65,7 @@ export const fieldOptionSchema = z
 			if (data.price === undefined || data.price === null || data.price === 0) {
 				ctx.addIssue({
 					code: z.ZodIssueCode.custom,
-					message: __("Price is required", "smart-product-options-addons"),
+					message: __("Price is required", "woo-product-options-addons"),
 					path: ["price"],
 				});
 			}
@@ -74,7 +74,7 @@ export const fieldOptionSchema = z
 		if (data.enable_stock && !data.inventory_id) {
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,
-				message: __("Inventory pool is required", "smart-product-options-addons"),
+				message: __("Inventory pool is required", "woo-product-options-addons"),
 				path: ["inventory_id"],
 			});
 		}
@@ -85,7 +85,7 @@ export const fieldDefinitionSchema = z
 		id: z.string(),
 		type: z.string(),
 		label: z.string().min(1, {
-			message: __("Field label is required", "smart-product-options-addons"),
+			message: __("Field label is required", "woo-product-options-addons"),
 		}),
 		description: z.string().optional(),
 		placeholder: z.string().optional(),
@@ -116,7 +116,7 @@ export const fieldDefinitionSchema = z
 			if (!data.options || data.options.length === 0) {
 				ctx.addIssue({
 					code: z.ZodIssueCode.custom,
-					message: __("At least one choice is required", "smart-product-options-addons"),
+					message: __("At least one choice is required", "woo-product-options-addons"),
 					path: ["options"],
 				});
 			}
@@ -129,7 +129,7 @@ export const fieldDefinitionSchema = z
 			if (data.price === undefined || data.price === null || data.price === 0) {
 				ctx.addIssue({
 					code: z.ZodIssueCode.custom,
-					message: __("Price is required", "smart-product-options-addons"),
+					message: __("Price is required", "woo-product-options-addons"),
 					path: ["price"],
 				});
 			}
@@ -141,7 +141,7 @@ export const fieldDefinitionSchema = z
 				if (!opt.color) {
 					ctx.addIssue({
 						code: z.ZodIssueCode.custom,
-						message: __("Color is required for swatch choices", "smart-product-options-addons"),
+						message: __("Color is required for swatch choices", "woo-product-options-addons"),
 						path: ["options", idx, "color"],
 					});
 				}
@@ -153,7 +153,7 @@ export const fieldDefinitionSchema = z
 				if (!opt.image_url) {
 					ctx.addIssue({
 						code: z.ZodIssueCode.custom,
-						message: __("Image is required for swatch choices", "smart-product-options-addons"),
+						message: __("Image is required for swatch choices", "woo-product-options-addons"),
 						path: ["options", idx, "image_url"],
 					});
 				}
@@ -164,7 +164,7 @@ export const fieldDefinitionSchema = z
 		if (data.type === "static_content" && !data.content) {
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,
-				message: __("Content is required for static fields", "smart-product-options-addons"),
+				message: __("Content is required for static fields", "woo-product-options-addons"),
 				path: ["content"],
 			});
 		}
@@ -173,7 +173,7 @@ export const fieldDefinitionSchema = z
 		if (data.enable_stock && !data.inventory_id) {
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,
-				message: __("Inventory pool is required", "smart-product-options-addons"),
+				message: __("Inventory pool is required", "woo-product-options-addons"),
 				path: ["inventory_id"],
 			});
 		}
@@ -184,7 +184,7 @@ export const fieldDefinitionSchema = z
 		if (optionsHaveStock && data.enable_stock) {
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,
-				message: __("Field stock tracking cannot be enabled when individual choice stock tracking is enabled", "smart-product-options-addons"),
+				message: __("Field stock tracking cannot be enabled when individual choice stock tracking is enabled", "woo-product-options-addons"),
 				path: ["enable_stock"],
 			});
 		}
@@ -199,7 +199,7 @@ export const addonGroupSchema = z
 	.object({
 		title: z
 			.string()
-			.min(1, { message: __('Group Title is required', 'smart-product-options-addons') }),
+			.min(1, { message: __('Group Title is required', 'woo-product-options-addons') }),
 		status: z.enum(['publish', 'draft']),
 		schema: z.array(fieldDefinitionSchema),
 		assignments: z.array(assignmentSchema),
@@ -221,7 +221,7 @@ export const addonGroupSchema = z
 		if (!hasGlobal && !hasProduct) {
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,
-				message: __('At least one target (global or product) is required for targeted visibility.', 'smart-product-options-addons'),
+				message: __('At least one target (global or product) is required for targeted visibility.', 'woo-product-options-addons'),
 				path: ['assignments'],
 			});
 		}

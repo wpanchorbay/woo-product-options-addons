@@ -8,23 +8,23 @@ export const SkeletonAddonList: React.FC = () => {
 			{ skeletonRows.map( ( index ) => (
 				<tr
 					key={ index }
-					className="spoa-border-b spoa-border-gray-200 spoa-animate-pulse"
+					className="wpab-wpoa-border-b wpab-wpoa-border-gray-200 wpab-wpoa-animate-pulse"
 				>
-					<td className="spoa-p-2">
-						<div className="spoa-w-4 spoa-h-4 spoa-bg-gray-200 spoa-rounded"></div>
+					<td className="wpab-wpoa-p-2">
+						<div className="wpab-wpoa-w-4 wpab-wpoa-h-4 wpab-wpoa-bg-gray-200 wpab-wpoa-rounded"></div>
 					</td>
-					<td className="spoa-p-2">
-						<div className="spoa-h-4 spoa-bg-gray-200 spoa-rounded spoa-w-3/4"></div>
-						<div className="spoa-h-3 spoa-bg-gray-200 spoa-rounded spoa-w-1/2 spoa-mt-2"></div>
+					<td className="wpab-wpoa-p-2">
+						<div className="wpab-wpoa-h-4 wpab-wpoa-bg-gray-200 wpab-wpoa-rounded wpab-wpoa-w-3/4"></div>
+						<div className="wpab-wpoa-h-3 wpab-wpoa-bg-gray-200 wpab-wpoa-rounded wpab-wpoa-w-1/2 wpab-wpoa-mt-2"></div>
 					</td>
-					<td className="spoa-p-2">
-						<div className="spoa-h-4 spoa-bg-gray-200 spoa-rounded spoa-w-6"></div>
+					<td className="wpab-wpoa-p-2">
+						<div className="wpab-wpoa-h-4 wpab-wpoa-bg-gray-200 wpab-wpoa-rounded wpab-wpoa-w-6"></div>
 					</td>
-					<td className="spoa-p-2">
-						<div className="spoa-h-4 spoa-bg-gray-200 spoa-rounded spoa-w-1/3"></div>
+					<td className="wpab-wpoa-p-2">
+						<div className="wpab-wpoa-h-4 wpab-wpoa-bg-gray-200 wpab-wpoa-rounded wpab-wpoa-w-1/3"></div>
 					</td>
-					<td className="spoa-p-2">
-						<div className="spoa-h-5 spoa-bg-gray-200 spoa-rounded spoa-w-12"></div>
+					<td className="wpab-wpoa-p-2">
+						<div className="wpab-wpoa-h-5 wpab-wpoa-bg-gray-200 wpab-wpoa-rounded wpab-wpoa-w-12"></div>
 					</td>
 				</tr>
 			) ) }

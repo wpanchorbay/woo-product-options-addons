@@ -63,7 +63,7 @@ class DbManager {
 	 * @since 1.0.0
 	 */
 	public function create_tables() {
-		smart_product_options_addons_log( 'DbManager: Running database table creations/updates.', 'INFO' );
+		woo_product_options_addons_log( 'DbManager: Running database table creations/updates.', 'INFO' );
 		$this->create_assignments_table();
 		$this->create_inventory_table();
 	}
@@ -76,7 +76,7 @@ class DbManager {
 	 */
 	public static function get_assignments_table() {
 		global $wpdb;
-		return $wpdb->prefix . 'smart_product_options_addons_assignments';
+		return $wpdb->prefix . 'wpab_product_options_addons_assignments';
 	}
 
 	/**
@@ -87,7 +87,7 @@ class DbManager {
 	 */
 	public static function get_inventory_table() {
 		global $wpdb;
-		return $wpdb->prefix . 'smart_product_options_addons_inventory';
+		return $wpdb->prefix . 'wpab_product_options_addons_inventory';
 	}
 
 	/**
@@ -101,7 +101,7 @@ class DbManager {
 	 * @access private
 	 */
 	private function create_assignments_table() {
-		smart_product_options_addons_log( 'DbManager: Creating or updating assignments lookup table.', 'DEBUG' );
+		woo_product_options_addons_log( 'DbManager: Creating or updating assignments lookup table.', 'DEBUG' );
 		global $wpdb;
 		$table_name      = self::get_assignments_table();
 		$charset_collate = $wpdb->get_charset_collate();
@@ -130,7 +130,7 @@ class DbManager {
 	 * @access private
 	 */
 	private function create_inventory_table() {
-		smart_product_options_addons_log( 'DbManager: Creating or updating global inventory table.', 'DEBUG' );
+		woo_product_options_addons_log( 'DbManager: Creating or updating global inventory table.', 'DEBUG' );
 		global $wpdb;
 		$table_name      = self::get_inventory_table();
 		$charset_collate = $wpdb->get_charset_collate();
@@ -167,7 +167,7 @@ class DbManager {
 		);
 
 		if ( false !== $result ) {
-			wp_cache_set( 'spoa_assignments_version', time(), 'spoa_assignments' );
+			wp_cache_set( 'wpab_wpoa_assignments_version', time(), 'wpab_wpoa_assignments' );
 		}
 
 		return $result;
@@ -209,14 +209,14 @@ class DbManager {
 				++$inserted;
 			} else {
 				// Record error if insertion query fails
-				smart_product_options_addons_log( "Failed to insert assignment for group {$group_id} to {$assignment['target_type']}:{$assignment['target_id']}", 'ERROR' );
+				woo_product_options_addons_log( "Failed to insert assignment for group {$group_id} to {$assignment['target_type']}:{$assignment['target_id']}", 'ERROR' );
 			}
 		}
 
-		smart_product_options_addons_log( "Successfully inserted {$inserted} assignments for group {$group_id}", 'INFO' );
+		woo_product_options_addons_log( "Successfully inserted {$inserted} assignments for group {$group_id}", 'INFO' );
 
 		if ( $inserted > 0 ) {
-			wp_cache_set( 'spoa_assignments_version', time(), 'spoa_assignments' );
+			wp_cache_set( 'wpab_wpoa_assignments_version', time(), 'wpab_wpoa_assignments' );
 		}
 
 		return $inserted;
@@ -273,10 +273,10 @@ class DbManager {
 	 * @return array Ordered array of group IDs to display.
 	 */
 	public function get_groups_for_product( $product_id ) {
-		$version_cache = wp_cache_get( 'spoa_assignments_version', 'spoa_assignments' );
+		$version_cache = wp_cache_get( 'wpab_wpoa_assignments_version', 'wpab_wpoa_assignments' );
 		$version       = $version_cache ? $version_cache : 1;
 		$cache_key     = "product_groups_{$product_id}_{$version}";
-		$cached        = wp_cache_get( $cache_key, 'spoa_assignments' );
+		$cached        = wp_cache_get( $cache_key, 'wpab_wpoa_assignments' );
 
 		if ( false !== $cached ) {
 			return $cached;
@@ -319,9 +319,9 @@ class DbManager {
 			$group_ids[] = absint( $row['group_id'] );
 		}
 
-		wp_cache_set( $cache_key, $group_ids, 'spoa_assignments', 3600 );
+		wp_cache_set( $cache_key, $group_ids, 'wpab_wpoa_assignments', 3600 );
 
-		smart_product_options_addons_log( 'Resolved ' . count( $group_ids ) . " group(s) for product {$product_id}", 'DEBUG' );
+		woo_product_options_addons_log( 'Resolved ' . count( $group_ids ) . " group(s) for product {$product_id}", 'DEBUG' );
 
 		return $group_ids;
 	}

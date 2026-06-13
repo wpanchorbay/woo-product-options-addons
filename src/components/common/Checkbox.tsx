@@ -22,27 +22,27 @@ export const Checkbox: React.FC< CheckboxProps > = ( {
 } ) => {
 	return (
 		<label
-			className={ `spoa-flex spoa-items-center spoa-gap-3 spoa-cursor-pointer ${
+			className={ `wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-3 wpab-wpoa-cursor-pointer ${
 				disabled
-					? 'spoa-opacity-50 spoa-cursor-not-allowed'
+					? 'wpab-wpoa-opacity-50 wpab-wpoa-cursor-not-allowed'
 					: ''
 			} ${ classNames?.root || '' }` }
 		>
 			<div
 				className={ `
-        spoa-flex spoa-items-center spoa-justify-center
-        spoa-w-4 spoa-h-4 spoa-rounded spoa-border-2 spoa-transition-all spoa-duration-200
+        wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-justify-center
+        wpab-wpoa-w-4 wpab-wpoa-h-4 wpab-wpoa-rounded wpab-wpoa-border-2 wpab-wpoa-transition-all wpab-wpoa-duration-200
         ${
 			checked
-				? 'spoa-border-primary spoa-bg-primary'
-				: 'spoa-border-[#949494] spoa-bg-transparent hover:spoa-border-primary'
+				? 'wpab-wpoa-border-primary wpab-wpoa-bg-primary'
+				: 'wpab-wpoa-border-[#949494] wpab-wpoa-bg-transparent hover:wpab-wpoa-border-primary'
 		}
         ${ classNames?.box || '' }
       ` }
 			>
 				<svg
-					className={ `spoa-w-3.5 spoa-h-3.5 spoa-text-white spoa-transform spoa-transition-transform spoa-duration-200 ${
-						checked ? 'spoa-scale-100' : 'spoa-scale-0'
+					className={ `wpab-wpoa-w-3.5 wpab-wpoa-h-3.5 wpab-wpoa-text-white wpab-wpoa-transform wpab-wpoa-transition-transform wpab-wpoa-duration-200 ${
+						checked ? 'wpab-wpoa-scale-100' : 'wpab-wpoa-scale-0'
 					} ${ classNames?.icon || '' }` }
 					viewBox="0 0 24 24"
 					fill="none"
@@ -55,7 +55,7 @@ export const Checkbox: React.FC< CheckboxProps > = ( {
 				</svg>
 				<input
 					type="checkbox"
-					className="!spoa-hidden"
+					className="!wpab-wpoa-hidden"
 					checked={ checked }
 					onChange={ ( e ) => onChange( e.target.checked ) }
 					disabled={ disabled }
@@ -63,7 +63,7 @@ export const Checkbox: React.FC< CheckboxProps > = ( {
 			</div>
 			{ label && (
 				<span
-					className={ `spoa-text-[13px] spoa-font-[400] spoa-leading-[20px] spoa-text-[#1e1e1e] ${
+					className={ `wpab-wpoa-text-[13px] wpab-wpoa-font-[400] wpab-wpoa-leading-[20px] wpab-wpoa-text-[#1e1e1e] ${
 						classNames?.label || ''
 					}` }
 				>

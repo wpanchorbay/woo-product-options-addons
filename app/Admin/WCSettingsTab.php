@@ -1,6 +1,6 @@
 <?php
 /**
- * WC Settings Tab — integrates Smart Product Options and Addons settings into WooCommerce settings.
+ * WC Settings Tab — integrates OptionBay - Product Options and Addons settings into WooCommerce settings.
  *
  * @since      1.0.0
  * @package    SmartProductOptionsAddons
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WooCommerce Settings Tab for Smart Product Options and Addons.
+ * WooCommerce Settings Tab for OptionBay - Product Options and Addons.
  */
 class WCSettingsTab extends \WC_Settings_Page {
 
@@ -23,8 +23,8 @@ class WCSettingsTab extends \WC_Settings_Page {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->id    = 'smart-product-options-addons';
-		$this->label = __( 'Options', 'smart-product-options-addons' );
+		$this->id    = 'woo-product-options-addons';
+		$this->label = __( 'Options', 'woo-product-options-addons' );
 
 		parent::__construct();
 	}

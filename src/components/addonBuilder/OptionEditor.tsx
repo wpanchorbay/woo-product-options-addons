@@ -40,8 +40,8 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
     if (!(window as any).wp?.media) return;
 
     const frame = (window as any).wp.media({
-      title: __("Select Image", "smart-product-options-addons"),
-      button: { text: __("Use this image", "smart-product-options-addons") },
+      title: __("Select Image", "woo-product-options-addons"),
+      button: { text: __("Use this image", "woo-product-options-addons") },
       multiple: false,
       library: { type: "image" },
     });
@@ -77,54 +77,54 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
 
   return (
     <div
-      className={`spoa-flex spoa-flex-col spoa-gap-2.5 ${
-        !hideLabel ? "spoa-mt-4" : ""
+      className={`wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-2.5 ${
+        !hideLabel ? "wpab-wpoa-mt-4" : ""
       }`}
     >
       {!hideLabel && (
-        <label className="spoa-font-semibold spoa-block">
-          {__("Choices", "smart-product-options-addons")}
+        <label className="wpab-wpoa-font-semibold wpab-wpoa-block">
+          {__("Choices", "woo-product-options-addons")}
         </label>
       )}
 
-      <div className="spoa-border spoa-border-[#c3c4c7] spoa-rounded-[12px] spoa-overflow-hidden spoa-bg-white">
+      <div className="wpab-wpoa-border wpab-wpoa-border-[#c3c4c7] wpab-wpoa-rounded-[12px] wpab-wpoa-overflow-hidden wpab-wpoa-bg-white">
         <div
-          className="spoa-w-0 spoa-min-w-full spoa-overflow-x-auto"
+          className="wpab-wpoa-w-0 wpab-wpoa-min-w-full wpab-wpoa-overflow-x-auto"
           style={{ overflowY: "auto" }}
         >
           <table
-            className="spoa-w-full spoa-text-left spoa-text-[13px]"
+            className="wpab-wpoa-w-full wpab-wpoa-text-left wpab-wpoa-text-[13px]"
             style={{ minWidth: isSwatch ? "700px" : "600px" }}
           >
             <thead>
-              <tr className="spoa-border-b spoa-border-[#c3c4c7]">
+              <tr className="wpab-wpoa-border-b wpab-wpoa-border-[#c3c4c7]">
                 {/* Swatch column header */}
                 {isColorSwatch && (
-                  <th className="!spoa-py-[10px] !spoa-px-[12px] spoa-font-semibold spoa-text-[#1d2327] spoa-w-[70px]">
-                    {__("Color", "smart-product-options-addons")}
+                  <th className="!wpab-wpoa-py-[10px] !wpab-wpoa-px-[12px] wpab-wpoa-font-semibold wpab-wpoa-text-[#1d2327] wpab-wpoa-w-[70px]">
+                    {__("Color", "woo-product-options-addons")}
                   </th>
                 )}
                 {isImageSwatch && (
-                  <th className="!spoa-py-[10px] !spoa-px-[12px] spoa-font-semibold spoa-text-[#1d2327] spoa-w-[90px]">
-                    {__("Image", "smart-product-options-addons")}
+                  <th className="!wpab-wpoa-py-[10px] !wpab-wpoa-px-[12px] wpab-wpoa-font-semibold wpab-wpoa-text-[#1d2327] wpab-wpoa-w-[90px]">
+                    {__("Image", "woo-product-options-addons")}
                   </th>
                 )}
-                <th className="!spoa-py-[10px] !spoa-px-[12px] spoa-font-semibold spoa-text-[#1d2327]">
-                  {__("Label", "smart-product-options-addons")}
+                <th className="!wpab-wpoa-py-[10px] !wpab-wpoa-px-[12px] wpab-wpoa-font-semibold wpab-wpoa-text-[#1d2327]">
+                  {__("Label", "woo-product-options-addons")}
                 </th>
-                <th className="!spoa-py-[10px] !spoa-px-[12px] spoa-font-semibold spoa-text-[#1d2327] spoa-w-[100px]">
-                  {__("Price", "smart-product-options-addons")}
+                <th className="!wpab-wpoa-py-[10px] !wpab-wpoa-px-[12px] wpab-wpoa-font-semibold wpab-wpoa-text-[#1d2327] wpab-wpoa-w-[100px]">
+                  {__("Price", "woo-product-options-addons")}
                 </th>
-                <th className="!spoa-py-[10px] !spoa-px-[12px] spoa-font-semibold spoa-text-[#1d2327] spoa-w-[160px]">
-                  {__("Price Type", "smart-product-options-addons")}
+                <th className="!wpab-wpoa-py-[10px] !wpab-wpoa-px-[12px] wpab-wpoa-font-semibold wpab-wpoa-text-[#1d2327] wpab-wpoa-w-[160px]">
+                  {__("Price Type", "woo-product-options-addons")}
                 </th>
-                <th className="!spoa-py-[10px] !spoa-px-[12px] spoa-font-semibold spoa-text-[#1d2327] spoa-w-[80px]">
-                  {__("Weight", "smart-product-options-addons")}
+                <th className="!wpab-wpoa-py-[10px] !wpab-wpoa-px-[12px] wpab-wpoa-font-semibold wpab-wpoa-text-[#1d2327] wpab-wpoa-w-[80px]">
+                  {__("Weight", "woo-product-options-addons")}
                 </th>
-                <th className="!spoa-py-[10px] !spoa-px-[12px] spoa-font-semibold spoa-text-[#1d2327] spoa-w-[180px]">
-                  {__("Stock", "smart-product-options-addons")}
+                <th className="!wpab-wpoa-py-[10px] !wpab-wpoa-px-[12px] wpab-wpoa-font-semibold wpab-wpoa-text-[#1d2327] wpab-wpoa-w-[180px]">
+                  {__("Stock", "woo-product-options-addons")}
                 </th>
-                <th className="!spoa-py-[10px] !spoa-px-[12px] spoa-font-semibold spoa-text-[#1d2327] spoa-w-[40px]"></th>
+                <th className="!wpab-wpoa-py-[10px] !wpab-wpoa-px-[12px] wpab-wpoa-font-semibold wpab-wpoa-text-[#1d2327] wpab-wpoa-w-[40px]"></th>
               </tr>
             </thead>
             <tbody>
@@ -132,23 +132,23 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
                 options.map((opt, idx) => (
                   <tr
                     key={idx}
-                    className="spoa-border-b spoa-border-[#c3c4c7] last:spoa-border-none"
+                    className="wpab-wpoa-border-b wpab-wpoa-border-[#c3c4c7] last:wpab-wpoa-border-none"
                   >
                     {/* Color swatch picker */}
                     {isColorSwatch && (
                       <td
-                        className="spoa-py-2 spoa-px-3"
+                        className="wpab-wpoa-py-2 wpab-wpoa-px-3"
                         style={{ verticalAlign: "top" }}
                       >
-                        <div className="spoa-flex spoa-items-center spoa-gap-2">
+                        <div className="wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-2">
                           <label
-                            className={`spoa-block spoa-w-7 spoa-h-7 spoa-rounded-[6px] spoa-border ${
+                            className={`wpab-wpoa-block wpab-wpoa-w-7 wpab-wpoa-h-7 wpab-wpoa-rounded-[6px] wpab-wpoa-border ${
                               state.errors?.[
                                 `schema.${fieldIndex}.options.${idx}.color`
                               ]
-                                ? "spoa-border-red-400"
-                                : "spoa-border-[#c3c4c7]"
-                            } spoa-cursor-pointer spoa-overflow-hidden spoa-shrink-0 hover:spoa-border-[#2271b1] spoa-transition-colors`}
+                                ? "wpab-wpoa-border-red-400"
+                                : "wpab-wpoa-border-[#c3c4c7]"
+                            } wpab-wpoa-cursor-pointer wpab-wpoa-overflow-hidden wpab-wpoa-shrink-0 hover:wpab-wpoa-border-[#2271b1] wpab-wpoa-transition-colors`}
                             style={{ backgroundColor: opt.color || "#ffffff" }}
                             title={opt.color || "#ffffff"}
                           >
@@ -165,7 +165,7 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
                                   },
                                 })
                               }
-                              className="spoa-opacity-0 spoa-w-0 spoa-h-0 spoa-absolute"
+                              className="wpab-wpoa-opacity-0 wpab-wpoa-w-0 wpab-wpoa-h-0 wpab-wpoa-absolute"
                             />
                           </label>
                         </div>
@@ -175,40 +175,40 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
                     {/* Image swatch picker */}
                     {isImageSwatch && (
                       <td
-                        className="spoa-py-2 spoa-px-3"
+                        className="wpab-wpoa-py-2 wpab-wpoa-px-3"
                         style={{ verticalAlign: "top" }}
                       >
-                        <div className="spoa-flex spoa-items-center spoa-gap-2">
+                        <div className="wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-2">
                           {opt.image_url ? (
                             <div
-                              className={`spoa-relative spoa-group/img spoa-w-10 spoa-h-10 spoa-rounded-[6px] spoa-border ${
+                              className={`wpab-wpoa-relative wpab-wpoa-group/img wpab-wpoa-w-10 wpab-wpoa-h-10 wpab-wpoa-rounded-[6px] wpab-wpoa-border ${
                                 state.errors?.[
                                   `schema.${fieldIndex}.options.${idx}.image_url`
                                 ]
-                                  ? "spoa-border-red-400"
-                                  : "spoa-border-[#c3c4c7]"
-                              } spoa-overflow-hidden spoa-shrink-0 spoa-cursor-pointer hover:spoa-border-[#2271b1] spoa-transition-colors`}
+                                  ? "wpab-wpoa-border-red-400"
+                                  : "wpab-wpoa-border-[#c3c4c7]"
+                              } wpab-wpoa-overflow-hidden wpab-wpoa-shrink-0 wpab-wpoa-cursor-pointer hover:wpab-wpoa-border-[#2271b1] wpab-wpoa-transition-colors`}
                               onClick={() => openMediaLibrary(idx)}
-                              title={__("Change image", "smart-product-options-addons")}
+                              title={__("Change image", "woo-product-options-addons")}
                             >
                               <img
                                 src={opt.image_url}
                                 alt={opt.label || "swatch"}
-                                className="spoa-w-full spoa-h-full spoa-object-cover"
+                                className="wpab-wpoa-w-full wpab-wpoa-h-full wpab-wpoa-object-cover"
                               />
                             </div>
                           ) : (
                             <button
                               type="button"
                               onClick={() => openMediaLibrary(idx)}
-                              className={`spoa-flex spoa-items-center spoa-justify-center spoa-w-10 spoa-h-10 spoa-rounded-[6px] spoa-border spoa-border-dashed ${
+                              className={`wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-justify-center wpab-wpoa-w-10 wpab-wpoa-h-10 wpab-wpoa-rounded-[6px] wpab-wpoa-border wpab-wpoa-border-dashed ${
                                 state.errors?.[
                                   `schema.${fieldIndex}.options.${idx}.image_url`
                                 ]
-                                  ? "spoa-border-red-400"
-                                  : "spoa-border-[#c3c4c7]"
-                              } spoa-bg-[#f6f7f7] spoa-text-[#646970] hover:spoa-border-[#2271b1] hover:spoa-text-[#2271b1] spoa-transition-colors spoa-cursor-pointer spoa-shrink-0`}
-                              title={__("Upload image", "smart-product-options-addons")}
+                                  ? "wpab-wpoa-border-red-400"
+                                  : "wpab-wpoa-border-[#c3c4c7]"
+                              } wpab-wpoa-bg-[#f6f7f7] wpab-wpoa-text-[#646970] hover:wpab-wpoa-border-[#2271b1] hover:wpab-wpoa-text-[#2271b1] wpab-wpoa-transition-colors wpab-wpoa-cursor-pointer wpab-wpoa-shrink-0`}
+                              title={__("Upload image", "woo-product-options-addons")}
                             >
                               <ImagePlus size={16} />
                             </button>
@@ -219,12 +219,12 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
 
                     {/* Label */}
                     <td
-                      className="spoa-py-2 spoa-px-3"
+                      className="wpab-wpoa-py-2 wpab-wpoa-px-3"
                       style={{ verticalAlign: "top" }}
                     >
                       <ClassicInput
                         size="regular"
-                        placeholder={__("Label", "smart-product-options-addons")}
+                        placeholder={__("Label", "woo-product-options-addons")}
                         value={opt.label}
                         isError={
                           !!state.errors?.[
@@ -258,7 +258,7 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
 
                     {/* Price */}
                     <td
-                      className="spoa-py-2 spoa-px-3"
+                      className="wpab-wpoa-py-2 wpab-wpoa-px-3"
                       style={{ verticalAlign: "top" }}
                     >
                       {opt.price_type !== "none" && (
@@ -266,7 +266,7 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
                           {opt.price_type === "formula" ? (
                             <ClassicInput
                               size="small"
-                              placeholder={__("Formula", "smart-product-options-addons")}
+                              placeholder={__("Formula", "woo-product-options-addons")}
                               value={opt.formula || ""}
                               isError={
                                 !!state.errors?.[
@@ -288,7 +288,7 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
                             <ClassicInput
                               type="number"
                               size="small"
-                              placeholder={__("Price", "smart-product-options-addons")}
+                              placeholder={__("Price", "woo-product-options-addons")}
                               value={opt.price ?? ""}
                               isError={
                                 !!state.errors?.[
@@ -325,7 +325,7 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
 
                     {/* Price Type */}
                     <td
-                      className="spoa-py-2 spoa-px-3"
+                      className="wpab-wpoa-py-2 wpab-wpoa-px-3"
                       style={{ verticalAlign: "top" }}
                     >
                       <ClassicSelect
@@ -365,13 +365,13 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
 
                     {/* Weight */}
                     <td
-                      className="spoa-py-2 spoa-px-3"
+                      className="wpab-wpoa-py-2 wpab-wpoa-px-3"
                       style={{ verticalAlign: "top" }}
                     >
                       <ClassicInput
                         type="number"
                         size="small"
-                        placeholder={__("Weight", "smart-product-options-addons")}
+                        placeholder={__("Weight", "woo-product-options-addons")}
                         value={opt.weight ?? ""}
                         isError={
                           !!state.errors?.[
@@ -398,12 +398,12 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
 
                     {/* Stock */}
                     <td
-                      className="spoa-py-2 spoa-px-3"
+                      className="wpab-wpoa-py-2 wpab-wpoa-px-3"
                       style={{ verticalAlign: "top" }}
                     >
-                      <div className="spoa-flex spoa-flex-col spoa-gap-1.5">
+                      <div className="wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-1.5">
                         <ClassicCheckbox
-                          label={__("Enable Stock", "smart-product-options-addons")}
+                          label={__("Enable Stock", "woo-product-options-addons")}
                           checked={opt.enable_stock || false}
                           isError={
                             !!state.errors?.[
@@ -491,7 +491,7 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
                     </td>
 
                     {/* Delete */}
-                    <td className="spoa-py-2">
+                    <td className="wpab-wpoa-py-2">
                       <button
                         type="button"
                         onClick={() =>
@@ -500,10 +500,10 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
                             payload: { fieldId, optionIndex: idx },
                           })
                         }
-                        className="spoa-bg-transparent spoa-border-none spoa-cursor-pointer spoa-p-1 spoa-text-[#d63638] hover:spoa-text-[#b32d2e] spoa-transition-colors"
-                        title={__("Remove choice", "smart-product-options-addons")}
+                        className="wpab-wpoa-bg-transparent wpab-wpoa-border-none wpab-wpoa-cursor-pointer wpab-wpoa-p-1 wpab-wpoa-text-[#d63638] hover:wpab-wpoa-text-[#b32d2e] wpab-wpoa-transition-colors"
+                        title={__("Remove choice", "woo-product-options-addons")}
                       >
-                        <Trash2 className="spoa-size-4" />
+                        <Trash2 className="wpab-wpoa-size-4" />
                       </button>
                     </td>
                   </tr>
@@ -512,9 +512,9 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
                 <tr>
                   <td
                     colSpan={colCount}
-                    className="spoa-py-6 spoa-text-center spoa-text-[#94a3b8] spoa-italic"
+                    className="wpab-wpoa-py-6 wpab-wpoa-text-center wpab-wpoa-text-[#94a3b8] wpab-wpoa-italic"
                   >
-                    {__("No choices added yet.", "smart-product-options-addons")}
+                    {__("No choices added yet.", "woo-product-options-addons")}
                   </td>
                 </tr>
               )}
@@ -523,7 +523,7 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
         </div>
       </div>
 
-      <div className="spoa-flex spoa-justify-start">
+      <div className="wpab-wpoa-flex wpab-wpoa-justify-start">
         <ClassicButton
           variant="secondary"
           onClick={() =>
@@ -536,8 +536,8 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
             })
           }
         >
-          <CirclePlus className="spoa-size-4" />{" "}
-          {__("Add Choice", "smart-product-options-addons")}
+          <CirclePlus className="wpab-wpoa-size-4" />{" "}
+          {__("Add Choice", "woo-product-options-addons")}
         </ClassicButton>
       </div>
 

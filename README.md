@@ -1,4 +1,4 @@
-# Smart Product Options and Addons (Classic & Modern)
+# OptionBay - Product Options and Addons (Classic & Modern)
 
 Production-ready WooCommerce product options and add-ons with a React/TypeScript admin, advanced pricing, inventory tracking, and conditional logic.
 
@@ -27,8 +27,8 @@ This plugin provides a robust, object-oriented PHP backend and a React single-pa
 - **Dual Component Libraries**:
   - **`common` (Modern UI)**: 30+ reusable Tailwind CSS components (Modals, Toasts, MultiSelects, Steppers, etc.) designed for custom, app-like interfaces.
   - **`classics` (Native UI)**: 10+ components (`ClassicInput`, `ClassicSettingsTable`, `ClassicRepeater`) built to 1:1 match native WooCommerce and WordPress settings aesthetics.
-- **Tailwind CSS Integration**: Fully configured Tailwind setup using a custom `spoa-` prefix to prevent style bleed.
-- **Preflight Conflict Mitigation**: Custom `spoa-ignore-preflight` guard class integrated into `index.scss` to allow Tailwind usage without destroying native WP/WC typography and input styles.
+- **Tailwind CSS Integration**: Fully configured Tailwind setup using a custom `wpab-wpoa-` prefix to prevent style bleed.
+- **Preflight Conflict Mitigation**: Custom `wpab-wpoa-ignore-preflight` guard class integrated into `index.scss` to allow Tailwind usage without destroying native WP/WC typography and input styles.
 - **State Management**: React Context stores integrated with `wp_localize_script` data bridges.
 - **Production Build System**: Powered by `@wordpress/scripts` (Webpack) for modern and legacy JS builds.
 
@@ -37,7 +37,7 @@ This plugin provides a robust, object-oriented PHP backend and a React single-pa
 ## 📁 Directory Structure
 
 ```text
-spoa-classic/
+wpab-wpoa-classic/
 ├── app/                        # PHP Backend Application
 │   ├── Admin/
 │   │   ├── Admin.php           # Admin menu & localized script enqueuing
@@ -85,7 +85,7 @@ spoa-classic/
 ├── assets/                     # Images, icons, and static media
 ├── languages/                  # i18n translation files (.pot, .json)
 ├── vendor/                     # Composer dependencies (PHP)
-├── smart-product-options-addons.php        # Plugin bootstrap & autoloader
+├── woo-product-options-addons.php        # Plugin bootstrap & autoloader
 ├── uninstall.php               # Cleanup on plugin deletion
 ├── rename.sh                   # Script for global find & replace
 ├── package.json                # NPM configuration
@@ -115,13 +115,13 @@ To white-label the plugin, replace these identifier strings throughout the codeb
 
 | Find String       | Replace With (Example) | Context                     |
 | ----------------- | ---------------------- | --------------------------- |
-| `Smart Product Options and Addons`       | `YourNamespace`        | PHP Namespaces              |
-| `SMART_PRODUCT_OPTIONS_ADDONS_`      | `YOUR_PLUGIN_`         | PHP Constants               |
-| `smart-product-options-addons`       | `your-plugin-slug`     | Text domains, URLs, Classes |
-| `smart-product-options-addons`       | `your_plugin_slug`     | PHP Variable/Option names   |
+| `OptionBay - Product Options and Addons`       | `YourNamespace`        | PHP Namespaces              |
+| `WOO_PRODUCT_OPTIONS_ADDONS_`      | `YOUR_PLUGIN_`         | PHP Constants               |
+| `woo-product-options-addons`       | `your-plugin-slug`     | Text domains, URLs, Classes |
+| `woo-product-options-addons`       | `your_plugin_slug`     | PHP Variable/Option names   |
 | `spoaPlugin` | `yourPlugin`           | JS Globals                  |
-| `Smart Product Options and Addons`       | `Your Plugin Title`    | UI Text                     |
-| `spoa-`      | `yourprefix-`          | Tailwind CSS Prefix         |
+| `OptionBay - Product Options and Addons`       | `Your Plugin Title`    | UI Text                     |
+| `wpab-wpoa-`      | `yourprefix-`          | Tailwind CSS Prefix         |
 
 ### 3. Install Dependencies
 
@@ -172,7 +172,7 @@ The admin app includes two layout systems. You can switch between them globally 
 
 Tailwind's preflight resets often break native WordPress styles (like `h2` sizing or input borders). This plugin uses a custom guard:
 
-By adding the **`spoa-ignore-preflight`** class to any element (or its parent), you prevent Tailwind's default reset from affecting it, allowing the native WordPress/WooCommerce CSS to take precedence.
+By adding the **`wpab-wpoa-ignore-preflight`** class to any element (or its parent), you prevent Tailwind's default reset from affecting it, allowing the native WordPress/WooCommerce CSS to take precedence.
 
 ---
 
