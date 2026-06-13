@@ -379,7 +379,7 @@ class AddonGroupController extends ApiController {
 			$id_map = array();
 			foreach ( $new_inventories as $new_inv ) {
 				$inv_id = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->create_item( $new_inv );
-				if ( ! $inv_id ) {
+				if ( ! inv_id ) {
 					throw new \Exception( __( 'Failed to create global inventory item.', 'smart-product-options-addons' ) );
 				}
 				$id_map[ $new_inv['tmp_id'] ] = $inv_id;
@@ -509,7 +509,7 @@ class AddonGroupController extends ApiController {
 				$id_map = array();
 				foreach ( $new_inventories as $new_inv ) {
 					$inv_id = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->create_item( $new_inv );
-					if ( ! $inv_id ) {
+					if ( ! inv_id ) {
 						throw new \Exception( __( 'Failed to create global inventory item.', 'smart-product-options-addons' ) );
 					}
 					$id_map[ $new_inv['tmp_id'] ] = $inv_id;
@@ -852,31 +852,8 @@ class AddonGroupController extends ApiController {
 			return array();
 		}
 
-		$allowed_types = array(
-			'text',
-			'textarea',
-			'select',
-			'checkbox',
-			'single_checkbox',
-			'radio',
-			'number',
-			'file',
-			'email',
-			'date',
-			'time',
-			'color_swatch',
-			'image_swatch',
-			'heading',
-			'static_content',
-		);
-
-		$allowed_price_types = array(
-			'flat',
-			'percentage',
-			'character_count',
-			'formula',
-			'none',
-		);
+		$allowed_types       = array( 'text', 'textarea', 'select', 'radio', 'checkbox', 'color_swatch', 'image_swatch', 'number', 'static_content' );
+		$allowed_price_types = array( 'none', 'flat', 'percentage' );
 
 		$sanitized = array();
 
@@ -1092,30 +1069,26 @@ class AddonGroupController extends ApiController {
 			'status'                                      => 'required|in:publish,draft',
 			'schema'                                      => 'required|array',
 			'schema.*.id'                                 => 'required',
-			'schema.*.type'                               => 'required|in:text,textarea,select,checkbox,single_checkbox,radio,number,file,email,color_swatch,image_swatch,static_content',
+			'schema.*.type'                               => 'required|in:text,textarea,select,radio,checkbox,color_swatch,image_swatch,number,static_content',
 			'schema.*.content'                            => 'nullable',
 			'schema.*.label'                              => 'required',
 			'schema.*.description'                        => 'nullable',
 			'schema.*.placeholder'                        => 'nullable',
 			'schema.*.required'                           => 'boolean',
 			'schema.*.class_name'                         => 'nullable',
-			'schema.*.price_type'                         => 'required_with:schema|in:flat,percentage,character_count,formula,none',
-			'schema.*.price'                              => 'required_if:schema.*.price_type,flat,percentage,character_count|numeric',
-			'schema.*.formula'                            => 'required_if:schema.*.price_type,formula',
+			'schema.*.price_type'                         => 'required_with:schema|in:none,flat,percentage',
+			'schema.*.price'                              => 'required_if:schema.*.price_type,flat,percentage|numeric',
 			'schema.*.weight'                             => 'numeric',
 			'schema.*.min_length'                         => 'numeric',
 			'schema.*.max_length'                         => 'numeric',
 			'schema.*.min_value'                          => 'numeric',
 			'schema.*.max_value'                          => 'numeric',
 			'schema.*.step'                               => 'numeric',
-			'schema.*.allowed_types'                      => 'required_if:schema.*.type,file',
-			'schema.*.max_file_size'                      => 'required_if:schema.*.type,file|numeric',
 			'schema.*.options'                            => 'array',
 			'schema.*.options.*.label'                    => 'required_with:schema.*.options',
 			'schema.*.options.*.value'                    => 'required_with:schema.*.options',
-			'schema.*.options.*.price_type'               => 'in:flat,percentage,character_count,quantity_multiplier,formula,none',
-			'schema.*.options.*.price'                    => 'required_if:schema.*.options.*.price_type,flat,percentage,character_count,quantity_multiplier|numeric',
-			'schema.*.options.*.formula'                  => 'required_if:schema.*.options.*.price_type,formula',
+			'schema.*.options.*.price_type'               => 'in:flat,none',
+			'schema.*.options.*.price'                    => 'required_if:schema.*.options.*.price_type,flat|numeric',
 			'schema.*.options.*.weight'                   => 'numeric',
 			'schema.*.options.*.color'                    => 'required_if:schema.*.type,color_swatch',
 			'schema.*.options.*.image_url'                => 'required_if:schema.*.type,image_swatch',
@@ -1130,22 +1103,16 @@ class AddonGroupController extends ApiController {
 			'schema.*.display_style'                      => 'nullable|in:swatch_only,swatch_label',
 			'schema.*.enable_stock'                       => 'boolean',
 			'schema.*.inventory_id'                       => 'required_if:schema.*.enable_stock,1',
-			'schema.*.reduction_mode'                     => 'nullable|in:per_item_qty,per_line_item,formula',
-			'schema.*.reduction_formula'                  => 'required_if:schema.*.reduction_mode,formula',
 			'schema.*.options.*.enable_stock'             => 'boolean',
 			'schema.*.options.*.inventory_id'             => 'required_if:schema.*.options.*.enable_stock,1',
-			'schema.*.options.*.reduction_mode'           => 'nullable|in:per_item_qty,per_line_item,formula',
-			'schema.*.options.*.reduction_formula'        => 'required_if:schema.*.options.*.reduction_mode,formula',
 			'new_inventories'                             => 'array',
 			'new_inventories.*.tmp_id'                    => 'required',
 			'new_inventories.*.name'                      => 'required',
 			'new_inventories.*.stock_count'               => 'numeric',
 			'new_inventories.*.allow_backorders'          => 'boolean',
 			'assignments'                                 => 'array',
-			'assignments.*.target_type'                   => 'required|in:product,category,tag,global',
+			'assignments.*.target_type'                   => 'required|in:global,product',
 			'assignments.*.target_id'                     => 'required|numeric',
-			'assignments.*.is_exclusion'                  => 'boolean',
-			'assignments.*.priority'                      => 'numeric',
 		);
 	}
 
@@ -1203,7 +1170,7 @@ class AddonGroupController extends ApiController {
 				$price_type = $field['price_type'] ?? 'none';
 				$price      = floatval( $field['price'] ?? 0 );
 
-				if ( in_array( $price_type, array( 'flat', 'percentage', 'character_count' ), true ) ) {
+				if ( in_array( $price_type, array( 'flat', 'percentage' ), true ) ) {
 					if ( $price <= 0 ) {
 						$errors[ "schema.{$f_idx}.price" ] = __( 'Price must be greater than 0 when a price type is selected.', 'smart-product-options-addons' );
 					}
@@ -1221,7 +1188,7 @@ class AddonGroupController extends ApiController {
 						$opt_price_type = $option['price_type'] ?? 'none';
 						$opt_price      = floatval( $option['price'] ?? 0 );
 
-						if ( in_array( $opt_price_type, array( 'flat', 'percentage', 'character_count' ), true ) ) {
+						if ( in_array( $opt_price_type, array( 'flat' ), true ) ) {
 							if ( $opt_price <= 0 ) {
 								$errors[ "schema.{$f_idx}.options.{$o_idx}.price" ] = __( 'Price must be greater than 0 when a price type is selected.', 'smart-product-options-addons' );
 							}
@@ -1242,6 +1209,23 @@ class AddonGroupController extends ApiController {
 				array(
 					'status' => 422,
 					'errors' => $errors,
+				)
+			);
+		}
+
+		// Pro gating: filter out disallowed assignments.
+		if ( isset( $validated['assignments'] ) && is_array( $validated['assignments'] ) ) {
+			$allowed_targets          = array( 'global', 'product' );
+			$validated['assignments'] = array_values(
+				array_filter(
+					$validated['assignments'],
+					function ( $a ) use ( $allowed_targets ) {
+						// Filter out disallowed target types.
+						if ( ! in_array( $a['target_type'] ?? '', $allowed_targets, true ) ) {
+							return false;
+						}
+						return true;
+					}
 				)
 			);
 		}

@@ -11,8 +11,7 @@
     ],
     "require": {
         "php": ">=7.0",
-        "rakit/validation": "^1.4",
-        "mossadal/math-parser": "^1.3"
+        "rakit/validation": "^1.4"
     },
     "autoload": {
         "psr-4": {

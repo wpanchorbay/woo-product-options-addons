@@ -50,7 +50,6 @@ class FieldFactory {
 				'radio'           => RadioField::class,
 				'email'           => EmailField::class,
 				'number'          => NumberField::class,
-				'file'            => FileField::class,
 				'color_swatch'    => ColorSwatchField::class,
 				'image_swatch'    => ImageSwatchField::class,
 				'static_content'  => StaticContentField::class,

@@ -75,4 +75,5 @@ export interface PluginStore {
 	pluginData: PluginData;
 	wpSettings: WpSettings;
 	plugin_settings: PluginSettings;
+	proFeatures: ProFeatures;
 }

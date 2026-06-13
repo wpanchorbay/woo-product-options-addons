@@ -14,6 +14,8 @@ import {
 	LucideIcon,
 } from 'lucide-react';
 
+// Removed proFeatures logic
+
 export const FIELD_TYPE_ICONS: Record< string, LucideIcon > = {
 	text: Type,
 	textarea: AlignLeft,
@@ -36,7 +38,6 @@ export const FIELD_TYPES = [
 	{ value: 'radio', label: __('Radio Buttons', 'smart-product-options-addons') },
 	{ value: 'single_checkbox', label: __('Checkbox', 'smart-product-options-addons') },
 	{ value: 'number', label: __('Number', 'smart-product-options-addons') },
-	{ value: 'file', label: __('File upload', 'smart-product-options-addons') },
 	{ value: 'email', label: __('Email', 'smart-product-options-addons') },
 	{ value: 'color_swatch', label: __('Color Swatch', 'smart-product-options-addons') },
 	{ value: 'image_swatch', label: __('Image Swatch', 'smart-product-options-addons') },
@@ -47,8 +48,6 @@ export const PRICE_TYPES = [
 	{ value: 'none', label: __( 'No Price', 'smart-product-options-addons' ) },
 	{ value: 'flat', label: __( 'Flat Fee', 'smart-product-options-addons' ) },
 	{ value: 'percentage', label: __( 'Percentage of Base', 'smart-product-options-addons' ) },
-	{ value: 'character_count', label: __( 'Per Character', 'smart-product-options-addons' ) },
-	{ value: 'formula', label: __( 'Formula', 'smart-product-options-addons' ) },
 ];
 
 export const REDUCTION_MODES = [
@@ -57,5 +56,4 @@ export const REDUCTION_MODES = [
 		value: 'per_line_item',
 		label: __( 'Per Line Item (Once)', 'smart-product-options-addons' ),
 	},
-	{ value: 'formula', label: __( 'Custom Formula', 'smart-product-options-addons' ) },
 ];

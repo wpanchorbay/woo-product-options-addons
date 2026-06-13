@@ -480,48 +480,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                           ),
                         },
                         ...(field.price_type !== "none"
-                          ? field.price_type === "formula"
-                            ? [
-                                {
-                                  label: __("Formula Expression", "smart-product-options-addons"),
-                                  tooltip: __(
-                                    "The mathematical expression used to calculate the price.",
-                                    "smart-product-options-addons",
-                                  ),
-                                  render: () => (
-                                    <>
-                                      <ClassicInput
-                                        size="large"
-                                        className="!spoa-w-1/2 !spoa-min-w-48"
-                                        value={field.formula || ""}
-                                        description={__(
-                                          "Use placeholders: [value], [char_count], [base_price]. Example: [char_count] * 2",
-                                          "smart-product-options-addons",
-                                        )}
-                                        isError={
-                                          !!state.errors?.[
-                                            `schema.${index}.formula`
-                                          ]
-                                        }
-                                        onChange={(e) =>
-                                          update({
-                                            formula: e.target.value,
-                                          })
-                                        }
-                                        placeholder="[char_count] * 2"
-                                      />
-                                      <FormError
-                                        message={
-                                          state.errors?.[
-                                            `schema.${index}.formula`
-                                          ]
-                                        }
-                                      />
-                                    </>
-                                  ),
-                                },
-                              ]
-                            : [
+                          ? [
                                 {
                                   label: __("Price Amount", "smart-product-options-addons"),
                                   tooltip: FIELD_TOOLTIPS.price,
@@ -743,77 +702,6 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                         },
                       ]
                     : []),
-                  ...(field.type === "file"
-                    ? [
-                        {
-                          label: __("File Restrictions", "smart-product-options-addons"),
-                          tooltip: FIELD_TOOLTIPS.file_restrictions,
-                          render: () => (
-                            <div className="spoa-flex spoa-flex-col spoa-gap-2">
-                              <label className="spoa-block">
-                                <span className="spoa-text-xs spoa-block">
-                                  {__(
-                                    "Allowed Extensions (comma separated):",
-                                    "smart-product-options-addons",
-                                  )}
-                                </span>
-                                <ClassicInput
-                                  size="regular"
-                                  value={field.allowed_types || ""}
-                                  isError={
-                                    !!state.errors?.[
-                                      `schema.${index}.allowed_types`
-                                    ]
-                                  }
-                                  onChange={(e) =>
-                                    update({
-                                      allowed_types: e.target.value,
-                                    })
-                                  }
-                                  placeholder=".jpg,.png,.pdf"
-                                />
-                                <FormError
-                                  message={
-                                    state.errors?.[
-                                      `schema.${index}.allowed_types`
-                                    ]
-                                  }
-                                />
-                              </label>
-                              <label className="spoa-block">
-                                <span className="spoa-text-xs spoa-block">
-                                  {__("Max File Size (MB):", "smart-product-options-addons")}
-                                </span>
-                                <ClassicInput
-                                  type="number"
-                                  size="small"
-                                  value={field.max_file_size || ""}
-                                  isError={
-                                    !!state.errors?.[
-                                      `schema.${index}.max_file_size`
-                                    ]
-                                  }
-                                  onChange={(e) =>
-                                    update({
-                                      max_file_size:
-                                        parseInt(e.target.value) || 5,
-                                    })
-                                  }
-                                  min={1}
-                                />
-                                <FormError
-                                  message={
-                                    state.errors?.[
-                                      `schema.${index}.max_file_size`
-                                    ]
-                                  }
-                                />
-                              </label>
-                            </div>
-                          ),
-                        },
-                      ]
-                    : []),
                   ...(hasOptions && field.options
                     ? [
                         ...(["color_swatch", "image_swatch"].includes(
@@ -952,28 +840,6 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                                         options={REDUCTION_MODES}
                                       />
                                     </div>
-                                    {field.reduction_mode === "formula" && (
-                                      <div className="spoa-flex-1">
-                                        <label className="spoa-text-xs spoa-font-medium spoa-mb-1 spoa-block">
-                                          {__("Formula", "smart-product-options-addons")}
-                                        </label>
-                                        <ClassicInput
-                                          size="large"
-                                          value={field.reduction_formula || ""}
-                                          isError={
-                                            !!state.errors?.[
-                                              `schema.${index}.reduction_formula`
-                                            ]
-                                          }
-                                          onChange={(e) =>
-                                            update({
-                                              reduction_formula: e.target.value,
-                                            })
-                                          }
-                                          placeholder="qty * val"
-                                        />
-                                      </div>
-                                    )}
                                   </div>
                                 </div>
                               )}

@@ -8,5 +8,4 @@ $baseDir = dirname($vendorDir);
 return array(
     'SmartProductOptionsAddons\\' => array($baseDir . '/app'),
     'Rakit\\Validation\\' => array($vendorDir . '/rakit/validation/src'),
-    'MathParser\\' => array($vendorDir . '/mossadal/math-parser/src/MathParser'),
 );

@@ -53,6 +53,7 @@
         <properties>
             <property name="custom_capabilities" type="array">
                 <element value="manage_smart-product-options-addons"/>
+                <element value="manage_woocommerce"/>
             </property>
         </properties>
     </rule>

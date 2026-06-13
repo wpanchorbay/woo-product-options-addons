@@ -31,10 +31,8 @@ class PricingEngine {
 	 * @var array
 	 */
 	private static $strategies = array(
-		'flat'            => FlatFeeStrategy::class,
-		'percentage'      => PercentageStrategy::class,
-		'character_count' => CharacterCountStrategy::class,
-		'formula'         => FormulaStrategy::class,
+		'flat'       => FlatFeeStrategy::class,
+		'percentage' => PercentageStrategy::class,
 	);
 
 	/**

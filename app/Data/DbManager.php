@@ -197,13 +197,12 @@ class DbManager {
 			$result = $wpdb->insert( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
 				$table_name,
 				array(
-					'group_id'     => absint( $group_id ),
-					'target_type'  => sanitize_text_field( $assignment['target_type'] ?? 'global' ),
-					'target_id'    => absint( $assignment['target_id'] ?? 0 ),
-					'is_exclusion' => ! empty( $assignment['is_exclusion'] ) ? 1 : 0,
-					'priority'     => absint( $assignment['priority'] ?? 10 ),
+					'group_id'    => absint( $group_id ),
+					'target_type' => sanitize_text_field( $assignment['target_type'] ?? 'global' ),
+					'target_id'   => absint( $assignment['target_id'] ?? 0 ),
+					'priority'    => absint( $assignment['priority'] ?? 10 ),
 				),
-				array( '%d', '%s', '%d', '%d', '%d' )
+				array( '%d', '%s', '%d', '%d' )
 			);
 
 			if ( $result ) {
@@ -248,7 +247,7 @@ class DbManager {
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$results = $wpdb->get_results(
 			$wpdb->prepare(
-				'SELECT target_type, target_id, is_exclusion, priority FROM %i WHERE group_id = %d ORDER BY priority ASC',
+				'SELECT target_type, target_id, priority FROM %i WHERE group_id = %d ORDER BY priority ASC',
 				self::get_assignments_table(),
 				absint( $group_id )
 			),
@@ -256,9 +255,8 @@ class DbManager {
 		);
 
 		foreach ( $results as &$row ) {
-			$row['is_exclusion'] = (bool) $row['is_exclusion'];
-			$row['target_id']    = (int) $row['target_id'];
-			$row['priority']     = (int) $row['priority'];
+			$row['target_id'] = (int) $row['target_id'];
+			$row['priority']  = (int) $row['priority'];
 		}
 
 		return $results;
@@ -268,19 +266,17 @@ class DbManager {
 	 * Get active group IDs for a product.
 	 *
 	 * Queries the lookup table to find which Option Groups should be
-	 * displayed on a given product page, considering product ID, its
-	 * category IDs, tag IDs, and global assignments.
+	 * displayed on a given product page.
 	 *
 	 * @since 1.0.0
-	 * @param int   $product_id  The WooCommerce product ID.
-	 * @param array $category_ids Array of term IDs for the product's categories.
-	 * @param array $tag_ids      Array of term IDs for the product's tags.
+	 * @param int $product_id The WooCommerce product ID.
 	 * @return array Ordered array of group IDs to display.
 	 */
-	public function get_groups_for_product( $product_id, $category_ids = array(), $tag_ids = array() ) {
-		$version   = wp_cache_get( 'spoa_assignments_version', 'spoa_assignments' ) ?: 1;
-		$cache_key = "product_groups_{$product_id}_{$version}";
-		$cached    = wp_cache_get( $cache_key, 'spoa_assignments' );
+	public function get_groups_for_product( $product_id ) {
+		$version_cache = wp_cache_get( 'spoa_assignments_version', 'spoa_assignments' );
+		$version       = $version_cache ? $version_cache : 1;
+		$cache_key     = "product_groups_{$product_id}_{$version}";
+		$cached        = wp_cache_get( $cache_key, 'spoa_assignments' );
 
 		if ( false !== $cached ) {
 			return $cached;
@@ -301,74 +297,32 @@ class DbManager {
 		$conditions[] = "(target_type = 'product' AND target_id = %d)";
 		$values[]     = absint( $product_id );
 
-		// Category assignments
-		if ( ! empty( $category_ids ) ) {
-			$cat_placeholders = implode( ',', array_fill( 0, count( $category_ids ), '%d' ) );
-			$conditions[]     = "(target_type = 'category' AND target_id IN ({$cat_placeholders}))";
-			foreach ( $category_ids as $cat_id ) {
-				$values[] = absint( $cat_id );
-			}
-		}
-
-		// Tag assignments
-		if ( ! empty( $tag_ids ) ) {
-			$tag_placeholders = implode( ',', array_fill( 0, count( $tag_ids ), '%d' ) );
-			$conditions[]     = "(target_type = 'tag' AND target_id IN ({$tag_placeholders}))";
-			foreach ( $tag_ids as $tag_id ) {
-				$values[] = absint( $tag_id );
-			}
-		}
-
 		$where_clause = implode( ' OR ', $conditions );
 
-		// Get all matching assignments (inclusions and exclusions)
+		// Get all matching assignments
 		// We join with the posts table to ensure we only get 'publish' status groups
-		$query = "SELECT a.group_id, a.is_exclusion, MIN(a.priority) as priority
+		$query = "SELECT a.group_id, MIN(a.priority) as priority
                   FROM {$table_name} as a
                   JOIN {$posts_table} as p ON a.group_id = p.ID
                   WHERE ({$where_clause}) AND p.post_status = 'publish'
-                  GROUP BY a.group_id, a.is_exclusion
-                  ORDER BY a.priority ASC"; // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
+                  GROUP BY a.group_id
+                  ORDER BY priority ASC"; // phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared
 
 		$results = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 			$wpdb->prepare( $query, $values ), // phpcs:ignore WordPress.DB.PreparedSQL.NotPrepared
 			ARRAY_A
 		);
 
-		// Separate inclusions and exclusions by processing query results
-		$included = array();
-		$excluded = array();
+		$group_ids = array();
 
 		foreach ( $results as $row ) {
-			$gid  = (int) $row['group_id'];
-			$prio = (int) $row['priority'];
-
-			if ( 1 === (int) $row['is_exclusion'] ) {
-				// Store the highest priority (lowest number) exclusion
-				if ( ! isset( $excluded[ $gid ] ) || $prio < $excluded[ $gid ] ) {
-					$excluded[ $gid ] = $prio;
-				}
-			} elseif ( ! isset( $included[ $gid ] ) || $prio < $included[ $gid ] ) {
-				// Store the highest priority (lowest number) inclusion
-				$included[ $gid ] = $prio;
-			}
+			$group_ids[] = absint( $row['group_id'] );
 		}
 
-		// Remove excluded groups only if the exclusion priority is higher (lower or equal number) than inclusion
-		foreach ( $excluded as $gid => $excl_prio ) {
-			if ( isset( $included[ $gid ] ) && $excl_prio <= $included[ $gid ] ) {
-				unset( $included[ $gid ] );
-			}
-		}
+		wp_cache_set( $cache_key, $group_ids, 'spoa_assignments', 3600 );
 
-		// Sort by priority (ascending, where 1 > 10) and return group IDs
-		asort( $included );
-		$final_ids = array_keys( $included );
+		smart_product_options_addons_log( 'Resolved ' . count( $group_ids ) . " group(s) for product {$product_id}", 'DEBUG' );
 
-		wp_cache_set( $cache_key, $final_ids, 'spoa_assignments', 3600 );
-
-		smart_product_options_addons_log( 'Resolved ' . count( $final_ids ) . " group(s) for product {$product_id}", 'DEBUG' );
-
-		return $final_ids;
+		return $group_ids;
 	}
 }

@@ -71,7 +71,7 @@ add_action(
 			\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', __FILE__, true );
 		}
 	}
-);	
+);
 
 /**
  * Fired during plugin activation.

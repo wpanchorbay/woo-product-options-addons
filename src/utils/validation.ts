@@ -62,20 +62,11 @@ export const fieldOptionSchema = z
 	})
 	.superRefine((data, ctx) => {
 		if (data.price_type && data.price_type !== "none" && data.price_type !== "") {
-			if (data.price_type !== "formula") {
-				if (data.price === undefined || data.price === null || data.price === 0) {
-					ctx.addIssue({
-						code: z.ZodIssueCode.custom,
-						message: __("Price is required", "smart-product-options-addons"),
-						path: ["price"],
-					});
-				}
-			}
-			if (data.price_type === "formula" && !data.formula) {
+			if (data.price === undefined || data.price === null || data.price === 0) {
 				ctx.addIssue({
 					code: z.ZodIssueCode.custom,
-					message: __("Formula is required", "smart-product-options-addons"),
-					path: ["formula"],
+					message: __("Price is required", "smart-product-options-addons"),
+					path: ["price"],
 				});
 			}
 		}
@@ -85,14 +76,6 @@ export const fieldOptionSchema = z
 				code: z.ZodIssueCode.custom,
 				message: __("Inventory pool is required", "smart-product-options-addons"),
 				path: ["inventory_id"],
-			});
-		}
-
-		if (data.reduction_mode === "formula" && !data.reduction_formula) {
-			ctx.addIssue({
-				code: z.ZodIssueCode.custom,
-				message: __("Reduction formula is required", "smart-product-options-addons"),
-				path: ["reduction_formula"],
 			});
 		}
 	});
@@ -143,20 +126,11 @@ export const fieldDefinitionSchema = z
 		const isChoiceType = ["select", "radio", "checkbox", "color_swatch", "image_swatch"].includes(data.type);
 
 		if (!isChoiceType && data.price_type && data.price_type !== "none" && data.price_type !== "") {
-			if (data.price_type !== "formula") {
-				if (data.price === undefined || data.price === null || data.price === 0) {
-					ctx.addIssue({
-						code: z.ZodIssueCode.custom,
-						message: __("Price is required", "smart-product-options-addons"),
-						path: ["price"],
-					});
-				}
-			}
-			if (data.price_type === "formula" && !data.formula) {
+			if (data.price === undefined || data.price === null || data.price === 0) {
 				ctx.addIssue({
 					code: z.ZodIssueCode.custom,
-					message: __("Formula is required", "smart-product-options-addons"),
-					path: ["formula"],
+					message: __("Price is required", "smart-product-options-addons"),
+					path: ["price"],
 				});
 			}
 		}
@@ -204,16 +178,7 @@ export const fieldDefinitionSchema = z
 			});
 		}
 
-		// 5. Reduction formula check
-		if (data.reduction_mode === "formula" && !data.reduction_formula) {
-			ctx.addIssue({
-				code: z.ZodIssueCode.custom,
-				message: __("Reduction formula is required", "smart-product-options-addons"),
-				path: ["reduction_formula"],
-			});
-		}
-
-		// 6. If any option has stock tracking enabled, the field itself cannot have stock tracking enabled
+		// 5. If any option has stock tracking enabled, the field itself cannot have stock tracking enabled
 		const fieldHasOptions = ["select", "radio", "checkbox", "color_swatch", "image_swatch"].includes(data.type);
 		const optionsHaveStock = fieldHasOptions && data.options?.some((opt) => opt.enable_stock);
 		if (optionsHaveStock && data.enable_stock) {
@@ -226,9 +191,8 @@ export const fieldDefinitionSchema = z
 	});
 
 export const assignmentSchema = z.object({
-	target_type: z.enum(['global', 'product', 'category', 'tag']),
+	target_type: z.enum(['global', 'product']),
 	target_id: z.number(),
-	is_exclusion: z.boolean(),
 });
 
 export const addonGroupSchema = z
@@ -252,12 +216,12 @@ export const addonGroupSchema = z
 	})
 	.superRefine((data, ctx) => {
 		const hasGlobal = data.assignments.some((a) => a.target_type === 'global');
-		const hasInclusion = data.assignments.some((a) => !a.is_exclusion && a.target_type !== 'global');
+		const hasProduct = data.assignments.some((a) => a.target_type === 'product');
 
-		if (!hasGlobal && !hasInclusion) {
+		if (!hasGlobal && !hasProduct) {
 			ctx.addIssue({
 				code: z.ZodIssueCode.custom,
-				message: __('At least one target (product, category, or tag) is required for targeted visibility.', 'smart-product-options-addons'),
+				message: __('At least one target (global or product) is required for targeted visibility.', 'smart-product-options-addons'),
 				path: ['assignments'],
 			});
 		}

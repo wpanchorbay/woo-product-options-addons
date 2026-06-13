@@ -15,10 +15,6 @@ class ComposerStaticInit5e2ccdd4e9c1b45ba4720c46bc8066bd
         array (
             'Rakit\\Validation\\' => 17,
         ),
-        'M' => 
-        array (
-            'MathParser\\' => 11,
-        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -29,10 +25,6 @@ class ComposerStaticInit5e2ccdd4e9c1b45ba4720c46bc8066bd
         'Rakit\\Validation\\' => 
         array (
             0 => __DIR__ . '/..' . '/rakit/validation/src',
-        ),
-        'MathParser\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/mossadal/math-parser/src/MathParser',
         ),
     );
 

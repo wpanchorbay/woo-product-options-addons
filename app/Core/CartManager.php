@@ -185,19 +185,6 @@ class CartManager extends Base {
 			$schema     = $this->get_group_schema( $group_id );
 			$group_data = $submitted_data[ $group_id ] ?? array();
 
-			$group_files = array();
-			if ( ! empty( $files_data['name'][ $group_id ] ) ) {
-				foreach ( $files_data['name'][ $group_id ] as $field_id => $name ) {
-					$group_files[ $field_id ] = array(
-						'name'     => $name,
-						'type'     => $files_data['type'][ $group_id ][ $field_id ] ?? '',
-						'tmp_name' => $files_data['tmp_name'][ $group_id ][ $field_id ] ?? '',
-						'error'    => $files_data['error'][ $group_id ][ $field_id ] ?? UPLOAD_ERR_NO_FILE,
-						'size'     => $files_data['size'][ $group_id ][ $field_id ] ?? 0,
-					);
-				}
-			}
-
 			foreach ( $schema as $field_schema ) {
 				if ( ! ConditionEvaluator::is_visible( $field_schema, $group_data ) ) {
 					continue;
@@ -210,12 +197,6 @@ class CartManager extends Base {
 
 				$field_id = $field_schema['id'];
 				$value    = $group_data[ $field_id ] ?? null;
-				if ( 'file' === $field_schema['type'] ) {
-					$value = $group_files[ $field_id ] ?? null;
-					if ( $value && UPLOAD_ERR_NO_FILE === $value['error'] ) {
-						$value = null;
-					}
-				}
 
 				$result = $field->validate( $value );
 				if ( is_wp_error( $result ) ) {
@@ -427,19 +408,6 @@ class CartManager extends Base {
 			$schema     = $this->get_group_schema( $group_id );
 			$group_data = $submitted_data[ $group_id ] ?? array();
 
-			$group_files = array();
-			if ( ! empty( $files_data['name'][ $group_id ] ) ) {
-				foreach ( $files_data['name'][ $group_id ] as $field_id => $name ) {
-					$group_files[ $field_id ] = array(
-						'name'     => $name,
-						'type'     => $files_data['type'][ $group_id ][ $field_id ] ?? '',
-						'tmp_name' => $files_data['tmp_name'][ $group_id ][ $field_id ] ?? '',
-						'error'    => $files_data['error'][ $group_id ][ $field_id ] ?? UPLOAD_ERR_NO_FILE,
-						'size'     => $files_data['size'][ $group_id ][ $field_id ] ?? 0,
-					);
-				}
-			}
-
 			foreach ( $schema as $field_schema ) {
 				$field_id = $field_schema['id'] ?? 'unknown_id';
 
@@ -453,17 +421,6 @@ class CartManager extends Base {
 				}
 
 				$value = $group_data[ $field_id ] ?? null;
-
-				// Handle File Uploads securely
-				if ( 'file' === $field_schema['type'] && ! empty( $group_files[ $field_id ] ) && UPLOAD_ERR_NO_FILE !== $group_files[ $field_id ]['error'] ) {
-					$upload = $this->handle_file_upload( $group_files[ $field_id ] );
-					if ( is_wp_error( $upload ) ) {
-						wc_add_notice( $upload->get_error_message(), 'error' );
-						// Throwing exception because validation passed but upload failed
-						throw new \Exception( esc_html( $upload->get_error_message() ) );
-					}
-					$value = $upload; // array with url and file parts
-				}
 
 				// Only save non-empty values
 				if ( null !== $value && '' !== $value ) {
@@ -530,25 +487,6 @@ class CartManager extends Base {
 		}
 
 		return $cart_item_data;
-	}
-
-	/**
-	 * Handle native WordPress attachment upload safely.
-	 *
-	 * @param array $file_array Uploaded file array from $_FILES.
-	 * @return array|\WP_Error
-	 */
-	private function handle_file_upload( $file_array ) {
-		require_once ABSPATH . 'wp-admin/includes/file.php';
-
-		$upload_overrides = array( 'test_form' => false );
-		$movefile         = wp_handle_upload( $file_array, $upload_overrides );
-
-		if ( $movefile && ! isset( $movefile['error'] ) ) {
-			return $movefile;
-		}
-
-		return new \WP_Error( 'upload_error', $movefile['error'] );
 	}
 
 	/**
@@ -689,15 +627,7 @@ class CartManager extends Base {
 	public function get_item_data( $item_data, $cart_item ) {
 		if ( isset( $cart_item[ self::CART_KEY ] ) && ! empty( $cart_item[ self::CART_KEY ]['fields'] ) ) {
 			foreach ( $cart_item[ self::CART_KEY ]['fields'] as $field ) {
-				// Format file upload to show link
 				$display = $field['display_value'];
-				if ( 'file' === $field['field_type'] && is_array( $field['value'] ) && isset( $field['value']['url'] ) ) {
-					$display = sprintf(
-						'<a href="%s" target="_blank" rel="noopener noreferrer">%s</a>',
-						esc_url( $field['value']['url'] ),
-						esc_html( $field['display_value'] )
-					);
-				}
 
 				$item_data[] = array(
 					'name'    => $field['name'],
@@ -734,9 +664,6 @@ class CartManager extends Base {
 			foreach ( $values[ self::CART_KEY ]['fields'] as $field ) {
 
 				$display = $field['display_value'];
-				if ( 'file' === $field['field_type'] && is_array( $field['value'] ) && isset( $field['value']['url'] ) ) {
-					$display = $field['value']['url'];
-				}
 
 				$item->add_meta_data( $field['name'], $display );
 
@@ -862,9 +789,6 @@ class CartManager extends Base {
 		if ( 'per_item_qty' === $mode ) {
 			return floatval( $qty );
 		}
-		if ( 'formula' === $mode && ! empty( $formula ) ) {
-			return $this->evaluate_reduction_formula( $formula, $qty, $value );
-		}
 		return floatval( $qty );
 	}
 
@@ -881,31 +805,6 @@ class CartManager extends Base {
 		$value   = $intent['value'] ?? '';
 
 		return $this->calculate_reduction_amount( $quantity, $mode, $formula, $value );
-	}
-
-	/**
-	 * Safe formula evaluation.
-	 *
-	 * @param string $formula The formula.
-	 * @param int    $qty     The quantity.
-	 * @param mixed  $value   The value.
-	 * @return float
-	 */
-	private function evaluate_reduction_formula( $formula, $qty, $value ) {
-		try {
-			$parser    = new \MathParser\StdMathParser();
-			$ast       = $parser->parse( $formula );
-			$evaluator = new \MathParser\Interpreting\Evaluator(
-				array(
-					'qty' => floatval( $qty ),
-					'val' => is_numeric( $value ) ? floatval( $value ) : 0,
-				)
-			);
-			$result    = $ast->accept( $evaluator );
-			return max( 0, floatval( $result ) );
-		} catch ( \Exception $e ) {
-			return floatval( $qty );
-		}
 	}
 
 	/**

@@ -1,24 +1,15 @@
 <?php return array(
     'root' => array(
         'name' => 'wpanchorbay/smart-product-options-addons',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'ddce6d10faf188a1f88a721c130f2366a56bdcb1',
         'type' => 'wordpress-plugin',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
         'dev' => true,
     ),
     'versions' => array(
-        'mossadal/math-parser' => array(
-            'pretty_version' => 'v1.3.16',
-            'version' => '1.3.16.0',
-            'reference' => '981b03ca603fd281049e092d75245ac029e13dec',
-            'type' => 'library',
-            'install_path' => __DIR__ . '/../mossadal/math-parser',
-            'aliases' => array(),
-            'dev_requirement' => false,
-        ),
         'rakit/validation' => array(
             'pretty_version' => 'v1.4.0',
             'version' => '1.4.0.0',
@@ -29,9 +20,9 @@
             'dev_requirement' => false,
         ),
         'wpanchorbay/smart-product-options-addons' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'ddce6d10faf188a1f88a721c130f2366a56bdcb1',
             'type' => 'wordpress-plugin',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
