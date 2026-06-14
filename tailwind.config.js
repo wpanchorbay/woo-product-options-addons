@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  prefix: "spoa-",
+  prefix: "wpab-wpoa-",
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
