@@ -81,13 +81,13 @@ export const AssignmentRules: React.FC = () => {
       {/* Products */}
       <div>
         <label className="wpab-wpoa-block wpab-wpoa-text-[12px] wpab-wpoa-font-semibold wpab-wpoa-mb-0.5">
-          {__("Products", "woo-product-options-addons")}
+          {__("Products", "product-options-addons-woo")}
         </label>
         <ClassicMultiSelect
           value={getIds("product")}
           onChange={(ids) => setIds("product", ids as number[])}
-          endpoint="/woo-product-options-addons/v1/resources/products"
-          placeholder={__("Search products…", "woo-product-options-addons")}
+          endpoint="/product-options-addons-woo/v1/resources/products"
+          placeholder={__("Search products…", "product-options-addons-woo")}
           renderOption={renderProductOption}
           size="regular"
         />
@@ -99,18 +99,18 @@ export const AssignmentRules: React.FC = () => {
 
   return (
     <ClassicSettingsTable
-      title={__("Assignment Rules", "woo-product-options-addons")}
+      title={__("Assignment Rules", "product-options-addons-woo")}
       description={__(
         "Control where this option group appears on your store.",
-        "woo-product-options-addons",
+        "product-options-addons-woo",
       )}
       fields={[
         // ── Section 1: Visibility ──
         {
-          label: __("Visibility", "woo-product-options-addons"),
+          label: __("Visibility", "product-options-addons-woo"),
           tooltip: __(
             "The broad scope of where this option group is active.",
-            "woo-product-options-addons",
+            "product-options-addons-woo",
           ),
           render: () => (
             <div className="wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-1.5">
@@ -121,7 +121,7 @@ export const AssignmentRules: React.FC = () => {
                   checked={isGlobal}
                   onChange={() => setGlobal()}
                 />
-                <span>{__("Apply to all products", "woo-product-options-addons")}</span>
+                <span>{__("Apply to all products", "product-options-addons-woo")}</span>
               </label>
               <label className="wpab-wpoa-flex wpab-wpoa-items-center wpab-wpoa-gap-2 wpab-wpoa-cursor-pointer">
                 <input
@@ -131,7 +131,7 @@ export const AssignmentRules: React.FC = () => {
                   onChange={() => setTargeted()}
                 />
                 <span>
-                  {__("Apply to specific products", "woo-product-options-addons")}
+                  {__("Apply to specific products", "product-options-addons-woo")}
                 </span>
               </label>
             </div>
@@ -142,10 +142,10 @@ export const AssignmentRules: React.FC = () => {
         ...(!isGlobal
           ? [
               {
-                label: __("Reach", "woo-product-options-addons"),
+                label: __("Reach", "product-options-addons-woo"),
                 tooltip: __(
                   "Specific targets for displaying this group.",
-                  "woo-product-options-addons",
+                  "product-options-addons-woo",
                 ),
                 render: () => (
                   <div>

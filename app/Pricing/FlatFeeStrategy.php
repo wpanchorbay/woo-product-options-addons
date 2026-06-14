@@ -34,7 +34,7 @@ class FlatFeeStrategy implements PricingStrategy {
 	 * @return float The fixed fee.
 	 */
 	public function calculate( float $base_price, float $amount, $value, int $quantity, array $config = array() ) {
-		woo_product_options_addons_log( "FlatFeeStrategy: Configured flat fee amount: {$amount}", 'DEBUG' );
+		product_options_addons_woo_log( "FlatFeeStrategy: Configured flat fee amount: {$amount}", 'DEBUG' );
 		return $amount;
 	}
 }

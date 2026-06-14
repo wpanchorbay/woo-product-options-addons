@@ -72,7 +72,7 @@ export const InventoryPicker: React.FC<InventoryPickerProps> = ({
     },
   ) => {
     const isTmp = String(opt.value).startsWith("tmp_") || opt.is_new;
-    const idLabel = isTmp ? __("[New]", "woo-product-options-addons") : `#${opt.value}`;
+    const idLabel = isTmp ? __("[New]", "product-options-addons-woo") : `#${opt.value}`;
 
     const isOutOfStock =
       opt.stock_count !== undefined &&
@@ -81,7 +81,7 @@ export const InventoryPicker: React.FC<InventoryPickerProps> = ({
 
     const stockLabel =
       opt.stock_count !== undefined
-        ? ` • ${formatStock(opt.stock_count)} ${__("in stock", "woo-product-options-addons")}`
+        ? ` • ${formatStock(opt.stock_count)} ${__("in stock", "product-options-addons-woo")}`
         : "";
 
     return (
@@ -102,7 +102,7 @@ export const InventoryPicker: React.FC<InventoryPickerProps> = ({
         </div>
         {isOutOfStock && (
           <span className="wpab-wpoa-bg-red-50 wpab-wpoa-text-red-600 wpab-wpoa-text-[9px] wpab-wpoa-font-bold wpab-wpoa-px-1.5 wpab-wpoa-py-0.5 wpab-wpoa-rounded-full wpab-wpoa-border wpab-wpoa-border-red-100">
-            {__("OUT OF STOCK", "woo-product-options-addons")}
+            {__("OUT OF STOCK", "product-options-addons-woo")}
           </span>
         )}
       </div>
@@ -117,10 +117,10 @@ export const InventoryPicker: React.FC<InventoryPickerProps> = ({
         isError={isError}
         onChange={(val) => onChange(val)}
         options={localOptions}
-        endpoint="woo-product-options-addons/v1/inventory"
+        endpoint="product-options-addons-woo/v1/inventory"
         enableSearch
         allowClear
-        placeholder={__("Select inventory pool…", "woo-product-options-addons")}
+        placeholder={__("Select inventory pool…", "product-options-addons-woo")}
         renderOption={renderInventoryOption as any}
         dropdownFooter={
           <div
@@ -128,7 +128,7 @@ export const InventoryPicker: React.FC<InventoryPickerProps> = ({
             onClick={() => setIsCreating(true)}
           >
             <Plus size={14} />
-            {__("Create New Pool", "woo-product-options-addons")}
+            {__("Create New Pool", "product-options-addons-woo")}
           </div>
         }
       />
@@ -143,7 +143,7 @@ export const InventoryPicker: React.FC<InventoryPickerProps> = ({
             onClick={(e) => e.stopPropagation()}
           >
             <h4 className="wpab-wpoa-m-0 wpab-wpoa-text-sm wpab-wpoa-font-semibold">
-              {__("New Inventory Pool", "woo-product-options-addons")}
+              {__("New Inventory Pool", "product-options-addons-woo")}
             </h4>
 
             <div>
@@ -151,14 +151,14 @@ export const InventoryPicker: React.FC<InventoryPickerProps> = ({
                 htmlFor="ob-new-inventory-name"
                 className="wpab-wpoa-text-xs wpab-wpoa-font-medium wpab-wpoa-mb-1 wpab-wpoa-block"
               >
-                {__("Pool Name", "woo-product-options-addons")}
+                {__("Pool Name", "product-options-addons-woo")}
               </label>
               <ClassicInput
                 id="ob-new-inventory-name"
                 size="regular"
                 value={newName}
                 onChange={(e) => setNewName(e.target.value)}
-                placeholder={__("e.g. Premium Material", "woo-product-options-addons")}
+                placeholder={__("e.g. Premium Material", "product-options-addons-woo")}
               />
             </div>
 
@@ -168,7 +168,7 @@ export const InventoryPicker: React.FC<InventoryPickerProps> = ({
                   htmlFor="ob-new-inventory-stock"
                   className="wpab-wpoa-text-xs wpab-wpoa-font-medium wpab-wpoa-mb-1 wpab-wpoa-block"
                 >
-                  {__("Initial Stock", "woo-product-options-addons")}
+                  {__("Initial Stock", "product-options-addons-woo")}
                 </label>
                 <ClassicInput
                   id="ob-new-inventory-stock"
@@ -181,7 +181,7 @@ export const InventoryPicker: React.FC<InventoryPickerProps> = ({
               </div>
               <div className="wpab-wpoa-flex-1 wpab-wpoa-pt-5">
                 <ClassicCheckbox
-                  label={__("Backorders?", "woo-product-options-addons")}
+                  label={__("Backorders?", "product-options-addons-woo")}
                   checked={newBackorders}
                   onChange={setNewBackorders}
                 />
@@ -193,14 +193,14 @@ export const InventoryPicker: React.FC<InventoryPickerProps> = ({
                 variant="secondary"
                 onClick={() => setIsCreating(false)}
               >
-                {__("Cancel", "woo-product-options-addons")}
+                {__("Cancel", "product-options-addons-woo")}
               </ClassicButton>
               <ClassicButton
                 variant="primary"
                 onClick={handleCreate}
                 disabled={!newName.trim()}
               >
-                {__("Add & Select", "woo-product-options-addons")}
+                {__("Add & Select", "product-options-addons-woo")}
               </ClassicButton>
             </div>
           </div>

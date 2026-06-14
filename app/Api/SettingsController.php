@@ -97,7 +97,7 @@ class SettingsController extends ApiController {
 	 * @return WP_REST_Response
 	 */
 	public function get_settings( $request ) {
-		woo_product_options_addons_log( 'SettingsController: Fetching plugin settings.', 'DEBUG' );
+		product_options_addons_woo_log( 'SettingsController: Fetching plugin settings.', 'DEBUG' );
 		$settings = Settings::get_instance()->get_settings();
 
 		return new WP_REST_Response(
@@ -117,7 +117,7 @@ class SettingsController extends ApiController {
 	 * @return WP_REST_Response
 	 */
 	public function update_settings( $request ) {
-		woo_product_options_addons_log( 'SettingsController: Updating plugin settings.', 'INFO' );
+		product_options_addons_woo_log( 'SettingsController: Updating plugin settings.', 'INFO' );
 
 		$validated = $this->validate(
 			$request,
@@ -144,7 +144,7 @@ class SettingsController extends ApiController {
 		return new WP_REST_Response(
 			array(
 				'success' => true,
-				'message' => __( 'Settings updated successfully.', 'woo-product-options-addons' ),
+				'message' => __( 'Settings updated successfully.', 'product-options-addons-woo' ),
 				'data'    => $settings_instance->get_settings(),
 			),
 			200

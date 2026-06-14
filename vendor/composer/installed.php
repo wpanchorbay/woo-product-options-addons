@@ -1,6 +1,6 @@
 <?php return array(
     'root' => array(
-        'name' => 'wpanchorbay/smart-product-options-addons',
+        'name' => 'wpanchorbay/woo-product-options-addons',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
         'reference' => 'ddce6d10faf188a1f88a721c130f2366a56bdcb1',
@@ -19,7 +19,7 @@
             'aliases' => array(),
             'dev_requirement' => false,
         ),
-        'wpanchorbay/smart-product-options-addons' => array(
+        'wpanchorbay/woo-product-options-addons' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
             'reference' => 'ddce6d10faf188a1f88a721c130f2366a56bdcb1',

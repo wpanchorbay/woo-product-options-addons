@@ -1,6 +1,6 @@
 {
     "sut": {
-        "slug": "woo-product-options-addons",
+        "slug": "product-options-addons-woo",
         "type": "plugin",
         "source": {
             "type": "local",

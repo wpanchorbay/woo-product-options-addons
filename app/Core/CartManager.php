@@ -41,7 +41,7 @@ class CartManager extends Base {
 	/**
 	 * Unique key used to store data in the WC Cart item.
 	 */
-	const CART_KEY = 'woo_product_options_addons_addons';
+	const CART_KEY = 'product_options_addons_woo_addons';
 
 	/**
 	 * Flag to prevent infinite loops in totals calculation.
@@ -97,7 +97,7 @@ class CartManager extends Base {
 	 */
 	private function get_groups_for_product( int $product_id ) {
 		$cache_key = 'ob_assignments_product_' . $product_id;
-		$cached    = wp_cache_get( $cache_key, 'woo-product-options-addons' );
+		$cached    = wp_cache_get( $cache_key, 'product-options-addons-woo' );
 
 		if ( false !== $cached ) {
 			return $cached;
@@ -112,7 +112,7 @@ class CartManager extends Base {
 			$tag_ids
 		);
 
-		wp_cache_set( $cache_key, $group_ids, 'woo-product-options-addons', 300 );
+		wp_cache_set( $cache_key, $group_ids, 'product-options-addons-woo', 300 );
 
 		return $group_ids;
 	}
@@ -126,7 +126,7 @@ class CartManager extends Base {
 	 */
 	private function get_group_schema( int $group_id ) {
 		$cache_key = 'ob_schema_group_' . $group_id;
-		$cached    = wp_cache_get( $cache_key, 'woo-product-options-addons' );
+		$cached    = wp_cache_get( $cache_key, 'product-options-addons-woo' );
 
 		if ( false !== $cached ) {
 			return $cached;
@@ -139,7 +139,7 @@ class CartManager extends Base {
 			$schema = array();
 		}
 
-		wp_cache_set( $cache_key, $schema, 'woo-product-options-addons', 600 );
+		wp_cache_set( $cache_key, $schema, 'product-options-addons-woo', 600 );
 
 		return $schema;
 	}
@@ -164,9 +164,9 @@ class CartManager extends Base {
 		}
 
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-		$submitted_data = isset( $_REQUEST['woo_product_options_addons_addons'] ) ? wp_unslash( (array) $_REQUEST['woo_product_options_addons_addons'] ) : array();
+		$submitted_data = isset( $_REQUEST['product_options_addons_woo_addons'] ) ? wp_unslash( (array) $_REQUEST['product_options_addons_woo_addons'] ) : array();
 		// phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-		$files_data = isset( $_FILES['woo_product_options_addons_addons'] ) ? (array) $_FILES['woo_product_options_addons_addons'] : array();
+		$files_data = isset( $_FILES['product_options_addons_woo_addons'] ) ? (array) $_FILES['product_options_addons_woo_addons'] : array();
 
 		// 1. Stock Validation
 		$intents = $this->collect_intents_from_request( $product_id, $quantity, $submitted_data );
@@ -175,7 +175,7 @@ class CartManager extends Base {
 			if ( ! $this->check_stock_availability( $inv_id, $amount ) ) {
 				$inv = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->get_item( $inv_id );
 				/* translators: 1: inventory pool name, 2: remaining stock amount */
-				wc_add_notice( sprintf( __( 'Insufficient stock for "%1$s". Only %2$s remaining.', 'woo-product-options-addons' ), $inv['name'], floatval( $inv['stock_count'] - $this->get_cart_reserved_stock( $inv_id ) ) ), 'error' );
+				wc_add_notice( sprintf( __( 'Insufficient stock for "%1$s". Only %2$s remaining.', 'product-options-addons-woo' ), $inv['name'], floatval( $inv['stock_count'] - $this->get_cart_reserved_stock( $inv_id ) ) ), 'error' );
 				return false;
 			}
 		}
@@ -255,7 +255,7 @@ class CartManager extends Base {
 
 			if ( ! $allow_backorders && $available < $amount ) {
 				/* translators: %s: inventory pool name */
-				wc_add_notice( sprintf( __( 'Cannot update quantity for "%s". Insufficient stock.', 'woo-product-options-addons' ), $inv['name'] ), 'error' );
+				wc_add_notice( sprintf( __( 'Cannot update quantity for "%s". Insufficient stock.', 'product-options-addons-woo' ), $inv['name'] ), 'error' );
 				return false;
 			}
 		}
@@ -317,7 +317,7 @@ class CartManager extends Base {
 					$is_reverting = false;
 
 					/* translators: %s: inventory pool name */
-					$message = sprintf( __( 'Cannot update quantity for "%s". Insufficient stock.', 'woo-product-options-addons' ), $inv['name'] );
+					$message = sprintf( __( 'Cannot update quantity for "%s". Insufficient stock.', 'product-options-addons-woo' ), $inv['name'] );
 					wc_add_notice( $message, 'error' );
 
 					// For Store API, we might need to throw an exception to stop execution and show error
@@ -345,7 +345,7 @@ class CartManager extends Base {
 	 * @param \WP_Error $errors The checkout errors.
 	 */
 	public function validate_checkout_stock( $data, $errors ) {
-		woo_product_options_addons_log( 'CartManager: Running checkout stock validation.', 'DEBUG' );
+		product_options_addons_woo_log( 'CartManager: Running checkout stock validation.', 'DEBUG' );
 		$cart   = WC()->cart->get_cart();
 		$totals = array();
 
@@ -367,9 +367,9 @@ class CartManager extends Base {
 		foreach ( $totals as $inv_id => $amount ) {
 			$inv = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->get_item( $inv_id );
 			if ( $inv && ! $inv['allow_backorders'] && $inv['stock_count'] < $amount ) {
-				woo_product_options_addons_log( sprintf( 'CartManager: ERROR: Out of stock validation failure for inventory "%s" (ID %d). Available: %f, Requested: %f', $inv['name'], $inv_id, $inv['stock_count'], $amount ), 'ERROR' );
+				product_options_addons_woo_log( sprintf( 'CartManager: ERROR: Out of stock validation failure for inventory "%s" (ID %d). Available: %f, Requested: %f', $inv['name'], $inv_id, $inv['stock_count'], $amount ), 'ERROR' );
 				/* translators: %s: inventory pool name */
-				$errors->add( 'out_of_stock', sprintf( __( 'Insufficient stock for "%s". Please reduce quantity.', 'woo-product-options-addons' ), $inv['name'] ) );
+				$errors->add( 'out_of_stock', sprintf( __( 'Insufficient stock for "%s". Please reduce quantity.', 'product-options-addons-woo' ), $inv['name'] ) );
 			}
 		}
 	}
@@ -396,8 +396,8 @@ class CartManager extends Base {
 		}
 
 		// phpcs:disable WordPress.Security.NonceVerification.Recommended, WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized, WordPress.Security.ValidatedSanitizedInput.MissingUnslash
-		$submitted_data = isset( $_REQUEST['woo_product_options_addons_addons'] ) ? wp_unslash( (array) $_REQUEST['woo_product_options_addons_addons'] ) : array();
-		$files_data     = isset( $_FILES['woo_product_options_addons_addons'] ) ? (array) $_FILES['woo_product_options_addons_addons'] : array();
+		$submitted_data = isset( $_REQUEST['product_options_addons_woo_addons'] ) ? wp_unslash( (array) $_REQUEST['product_options_addons_woo_addons'] ) : array();
+		$files_data     = isset( $_FILES['product_options_addons_woo_addons'] ) ? (array) $_FILES['product_options_addons_woo_addons'] : array();
 		// phpcs:enable
 
 		$session_data          = array();
@@ -472,7 +472,7 @@ class CartManager extends Base {
 		if ( ! empty( $session_data ) ) {
 			// Save to cart item data
 			$cart_item_data[ self::CART_KEY ] = apply_filters(
-				'woo_product_options_addons_cart_item_data',
+				'product_options_addons_woo_cart_item_data',
 				array(
 					'fields' => $session_data,
 				),
@@ -508,7 +508,7 @@ class CartManager extends Base {
 		self::$already_run_calculate_totals = true;
 
 		if ( wp_doing_ajax() && ! did_action( 'woocommerce_calculate_totals' ) ) {
-			$_add_to_cart = apply_filters( 'woo_product_options_addons_ajax_calculate_totals', true );
+			$_add_to_cart = apply_filters( 'product_options_addons_woo_ajax_calculate_totals', true );
 		}
 
 		// Ensure we don't recurse if our own plugin triggers price checks causing an infinite loop
@@ -657,7 +657,7 @@ class CartManager extends Base {
 	 */
 	public function add_order_item_meta( $item, $cart_item_key, $values, $order ) {
 		if ( isset( $values[ self::CART_KEY ] ) && ! empty( $values[ self::CART_KEY ]['fields'] ) ) {
-			woo_product_options_addons_log( sprintf( 'CartManager: Adding OptionBay - Product Options and Addons metadata to order line item: %s', $item->get_name() ), 'DEBUG' );
+			product_options_addons_woo_log( sprintf( 'CartManager: Adding OptionBay - Product Options and Addons metadata to order line item: %s', $item->get_name() ), 'DEBUG' );
 			$all_intents = array();
 			foreach ( $values[ self::CART_KEY ]['fields'] as $field ) {
 
@@ -672,7 +672,7 @@ class CartManager extends Base {
 
 			if ( ! empty( $all_intents ) ) {
 				$item->add_meta_data( '_ob_stock_intents', $all_intents );
-				woo_product_options_addons_log( sprintf( 'CartManager: Added %d stock reduction intents to order line item.', count( $all_intents ) ), 'DEBUG' );
+				product_options_addons_woo_log( sprintf( 'CartManager: Added %d stock reduction intents to order line item.', count( $all_intents ) ), 'DEBUG' );
 			}
 		}
 	}
@@ -685,7 +685,7 @@ class CartManager extends Base {
 	 * @throws \Exception When stock is insufficient.
 	 */
 	public function reduce_inventory_stock( $order ) {
-		woo_product_options_addons_log( sprintf( 'CartManager: Reducing inventory stock for Order #%d', $order->get_id() ), 'INFO' );
+		product_options_addons_woo_log( sprintf( 'CartManager: Reducing inventory stock for Order #%d', $order->get_id() ), 'INFO' );
 		foreach ( $order->get_items() as $item ) {
 			$intents = $item->get_meta( '_ob_stock_intents', true );
 
@@ -694,32 +694,32 @@ class CartManager extends Base {
 			}
 
 			if ( ! is_array( $intents ) ) {
-				woo_product_options_addons_log( sprintf( 'CartManager: Intents is not an array for item %s.', $item->get_name() ), 'WARNING' );
+				product_options_addons_woo_log( sprintf( 'CartManager: Intents is not an array for item %s.', $item->get_name() ), 'WARNING' );
 				continue;
 			}
 
 			$quantity = $item->get_quantity();
-			woo_product_options_addons_log( sprintf( 'CartManager: Checking Item "%s" with quantity %f', $item->get_name(), $quantity ), 'DEBUG' );
+			product_options_addons_woo_log( sprintf( 'CartManager: Checking Item "%s" with quantity %f', $item->get_name(), $quantity ), 'DEBUG' );
 
 			foreach ( $intents as $intent ) {
 				$inv_id          = $intent['id'] ?? 0;
 				$total_reduction = $this->calculate_total_intent_reduction( $intent, $quantity );
-				woo_product_options_addons_log( sprintf( 'CartManager: Dec stock intent for inventory ID %d by amount %f', $inv_id, $total_reduction ), 'DEBUG' );
+				product_options_addons_woo_log( sprintf( 'CartManager: Dec stock intent for inventory ID %d by amount %f', $inv_id, $total_reduction ), 'DEBUG' );
 
 				$success = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->decrement_stock( $inv_id, $total_reduction );
 
 				if ( ! $success ) {
-					woo_product_options_addons_log( sprintf( 'CartManager: ERROR: Insufficient stock for inventory ID %d. Cannot reduce by %f.', $inv_id, $total_reduction ), 'ERROR' );
+					product_options_addons_woo_log( sprintf( 'CartManager: ERROR: Insufficient stock for inventory ID %d. Cannot reduce by %f.', $inv_id, $total_reduction ), 'ERROR' );
 					/* translators: %1$d: inventory ID */
-					$message = sprintf( __( 'Insufficient stock for an option in your cart (Inventory #%1$d). Please adjust your order.', 'woo-product-options-addons' ), $inv_id );
+					$message = sprintf( __( 'Insufficient stock for an option in your cart (Inventory #%1$d). Please adjust your order.', 'product-options-addons-woo' ), $inv_id );
 
 					/* translators: 1: inventory ID, 2: reduction amount */
-					$order->add_order_note( sprintf( __( 'OptionBay - Product Options and Addons: Failed to reduce stock for inventory #%1$d (Amount: %2$s). Order halted.', 'woo-product-options-addons' ), $inv_id, $total_reduction ) );
+					$order->add_order_note( sprintf( __( 'OptionBay - Product Options and Addons: Failed to reduce stock for inventory #%1$d (Amount: %2$s). Order halted.', 'product-options-addons-woo' ), $inv_id, $total_reduction ) );
 
 					// phpcs:ignore WordPress.Security.EscapeOutput.ExceptionNotEscaped
 					throw new \Exception( $message );
 				}
-				woo_product_options_addons_log( sprintf( 'CartManager: SUCCESS: Decremented inventory ID %d by amount %f', $inv_id, $total_reduction ), 'INFO' );
+				product_options_addons_woo_log( sprintf( 'CartManager: SUCCESS: Decremented inventory ID %d by amount %f', $inv_id, $total_reduction ), 'INFO' );
 			}
 		}
 	}
@@ -740,7 +740,7 @@ class CartManager extends Base {
 			return;
 		}
 
-		woo_product_options_addons_log( sprintf( 'CartManager: Restoring inventory stock for Order #%d', $order->get_id() ), 'INFO' );
+		product_options_addons_woo_log( sprintf( 'CartManager: Restoring inventory stock for Order #%d', $order->get_id() ), 'INFO' );
 
 		foreach ( $order->get_items() as $item ) {
 			$intents = $item->get_meta( '_ob_stock_intents', true );
@@ -749,17 +749,17 @@ class CartManager extends Base {
 			}
 
 			$quantity = $item->get_quantity();
-			woo_product_options_addons_log( sprintf( 'CartManager: Restoring stock for Item "%s" with quantity %f', $item->get_name(), $quantity ), 'DEBUG' );
+			product_options_addons_woo_log( sprintf( 'CartManager: Restoring stock for Item "%s" with quantity %f', $item->get_name(), $quantity ), 'DEBUG' );
 
 			foreach ( $intents as $intent ) {
 				$total_restoration = $this->calculate_total_intent_reduction( $intent, $quantity );
-				woo_product_options_addons_log( sprintf( 'CartManager: Restoring inventory ID %d by amount %f', $intent['id'], $total_restoration ), 'DEBUG' );
+				product_options_addons_woo_log( sprintf( 'CartManager: Restoring inventory ID %d by amount %f', $intent['id'], $total_restoration ), 'DEBUG' );
 
 				$success = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->increment_stock( $intent['id'], $total_restoration );
 				if ( $success ) {
-					woo_product_options_addons_log( sprintf( 'CartManager: SUCCESS: Incremented inventory ID %d by amount %f', $intent['id'], $total_restoration ), 'INFO' );
+					product_options_addons_woo_log( sprintf( 'CartManager: SUCCESS: Incremented inventory ID %d by amount %f', $intent['id'], $total_restoration ), 'INFO' );
 				} else {
-					woo_product_options_addons_log( sprintf( 'CartManager: ERROR: Failed to increment inventory ID %d by amount %f', $intent['id'], $total_restoration ), 'ERROR' );
+					product_options_addons_woo_log( sprintf( 'CartManager: ERROR: Failed to increment inventory ID %d by amount %f', $intent['id'], $total_restoration ), 'ERROR' );
 				}
 			}
 		}

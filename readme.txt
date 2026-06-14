@@ -2,7 +2,7 @@
 Contributors: optionbay
 Tags: woocommerce, product options, addons, product fields, extra product options, conditional logic
 Requires at least: 6.0
-Tested up to: 6.5
+Tested up to: 7.0
 Requires PHP: 7.4
 WC requires at least: 8.0
 WC tested up to: 8.7
@@ -40,7 +40,7 @@ Get started instantly with 6 highly practical, pre-built templates covering real
 
 == Installation ==
 
-1. Upload the plugin files to the `/wp-content/plugins/woo-product-options-addons` directory, or install the plugin directly through the WordPress plugins screen.
+1. Upload the plugin files to the `/wp-content/plugins/product-options-addons-woo` directory, or install the plugin directly through the WordPress plugins screen.
 2. Activate the plugin through the 'Plugins' screen in WordPress.
 3. Navigate to **Products > Options** in your WordPress dashboard to start building.
 

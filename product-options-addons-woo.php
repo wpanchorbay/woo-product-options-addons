@@ -3,17 +3,17 @@
  * Plugin Name:       OptionBay - Product Options and Addons
  * Plugin URI:        https://wpanchorbay.com
  * Description:       Add custom product options, add-ons, and extra fields to WooCommerce products with advanced pricing, inventory, and conditional logic.
- * Requires at least: 6.8
- * Requires PHP:      7.0
+ * Requires at least: 6.0
+ * Requires PHP:      7.4
  * Requires Plugins:  woocommerce
- * WC requires at least: 6.1
- * Version:           1.0.0
- * Stable tag:        1.0.0
+ * WC requires at least: 8.0
+ * Version:           1.1.0
+ * Stable tag:        1.1.0
  * Author:            WPAnchorBay
  * Author URI:        https://wpanchorbay.com
  * License:           GPLv2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       woo-product-options-addons
+ * Text Domain:       product-options-addons-woo
  * Domain Path:       /languages
  *
  * @package SmartProductOptionsAddons
@@ -24,40 +24,40 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'WOO_PRODUCT_OPTIONS_ADDONS_PATH', plugin_dir_path( __FILE__ ) );
-define( 'WOO_PRODUCT_OPTIONS_ADDONS_DIR', plugin_dir_path( __FILE__ ) );
-define( 'WOO_PRODUCT_OPTIONS_ADDONS_URL', plugin_dir_url( __FILE__ ) );
-define( 'WOO_PRODUCT_OPTIONS_ADDONS_VERSION', '1.0.0' );
-define( 'WOO_PRODUCT_OPTIONS_ADDONS_PLUGIN_NAME', 'woo-product-options-addons' );
-define( 'WOO_PRODUCT_OPTIONS_ADDONS_TEXT_DOMAIN', 'woo-product-options-addons' );
-define( 'WOO_PRODUCT_OPTIONS_ADDONS_OPTION_NAME', 'woo-product-options-addons' );
-define( 'WOO_PRODUCT_OPTIONS_ADDONS_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
-define( 'WOO_PRODUCT_OPTIONS_ADDONS_DEV_MODE', true );
+define( 'PRODUCT_OPTIONS_ADDONS_WOO_PATH', plugin_dir_path( __FILE__ ) );
+define( 'PRODUCT_OPTIONS_ADDONS_WOO_DIR', plugin_dir_path( __FILE__ ) );
+define( 'PRODUCT_OPTIONS_ADDONS_WOO_URL', plugin_dir_url( __FILE__ ) );
+define( 'PRODUCT_OPTIONS_ADDONS_WOO_VERSION', '1.1.0' );
+define( 'PRODUCT_OPTIONS_ADDONS_WOO_PLUGIN_NAME', 'product-options-addons-woo' );
+define( 'PRODUCT_OPTIONS_ADDONS_WOO_TEXT_DOMAIN', 'product-options-addons-woo' );
+define( 'PRODUCT_OPTIONS_ADDONS_WOO_OPTION_NAME', 'product-options-addons-woo' );
+define( 'PRODUCT_OPTIONS_ADDONS_WOO_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
+define( 'PRODUCT_OPTIONS_ADDONS_WOO_DEV_MODE', true );
 
 /**
  * Initialize Composer Autoloader.
  */
-if ( file_exists( WOO_PRODUCT_OPTIONS_ADDONS_PATH . 'vendor/autoload.php' ) ) {
-	require_once WOO_PRODUCT_OPTIONS_ADDONS_PATH . 'vendor/autoload.php';
+if ( file_exists( PRODUCT_OPTIONS_ADDONS_WOO_PATH . 'vendor/autoload.php' ) ) {
+	require_once PRODUCT_OPTIONS_ADDONS_WOO_PATH . 'vendor/autoload.php';
 }
 
-require_once WOO_PRODUCT_OPTIONS_ADDONS_PATH . 'app/functions.php';
+require_once PRODUCT_OPTIONS_ADDONS_WOO_PATH . 'app/functions.php';
 
-register_activation_hook( __FILE__, 'woo_product_options_addons_activate' );
-register_deactivation_hook( __FILE__, 'woo_product_options_addons_deactivate' );
-if ( ! function_exists( 'woo_product_options_addons_run' ) ) {
+register_activation_hook( __FILE__, 'product_options_addons_woo_activate' );
+register_deactivation_hook( __FILE__, 'product_options_addons_woo_deactivate' );
+if ( ! function_exists( 'product_options_addons_woo_run' ) ) {
 	/**
 	 * Begins execution of the plugin.
 	 *
 	 * @since    1.0.0
 	 * @return void
 	 */
-	function woo_product_options_addons_run() {
+	function product_options_addons_woo_run() {
 		$plugin = \SmartProductOptionsAddons\Core\Plugin::get_instance();
 		add_action( 'plugins_loaded', array( $plugin, 'run' ) );
 	}
 }
-woo_product_options_addons_run();
+product_options_addons_woo_run();
 
 /**
  * Declare compatibility with WooCommerce High-Performance Order Storage (HPOS).
@@ -79,7 +79,7 @@ add_action(
  * @since 1.0.0
  * @return void
  */
-function woo_product_options_addons_activate() {
+function product_options_addons_woo_activate() {
 	require_once ABSPATH . 'wp-admin/includes/upgrade.php';
 	\SmartProductOptionsAddons\Core\Activator::activate();
 }
@@ -90,6 +90,6 @@ function woo_product_options_addons_activate() {
  * @since 1.0.0
  * @return void
  */
-function woo_product_options_addons_deactivate() {
+function product_options_addons_woo_deactivate() {
 	\SmartProductOptionsAddons\Core\Deactivator::deactivate();
 }

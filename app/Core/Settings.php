@@ -128,14 +128,14 @@ class Settings {
 	 * @return void
 	 */
 	public function load_settings() {
-		$options = get_option( WOO_PRODUCT_OPTIONS_ADDONS_OPTION_NAME );
+		$options = get_option( PRODUCT_OPTIONS_ADDONS_WOO_OPTION_NAME );
 		if ( ! is_array( $options ) ) {
 			$options = array();
 		}
 		$default_settings = $this->get_default_settings();
 		$settings         = array_merge( $default_settings, $options );
 		$this->settings   = $settings;
-		woo_product_options_addons_log( 'Settings: Plugin settings loaded.', 'DEBUG' );
+		product_options_addons_woo_log( 'Settings: Plugin settings loaded.', 'DEBUG' );
 	}
 
 	/**
@@ -148,7 +148,7 @@ class Settings {
 	 * @return void
 	 */
 	public function update_settings( $key_or_data, $val = '' ) {
-		woo_product_options_addons_log( 'Settings: Updating plugin settings option.', 'INFO' );
+		product_options_addons_woo_log( 'Settings: Updating plugin settings option.', 'INFO' );
 		if ( is_string( $key_or_data ) ) {
 			$options                 = $this->get_settings();
 			$options[ $key_or_data ] = $val;
@@ -156,7 +156,7 @@ class Settings {
 			$options = $key_or_data;
 		}
 
-		update_option( WOO_PRODUCT_OPTIONS_ADDONS_OPTION_NAME, $options );
+		update_option( PRODUCT_OPTIONS_ADDONS_WOO_OPTION_NAME, $options );
 		$this->load_settings();
 	}
 
@@ -171,8 +171,8 @@ class Settings {
 		$defaults = $this->get_default_settings();
 
 		register_setting(
-			'woo_product_options_addons_settings_group',
-			WOO_PRODUCT_OPTIONS_ADDONS_OPTION_NAME,
+			'product_options_addons_woo_settings_group',
+			PRODUCT_OPTIONS_ADDONS_WOO_OPTION_NAME,
 			array(
 				'type'              => 'object',
 				'default'           => $defaults,
@@ -196,12 +196,12 @@ class Settings {
 		 * Filters the settings schema for the plugin.
 		 *
 		 * @since 1.0.0
-		 * @hook woo_product_options_addons_options_properties
+		 * @hook product_options_addons_woo_options_properties
 		 * @param array $setting_properties The associative array of setting properties.
 		 * @return array The filtered array of setting properties.
 		 */
 		$setting_properties = apply_filters(
-			'woo_product_options_addons_options_properties',
+			'product_options_addons_woo_options_properties',
 			array(
 				'global_optionsOrientation'     => array(
 					'type'    => 'string',
@@ -264,7 +264,7 @@ class Settings {
 		$schema           = $this->get_settings_schema();
 		$properties       = $schema['properties'] ?? array();
 		$default_options  = $this->get_default_settings();
-		$sanitized_output = get_option( WOO_PRODUCT_OPTIONS_ADDONS_OPTION_NAME, $default_options );
+		$sanitized_output = get_option( PRODUCT_OPTIONS_ADDONS_WOO_OPTION_NAME, $default_options );
 
 		foreach ( $properties as $key => $details ) {
 			if ( ! isset( $input[ $key ] ) ) {

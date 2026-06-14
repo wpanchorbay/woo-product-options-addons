@@ -29,29 +29,29 @@ export const FIELD_TYPE_ICONS: Record< string, LucideIcon > = {
 };
 
 export const FIELD_TYPES = [
-	{ value: 'text', label: __('Text Input', 'woo-product-options-addons') },
-	{ value: 'textarea', label: __('Textarea', 'woo-product-options-addons') },
-	{ value: 'select', label: __('Dropdown', 'woo-product-options-addons') },
-	{ value: 'checkbox', label: __('Checkboxes', 'woo-product-options-addons') },
-	{ value: 'radio', label: __('Radio Buttons', 'woo-product-options-addons') },
-	{ value: 'single_checkbox', label: __('Checkbox', 'woo-product-options-addons') },
-	{ value: 'number', label: __('Number', 'woo-product-options-addons') },
-	{ value: 'email', label: __('Email', 'woo-product-options-addons') },
-	{ value: 'color_swatch', label: __('Color Swatch', 'woo-product-options-addons') },
-	{ value: 'image_swatch', label: __('Image Swatch', 'woo-product-options-addons') },
-	{ value: 'static_content', label: __('Static Content', 'woo-product-options-addons') },
+	{ value: 'text', label: __('Text Input', 'product-options-addons-woo') },
+	{ value: 'textarea', label: __('Textarea', 'product-options-addons-woo') },
+	{ value: 'select', label: __('Dropdown', 'product-options-addons-woo') },
+	{ value: 'checkbox', label: __('Checkboxes', 'product-options-addons-woo') },
+	{ value: 'radio', label: __('Radio Buttons', 'product-options-addons-woo') },
+	{ value: 'single_checkbox', label: __('Checkbox', 'product-options-addons-woo') },
+	{ value: 'number', label: __('Number', 'product-options-addons-woo') },
+	{ value: 'email', label: __('Email', 'product-options-addons-woo') },
+	{ value: 'color_swatch', label: __('Color Swatch', 'product-options-addons-woo') },
+	{ value: 'image_swatch', label: __('Image Swatch', 'product-options-addons-woo') },
+	{ value: 'static_content', label: __('Static Content', 'product-options-addons-woo') },
 ];
 
 export const PRICE_TYPES = [
-	{ value: 'none', label: __( 'No Price', 'woo-product-options-addons' ) },
-	{ value: 'flat', label: __( 'Flat Fee', 'woo-product-options-addons' ) },
-	{ value: 'percentage', label: __( 'Percentage of Base', 'woo-product-options-addons' ) },
+	{ value: 'none', label: __( 'No Price', 'product-options-addons-woo' ) },
+	{ value: 'flat', label: __( 'Flat Fee', 'product-options-addons-woo' ) },
+	{ value: 'percentage', label: __( 'Percentage of Base', 'product-options-addons-woo' ) },
 ];
 
 export const REDUCTION_MODES = [
-	{ value: 'per_item_qty', label: __( 'Per Item Quantity', 'woo-product-options-addons' ) },
+	{ value: 'per_item_qty', label: __( 'Per Item Quantity', 'product-options-addons-woo' ) },
 	{
 		value: 'per_line_item',
-		label: __( 'Per Line Item (Once)', 'woo-product-options-addons' ),
+		label: __( 'Per Line Item (Once)', 'product-options-addons-woo' ),
 	},
 ];

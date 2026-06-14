@@ -516,13 +516,13 @@ video {
 .product_page_wpab-wpoa-options #wpfooter {
   display: none !important;
 }
-#woo-product-options-addons {
+#product-options-addons-woo {
   font-family: 'SF Pro', 'Segoe UI', Tahoma, Verdana, sans-serif;
   color: #000;
 }
-#woo-product-options-addons *,
-#woo-product-options-addons *::before,
-#woo-product-options-addons *::after {
+#product-options-addons-woo *,
+#product-options-addons-woo *::before,
+#product-options-addons-woo *::after {
   box-sizing: border-box;
 }
 
@@ -605,7 +605,7 @@ video {
   }
 }
 
-@keyframes woo-product-options-addonsFlashPulse {
+@keyframes product-options-addons-wooFlashPulse {
   0% {
     box-shadow: 0 0 0 0 rgba(220, 54, 56, 0.4);
     background-color: rgba(220, 54, 56, 0.05);
@@ -621,7 +621,7 @@ video {
 }
 
 .wpab-wpoa-flash-highlight {
-  animation: woo-product-options-addonsFlashPulse 2s ease-in-out;
+  animation: product-options-addons-wooFlashPulse 2s ease-in-out;
   border-left: 4px solid #d63638 !important;
 }
 

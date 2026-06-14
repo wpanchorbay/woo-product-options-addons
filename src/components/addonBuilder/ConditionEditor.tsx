@@ -51,7 +51,7 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
           !hideLabel ? "wpab-wpoa-mt-4" : ""
         }`}
       >
-        {__("Add more fields to set up conditional logic.", "woo-product-options-addons")}
+        {__("Add more fields to set up conditional logic.", "product-options-addons-woo")}
       </p>
     );
   }
@@ -60,7 +60,7 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
     <div className="">
       <div className="wpab-wpoa-flex wpab-wpoa-justify-between wpab-wpoa-items-center">
         <ClassicCheckbox
-          label={__("Enable Conditional Logic", "woo-product-options-addons")}
+          label={__("Enable Conditional Logic", "product-options-addons-woo")}
           checked={conditions.status === "active"}
           onChange={(checked) =>
             updateConditions({
@@ -84,7 +84,7 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
             }}
           >
             <CirclePlus className="wpab-wpoa-size-4" />{" "}
-            {__("Add Rule", "woo-product-options-addons")}
+            {__("Add Rule", "product-options-addons-woo")}
           </ClassicButton>
         )}
       </div>
@@ -105,15 +105,15 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
               options={[
                 {
                   value: "show",
-                  label: __("Show", "woo-product-options-addons"),
+                  label: __("Show", "product-options-addons-woo"),
                 },
                 {
                   value: "hide",
-                  label: __("Hide", "woo-product-options-addons"),
+                  label: __("Hide", "product-options-addons-woo"),
                 },
               ]}
             />
-            <span>{__("this field if", "woo-product-options-addons")}</span>
+            <span>{__("this field if", "product-options-addons-woo")}</span>
             <ClassicSelect
               value={conditions.match}
               classNames={{
@@ -127,15 +127,15 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
               options={[
                 {
                   value: "ALL",
-                  label: __("ALL", "woo-product-options-addons"),
+                  label: __("ALL", "product-options-addons-woo"),
                 },
                 {
                   value: "ANY",
-                  label: __("ANY", "woo-product-options-addons"),
+                  label: __("ANY", "product-options-addons-woo"),
                 },
               ]}
             />
-            <span>{__("of these rules match:", "woo-product-options-addons")}</span>
+            <span>{__("of these rules match:", "product-options-addons-woo")}</span>
           </div>
 
           <div className="wpab-wpoa-border wpab-wpoa-border-[#c3c4c7] wpab-wpoa-rounded-[12px] wpab-wpoa-overflow-hidden wpab-wpoa-bg-white wpab-wpoa-condition-rules-table">
@@ -147,13 +147,13 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
                 <thead>
                   <tr className="wpab-wpoa-border-b wpab-wpoa-border-[#c3c4c7]">
                     <th className="!wpab-wpoa-py-[10px] !wpab-wpoa-px-[12px] wpab-wpoa-font-semibold wpab-wpoa-text-[#1d2327]">
-                      {__("Field", "woo-product-options-addons")}
+                      {__("Field", "product-options-addons-woo")}
                     </th>
                     <th className="!wpab-wpoa-py-[10px] !wpab-wpoa-px-[12px] wpab-wpoa-font-semibold wpab-wpoa-text-[#1d2327] wpab-wpoa-w-[150px]">
-                      {__("Operator", "woo-product-options-addons")}
+                      {__("Operator", "product-options-addons-woo")}
                     </th>
                     <th className="!wpab-wpoa-py-[10px] !wpab-wpoa-px-[12px] wpab-wpoa-font-semibold wpab-wpoa-text-[#1d2327]">
-                      {__("Value", "woo-product-options-addons")}
+                      {__("Value", "product-options-addons-woo")}
                     </th>
                     <th className="!wpab-wpoa-py-[10px] !wpab-wpoa-px-[12px] wpab-wpoa-w-[40px]"></th>
                   </tr>
@@ -169,11 +169,11 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
                       const operatorOptions = [
                         {
                           value: "==",
-                          label: __("equals", "woo-product-options-addons"),
+                          label: __("equals", "product-options-addons-woo"),
                         },
                         {
                           value: "!=",
-                          label: __("not equals", "woo-product-options-addons"),
+                          label: __("not equals", "product-options-addons-woo"),
                         },
                       ];
 
@@ -186,30 +186,30 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
                           operatorOptions.push(
                             {
                               value: ">",
-                              label: __("greater than", "woo-product-options-addons"),
+                              label: __("greater than", "product-options-addons-woo"),
                             },
                             {
                               value: "<",
-                              label: __("less than", "woo-product-options-addons"),
+                              label: __("less than", "product-options-addons-woo"),
                             },
                             {
                               value: ">=",
-                              label: __("greater than or equals", "woo-product-options-addons"),
+                              label: __("greater than or equals", "product-options-addons-woo"),
                             },
                             {
                               value: "<=",
-                              label: __("less than or equals", "woo-product-options-addons"),
+                              label: __("less than or equals", "product-options-addons-woo"),
                             },
                           );
                         } else {
                           operatorOptions.push(
                             {
                               value: "contains",
-                              label: __("contains", "woo-product-options-addons"),
+                              label: __("contains", "product-options-addons-woo"),
                             },
                             {
                               value: "not_contains",
-                              label: __("not contains", "woo-product-options-addons"),
+                              label: __("not contains", "product-options-addons-woo"),
                             },
                           );
                         }
@@ -219,11 +219,11 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
                         operatorOptions.push(
                           {
                             value: "contains",
-                            label: __("contains", "woo-product-options-addons"),
+                            label: __("contains", "product-options-addons-woo"),
                           },
                           {
                             value: "not_contains",
-                            label: __("not contains", "woo-product-options-addons"),
+                            label: __("not contains", "product-options-addons-woo"),
                           },
                         );
                       }
@@ -232,11 +232,11 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
                       operatorOptions.push(
                         {
                           value: "empty",
-                          label: __("is empty", "woo-product-options-addons"),
+                          label: __("is empty", "product-options-addons-woo"),
                         },
                         {
                           value: "not_empty",
-                          label: __("is not empty", "woo-product-options-addons"),
+                          label: __("is not empty", "product-options-addons-woo"),
                         },
                       );
 
@@ -268,7 +268,7 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
                               options={[
                                 {
                                   value: "",
-                                  label: __("Select field…", "woo-product-options-addons"),
+                                  label: __("Select field…", "product-options-addons-woo"),
                                 },
                                 ...siblingFields.map((sf) => ({
                                   value: sf.id,
@@ -339,11 +339,11 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
                                       options={[
                                         {
                                           value: "1",
-                                          label: __("Checked", "woo-product-options-addons"),
+                                          label: __("Checked", "product-options-addons-woo"),
                                         },
                                         {
                                           value: "",
-                                          label: __("Unchecked", "woo-product-options-addons"),
+                                          label: __("Unchecked", "product-options-addons-woo"),
                                         },
                                       ]}
                                     />
@@ -377,7 +377,7 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
                                           value: "",
                                           label: __(
                                             "Select option…",
-                                            "woo-product-options-addons",
+                                            "product-options-addons-woo",
                                           ),
                                         },
                                         ...targetField.options.map((opt) => ({
@@ -407,7 +407,7 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
                                           rules,
                                         });
                                       }}
-                                      placeholder={__("Value", "woo-product-options-addons")}
+                                      placeholder={__("Value", "product-options-addons-woo")}
                                     />
                                   )}
                                   <FormError
@@ -430,7 +430,7 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
                                 updateConditions({ rules });
                               }}
                               className="wpab-wpoa-bg-transparent wpab-wpoa-border-none wpab-wpoa-cursor-pointer wpab-wpoa-p-1 wpab-wpoa-text-[#d63638] hover:wpab-wpoa-text-[#b32d2e] wpab-wpoa-transition-colors"
-                              title={__("Remove rule", "woo-product-options-addons")}
+                              title={__("Remove rule", "product-options-addons-woo")}
                             >
                               <Trash2 className="wpab-wpoa-size-4" />
                             </button>
@@ -444,7 +444,7 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
                         colSpan={4}
                         className="wpab-wpoa-py-6 wpab-wpoa-text-center wpab-wpoa-text-[#94a3b8] wpab-wpoa-italic"
                       >
-                        {__("No rules added yet.", "woo-product-options-addons")}
+                        {__("No rules added yet.", "product-options-addons-woo")}
                       </td>
                     </tr>
                   )}

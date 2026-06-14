@@ -20,7 +20,7 @@ export const ImportCard: React.FC = () => {
 
 		// Explicit check for .json extension
 		if (!selectedFile.name.toLowerCase().endsWith('.json')) {
-			addToast(__('Please select a valid .json file.', 'woo-product-options-addons'), 'error');
+			addToast(__('Please select a valid .json file.', 'product-options-addons-woo'), 'error');
 			if (fileInputRef.current) {
 				fileInputRef.current.value = '';
 			}
@@ -38,7 +38,7 @@ export const ImportCard: React.FC = () => {
 				setImportInventory(!!(json.inventory && json.inventory.length));
 				setImportSettings(!!json.settings);
 			} catch (error) {
-				addToast(__('Invalid JSON file.', 'woo-product-options-addons'), 'error');
+				addToast(__('Invalid JSON file.', 'product-options-addons-woo'), 'error');
 				setParsedData(null);
 				setFile(null);
 			}
@@ -57,19 +57,19 @@ export const ImportCard: React.FC = () => {
 			if (importSettings && parsedData.settings) payload.settings = parsedData.settings;
 
 			if (Object.keys(payload).length === 0) {
-				addToast(__('Please select at least one entity to import.', 'woo-product-options-addons'), 'error');
+				addToast(__('Please select at least one entity to import.', 'product-options-addons-woo'), 'error');
 				setIsImporting(false);
 				return;
 			}
 
 			const response: any = await apiFetch({
-				path: 'woo-product-options-addons/v1/import',
+				path: 'product-options-addons-woo/v1/import',
 				method: 'POST',
 				data: payload,
 			});
 
 			if (response.success) {
-				addToast(__('Data imported successfully. Please reload the page to see changes.', 'woo-product-options-addons'), 'success');
+				addToast(__('Data imported successfully. Please reload the page to see changes.', 'product-options-addons-woo'), 'success');
 				setFile(null);
 				setParsedData(null);
 				if (fileInputRef.current) {
@@ -78,7 +78,7 @@ export const ImportCard: React.FC = () => {
 			}
 		} catch (error: any) {
 			console.error('Import failed:', error);
-			addToast(error.message || __('Failed to import data.', 'woo-product-options-addons'), 'error');
+			addToast(error.message || __('Failed to import data.', 'product-options-addons-woo'), 'error');
 		} finally {
 			setIsImporting(false);
 		}
@@ -86,14 +86,14 @@ export const ImportCard: React.FC = () => {
 
 	return (
 		<div className="wpab-wpoa-settings-section wpab-wpoa-mt-8 wpab-wpoa-mb-8">
-			<h2 className="wpab-wpoa-ignore-preflight">{__('Import Data', 'woo-product-options-addons')}</h2>
-			<p className="description">{__('Upload an OptionBay - Product Options and Addons JSON export file to restore data.', 'woo-product-options-addons')}</p>
+			<h2 className="wpab-wpoa-ignore-preflight">{__('Import Data', 'product-options-addons-woo')}</h2>
+			<p className="description">{__('Upload an OptionBay - Product Options and Addons JSON export file to restore data.', 'product-options-addons-woo')}</p>
 
 			<table className="form-table">
 				<tbody>
 					<tr>
 						<th scope="row">
-							<label>{__('JSON File', 'woo-product-options-addons')}</label>
+							<label>{__('JSON File', 'product-options-addons-woo')}</label>
 						</th>
 						<td>
 							<input
@@ -106,27 +106,27 @@ export const ImportCard: React.FC = () => {
 
 							{parsedData && (
 								<div className="wpab-wpoa-mt-6 wpab-wpoa-bg-gray-50 wpab-wpoa-p-4 wpab-wpoa-rounded-lg wpab-wpoa-border wpab-wpoa-border-gray-200">
-									<h4 className="wpab-wpoa-mt-0 wpab-wpoa-mb-3 wpab-wpoa-font-semibold">{__('What would you like to import?', 'woo-product-options-addons')}</h4>
+									<h4 className="wpab-wpoa-mt-0 wpab-wpoa-mb-3 wpab-wpoa-font-semibold">{__('What would you like to import?', 'product-options-addons-woo')}</h4>
 									<div className="wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-3">
 										{parsedData.groups && parsedData.groups.length > 0 && (
 											<ClassicCheckbox
 												checked={importGroups}
 												onChange={setImportGroups}
-												label={__('Option Groups (Appends as new)', 'woo-product-options-addons')}
+												label={__('Option Groups (Appends as new)', 'product-options-addons-woo')}
 											/>
 										)}
 										{parsedData.inventory && parsedData.inventory.length > 0 && (
 											<ClassicCheckbox
 												checked={importInventory}
 												onChange={setImportInventory}
-												label={__('Inventory Pools (Appends as new)', 'woo-product-options-addons')}
+												label={__('Inventory Pools (Appends as new)', 'product-options-addons-woo')}
 											/>
 										)}
 										{parsedData.settings && (
 											<ClassicCheckbox
 												checked={importSettings}
 												onChange={setImportSettings}
-												label={__('Plugin Settings (Overwrites current)', 'woo-product-options-addons')}
+												label={__('Plugin Settings (Overwrites current)', 'product-options-addons-woo')}
 											/>
 										)}
 									</div>
@@ -136,7 +136,7 @@ export const ImportCard: React.FC = () => {
 											onClick={handleImport}
 											disabled={isImporting || (!importGroups && !importInventory && !importSettings)}
 										>
-											{isImporting ? __('Importing...', 'woo-product-options-addons') : __('Run Import', 'woo-product-options-addons')}
+											{isImporting ? __('Importing...', 'product-options-addons-woo') : __('Run Import', 'product-options-addons-woo')}
 										</ClassicButton>
 									</div>
 								</div>

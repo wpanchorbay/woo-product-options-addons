@@ -115,12 +115,12 @@ class CheckboxField extends BaseField {
 			$allowed = array_column( $options, 'value' );
 			foreach ( $value as $v ) {
 				if ( ! in_array( $v, $allowed, true ) ) {
-					woo_product_options_addons_log( "CheckboxField Validation: Submited value '{$v}' not in allowed set.", 'WARNING' );
+					product_options_addons_woo_log( "CheckboxField Validation: Submited value '{$v}' not in allowed set.", 'WARNING' );
 					return new \WP_Error(
 						'invalid_option',
 						sprintf(
 							/* translators: %s: field label */
-							__( 'Invalid selection for %s.', 'woo-product-options-addons' ),
+							__( 'Invalid selection for %s.', 'product-options-addons-woo' ),
 							$this->get( 'label', $this->get( 'id' ) )
 						)
 					);
@@ -157,7 +157,7 @@ class CheckboxField extends BaseField {
 
 		// Single toggle
 		if ( empty( $options ) ) {
-			return $value ? __( 'Yes', 'woo-product-options-addons' ) : __( 'No', 'woo-product-options-addons' );
+			return $value ? __( 'Yes', 'product-options-addons-woo' ) : __( 'No', 'product-options-addons-woo' );
 		}
 
 		// Multi-checkbox

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Field Factory — maps JSON field type to a PHP class instance.
  *
- * Extensible via the `woo_product_options_addons_register_field_types` filter.
+ * Extensible via the `product_options_addons_woo_register_field_types` filter.
  *
  * @since      1.0.0
  * @package    SmartProductOptionsAddons
@@ -63,7 +63,7 @@ class FieldFactory {
 			 * @since 1.0.0
 			 * @param array $types Associative array of type => class name.
 			 */
-			self::$types = apply_filters( 'woo_product_options_addons_register_field_types', self::$types );
+			self::$types = apply_filters( 'product_options_addons_woo_register_field_types', self::$types );
 		}
 		return self::$types;
 	}
@@ -84,13 +84,13 @@ class FieldFactory {
 		$types = self::get_types();
 
 		if ( ! isset( $types[ $type ] ) ) {
-			woo_product_options_addons_log( "FieldFactory: Unregistered field type requested: '{$type}' in group {$group_id}", 'WARNING' );
+			product_options_addons_woo_log( "FieldFactory: Unregistered field type requested: '{$type}' in group {$group_id}", 'WARNING' );
 			return null;
 		}
 
 		$class = $types[ $type ];
 		if ( ! class_exists( $class ) ) {
-			woo_product_options_addons_log( "FieldFactory: Class '{$class}' for type '{$type}' does not exist.", 'ERROR' );
+			product_options_addons_woo_log( "FieldFactory: Class '{$class}' for type '{$type}' does not exist.", 'ERROR' );
 			return null;
 		}
 

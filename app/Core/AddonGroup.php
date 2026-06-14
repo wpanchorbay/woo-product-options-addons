@@ -74,17 +74,17 @@ class AddonGroup extends Base {
 	 */
 	public function register_post_type() {
 		$labels = array(
-			'name'               => _x( 'Option Groups', 'Post type general name', 'woo-product-options-addons' ),
-			'singular_name'      => _x( 'Option Group', 'Post type singular name', 'woo-product-options-addons' ),
-			'menu_name'          => _x( 'Option Groups', 'Admin Menu text', 'woo-product-options-addons' ),
-			'add_new'            => __( 'Add New', 'woo-product-options-addons' ),
-			'add_new_item'       => __( 'Add New Option Group', 'woo-product-options-addons' ),
-			'edit_item'          => __( 'Edit Option Group', 'woo-product-options-addons' ),
-			'new_item'           => __( 'New Option Group', 'woo-product-options-addons' ),
-			'view_item'          => __( 'View Option Group', 'woo-product-options-addons' ),
-			'search_items'       => __( 'Search Option Groups', 'woo-product-options-addons' ),
-			'not_found'          => __( 'No option groups found', 'woo-product-options-addons' ),
-			'not_found_in_trash' => __( 'No option groups found in Trash', 'woo-product-options-addons' ),
+			'name'               => _x( 'Option Groups', 'Post type general name', 'product-options-addons-woo' ),
+			'singular_name'      => _x( 'Option Group', 'Post type singular name', 'product-options-addons-woo' ),
+			'menu_name'          => _x( 'Option Groups', 'Admin Menu text', 'product-options-addons-woo' ),
+			'add_new'            => __( 'Add New', 'product-options-addons-woo' ),
+			'add_new_item'       => __( 'Add New Option Group', 'product-options-addons-woo' ),
+			'edit_item'          => __( 'Edit Option Group', 'product-options-addons-woo' ),
+			'new_item'           => __( 'New Option Group', 'product-options-addons-woo' ),
+			'view_item'          => __( 'View Option Group', 'product-options-addons-woo' ),
+			'search_items'       => __( 'Search Option Groups', 'product-options-addons-woo' ),
+			'not_found'          => __( 'No option groups found', 'product-options-addons-woo' ),
+			'not_found_in_trash' => __( 'No option groups found in Trash', 'product-options-addons-woo' ),
 		);
 
 		$args = array(
@@ -102,7 +102,7 @@ class AddonGroup extends Base {
 		);
 
 		register_post_type( self::POST_TYPE, $args );
-		woo_product_options_addons_log( 'Registered Custom Post Type: ' . self::POST_TYPE, 'DEBUG' );
+		product_options_addons_woo_log( 'Registered Custom Post Type: ' . self::POST_TYPE, 'DEBUG' );
 	}
 
 	/**
@@ -165,7 +165,7 @@ class AddonGroup extends Base {
 		}
 
 		if ( json_last_error() !== JSON_ERROR_NONE ) {
-			woo_product_options_addons_log( 'JSON validation failed in sanitize_json_meta', 'ERROR' );
+			product_options_addons_woo_log( 'JSON validation failed in sanitize_json_meta', 'ERROR' );
 			return '[]';
 		}
 

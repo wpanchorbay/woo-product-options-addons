@@ -23,9 +23,9 @@ use SmartProductOptionsAddons\Data\InventoryManager;
  * REST API controller for Inventory Items.
  *
  * Endpoints:
- *   GET    /woo-product-options-addons/v1/inventory         - Search inventory items
- *   POST   /woo-product-options-addons/v1/inventory         - Create inventory item
- *   PUT    /woo-product-options-addons/v1/inventory/{id}    - Update inventory item
+ *   GET    /product-options-addons-woo/v1/inventory         - Search inventory items
+ *   POST   /product-options-addons-woo/v1/inventory         - Create inventory item
+ *   PUT    /product-options-addons-woo/v1/inventory/{id}    - Update inventory item
  *
  * @since      1.1.0
  * @package    SmartProductOptionsAddons
@@ -149,11 +149,11 @@ class InventoryController extends ApiController {
 	 */
 	public function get_item( $request ) {
 		$id = $request->get_param( 'id' );
-		woo_product_options_addons_log( sprintf( 'InventoryController: Fetching single inventory ID %d.', $id ), 'DEBUG' );
+		product_options_addons_woo_log( sprintf( 'InventoryController: Fetching single inventory ID %d.', $id ), 'DEBUG' );
 		$item = InventoryManager::get_instance()->get_item( $id );
 
 		if ( ! $item ) {
-			return new WP_Error( 'not_found', __( 'Inventory item not found', 'woo-product-options-addons' ), array( 'status' => 404 ) );
+			return new WP_Error( 'not_found', __( 'Inventory item not found', 'product-options-addons-woo' ), array( 'status' => 404 ) );
 		}
 
 		return new WP_REST_Response( $item, 200 );
@@ -169,7 +169,7 @@ class InventoryController extends ApiController {
 	public function get_items( $request ) {
 		$search = $request->get_param( 'search' );
 		$limit  = $request->get_param( 'limit' );
-		woo_product_options_addons_log( sprintf( 'InventoryController: Searching inventory with term "%s" (Limit: %d).', $search, $limit ), 'DEBUG' );
+		product_options_addons_woo_log( sprintf( 'InventoryController: Searching inventory with term "%s" (Limit: %d).', $search, $limit ), 'DEBUG' );
 
 		$items = InventoryManager::get_instance()->search_items( $search, $limit );
 
@@ -197,11 +197,11 @@ class InventoryController extends ApiController {
 			return $validated;
 		}
 
-		woo_product_options_addons_log( sprintf( 'InventoryController: Creating inventory item. Data: %s', wp_json_encode( $validated ) ), 'INFO' );
+		product_options_addons_woo_log( sprintf( 'InventoryController: Creating inventory item. Data: %s', wp_json_encode( $validated ) ), 'INFO' );
 		$id = InventoryManager::get_instance()->create_item( $validated );
 
 		if ( ! $id ) {
-			return new WP_Error( 'create_failed', __( 'Failed to create inventory item', 'woo-product-options-addons' ), array( 'status' => 500 ) );
+			return new WP_Error( 'create_failed', __( 'Failed to create inventory item', 'product-options-addons-woo' ), array( 'status' => 500 ) );
 		}
 
 		$item = InventoryManager::get_instance()->get_item( $id );
@@ -232,11 +232,11 @@ class InventoryController extends ApiController {
 			return $validated;
 		}
 
-		woo_product_options_addons_log( sprintf( 'InventoryController: Updating inventory item ID %d. Data: %s', $id, wp_json_encode( $validated ) ), 'INFO' );
+		product_options_addons_woo_log( sprintf( 'InventoryController: Updating inventory item ID %d. Data: %s', $id, wp_json_encode( $validated ) ), 'INFO' );
 		$result = InventoryManager::get_instance()->update_item( $id, $validated );
 
 		if ( false === $result ) {
-			return new WP_Error( 'update_failed', __( 'Failed to update inventory item', 'woo-product-options-addons' ), array( 'status' => 500 ) );
+			return new WP_Error( 'update_failed', __( 'Failed to update inventory item', 'product-options-addons-woo' ), array( 'status' => 500 ) );
 		}
 
 		$item = InventoryManager::get_instance()->get_item( $id );
@@ -254,7 +254,7 @@ class InventoryController extends ApiController {
 	public function delete_item( $request ) {
 		$id = $request->get_param( 'id' );
 
-		woo_product_options_addons_log( sprintf( 'InventoryController: Deleting inventory ID %d.', $id ), 'INFO' );
+		product_options_addons_woo_log( sprintf( 'InventoryController: Deleting inventory ID %d.', $id ), 'INFO' );
 
 		global $wpdb;
 		$used_in = array();
@@ -287,7 +287,7 @@ class InventoryController extends ApiController {
 		if ( ! empty( $used_in ) ) {
 			return new WP_Error(
 				'inventory_in_use',
-				__( 'This inventory is currently being used by one or more option groups. It cannot be deleted.', 'woo-product-options-addons' ),
+				__( 'This inventory is currently being used by one or more option groups. It cannot be deleted.', 'product-options-addons-woo' ),
 				array(
 					'status' => 400,
 					'groups' => $used_in,
@@ -299,7 +299,7 @@ class InventoryController extends ApiController {
 		$deleted = InventoryManager::get_instance()->delete_item( $id );
 
 		if ( ! $deleted ) {
-			return new WP_Error( 'delete_failed', __( 'Failed to delete inventory item.', 'woo-product-options-addons' ), array( 'status' => 500 ) );
+			return new WP_Error( 'delete_failed', __( 'Failed to delete inventory item.', 'product-options-addons-woo' ), array( 'status' => 500 ) );
 		}
 
 		return new WP_REST_Response( array( 'success' => true ), 200 );

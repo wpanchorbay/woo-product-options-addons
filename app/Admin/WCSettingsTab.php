@@ -23,8 +23,8 @@ class WCSettingsTab extends \WC_Settings_Page {
 	 * Constructor.
 	 */
 	public function __construct() {
-		$this->id    = 'woo-product-options-addons';
-		$this->label = __( 'Options', 'woo-product-options-addons' );
+		$this->id    = 'product-options-addons-woo';
+		$this->label = __( 'Options', 'product-options-addons-woo' );
 
 		parent::__construct();
 	}
