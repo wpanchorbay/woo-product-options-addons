@@ -1,8 +1,8 @@
 /**
  * Smart Product Options and Addons Frontend Interactivity Engine
  *
- * Handles conditional logic evaluation, live price calculation,
- * and file upload pre-validation on WooCommerce product pages.
+ * Handles conditional logic evaluation and live price calculation
+ * on WooCommerce product pages.
  *
  * Uses event delegation on form.cart for performance.
  * jQuery is available since WordPress provides it.
@@ -271,11 +271,6 @@
 
         var priceType = opt.price_type || "flat";
 
-        if (priceType === "formula") {
-          total += evaluateFormula(opt.formula || "", v);
-          return;
-        }
-
         if (parseFloat(opt.price) > 0) {
           total += computePriceByType(
             priceType,
@@ -295,63 +290,9 @@
     var priceType = field.price_type || "none";
     var price = parseFloat(field.price) || 0;
 
-    if (priceType === "none" || (price === 0 && priceType !== "formula")) return 0;
-
-    if (priceType === "character_count") {
-      return String(value).length * price;
-    }
-
-    if (priceType === "formula") {
-      return evaluateFormula(field.formula || "", value);
-    }
+    if (priceType === "none" || price === 0) return 0;
 
     return computePriceByType(priceType, price);
-  }
-
-  /**
-   * Evaluate a mathematical formula string.
-   */
-  function evaluateFormula(formula, value) {
-    if (!formula) return 0;
-
-    var char_count = String(value).length;
-    var val_num = parseFloat(value) || 0;
-    var qty = parseInt($("input.qty").val()) || 1;
-
-    // Replace placeholders with actual values
-    var expr = formula
-      .replace(/\[char_count\]/g, char_count)
-      .replace(/\[value\]/g, val_num)
-      .replace(/\[base_price\]/g, basePrice)
-      .replace(/\[price\]/g, basePrice)
-      .replace(/\[quantity\]/g, qty)
-      // Support for MathParser raw variables used in stock
-      .replace(/\bqty\b/g, qty)
-      .replace(/\bval\b/g, val_num);
-
-    // Sanitize: allow only numbers, math operators, and parentheses
-    // Remove all whitespace for evaluation
-    expr = expr.replace(/\s+/g, "");
-
-    // Prevent division by zero
-    if (/\/0(?![0-9\.\(])/.test(expr)) {
-      if (window.SPOA_DEBUG) console.warn("Smart Product Options and Addons: Division by zero detected in formula", expr);
-      return 0;
-    }
-
-    if (/[^0-9\+\-\*\/\.\(\)]/.test(expr)) {
-      if (window.SPOA_DEBUG) console.warn("Smart Product Options and Addons: Formula contains invalid characters", expr);
-      return 0;
-    }
-
-    try {
-      // Use a safer evaluation pattern by ensuring the expression is valid math
-      var result = new Function('"use strict";return (' + expr + ")")();
-      return parseFloat(result) || 0;
-    } catch (e) {
-      if (window.SPOA_DEBUG) console.warn("Smart Product Options and Addons: Formula evaluation error", e);
-      return 0;
-    }
   }
 
   /**
@@ -376,8 +317,7 @@
         if (field.enable_stock && field.inventory_id) {
           var inv = OB.inventory[field.inventory_id];
           if (inv && !inv.allow_backorders) {
-            var value = getFieldValue(groupId, field.id);
-            var reductionAmount = calculateReductionAmount(field.reduction_mode, field.reduction_formula, value, currentQty);
+            var reductionAmount = calculateReductionAmount(field.reduction_mode, currentQty);
             var remaining = inv.stock - (inv.reserved || 0);
 
             if (remaining < reductionAmount) {
@@ -398,7 +338,7 @@
             if (opt.enable_stock && opt.inventory_id) {
               var inv = OB.inventory[opt.inventory_id];
               if (inv && !inv.allow_backorders) {
-                var reductionAmount = calculateReductionAmount(opt.reduction_mode, opt.reduction_formula, opt.value, currentQty);
+                var reductionAmount = calculateReductionAmount(opt.reduction_mode, currentQty);
                 var remaining = inv.stock - (inv.reserved || 0);
 
                 var $optEl = findOptionElement($fieldWrapper, field.type, opt.value);
@@ -415,12 +355,9 @@
     });
   }
 
-  function calculateReductionAmount(mode, formula, value, qty) {
+  function calculateReductionAmount(mode, qty) {
     if (mode === 'per_line_item') return 1;
     if (mode === 'per_item_qty') return qty;
-    if (mode === 'formula' && formula) {
-      return evaluateFormula(formula, value);
-    }
     return qty;
   }
 
@@ -593,39 +530,7 @@
     }
   }
 
-  // ─── File Upload Pre-validation ──────────────────────────────────
 
-  function validateFile(input) {
-    var $input = $(input);
-    var maxSize = parseInt($input.data("max-size")) || 5;
-    var maxBytes = maxSize * 1024 * 1024;
-    var accept = ($input.attr("accept") || "").split(",").map(function (s) {
-      return s.trim().toLowerCase();
-    });
-
-    if (input.files && input.files[0]) {
-      var file = input.files[0];
-
-      // Size check
-      if (file.size > maxBytes) {
-        alert("File size exceeds " + maxSize + " MB limit.");
-        $input.val("");
-        return false;
-      }
-
-      // Extension check
-      if (accept.length > 0 && accept[0] !== "") {
-        var ext = "." + file.name.split(".").pop().toLowerCase();
-        if (accept.indexOf(ext) === -1) {
-          alert("File type not allowed. Allowed: " + accept.join(", "));
-          $input.val("");
-          return false;
-        }
-      }
-    }
-
-    return true;
-  }
 
   // ─── Event Binding (Delegation) ──────────────────────────────────
 
@@ -650,10 +555,7 @@
       evaluateStock();
     });
 
-    // File input validation
-    $form.on("change", '.ob-input--file', function () {
-      validateFile(this);
-    });
+
 
     // Quantity change re-triggers pricing & stock
     $form.on("change input", "input.qty", function () {

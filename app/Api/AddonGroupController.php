@@ -878,7 +878,6 @@ class AddonGroupController extends ApiController {
 				'enable_stock'      => ! empty( $field['enable_stock'] ),
 				'inventory_id'      => $field['inventory_id'] ?? null,
 				'reduction_mode'    => $field['reduction_mode'] ?? 'per_item_qty',
-				'reduction_formula' => sanitize_text_field( $field['reduction_formula'] ?? '' ),
 			);
 
 			$options_have_stock = false;
@@ -903,11 +902,7 @@ class AddonGroupController extends ApiController {
 						'enable_stock'      => ! empty( $option['enable_stock'] ),
 						'inventory_id'      => $option['inventory_id'] ?? null,
 						'reduction_mode'    => $option['reduction_mode'] ?? 'per_item_qty',
-						'reduction_formula' => sanitize_text_field( $option['reduction_formula'] ?? '' ),
 					);
-					if ( isset( $option['formula'] ) ) {
-						$clean_option['formula'] = sanitize_text_field( $option['formula'] );
-					}
 					if ( ! empty( $clean_option['enable_stock'] ) ) {
 						$options_have_stock = true;
 					}
@@ -938,15 +933,7 @@ class AddonGroupController extends ApiController {
 			if ( isset( $field['step'] ) ) {
 				$clean_field['step'] = floatval( $field['step'] );
 			}
-			if ( isset( $field['allowed_types'] ) ) {
-				$clean_field['allowed_types'] = sanitize_text_field( $field['allowed_types'] );
-			}
-			if ( isset( $field['max_file_size'] ) ) {
-				$clean_field['max_file_size'] = absint( $field['max_file_size'] );
-			}
-			if ( isset( $field['formula'] ) ) {
-				$clean_field['formula'] = sanitize_text_field( $field['formula'] );
-			}
+
 			if ( isset( $field['display_style'] ) ) {
 				$clean_field['display_style'] = sanitize_text_field( $field['display_style'] );
 			}

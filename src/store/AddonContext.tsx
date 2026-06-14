@@ -22,13 +22,11 @@ export interface FieldOption {
   price_type: string;
   price?: number;
   weight?: number;
-  formula?: string;
   color?: string;
   image_url?: string;
   enable_stock?: boolean;
   inventory_id?: number | string;
   reduction_mode?: string;
-  reduction_formula?: string;
 }
 
 export interface FieldDefinition {
@@ -48,16 +46,12 @@ export interface FieldDefinition {
   min_value?: number;
   max_value?: number;
   step?: number;
-  formula?: string;
-  allowed_types?: string;
-  max_file_size?: number;
   content?: string;
   conditions: FieldConditions;
   display_style?: "swatch_only" | "swatch_label";
   enable_stock?: boolean;
   inventory_id?: number | string;
   reduction_mode?: string;
-  reduction_formula?: string;
 }
 
 export interface Assignment {
@@ -198,10 +192,7 @@ export function getDefaultField(type: string): FieldDefinition {
       base.max_value = undefined;
       base.step = 1;
       break;
-    case "file":
-      base.allowed_types = ".jpg,.png,.pdf";
-      base.max_file_size = 5; // MB
-      break;
+
     case "static_content":
       base.content = "";
       break;

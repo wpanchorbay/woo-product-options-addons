@@ -63,7 +63,7 @@ class PricingEngine {
 	 * and executes the correct mathematical operation against the product base price.
 	 *
 	 * @since 1.0.0
-	 * @param string $type              The price type (e.g. 'flat', 'percentage', 'character_count', 'quantity_multiplier').
+	 * @param string $type              The price type (e.g. 'flat', 'percentage').
 	 * @param float  $base_price        Product base price from WooCommerce.
 	 * @param float  $configured_amount Amount configured in the option schema.
 	 * @param mixed  $field_value       The value submitted by the customer.
@@ -72,7 +72,7 @@ class PricingEngine {
 	 * @return float The calculated delta to be added to the product price.
 	 */
 	public static function calculate( string $type, float $base_price, float $configured_amount, $field_value, int $quantity, array $config = array() ) {
-		if ( 'none' === $type || ( 0.0 === $configured_amount && 'formula' !== $type ) ) {
+		if ( 'none' === $type || 0.0 === $configured_amount ) {
 			woo_product_options_addons_log( "Pricing Engine: Type 'none' or amount 0. Price delta is 0.", 'DEBUG' );
 			return 0.0;
 		}

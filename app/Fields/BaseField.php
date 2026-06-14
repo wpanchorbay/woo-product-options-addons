@@ -300,7 +300,7 @@ abstract class BaseField implements InterfaceField {
 	 */
 	protected function format_price_label( $price, $price_type, $html = true ) {
 		$price = floatval( $price );
-		if ( 'none' === $price_type || ( 0.0 === $price && 'formula' !== $price_type ) ) {
+		if ( 'none' === $price_type || 0.0 === $price ) {
 			return '';
 		}
 
@@ -309,18 +309,10 @@ abstract class BaseField implements InterfaceField {
 
 		if ( 'percentage' === $price_type ) {
 			$formatted = $prefix . number_format( $abs_price, \SmartProductOptionsAddons\Helper\WooCommerce::get_price_decimals(), \SmartProductOptionsAddons\Helper\WooCommerce::get_price_decimal_separator(), \SmartProductOptionsAddons\Helper\WooCommerce::get_price_thousand_separator() ) . '%';
-		} elseif ( 'formula' === $price_type ) {
-			// For formula, the static amount might be 0, but we want to indicate calculation
-			$formatted = __( 'Dynamic', 'woo-product-options-addons' );
 		} elseif ( function_exists( 'wc_price' ) ) {
-			// For flat, character_count, etc. we use native WooCommerce price formatting
 			$formatted = $prefix . wp_strip_all_tags( wc_price( $abs_price ) );
 		} else {
 			$formatted = $prefix . \SmartProductOptionsAddons\Helper\WooCommerce::get_currency_symbol() . number_format( $abs_price, \SmartProductOptionsAddons\Helper\WooCommerce::get_price_decimals(), \SmartProductOptionsAddons\Helper\WooCommerce::get_price_decimal_separator(), \SmartProductOptionsAddons\Helper\WooCommerce::get_price_thousand_separator() );
-		}
-
-		if ( 'character_count' === $price_type ) {
-			$formatted .= __( ' / character', 'woo-product-options-addons' );
 		}
 
 		if ( $html ) {

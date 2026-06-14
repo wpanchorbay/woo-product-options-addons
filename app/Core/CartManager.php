@@ -440,7 +440,6 @@ class CartManager extends Base {
 						$intents[] = array(
 							'id'      => $field_schema['inventory_id'],
 							'mode'    => $field_schema['reduction_mode'] ?? 'per_item_qty',
-							'formula' => $field_schema['reduction_formula'] ?? '',
 							'value'   => $sanitized_value,
 							'amount'  => 1.0, // Base unit
 						);
@@ -453,7 +452,6 @@ class CartManager extends Base {
 								$intents[] = array(
 									'id'      => $opt['inventory_id'],
 									'mode'    => $opt['reduction_mode'] ?? 'per_item_qty',
-									'formula' => $opt['reduction_formula'] ?? '',
 									'value'   => $opt['value'],
 									'amount'  => 1.0,
 								);
@@ -778,11 +776,9 @@ class CartManager extends Base {
 	 *
 	 * @param int    $qty     The quantity.
 	 * @param string $mode    The reduction mode.
-	 * @param string $formula The reduction formula.
-	 * @param mixed  $value   The field value.
 	 * @return float
 	 */
-	private function calculate_reduction_amount( $qty, $mode, $formula, $value ) {
+	private function calculate_reduction_amount( $qty, $mode ) {
 		if ( 'per_line_item' === $mode ) {
 			return 1.0;
 		}
@@ -801,10 +797,8 @@ class CartManager extends Base {
 	 */
 	private function calculate_total_intent_reduction( $intent, $quantity ) {
 		$mode    = $intent['mode'] ?? 'per_item_qty';
-		$formula = $intent['formula'] ?? '';
-		$value   = $intent['value'] ?? '';
 
-		return $this->calculate_reduction_amount( $quantity, $mode, $formula, $value );
+		return $this->calculate_reduction_amount( $quantity, $mode );
 	}
 
 	/**
@@ -871,16 +865,16 @@ class CartManager extends Base {
 
 				if ( ! empty( $field_schema['enable_stock'] ) && ! empty( $field_schema['inventory_id'] ) ) {
 					$inv_id             = $field_schema['inventory_id'];
-					$amount             = $this->calculate_reduction_amount( $quantity, $field_schema['reduction_mode'] ?? 'per_item_qty', $field_schema['reduction_formula'] ?? '', $value );
+					$amount             = $this->calculate_reduction_amount( $quantity, $field_schema['reduction_mode'] ?? 'per_item_qty' );
 					$intents[ $inv_id ] = ( $intents[ $inv_id ] ?? 0 ) + $amount;
 				}
-
+ 
 				if ( in_array( $field_schema['type'], array( 'select', 'radio', 'checkbox', 'color_swatch', 'image_swatch' ), true ) ) {
 					$values_array = is_array( $value ) ? $value : array( $value );
 					foreach ( $field_schema['options'] as $opt ) {
 						if ( in_array( $opt['value'], $values_array, true ) && ! empty( $opt['enable_stock'] ) && ! empty( $opt['inventory_id'] ) ) {
 							$inv_id             = $opt['inventory_id'];
-							$amount             = $this->calculate_reduction_amount( $quantity, $opt['reduction_mode'] ?? 'per_item_qty', $opt['reduction_formula'] ?? '', $opt['value'] );
+							$amount             = $this->calculate_reduction_amount( $quantity, $opt['reduction_mode'] ?? 'per_item_qty' );
 							$intents[ $inv_id ] = ( $intents[ $inv_id ] ?? 0 ) + $amount;
 						}
 					}

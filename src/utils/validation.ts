@@ -51,12 +51,10 @@ export const fieldOptionSchema = z
 			.min(1, { message: __("Choice value is required", "woo-product-options-addons") }),
 		price_type: z.string().optional(),
 		price: z.number().optional(),
-		formula: z.string().optional(),
 		weight: z.number().optional(),
 		enable_stock: z.boolean().optional(),
 		inventory_id: z.union([z.number(), z.string()]).nullable().optional(),
 		reduction_mode: z.string().optional(),
-		reduction_formula: z.string().optional(),
 		color: z.string().optional(),
 		image_url: z.string().optional(),
 	})
@@ -94,7 +92,6 @@ export const fieldDefinitionSchema = z
 		content: z.string().optional(),
 		price_type: z.string().optional(),
 		price: z.number().optional(),
-		formula: z.string().optional(),
 		weight: z.number().optional(),
 		options: z.array(fieldOptionSchema).optional(),
 		min_length: z.number().optional(),
@@ -102,12 +99,9 @@ export const fieldDefinitionSchema = z
 		min_value: z.number().optional(),
 		max_value: z.number().optional(),
 		step: z.number().optional(),
-		allowed_types: z.string().optional(),
-		max_file_size: z.number().optional(),
 		enable_stock: z.boolean().optional(),
 		inventory_id: z.union([z.number(), z.string()]).nullable().optional(),
 		reduction_mode: z.string().optional(),
-		reduction_formula: z.string().optional(),
 		conditions: fieldConditionsSchema,
 	})
 	.superRefine((data, ctx) => {

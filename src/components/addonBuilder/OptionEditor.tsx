@@ -263,55 +263,32 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
                     >
                       {opt.price_type !== "none" && (
                         <>
-                          {opt.price_type === "formula" ? (
-                            <ClassicInput
-                              size="small"
-                              placeholder={__("Formula", "woo-product-options-addons")}
-                              value={opt.formula || ""}
-                              isError={
-                                !!state.errors?.[
-                                  `schema.${fieldIndex}.options.${idx}.formula`
-                                ]
-                              }
-                              onChange={(e) =>
-                                dispatch({
-                                  type: "UPDATE_OPTION",
-                                  payload: {
-                                    fieldId,
-                                    optionIndex: idx,
-                                    updates: { formula: e.target.value },
+                          <ClassicInput
+                            type="number"
+                            size="small"
+                            placeholder={__("Price", "woo-product-options-addons")}
+                            value={opt.price ?? ""}
+                            isError={
+                              !!state.errors?.[
+                                `schema.${fieldIndex}.options.${idx}.price`
+                              ]
+                            }
+                            onChange={(e) =>
+                              dispatch({
+                                type: "UPDATE_OPTION",
+                                payload: {
+                                  fieldId,
+                                  optionIndex: idx,
+                                  updates: {
+                                    price:
+                                      e.target.value === ""
+                                        ? undefined
+                                        : parseFloat(e.target.value),
                                   },
-                                })
-                              }
-                            />
-                          ) : (
-                            <ClassicInput
-                              type="number"
-                              size="small"
-                              placeholder={__("Price", "woo-product-options-addons")}
-                              value={opt.price ?? ""}
-                              isError={
-                                !!state.errors?.[
-                                  `schema.${fieldIndex}.options.${idx}.price`
-                                ]
-                              }
-                              onChange={(e) =>
-                                dispatch({
-                                  type: "UPDATE_OPTION",
-                                  payload: {
-                                    fieldId,
-                                    optionIndex: idx,
-                                    updates: {
-                                      price:
-                                        e.target.value === ""
-                                          ? undefined
-                                          : parseFloat(e.target.value),
-                                    },
-                                  },
-                                })
-                              }
-                            />
-                          )}
+                                },
+                              })
+                            }
+                          />
                           <FormError
                             message={
                               state.errors?.[
@@ -346,9 +323,7 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
                             },
                           })
                         }
-                        options={PRICE_TYPES.filter(
-                          (pt) => pt.value !== "character_count",
-                        ).map((pt) => ({
+                        options={PRICE_TYPES.map((pt) => ({
                           value: pt.value,
                           label: pt.label,
                         }))}
@@ -461,30 +436,7 @@ export const OptionEditor: React.FC<OptionEditorProps> = ({
                               }
                               options={REDUCTION_MODES}
                             />
-                            {opt.reduction_mode === "formula" && (
-                              <ClassicInput
-                                size="large"
-                                value={opt.reduction_formula || ""}
-                                isError={
-                                  !!state.errors?.[
-                                    `schema.${fieldIndex}.options.${idx}.reduction_formula`
-                                  ]
-                                }
-                                onChange={(e) =>
-                                  dispatch({
-                                    type: "UPDATE_OPTION",
-                                    payload: {
-                                      fieldId,
-                                      optionIndex: idx,
-                                      updates: {
-                                        reduction_formula: e.target.value,
-                                      },
-                                    },
-                                  })
-                                }
-                                placeholder="qty * 1"
-                              />
-                            )}
+
                           </>
                         )}
                       </div>

@@ -282,8 +282,6 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                             min_value: defaults.min_value,
                             max_value: defaults.max_value,
                             step: defaults.step,
-                            allowed_types: defaults.allowed_types,
-                            max_file_size: defaults.max_file_size,
                             display_style: defaults.display_style,
                             content: defaults.content,
                           });
@@ -458,15 +456,7 @@ export const FieldRow: React.FC<FieldRowProps> = ({ field, index }) => {
                                     price_type: String(val),
                                   })
                                 }
-                                options={PRICE_TYPES.filter((pt) => {
-                                  if (pt.value === "character_count") {
-                                    return (
-                                      field.type === "text" ||
-                                      field.type === "textarea"
-                                    );
-                                  }
-                                  return true;
-                                }).map((pt) => ({
+                                options={PRICE_TYPES.map((pt) => ({
                                   value: pt.value,
                                   label: pt.label,
                                 }))}

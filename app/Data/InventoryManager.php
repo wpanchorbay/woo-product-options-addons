@@ -339,25 +339,7 @@ class InventoryManager {
 			return floatval( $quantity );
 		}
 
-		if ( 'formula' === $mode ) {
-			$formula = $intent['formula'] ?? '';
-			$value   = $intent['value'] ?? '';
 
-			try {
-				$parser    = new \MathParser\StdMathParser();
-				$ast       = $parser->parse( $formula );
-				$evaluator = new \MathParser\Interpreting\Evaluator(
-					array(
-						'qty' => floatval( $quantity ),
-						'val' => is_numeric( $value ) ? floatval( $value ) : 0,
-					)
-				);
-				$result    = $ast->accept( $evaluator );
-				return max( 0, floatval( $result ) );
-			} catch ( \Exception $e ) {
-				return floatval( $quantity );
-			}
-		}
 
 		return floatval( $quantity );
 	}

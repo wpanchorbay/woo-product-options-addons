@@ -183,9 +183,7 @@ export const OptionEditorAccordion: React.FC<OptionEditorAccordionProps> = ({
                                 },
                               })
                             }
-                            options={PRICE_TYPES.filter(
-                              (pt) => pt.value !== "character_count",
-                            ).map((pt) => ({
+                            options={PRICE_TYPES.map((pt) => ({
                               value: pt.value,
                               label: pt.label,
                             }))}
@@ -202,73 +200,41 @@ export const OptionEditorAccordion: React.FC<OptionEditorAccordionProps> = ({
                                   size={13}
                                   className="wpab-wpoa-text-[#2271b1]"
                                 />
-                                {opt.price_type === "formula"
-                                  ? __("Formula Expression", "woo-product-options-addons")
-                                  : __("Price Amount", "woo-product-options-addons")}
+                                {__("Price Amount", "woo-product-options-addons")}
                               </span>
                             ),
                             render: () => (
                               <div className="wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-1.5 wpab-wpoa-max-w-xs">
-                                {opt.price_type === "formula" ? (
-                                  <ClassicInput
-                                    size="regular"
-                                    placeholder={__("Formula", "woo-product-options-addons")}
-                                    value={opt.formula || ""}
-                                    isError={
-                                      !!state.errors?.[
-                                        `schema.${fieldIndex}.options.${idx}.formula`
-                                      ]
-                                    }
-                                    onChange={(e) =>
-                                      dispatch({
-                                        type: "UPDATE_OPTION",
-                                        payload: {
-                                          fieldId,
-                                          optionIndex: idx,
-                                          updates: { formula: e.target.value },
-                                        },
-                                      })
-                                    }
-                                  />
-                                ) : (
-                                  <ClassicInput
-                                    type="number"
-                                    size="regular"
-                                    placeholder={__("Price", "woo-product-options-addons")}
-                                    value={opt.price ?? ""}
-                                    isError={
-                                      !!state.errors?.[
-                                        `schema.${fieldIndex}.options.${idx}.price`
-                                      ]
-                                    }
-                                    onChange={(e) =>
-                                      dispatch({
-                                        type: "UPDATE_OPTION",
-                                        payload: {
-                                          fieldId,
-                                          optionIndex: idx,
-                                          updates: {
-                                            price:
-                                              e.target.value === ""
-                                                ? undefined
-                                                : parseFloat(e.target.value),
-                                          },
-                                        },
-                                      })
-                                    }
-                                  />
-                                )}
-                                <FormError
-                                  message={
-                                    state.errors?.[
+                                <ClassicInput
+                                  type="number"
+                                  size="regular"
+                                  placeholder={__("Price", "woo-product-options-addons")}
+                                  value={opt.price ?? ""}
+                                  isError={
+                                    !!state.errors?.[
                                       `schema.${fieldIndex}.options.${idx}.price`
                                     ]
+                                  }
+                                  onChange={(e) =>
+                                    dispatch({
+                                      type: "UPDATE_OPTION",
+                                      payload: {
+                                        fieldId,
+                                        optionIndex: idx,
+                                        updates: {
+                                          price:
+                                            e.target.value === ""
+                                              ? undefined
+                                              : parseFloat(e.target.value),
+                                        },
+                                      },
+                                    })
                                   }
                                 />
                                 <FormError
                                   message={
                                     state.errors?.[
-                                      `schema.${fieldIndex}.options.${idx}.formula`
+                                      `schema.${fieldIndex}.options.${idx}.price`
                                     ]
                                   }
                                 />
@@ -403,35 +369,7 @@ export const OptionEditorAccordion: React.FC<OptionEditorAccordionProps> = ({
                                 />
                               </div>
 
-                              {opt.reduction_mode === "formula" && (
-                                <div className="wpab-wpoa-flex wpab-wpoa-flex-col wpab-wpoa-gap-1">
-                                  <label className="wpab-wpoa-text-[11px] wpab-wpoa-text-gray-500 wpab-wpoa-font-semibold wpab-wpoa-uppercase wpab-wpoa-tracking-wider">
-                                    {__("Formula", "woo-product-options-addons")}
-                                  </label>
-                                  <ClassicInput
-                                    size="regular"
-                                    value={opt.reduction_formula || ""}
-                                    isError={
-                                      !!state.errors?.[
-                                        `schema.${fieldIndex}.options.${idx}.reduction_formula`
-                                      ]
-                                    }
-                                    onChange={(e) =>
-                                      dispatch({
-                                        type: "UPDATE_OPTION",
-                                        payload: {
-                                          fieldId,
-                                          optionIndex: idx,
-                                          updates: {
-                                            reduction_formula: e.target.value,
-                                          },
-                                        },
-                                      })
-                                    }
-                                    placeholder="qty * 1"
-                                  />
-                                </div>
-                              )}
+
                             </div>
                           )}
                         </div>
@@ -610,10 +548,7 @@ export const OptionEditorAccordion: React.FC<OptionEditorAccordionProps> = ({
                                     PRICE_TYPES.find(
                                       (pt) => pt.value === opt.price_type,
                                     )?.label || opt.price_type;
-                                  const displayPrice =
-                                    opt.price_type === "formula"
-                                      ? opt.formula || ""
-                                      : `$${(opt.price ?? 0).toFixed(2)}`;
+                                  const displayPrice = `$${(opt.price ?? 0).toFixed(2)}`;
                                   return (
                                     <span className="wpab-wpoa-inline-flex wpab-wpoa-items-center wpab-wpoa-px-2.5 wpab-wpoa-py-0.5 wpab-wpoa-rounded-[6px] wpab-wpoa-text-[11px] wpab-wpoa-font-semibold wpab-wpoa-bg-indigo-50 wpab-wpoa-text-indigo-700 wpab-wpoa-border wpab-wpoa-border-indigo-100/80">
                                       <Tag className="wpab-wpoa-w-3 wpab-wpoa-h-3 wpab-wpoa-mr-1.5 wpab-wpoa-shrink-0 wpab-wpoa-text-indigo-500" />
