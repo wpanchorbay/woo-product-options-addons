@@ -284,7 +284,7 @@ class Admin {
 	 */
 	public function add_plugin_action_links( $actions ) {
 		$actions[] = '<a href="' . esc_url( admin_url( 'admin.php?page=wc-settings&tab=products&section=woo-product-options-addons' ) ) . '">' . esc_html__( 'Settings', 'woo-product-options-addons' ) . '</a>';
-		$actions[] = '<a href="' . esc_url( 'https://docs.wpanchorbay.com/woo-product-options-addons/' ) . '" target="_blank">' . esc_html__( 'Documentation', 'woo-product-options-addons' ) . '</a>';
+		$actions[] = '<a href="' . esc_url( 'https://docs.wpanchorbay.com/smart-product-options-addons/' ) . '" target="_blank">' . esc_html__( 'Documentation', 'woo-product-options-addons' ) . '</a>';
 		$actions[] = '<a href="' . esc_url( 'https://wpanchorbay.com/support/' ) . '" target="_blank">' . esc_html__( 'Support', 'woo-product-options-addons' ) . '</a>';
 		return $actions;
 	}

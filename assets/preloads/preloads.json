@@ -1,52 +1,976 @@
 [
   {
-    "title": "Comprehensive All-Field Prototype",
+    "title": "Gift Wrapping Service",
+    "assignments": [
+      {
+        "target_type": "global",
+        "target_id": 0
+      }
+    ],
     "schema": [
-      { "id": "f1_text", "type": "text", "label": "Text Input", "price": 0, "price_type": "none" },
-      { "id": "f2_textarea", "type": "textarea", "label": "Textarea", "price": 0, "price_type": "none" },
-      { "id": "f3_number", "type": "number", "label": "Number Field", "price": 10, "price_type": "flat" },
-      { "id": "f4_email", "type": "text", "label": "Email Field", "price": 0, "price_type": "none" },
-      { "id": "f5_select", "type": "select", "label": "Dropdown", "price": 0, "price_type": "none", "options": [{"label": "Opt 1", "value": "1", "price": 0, "price_type": "none"}] },
-      { "id": "f6_checkbox", "type": "checkbox", "label": "Checkbox Group", "price": 0, "price_type": "none", "options": [{"label": "Check 1", "value": "c1", "price": 5, "price_type": "flat"}] },
-      { "id": "f7_radio", "type": "radio", "label": "Radio Buttons", "price": 0, "price_type": "none", "options": [{"label": "Radio 1", "value": "r1", "price": 0, "price_type": "none"}] },
-      { "id": "f8_color", "type": "color_swatch", "label": "Color Swatch", "price": 0, "price_type": "none", "options": [{"label": "Red", "value": "red", "color": "#FF0000", "price": 0, "price_type": "none"}] },
-      { "id": "f9_image", "type": "image_swatch", "label": "Image Swatch", "price": 0, "price_type": "none", "options": [{"label": "Icon", "value": "i1", "image_url": "http://example.com/icon.png", "price": 0, "price_type": "none"}] },
-      { "id": "f10_static", "type": "static_content", "label": "Static Content", "content": "<h2>Hello World</h2>" }
+      {
+        "id": "gw1",
+        "type": "radio",
+        "label": "Wrapping Paper Style",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "Standard Paper",
+            "value": "standard",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "Premium Glossy",
+            "value": "premium",
+            "price": 2.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Eco-Friendly Kraft",
+            "value": "eco",
+            "price": 1.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "gw2",
+        "type": "select",
+        "label": "Ribbon Color",
+        "required": false,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "No Ribbon",
+            "value": "none",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "Classic Red",
+            "value": "red",
+            "price": 0.5,
+            "price_type": "flat"
+          },
+          {
+            "label": "Gold Foil",
+            "value": "gold",
+            "price": 1.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Silver Foil",
+            "value": "silver",
+            "price": 1.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "gw3",
+        "type": "checkbox",
+        "label": "Add-ons",
+        "required": false,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "Greeting Card",
+            "value": "card",
+            "price": 3.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Custom Name Tag",
+            "value": "tag",
+            "price": 1.5,
+            "price_type": "flat"
+          },
+          {
+            "label": "Scented Spray",
+            "value": "scent",
+            "price": 2.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "gw4",
+        "type": "textarea",
+        "label": "Card Message",
+        "required": false,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        }
+      },
+      {
+        "id": "gw5",
+        "type": "text",
+        "label": "Recipient Name",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        }
+      }
     ]
   },
   {
-    "title": "Electronics Configurator",
+    "title": "Laptop Configurator",
+    "assignments": [
+      {
+        "target_type": "global",
+        "target_id": 0
+      }
+    ],
     "schema": [
-      { "id": "e1_color", "type": "color_swatch", "label": "Color", "options": [{"label": "Silver", "value": "s", "color": "#C0C0C0", "price": 0, "price_type": "none"}] },
-      { "id": "e2_ram", "type": "select", "label": "RAM", "options": [{"label": "16GB", "value": "16", "price": 100, "price_type": "flat"}] }
+      {
+        "id": "lc1",
+        "type": "select",
+        "label": "RAM Upgrade",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "8GB Unified Memory",
+            "value": "8gb",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "16GB Unified Memory",
+            "value": "16gb",
+            "price": 200.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "32GB Unified Memory",
+            "value": "32gb",
+            "price": 400.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "lc2",
+        "type": "radio",
+        "label": "Storage Capacity",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "256GB SSD",
+            "value": "256gb",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "512GB SSD",
+            "value": "512gb",
+            "price": 200.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "1TB SSD",
+            "value": "1tb",
+            "price": 400.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "lc3",
+        "type": "color_swatch",
+        "label": "Chassis Color",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "Space Gray",
+            "value": "gray",
+            "price": 0,
+            "price_type": "none",
+            "color": "#53565A"
+          },
+          {
+            "label": "Midnight Black",
+            "value": "black",
+            "price": 0,
+            "price_type": "none",
+            "color": "#1A1A1A"
+          },
+          {
+            "label": "Starlight Silver",
+            "value": "silver",
+            "price": 0,
+            "price_type": "none",
+            "color": "#E5E5E5"
+          }
+        ]
+      },
+      {
+        "id": "lc4",
+        "type": "checkbox",
+        "label": "Pre-installed Software",
+        "required": false,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "Office Suite",
+            "value": "office",
+            "price": 149.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Creative Video Editor",
+            "value": "video",
+            "price": 299.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Antivirus 1-Year",
+            "value": "av",
+            "price": 49.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "lc5",
+        "type": "select",
+        "label": "Warranty",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "1 Year Standard",
+            "value": "1y",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "2 Years Extended",
+            "value": "2y",
+            "price": 99.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "3 Years Premium Protection",
+            "value": "3y",
+            "price": 199.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "lc6",
+        "type": "text",
+        "label": "Free Laser Engraving",
+        "required": false,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        }
+      }
     ]
   },
   {
-    "title": "Gourmet Pizza Customizer",
+    "title": "Gourmet Pizza Builder",
+    "assignments": [
+      {
+        "target_type": "global",
+        "target_id": 0
+      }
+    ],
     "schema": [
-      { "id": "p1_size", "type": "radio", "label": "Size", "options": [{"label": "12\"", "value": "12", "price": 0, "price_type": "none"}] },
-      { "id": "p2_topping", "type": "checkbox", "label": "Toppings", "options": [{"label": "Pep", "value": "p", "price": 2, "price_type": "flat"}] }
+      {
+        "id": "pz1",
+        "type": "radio",
+        "label": "Pizza Size",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "Small 10\"",
+            "value": "s",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "Medium 12\"",
+            "value": "m",
+            "price": 3.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Large 14\"",
+            "value": "l",
+            "price": 6.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Extra Large 16\"",
+            "value": "xl",
+            "price": 9.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "pz2",
+        "type": "select",
+        "label": "Crust Type",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "Thin Crust",
+            "value": "thin",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "Classic Hand Tossed",
+            "value": "hand",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "Cheese Stuffed Crust",
+            "value": "stuffed",
+            "price": 2.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Gluten-Free Base",
+            "value": "gf",
+            "price": 3.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "pz3",
+        "type": "checkbox",
+        "label": "Meat Toppings ($1.50 each)",
+        "required": false,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "Pepperoni",
+            "value": "pep",
+            "price": 1.5,
+            "price_type": "flat"
+          },
+          {
+            "label": "Italian Sausage",
+            "value": "saus",
+            "price": 1.5,
+            "price_type": "flat"
+          },
+          {
+            "label": "Smoked Bacon",
+            "value": "bacon",
+            "price": 1.5,
+            "price_type": "flat"
+          },
+          {
+            "label": "Grilled Chicken",
+            "value": "chicken",
+            "price": 1.5,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "pz4",
+        "type": "checkbox",
+        "label": "Veggie Toppings ($1.00 each)",
+        "required": false,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "Fresh Mushrooms",
+            "value": "mush",
+            "price": 1.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Red Onions",
+            "value": "onions",
+            "price": 1.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Green Bell Peppers",
+            "value": "peppers",
+            "price": 1.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Black Olives",
+            "value": "olives",
+            "price": 1.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "pz5",
+        "type": "textarea",
+        "label": "Special Instructions",
+        "required": false,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        }
+      }
     ]
   },
   {
-    "title": "Sports Jersey Builder",
+    "title": "Custom Apparel",
+    "assignments": [
+      {
+        "target_type": "global",
+        "target_id": 0
+      }
+    ],
     "schema": [
-      { "id": "j1_name", "type": "text", "label": "Name", "required": true },
-      { "id": "j2_num", "type": "number", "label": "Number", "min_value": 0, "max_value": 99 }
+      {
+        "id": "ts1",
+        "type": "select",
+        "label": "Size",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "Small",
+            "value": "s",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "Medium",
+            "value": "m",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "Large",
+            "value": "l",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "X-Large",
+            "value": "xl",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "XX-Large",
+            "value": "xxl",
+            "price": 2.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "ts2",
+        "type": "color_swatch",
+        "label": "Shirt Color",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "Crimson Red",
+            "value": "red",
+            "price": 0,
+            "price_type": "none",
+            "color": "#DC143C"
+          },
+          {
+            "label": "Navy Blue",
+            "value": "blue",
+            "price": 0,
+            "price_type": "none",
+            "color": "#000080"
+          },
+          {
+            "label": "Pitch Black",
+            "value": "black",
+            "price": 0,
+            "price_type": "none",
+            "color": "#000000"
+          },
+          {
+            "label": "Pure White",
+            "value": "white",
+            "price": 0,
+            "price_type": "none",
+            "color": "#FFFFFF"
+          }
+        ]
+      },
+      {
+        "id": "ts3",
+        "type": "radio",
+        "label": "Material",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "100% Organic Cotton",
+            "value": "cotton",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "Polyester Blend",
+            "value": "poly",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "Premium Moisture Wicking",
+            "value": "wicking",
+            "price": 5.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "ts4",
+        "type": "text",
+        "label": "Custom Text on Back",
+        "required": false,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        }
+      }
     ]
   },
   {
-    "title": "Luxury Watch Options",
+    "title": "Floral Arrangement Options",
+    "assignments": [
+      {
+        "target_type": "global",
+        "target_id": 0
+      }
+    ],
     "schema": [
-      { "id": "w1_dial", "type": "select", "label": "Dial Color", "options": [{"label": "Black", "value": "k", "price": 0, "price_type": "none"}] },
-      { "id": "w2_engraving", "type": "checkbox", "label": "Engraving?", "price": 50, "price_type": "flat" }
+      {
+        "id": "fl1",
+        "type": "select",
+        "label": "Bouquet Size",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "Standard (12 Stems)",
+            "value": "std",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "Deluxe (18 Stems)",
+            "value": "deluxe",
+            "price": 15.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Premium (24 Stems)",
+            "value": "prem",
+            "price": 30.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "fl2",
+        "type": "checkbox",
+        "label": "Include Extras",
+        "required": false,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "Box of Chocolates",
+            "value": "choc",
+            "price": 12.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Plush Teddy Bear",
+            "value": "bear",
+            "price": 18.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Mylar Balloon",
+            "value": "balloon",
+            "price": 5.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "fl3",
+        "type": "radio",
+        "label": "Vase Type",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "No Vase (Wrapped in paper)",
+            "value": "none",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "Clear Glass Vase",
+            "value": "glass",
+            "price": 10.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Elegant Ceramic Vase",
+            "value": "ceramic",
+            "price": 20.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "fl4",
+        "type": "text",
+        "label": "Requested Delivery Date",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        }
+      },
+      {
+        "id": "fl5",
+        "type": "textarea",
+        "label": "Gift Message",
+        "required": false,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        }
+      }
     ]
   },
   {
-    "title": "Healthy Meal Plan",
+    "title": "Auto Detailing Booking",
+    "assignments": [
+      {
+        "target_type": "global",
+        "target_id": 0
+      }
+    ],
     "schema": [
-      { "id": "m1_diet", "type": "radio", "label": "Diet", "options": [{"label": "Vegan", "value": "v", "price": 0, "price_type": "none"}] },
-      { "id": "m2_notes", "type": "textarea", "label": "Allergies", "placeholder": "Enter here..." }
+      {
+        "id": "cw1",
+        "type": "select",
+        "label": "Vehicle Type",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "Compact / Sedan",
+            "value": "sedan",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "Mid-size SUV",
+            "value": "suv",
+            "price": 10.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Full-size Truck / Van",
+            "value": "truck",
+            "price": 20.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "cw2",
+        "type": "radio",
+        "label": "Wash Package",
+        "required": true,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "Basic Exterior",
+            "value": "basic",
+            "price": 0,
+            "price_type": "none"
+          },
+          {
+            "label": "Standard Inside & Out",
+            "value": "std",
+            "price": 15.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Premium Detail",
+            "value": "prem",
+            "price": 40.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Ultimate Ceramic Package",
+            "value": "ult",
+            "price": 100.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "cw3",
+        "type": "checkbox",
+        "label": "\u00c0 La Carte Services",
+        "required": false,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "options": [
+          {
+            "label": "Hand Wax Coating",
+            "value": "wax",
+            "price": 25.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Deep Carpet Shampoo",
+            "value": "carpet",
+            "price": 35.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Leather Seat Conditioning",
+            "value": "leather",
+            "price": 30.0,
+            "price_type": "flat"
+          },
+          {
+            "label": "Headlight Restoration",
+            "value": "lights",
+            "price": 20.0,
+            "price_type": "flat"
+          }
+        ]
+      },
+      {
+        "id": "cw4",
+        "type": "number",
+        "label": "Number of Vehicles",
+        "required": false,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        }
+      },
+      {
+        "id": "cw5",
+        "type": "static_content",
+        "label": "Terms & Conditions",
+        "required": false,
+        "price": 0,
+        "price_type": "none",
+        "conditions": {
+          "status": "inactive",
+          "action": "show",
+          "match": "ALL",
+          "rules": []
+        },
+        "content": "<p>Please ensure all personal belongings are removed from the vehicle prior to the appointment.</p>"
+      }
     ]
   }
 ]

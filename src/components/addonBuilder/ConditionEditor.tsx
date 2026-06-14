@@ -23,7 +23,12 @@ export const ConditionEditor: React.FC<ConditionEditorProps> = ({
 }) => {
   const { state, dispatch } = useAddonContext();
   const siblingFields = state.schema.filter((f) => f.id !== field.id);
-  const conditions = field.conditions;
+  const conditions = field.conditions || {
+    status: "inactive",
+    action: "show",
+    match: "ALL",
+    rules: [],
+  };
 
   console.log('ConditionEditor for field:', field.id, 'label:', field.label);
   console.log('Total schema fields:', state.schema.length);
