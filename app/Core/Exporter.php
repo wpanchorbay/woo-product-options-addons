@@ -66,12 +66,13 @@ class Exporter {
 	 */
 	public static function export_inventory() {
 		global $wpdb;
+
+		$table_name = DbManager::get_inventory_table();
+
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$results = $wpdb->get_results(
-			$wpdb->prepare(
-				'SELECT id, name, stock_count, allow_backorders FROM %i',
-				DbManager::get_inventory_table()
-			),
+			// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Internal table name is safe.
+			"SELECT id, name, stock_count, allow_backorders FROM $table_name",
 			ARRAY_A
 		);
 		return is_array( $results ) ? $results : array();

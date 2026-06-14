@@ -244,11 +244,14 @@ class DbManager {
 	 */
 	public function get_assignments_for_group( $group_id ) {
 		global $wpdb;
+
+		$table_name = self::get_assignments_table();
+
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$results = $wpdb->get_results(
 			$wpdb->prepare(
-				'SELECT target_type, target_id, priority FROM %i WHERE group_id = %d ORDER BY priority ASC',
-				self::get_assignments_table(),
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Internal table name is safe.
+				"SELECT target_type, target_id, priority FROM $table_name WHERE group_id = %d ORDER BY priority ASC",
 				absint( $group_id )
 			),
 			ARRAY_A

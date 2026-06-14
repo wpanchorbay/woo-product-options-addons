@@ -1,6 +1,6 @@
 === OptionBay - Product Options and Addons ===
 Contributors: optionbay
-Tags: woocommerce, product options, addons, product fields, extra product options, conditional logic
+Tags: woocommerce, product options, addons, extra product options, conditional logic
 Requires at least: 6.0
 Tested up to: 7.0
 Requires PHP: 7.4

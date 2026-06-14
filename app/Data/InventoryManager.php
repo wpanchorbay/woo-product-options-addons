@@ -71,11 +71,13 @@ class InventoryManager {
 
 		global $wpdb;
 
+		$table_name = DbManager::get_inventory_table();
+
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$item = $wpdb->get_row(
 			$wpdb->prepare(
-				'SELECT * FROM %i WHERE id = %d',
-				DbManager::get_inventory_table(),
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Internal table name is safe.
+				"SELECT * FROM $table_name WHERE id = %d",
 				absint( $id )
 			),
 			ARRAY_A
@@ -209,11 +211,13 @@ class InventoryManager {
 	public function decrement_stock( $id, $amount ) {
 		global $wpdb;
 
+		$table_name = DbManager::get_inventory_table();
+
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$result = $wpdb->query(
 			$wpdb->prepare(
-				'UPDATE %i SET stock_count = stock_count - %f, updated_at = %s WHERE id = %d AND (stock_count >= %f OR allow_backorders = 1)',
-				DbManager::get_inventory_table(),
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Internal table name is safe.
+				"UPDATE $table_name SET stock_count = stock_count - %f, updated_at = %s WHERE id = %d AND (stock_count >= %f OR allow_backorders = 1)",
 				floatval( $amount ),
 				current_time( 'mysql' ),
 				absint( $id ),
@@ -242,11 +246,13 @@ class InventoryManager {
 	public function increment_stock( $id, $amount ) {
 		global $wpdb;
 
+		$table_name = DbManager::get_inventory_table();
+
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		$result = $wpdb->query(
 			$wpdb->prepare(
-				'UPDATE %i SET stock_count = stock_count + %f, updated_at = %s WHERE id = %d',
-				DbManager::get_inventory_table(),
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Internal table name is safe.
+				"UPDATE $table_name SET stock_count = stock_count + %f, updated_at = %s WHERE id = %d",
 				floatval( $amount ),
 				current_time( 'mysql' ),
 				absint( $id )
@@ -274,11 +280,13 @@ class InventoryManager {
 	public function search_items( $search, $limit = 20 ) {
 		global $wpdb;
 
+		$table_name = DbManager::get_inventory_table();
+
 		// phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
 		return $wpdb->get_results(
 			$wpdb->prepare(
-				'SELECT id, name, stock_count, allow_backorders FROM %i WHERE name LIKE %s LIMIT %d',
-				DbManager::get_inventory_table(),
+				// phpcs:ignore WordPress.DB.PreparedSQL.InterpolatedNotPrepared, PluginCheck.Security.DirectDB.UnescapedDBParameter -- Internal table name is safe.
+				"SELECT id, name, stock_count, allow_backorders FROM $table_name WHERE name LIKE %s LIMIT %d",
 				'%' . $wpdb->esc_like( $search ) . '%',
 				absint( $limit )
 			),
