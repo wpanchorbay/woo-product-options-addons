@@ -438,10 +438,10 @@ class CartManager extends Base {
 					$intents = array();
 					if ( ! empty( $field_schema['enable_stock'] ) && ! empty( $field_schema['inventory_id'] ) ) {
 						$intents[] = array(
-							'id'      => $field_schema['inventory_id'],
-							'mode'    => $field_schema['reduction_mode'] ?? 'per_item_qty',
-							'value'   => $sanitized_value,
-							'amount'  => 1.0, // Base unit
+							'id'     => $field_schema['inventory_id'],
+							'mode'   => $field_schema['reduction_mode'] ?? 'per_item_qty',
+							'value'  => $sanitized_value,
+							'amount' => 1.0, // Base unit
 						);
 					}
 
@@ -450,10 +450,10 @@ class CartManager extends Base {
 						foreach ( $field_schema['options'] as $opt ) {
 							if ( in_array( $opt['value'], $values_array, true ) && ! empty( $opt['enable_stock'] ) && ! empty( $opt['inventory_id'] ) ) {
 								$intents[] = array(
-									'id'      => $opt['inventory_id'],
-									'mode'    => $opt['reduction_mode'] ?? 'per_item_qty',
-									'value'   => $opt['value'],
-									'amount'  => 1.0,
+									'id'     => $opt['inventory_id'],
+									'mode'   => $opt['reduction_mode'] ?? 'per_item_qty',
+									'value'  => $opt['value'],
+									'amount' => 1.0,
 								);
 							}
 						}
@@ -796,7 +796,7 @@ class CartManager extends Base {
 	 * @return float
 	 */
 	private function calculate_total_intent_reduction( $intent, $quantity ) {
-		$mode    = $intent['mode'] ?? 'per_item_qty';
+		$mode = $intent['mode'] ?? 'per_item_qty';
 
 		return $this->calculate_reduction_amount( $quantity, $mode );
 	}
@@ -868,7 +868,7 @@ class CartManager extends Base {
 					$amount             = $this->calculate_reduction_amount( $quantity, $field_schema['reduction_mode'] ?? 'per_item_qty' );
 					$intents[ $inv_id ] = ( $intents[ $inv_id ] ?? 0 ) + $amount;
 				}
- 
+
 				if ( in_array( $field_schema['type'], array( 'select', 'radio', 'checkbox', 'color_swatch', 'image_swatch' ), true ) ) {
 					$values_array = is_array( $value ) ? $value : array( $value );
 					foreach ( $field_schema['options'] as $opt ) {

@@ -61,7 +61,8 @@
     <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
         <properties>
             <property name="prefixes" type="array">
-                <element value="smart_product_options_addons"/>
+                <element value="product_options_addons_woo"/>
+                <element value="PRODUCT_OPTIONS_ADDONS_WOO"/>
                 <element value="SmartProductOptionsAddons"/>
             </property>
         </properties>

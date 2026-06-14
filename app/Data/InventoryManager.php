@@ -339,8 +339,6 @@ class InventoryManager {
 			return floatval( $quantity );
 		}
 
-
-
 		return floatval( $quantity );
 	}
 }

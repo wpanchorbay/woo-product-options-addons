@@ -863,21 +863,21 @@ class AddonGroupController extends ApiController {
 			}
 
 			$clean_field = array(
-				'id'                => sanitize_text_field( $field['id'] ),
-				'type'              => in_array( $field['type'] ?? '', $allowed_types, true ) ? $field['type'] : 'text',
-				'label'             => sanitize_text_field( $field['label'] ?? '' ),
-				'description'       => sanitize_textarea_field( $field['description'] ?? '' ),
-				'placeholder'       => sanitize_text_field( $field['placeholder'] ?? '' ),
-				'required'          => ! empty( $field['required'] ),
-				'class_name'        => sanitize_html_class( $field['class_name'] ?? '' ),
-				'price_type'        => in_array( $field['price_type'] ?? 'none', $allowed_price_types, true )
+				'id'             => sanitize_text_field( $field['id'] ),
+				'type'           => in_array( $field['type'] ?? '', $allowed_types, true ) ? $field['type'] : 'text',
+				'label'          => sanitize_text_field( $field['label'] ?? '' ),
+				'description'    => sanitize_textarea_field( $field['description'] ?? '' ),
+				'placeholder'    => sanitize_text_field( $field['placeholder'] ?? '' ),
+				'required'       => ! empty( $field['required'] ),
+				'class_name'     => sanitize_html_class( $field['class_name'] ?? '' ),
+				'price_type'     => in_array( $field['price_type'] ?? 'none', $allowed_price_types, true )
 					? ( $field['price_type'] ?? 'none' )
 					: 'none',
-				'price'             => floatval( $field['price'] ?? 0 ),
-				'weight'            => floatval( $field['weight'] ?? 0 ),
-				'enable_stock'      => ! empty( $field['enable_stock'] ),
-				'inventory_id'      => $field['inventory_id'] ?? null,
-				'reduction_mode'    => $field['reduction_mode'] ?? 'per_item_qty',
+				'price'          => floatval( $field['price'] ?? 0 ),
+				'weight'         => floatval( $field['weight'] ?? 0 ),
+				'enable_stock'   => ! empty( $field['enable_stock'] ),
+				'inventory_id'   => $field['inventory_id'] ?? null,
+				'reduction_mode' => $field['reduction_mode'] ?? 'per_item_qty',
 			);
 
 			$options_have_stock = false;
@@ -890,18 +890,18 @@ class AddonGroupController extends ApiController {
 						continue;
 					}
 					$clean_option = array(
-						'label'             => sanitize_text_field( $option['label'] ?? '' ),
-						'value'             => sanitize_text_field( $option['value'] ?? '' ),
-						'price_type'        => in_array( $option['price_type'] ?? 'flat', $allowed_price_types, true )
+						'label'          => sanitize_text_field( $option['label'] ?? '' ),
+						'value'          => sanitize_text_field( $option['value'] ?? '' ),
+						'price_type'     => in_array( $option['price_type'] ?? 'flat', $allowed_price_types, true )
 							? ( $option['price_type'] ?? 'flat' )
 							: 'flat',
-						'price'             => floatval( $option['price'] ?? 0 ),
-						'weight'            => floatval( $option['weight'] ?? 0 ),
-						'color'             => sanitize_text_field( $option['color'] ?? '' ),
-						'image_url'         => esc_url_raw( $option['image_url'] ?? '' ),
-						'enable_stock'      => ! empty( $option['enable_stock'] ),
-						'inventory_id'      => $option['inventory_id'] ?? null,
-						'reduction_mode'    => $option['reduction_mode'] ?? 'per_item_qty',
+						'price'          => floatval( $option['price'] ?? 0 ),
+						'weight'         => floatval( $option['weight'] ?? 0 ),
+						'color'          => sanitize_text_field( $option['color'] ?? '' ),
+						'image_url'      => esc_url_raw( $option['image_url'] ?? '' ),
+						'enable_stock'   => ! empty( $option['enable_stock'] ),
+						'inventory_id'   => $option['inventory_id'] ?? null,
+						'reduction_mode' => $option['reduction_mode'] ?? 'per_item_qty',
 					);
 					if ( ! empty( $clean_option['enable_stock'] ) ) {
 						$options_have_stock = true;
