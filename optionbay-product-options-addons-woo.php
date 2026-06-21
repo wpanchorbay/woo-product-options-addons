@@ -16,7 +16,7 @@
  * Text Domain:       optionbay-product-options-addons-woo
  * Domain Path:       /languages
  *
- * @package SmartProductOptionsAddons
+ * @package Opopw
  */
 
 // If this file is called directly, abort.
@@ -45,17 +45,15 @@ require_once OPOPW_PATH . 'app/functions.php';
 
 register_activation_hook( __FILE__, 'opopw_activate' );
 register_deactivation_hook( __FILE__, 'opopw_deactivate' );
-if ( ! function_exists( 'opopw_run' ) ) {
-	/**
-	 * Begins execution of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @return void
-	 */
-	function opopw_run() {
-		$plugin = \SmartProductOptionsAddons\Core\Plugin::get_instance();
-		add_action( 'plugins_loaded', array( $plugin, 'run' ) );
-	}
+/**
+ * Begins execution of the plugin.
+ *
+ * @since    1.0.0
+ * @return void
+ */
+function opopw_run() {
+	$plugin = \Opopw\Core\Plugin::get_instance();
+	add_action( 'plugins_loaded', array( $plugin, 'run' ) );
 }
 opopw_run();
 
@@ -81,7 +79,7 @@ add_action(
  */
 function opopw_activate() {
 	require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-	\SmartProductOptionsAddons\Core\Activator::activate();
+	\Opopw\Core\Activator::activate();
 }
 
 /**
@@ -91,5 +89,5 @@ function opopw_activate() {
  * @return void
  */
 function opopw_deactivate() {
-	\SmartProductOptionsAddons\Core\Deactivator::deactivate();
+	\Opopw\Core\Deactivator::deactivate();
 }

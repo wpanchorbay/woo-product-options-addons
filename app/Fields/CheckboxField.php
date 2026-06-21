@@ -3,11 +3,11 @@
  * Checkbox Field — Field type for toggles and multi-checkboxes.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Fields
+ * @package    Opopw
+ * @subpackage Opopw/Fields
  */
 
-namespace SmartProductOptionsAddons\Fields;
+namespace Opopw\Fields;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -41,10 +41,10 @@ class CheckboxField extends BaseField {
 		if ( empty( $options ) ) {
 			$is_required   = $this->get( 'required' );
 			$required_attr = $is_required ? ' required="required"' : '';
-			$required_mark = $is_required ? ' <span class="ob-required">*</span>' : '';
+			$required_mark = $is_required ? ' <span class="opopw-required">*</span>' : '';
 
 			return sprintf(
-				'<label class="ob-checkbox-single"><input type="checkbox" id="%s" name="%s" value="1" class="ob-input ob-input--checkbox"%s /> %s%s%s</label>',
+				'<label class="opopw-checkbox-single"><input type="checkbox" id="%s" name="%s" value="1" class="opopw-input opopw-input--checkbox"%s /> %s%s%s</label>',
 				$this->get_html_id(),
 				$this->get_name(),
 				$required_attr,
@@ -55,7 +55,7 @@ class CheckboxField extends BaseField {
 		}
 
 		// Multi-checkbox (with options)
-		$html = '<div class="ob-checkbox-group">';
+		$html = '<div class="opopw-checkbox-group">';
 		$name = $this->get_name() . '[]'; // Array name for multi-select
 
 		foreach ( $options as $i => $option ) {
@@ -75,7 +75,7 @@ class CheckboxField extends BaseField {
 			}
 
 			$html .= sprintf(
-				'<label class="ob-checkbox-option" for="%s"><input type="checkbox" id="%s" name="%s" value="%s" class="ob-input ob-input--checkbox"%s /> %s%s</label>',
+				'<label class="opopw-checkbox-option" for="%s"><input type="checkbox" id="%s" name="%s" value="%s" class="opopw-input opopw-input--checkbox"%s /> %s%s</label>',
 				$option_id,
 				$option_id,
 				$name,

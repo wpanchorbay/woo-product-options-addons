@@ -3,11 +3,11 @@
  * Addon Group Controller — REST API handling for options.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Api
+ * @package    Opopw
+ * @subpackage Opopw/Api
  */
 
-namespace SmartProductOptionsAddons\Api;
+namespace Opopw\Api;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,8 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
-use SmartProductOptionsAddons\Core\AddonGroup;
-use SmartProductOptionsAddons\Data\DbManager;
+use Opopw\Core\AddonGroup;
+use Opopw\Data\DbManager;
 
 /**
  * REST API controller for Option Groups (CRUD + assignment sync).
@@ -31,8 +31,8 @@ use SmartProductOptionsAddons\Data\DbManager;
  *   DELETE /optionbay-product-options-addons-woo/v1/groups/{id}    - Delete group
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Api
+ * @package    Opopw
+ * @subpackage Opopw/Api
  */
 class AddonGroupController extends ApiController {
 
@@ -378,7 +378,7 @@ class AddonGroupController extends ApiController {
 			// 1. Process new inventories (Handshake)
 			$id_map = array();
 			foreach ( $new_inventories as $new_inv ) {
-				$inv_id = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->create_item( $new_inv );
+				$inv_id = \Opopw\Data\InventoryManager::get_instance()->create_item( $new_inv );
 				if ( ! inv_id ) {
 					throw new \Exception( __( 'Failed to create global inventory item.', 'optionbay-product-options-addons-woo' ) );
 				}
@@ -508,7 +508,7 @@ class AddonGroupController extends ApiController {
 				// Handshake
 				$id_map = array();
 				foreach ( $new_inventories as $new_inv ) {
-					$inv_id = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->create_item( $new_inv );
+					$inv_id = \Opopw\Data\InventoryManager::get_instance()->create_item( $new_inv );
 					if ( ! inv_id ) {
 						throw new \Exception( __( 'Failed to create global inventory item.', 'optionbay-product-options-addons-woo' ) );
 					}

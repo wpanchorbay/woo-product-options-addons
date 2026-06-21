@@ -3,11 +3,11 @@
  * Textarea Field — Field type for multi-line text input.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Fields
+ * @package    Opopw
+ * @subpackage Opopw/Fields
  */
 
-namespace SmartProductOptionsAddons\Fields;
+namespace Opopw\Fields;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -35,7 +35,7 @@ class TextareaField extends BaseField {
 		$maxlength_attr = $max_length > 0 ? sprintf( ' maxlength="%d"', absint( $max_length ) ) : '';
 
 		return sprintf(
-			'<textarea id="%s" name="%s" class="ob-input ob-input--textarea" rows="4" placeholder="%s"%s%s></textarea>',
+			'<textarea id="%s" name="%s" class="opopw-input opopw-input--textarea" rows="4" placeholder="%s"%s%s></textarea>',
 			$this->get_html_id(),
 			$this->get_name(),
 			$placeholder,

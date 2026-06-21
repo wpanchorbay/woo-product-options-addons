@@ -3,11 +3,11 @@
  * Number Field — Field type for numeric inputs.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Fields
+ * @package    Opopw
+ * @subpackage Opopw/Fields
  */
 
-namespace SmartProductOptionsAddons\Fields;
+namespace Opopw\Fields;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -33,7 +33,7 @@ class NumberField extends BaseField {
 			'type'  => 'number',
 			'id'    => $this->get_html_id(),
 			'name'  => $this->get_name(),
-			'class' => 'ob-input ob-input--number',
+			'class' => 'opopw-input opopw-input--number',
 		);
 
 		$placeholder = $this->get( 'placeholder' );

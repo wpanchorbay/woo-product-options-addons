@@ -3,13 +3,13 @@
  * Exporter — Service for extracting data to JSON.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 
-namespace SmartProductOptionsAddons\Core;
+namespace Opopw\Core;
 
-use SmartProductOptionsAddons\Data\DbManager;
+use Opopw\Data\DbManager;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {

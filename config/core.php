@@ -7,7 +7,7 @@
  * to register its hooks with the Loader.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
+ * @package    Opopw
  */
 
 // Exit if accessed directly.
@@ -16,10 +16,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 return array(
-	\SmartProductOptionsAddons\Admin\Admin::class,
-	\SmartProductOptionsAddons\Core\Settings::class,
-	\SmartProductOptionsAddons\Core\Cron::class,
-	\SmartProductOptionsAddons\Core\AddonGroup::class,
-	\SmartProductOptionsAddons\Core\AddonRenderer::class,
-	\SmartProductOptionsAddons\Core\CartManager::class,
+	\Opopw\Admin\Admin::class,
+	\Opopw\Core\Settings::class,
+	\Opopw\Core\Cron::class,
+	\Opopw\Core\AddonGroup::class,
+	\Opopw\Core\AddonRenderer::class,
+	\Opopw\Core\CartManager::class,
 );

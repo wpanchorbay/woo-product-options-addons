@@ -6,6 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'SmartProductOptionsAddons\\' => array($baseDir . '/app'),
     'Rakit\\Validation\\' => array($vendorDir . '/rakit/validation/src'),
+    'Opopw\\' => array($baseDir . '/app'),
 );

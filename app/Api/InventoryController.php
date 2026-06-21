@@ -3,11 +3,11 @@
  * Inventory Controller — REST API handling for inventory items.
  *
  * @since      1.1.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Api
+ * @package    Opopw
+ * @subpackage Opopw/Api
  */
 
-namespace SmartProductOptionsAddons\Api;
+namespace Opopw\Api;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
-use SmartProductOptionsAddons\Data\InventoryManager;
+use Opopw\Data\InventoryManager;
 
 /**
  * REST API controller for Inventory Items.
@@ -28,8 +28,8 @@ use SmartProductOptionsAddons\Data\InventoryManager;
  *   PUT    /optionbay-product-options-addons-woo/v1/inventory/{id}    - Update inventory item
  *
  * @since      1.1.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Api
+ * @package    Opopw
+ * @subpackage Opopw/Api
  */
 class InventoryController extends ApiController {
 
@@ -269,8 +269,8 @@ class InventoryController extends ApiController {
 			WHERE p.post_type = %s 
 			AND p.post_status != 'trash'
 			AND pm.meta_key = %s",
-				\SmartProductOptionsAddons\Core\AddonGroup::POST_TYPE,
-				\SmartProductOptionsAddons\Core\AddonGroup::META_SCHEMA
+				\Opopw\Core\AddonGroup::POST_TYPE,
+				\Opopw\Core\AddonGroup::META_SCHEMA
 			)
 		);
 

@@ -3,11 +3,11 @@
  * Condition Evaluator — processes conditional logic rules for fields.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Helper
+ * @package    Opopw
+ * @subpackage Opopw/Helper
  */
 
-namespace SmartProductOptionsAddons\Helper;
+namespace Opopw\Helper;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,8 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * validation and pricing when processing add-to-cart requests.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Helper
+ * @package    Opopw
+ * @subpackage Opopw/Helper
  */
 class ConditionEvaluator {
 

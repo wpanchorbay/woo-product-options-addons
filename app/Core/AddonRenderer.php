@@ -3,20 +3,20 @@
  * Addon Renderer — handles displaying option fields on the product page.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 
-namespace SmartProductOptionsAddons\Core;
+namespace Opopw\Core;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use SmartProductOptionsAddons\Data\DbManager;
-use SmartProductOptionsAddons\Fields\FieldFactory;
-use SmartProductOptionsAddons\Helper\WooCommerce;
+use Opopw\Data\DbManager;
+use Opopw\Fields\FieldFactory;
+use Opopw\Helper\WooCommerce;
 
 /**
  * Rendering Engine — hooks into WooCommerce product pages to display
@@ -26,11 +26,11 @@ use SmartProductOptionsAddons\Helper\WooCommerce;
  *   1. Assignment Resolution: query lookup table for matching groups
  *   2. Schema Retrieval: load JSON schemas from post meta
  *   3. HTML Generation: pass each field through FieldFactory
- *   4. State Hydration: print spoaSchema + spoaBasePrice to JS
+ *   4. State Hydration: print opopwSchema + opopwBasePrice to JS
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 class AddonRenderer extends Base {
 
@@ -129,7 +129,7 @@ class AddonRenderer extends Base {
 
 		// Build inline styles for font and swatch customization
 		$style_attr = sprintf(
-			'--ob-font-size-label: %s; --ob-font-size-input: %s; --ob-swatch-size: %s; --ob-swatch-image-size: %s; --ob-swatch-radius: %s; --ob-swatch-image-radius: %s;',
+			'--opopw-font-size-label: %s; --opopw-font-size-input: %s; --opopw-swatch-size: %s; --opopw-swatch-image-size: %s; --opopw-swatch-radius: %s; --opopw-swatch-image-radius: %s;',
 			esc_attr( $font_label ),
 			esc_attr( $font_input ),
 			esc_attr( $swatch_size ),
@@ -140,7 +140,7 @@ class AddonRenderer extends Base {
 
 		// Output the fully rendered fields wrapper
 		printf(
-			'<div class="ob-options-wrapper" id="wpab-wpoa-options" data-orientation="%s" style="%s">',
+			'<div class="opopw-options-wrapper" id="opopw-options" data-orientation="%s" style="%s">',
 			esc_attr( $orientation ),
 			esc_attr( $style_attr )
 		);
@@ -165,7 +165,7 @@ class AddonRenderer extends Base {
 		$layout = 'flat';
 
 		$html = sprintf(
-			'<div class="ob-group ob-group--%s" data-group-id="%d">',
+			'<div class="opopw-group opopw-group--%s" data-group-id="%d">',
 			esc_attr( $layout ),
 			$group_id
 		);
@@ -186,9 +186,9 @@ class AddonRenderer extends Base {
 		}
 
 		// Setup the live pricing display container at the bottom of the group
-		$html .= '<div class="wpab-wpoa-live-total" style="display:none;">';
+		$html .= '<div class="opopw-live-total" style="display:none;">';
 		$html .= sprintf(
-			'<span class="ob-total-label">%s</span> ',
+			'<span class="opopw-total-label">%s</span> ',
 			esc_html__( 'Total Product Price:', 'optionbay-product-options-addons-woo' )
 		);
 		$html .= '<span class="amount"></span>';
@@ -202,7 +202,7 @@ class AddonRenderer extends Base {
 	/**
 	 * Hydrate the page with JSON schema data for the JS engine.
 	 *
-	 * Prints window.spoaSchema and window.spoaBasePrice.
+	 * Prints window.opopwSchema.
 	 *
 	 * @since 1.0.0
 	 * @param array       $schemas  Grouped schemas indexed by group ID.
@@ -240,7 +240,7 @@ class AddonRenderer extends Base {
 
 		$inventory_data = array();
 		if ( ! empty( $inventory_ids ) ) {
-			$inv_manager = \SmartProductOptionsAddons\Data\InventoryManager::get_instance();
+			$inv_manager = \Opopw\Data\InventoryManager::get_instance();
 			foreach ( $inventory_ids as $inv_id ) {
 				$inv = $inv_manager->get_item( $inv_id );
 				if ( $inv ) {
@@ -269,8 +269,8 @@ class AddonRenderer extends Base {
 
 		// Hydrate JS state using the standard WordPress inline script method
 		wp_add_inline_script(
-			'wpab-wpoa-frontend',
-			'window.spoaSchema = ' . wp_json_encode( $hydration_data ) . ';',
+			'opopw-frontend',
+			'window.opopwSchema = ' . wp_json_encode( $hydration_data ) . ';',
 			'before'
 		);
 	}
@@ -286,7 +286,7 @@ class AddonRenderer extends Base {
 	 * @return array Group IDs.
 	 */
 	private function get_groups_for_product( int $product_id ) {
-		$cache_key = 'ob_assignments_product_' . $product_id;
+		$cache_key = 'opopw_assignments_product_' . $product_id;
 		$cached    = wp_cache_get( $cache_key, 'optionbay-product-options-addons-woo' );
 
 		if ( false !== $cached ) {
@@ -317,7 +317,7 @@ class AddonRenderer extends Base {
 	 * @return array
 	 */
 	private function get_group_schema( int $group_id ) {
-		$cache_key = 'ob_schema_group_' . $group_id;
+		$cache_key = 'opopw_schema_group_' . $group_id;
 		$cached    = wp_cache_get( $cache_key, 'optionbay-product-options-addons-woo' );
 
 		if ( false !== $cached ) {
@@ -369,7 +369,7 @@ class AddonRenderer extends Base {
 
 		// Frontend CSS
 		wp_enqueue_style(
-			'wpab-wpoa-frontend',
+			'opopw-frontend',
 			OPOPW_URL . 'assets/css/frontend.css',
 			array(),
 			OPOPW_VERSION
@@ -377,7 +377,7 @@ class AddonRenderer extends Base {
 
 		// Frontend JS
 		wp_enqueue_script(
-			'wpab-wpoa-frontend',
+			'opopw-frontend',
 			OPOPW_URL . 'assets/js/frontend.js',
 			array( 'jquery' ),
 			OPOPW_VERSION,

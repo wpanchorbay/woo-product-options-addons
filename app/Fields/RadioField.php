@@ -3,11 +3,11 @@
  * Radio Field — Field type for single choice radio buttons.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Fields
+ * @package    Opopw
+ * @subpackage Opopw/Fields
  */
 
-namespace SmartProductOptionsAddons\Fields;
+namespace Opopw\Fields;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -31,7 +31,7 @@ class RadioField extends BaseField {
 	protected function render_input() {
 		$options  = $this->get( 'options', array() );
 		$required = $this->get( 'required' ) ? ' required="required"' : '';
-		$html     = '<div class="ob-radio-group">';
+		$html     = '<div class="opopw-radio-group">';
 		$name     = $this->get_name();
 
 		foreach ( $options as $i => $option ) {
@@ -51,7 +51,7 @@ class RadioField extends BaseField {
 			}
 
 			$html .= sprintf(
-				'<label class="ob-radio-option" for="%s"><input type="radio" id="%s" name="%s" value="%s" class="ob-input ob-input--radio"%s%s /> %s%s</label>',
+				'<label class="opopw-radio-option" for="%s"><input type="radio" id="%s" name="%s" value="%s" class="opopw-input opopw-input--radio"%s%s /> %s%s</label>',
 				$option_id,
 				$option_id,
 				$name,

@@ -26,7 +26,7 @@ const ClassicLayout: FC = () => {
 	};
 
 	const context =
-		(window as any).spoaPlugin_Localize?.context || 'options';
+		(window as any).opopwPluginLocalize?.context || 'options';
 
 	return (
 		<div className="">

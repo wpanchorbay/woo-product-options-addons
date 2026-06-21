@@ -3,13 +3,13 @@
  * Activator — Logic to be executed during plugin activation.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 
-namespace SmartProductOptionsAddons\Core;
+namespace Opopw\Core;
 
-use SmartProductOptionsAddons\Data\DbManager;
+use Opopw\Data\DbManager;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,8 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 class Activator {
 
@@ -58,6 +58,7 @@ class Activator {
 
 		opopw_log( 'Activator: OptionBay - Product Options and Addons activated successfully.', 'INFO' );
 	}
+
 
 	/**
 	 * Instantiates the DB Manager and creates the custom tables.

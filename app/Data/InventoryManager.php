@@ -3,11 +3,11 @@
  * Inventory Manager — Handles global stock logic and database persistence.
  *
  * @since      1.1.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Data
+ * @package    Opopw
+ * @subpackage Opopw/Data
  */
 
-namespace SmartProductOptionsAddons\Data;
+namespace Opopw\Data;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -64,7 +64,7 @@ class InventoryManager {
 	 */
 	public function get_item( $id ) {
 		$cache_key = "item_{$id}";
-		$cached    = wp_cache_get( $cache_key, 'wpab_wpoa_inventory' );
+		$cached    = wp_cache_get( $cache_key, 'opopw_inventory' );
 		if ( false !== $cached ) {
 			return $cached;
 		}
@@ -85,7 +85,7 @@ class InventoryManager {
 		);
 
 		if ( $item ) {
-			wp_cache_set( $cache_key, $item, 'wpab_wpoa_inventory', 3600 );
+			wp_cache_set( $cache_key, $item, 'opopw_inventory', 3600 );
 		}
 
 		return $item;
@@ -169,7 +169,7 @@ class InventoryManager {
 		);
 
 		if ( false !== $result ) {
-			wp_cache_delete( "item_{$id}", 'wpab_wpoa_inventory' );
+			wp_cache_delete( "item_{$id}", 'opopw_inventory' );
 		}
 
 		return $result;
@@ -195,7 +195,7 @@ class InventoryManager {
 		);
 
 		if ( $result ) {
-			wp_cache_delete( "item_{$id}", 'wpab_wpoa_inventory' );
+			wp_cache_delete( "item_{$id}", 'opopw_inventory' );
 			opopw_log( sprintf( 'InventoryManager: Deleted inventory ID %d.', $id ), 'INFO' );
 		} else {
 			opopw_log( sprintf( 'InventoryManager: Failed to delete inventory ID %d.', $id ), 'ERROR' );
@@ -231,7 +231,7 @@ class InventoryManager {
 		);
 
 		if ( $result ) {
-			wp_cache_delete( "item_{$id}", 'wpab_wpoa_inventory' );
+			wp_cache_delete( "item_{$id}", 'opopw_inventory' );
 			opopw_log( sprintf( 'InventoryManager: Decrement stock ID %d by amount %f was SUCCESSFUL.', $id, $amount ), 'INFO' );
 		} else {
 			opopw_log( sprintf( 'InventoryManager: Decrement stock ID %d by amount %f FAILED (possibly insufficient stock).', $id, $amount ), 'ERROR' );
@@ -266,7 +266,7 @@ class InventoryManager {
 		);
 
 		if ( $result ) {
-			wp_cache_delete( "item_{$id}", 'wpab_wpoa_inventory' );
+			wp_cache_delete( "item_{$id}", 'opopw_inventory' );
 			opopw_log( sprintf( 'InventoryManager: Increment stock ID %d by amount %f was SUCCESSFUL.', $id, $amount ), 'INFO' );
 		} else {
 			opopw_log( sprintf( 'InventoryManager: Increment stock ID %d by amount %f FAILED.', $id, $amount ), 'ERROR' );

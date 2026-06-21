@@ -3,11 +3,11 @@
  * Resource Controller — REST API handling for WooCommerce resources.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Api
+ * @package    Opopw
+ * @subpackage Opopw/Api
  */
 
-namespace SmartProductOptionsAddons\Api;
+namespace Opopw\Api;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -25,8 +25,8 @@ use WP_REST_Server;
  * for the admin Assignment Rules UI.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Api
+ * @package    Opopw
+ * @subpackage Opopw/Api
  */
 class ResourceController extends ApiController {
 

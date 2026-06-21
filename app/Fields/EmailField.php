@@ -3,11 +3,11 @@
  * Email Field — Field type for email addresses.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Fields
+ * @package    Opopw
+ * @subpackage Opopw/Fields
  */
 
-namespace SmartProductOptionsAddons\Fields;
+namespace Opopw\Fields;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -31,7 +31,7 @@ class EmailField extends TextField {
 			'type'  => 'email',
 			'id'    => $this->get_html_id(),
 			'name'  => $this->get_name(),
-			'class' => 'ob-input ob-input--email',
+			'class' => 'opopw-input opopw-input--email',
 		);
 
 		$placeholder = $this->get( 'placeholder' );

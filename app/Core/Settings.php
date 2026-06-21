@@ -3,11 +3,11 @@
  * Settings — Plugin settings management.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 
-namespace SmartProductOptionsAddons\Core;
+namespace Opopw\Core;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,8 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * The settings functionality of the plugin.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 class Settings {
 
@@ -296,7 +296,7 @@ class Settings {
 	 * Register the hooks for settings.
 	 *
 	 * @since    1.0.0
-	 * @param    \SmartProductOptionsAddons\Core\Plugin $plugin The Plugin instance.
+	 * @param    \Opopw\Core\Plugin $plugin The Plugin instance.
 	 * @return   void
 	 */
 	public function run( $plugin ) {

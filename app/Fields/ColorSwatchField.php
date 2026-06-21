@@ -3,11 +3,11 @@
  * Color Swatch Field — Field type for picking colors visually.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Fields
+ * @package    Opopw
+ * @subpackage Opopw/Fields
  */
 
-namespace SmartProductOptionsAddons\Fields;
+namespace Opopw\Fields;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -34,7 +34,7 @@ class ColorSwatchField extends RadioField {
 		$display_style = $this->get( 'display_style', 'swatch_only' );
 		$name          = $this->get_name();
 		$html          = sprintf(
-			'<div class="ob-swatch-group ob-swatch-group--color" data-display-style="%s">',
+			'<div class="opopw-swatch-group opopw-swatch-group--color" data-display-style="%s">',
 			esc_attr( $display_style )
 		);
 
@@ -65,11 +65,11 @@ class ColorSwatchField extends RadioField {
 			$full_label_text  = $label . $price_label_text;
 
 			$html .= sprintf(
-				'<div class="ob-swatch-option">
-					<input type="radio" id="%s" name="%s" value="%s" class="ob-swatch-input"%s%s />
-					<label class="ob-swatch-label" for="%s" title="%s">
-						<span class="ob-swatch-visual" style="background-color: %s;">
-							<span class="ob-swatch-check"></span>
+				'<div class="opopw-swatch-option">
+					<input type="radio" id="%s" name="%s" value="%s" class="opopw-swatch-input"%s%s />
+					<label class="opopw-swatch-label" for="%s" title="%s">
+						<span class="opopw-swatch-visual" style="background-color: %s;">
+							<span class="opopw-swatch-check"></span>
 						</span>
 						%s
 					</label>
@@ -82,7 +82,7 @@ class ColorSwatchField extends RadioField {
 				$option_id,
 				esc_attr( $full_label_text ),
 				$color,
-				'swatch_label' === $display_style ? '<span class="ob-swatch-text">' . $label . $price_label_html . '</span>' : ''
+				'swatch_label' === $display_style ? '<span class="opopw-swatch-text">' . $label . $price_label_html . '</span>' : ''
 			);
 		}
 

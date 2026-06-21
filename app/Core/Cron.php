@@ -3,11 +3,11 @@
  * Cron Job management — Handling scheduled tasks and self-healing fallbacks.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 
-namespace SmartProductOptionsAddons\Core;
+namespace Opopw\Core;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -23,8 +23,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * and the built-in WP-Cron system.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 class Cron {
 
@@ -367,7 +367,7 @@ class Cron {
 	 * Register the hooks for the cron system.
 	 *
 	 * @since 1.0.0
-	 * @param \SmartProductOptionsAddons\Core\Plugin $plugin The Plugin instance.
+	 * @param \Opopw\Core\Plugin $plugin The Plugin instance.
 	 * @return void
 	 */
 	public function run( $plugin ) {

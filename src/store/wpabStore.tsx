@@ -26,14 +26,14 @@ interface WpabStoreContextType {
 
 const WpabStoreContext = createContext< WpabStoreContextType | null >( null );
 
-declare const spoaPlugin_Localize: PluginStore;
+declare const opopwPluginLocalize: PluginStore;
 
 export const WpabProvider: React.FC< { children: ReactNode } > = ( {
 	children,
 } ) => {
 	const initialValue: PluginStore =
-		typeof spoaPlugin_Localize !== 'undefined'
-			? spoaPlugin_Localize
+		typeof opopwPluginLocalize !== 'undefined'
+			? opopwPluginLocalize
 			: ( {} as PluginStore );
 
 	const [ store, setStore ] = useState< PluginStore >( initialValue );

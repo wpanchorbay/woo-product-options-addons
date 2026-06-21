@@ -3,11 +3,11 @@
  * Static Content Field — renders rich text content directly onto the product page.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Fields
+ * @package    Opopw
+ * @subpackage Opopw/Fields
  */
 
-namespace SmartProductOptionsAddons\Fields;
+namespace Opopw\Fields;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -21,8 +21,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Wrapper and label handling is managed by the base class.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Fields
+ * @package    Opopw
+ * @subpackage Opopw/Fields
  */
 class StaticContentField extends BaseField {
 
@@ -38,7 +38,7 @@ class StaticContentField extends BaseField {
 	protected function render_input() {
 		$content = $this->get( 'content', '' );
 		return sprintf(
-			'<div class="ob-static-content">%s</div>',
+			'<div class="opopw-static-content">%s</div>',
 			wp_kses_post( $content )
 		);
 	}

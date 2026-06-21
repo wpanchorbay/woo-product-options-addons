@@ -3,22 +3,22 @@
  * Cart Manager — manages the WooCommerce cart and checkout pipeline.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 
-namespace SmartProductOptionsAddons\Core;
+namespace Opopw\Core;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use SmartProductOptionsAddons\Data\DbManager;
-use SmartProductOptionsAddons\Fields\FieldFactory;
-use SmartProductOptionsAddons\Helper\ConditionEvaluator;
-use SmartProductOptionsAddons\Helper\WooCommerce;
-use SmartProductOptionsAddons\Pricing\PricingEngine;
+use Opopw\Data\DbManager;
+use Opopw\Fields\FieldFactory;
+use Opopw\Helper\ConditionEvaluator;
+use Opopw\Helper\WooCommerce;
+use Opopw\Pricing\PricingEngine;
 
 /**
  * Cart Manager — manages the WooCommerce cart and checkout pipeline.
@@ -31,8 +31,8 @@ use SmartProductOptionsAddons\Pricing\PricingEngine;
  *  5. Order line item (save to DB on checkout)
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 class CartManager extends Base {
 
@@ -96,7 +96,7 @@ class CartManager extends Base {
 	 * @return array
 	 */
 	private function get_groups_for_product( int $product_id ) {
-		$cache_key = 'ob_assignments_product_' . $product_id;
+		$cache_key = 'opopw_assignments_product_' . $product_id;
 		$cached    = wp_cache_get( $cache_key, 'optionbay-product-options-addons-woo' );
 
 		if ( false !== $cached ) {
@@ -125,7 +125,7 @@ class CartManager extends Base {
 	 * @return array The JSON-decoded schema array.
 	 */
 	private function get_group_schema( int $group_id ) {
-		$cache_key = 'ob_schema_group_' . $group_id;
+		$cache_key = 'opopw_schema_group_' . $group_id;
 		$cached    = wp_cache_get( $cache_key, 'optionbay-product-options-addons-woo' );
 
 		if ( false !== $cached ) {
@@ -173,7 +173,7 @@ class CartManager extends Base {
 
 		foreach ( $intents as $inv_id => $amount ) {
 			if ( ! $this->check_stock_availability( $inv_id, $amount ) ) {
-				$inv = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->get_item( $inv_id );
+				$inv = \Opopw\Data\InventoryManager::get_instance()->get_item( $inv_id );
 				/* translators: 1: inventory pool name, 2: remaining stock amount */
 				wc_add_notice( sprintf( __( 'Insufficient stock for "%1$s". Only %2$s remaining.', 'optionbay-product-options-addons-woo' ), $inv['name'], floatval( $inv['stock_count'] - $this->get_cart_reserved_stock( $inv_id ) ) ), 'error' );
 				return false;
@@ -242,8 +242,8 @@ class CartManager extends Base {
 
 		foreach ( $intents as $inv_id => $amount ) {
 			// Subtract the current cart item's reserved stock to avoid self-blocking
-			$reserved_others = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->get_cart_reserved_stock( $inv_id, $cart_item_key );
-			$inv             = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->get_item( $inv_id );
+			$reserved_others = \Opopw\Data\InventoryManager::get_instance()->get_cart_reserved_stock( $inv_id, $cart_item_key );
+			$inv             = \Opopw\Data\InventoryManager::get_instance()->get_item( $inv_id );
 
 			if ( ! $inv ) {
 				continue;
@@ -299,8 +299,8 @@ class CartManager extends Base {
 
 			foreach ( $intents as $inv_id => $amount ) {
 				// Subtract the current cart item's reserved stock to avoid self-blocking
-				$reserved_others = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->get_cart_reserved_stock( $inv_id, $cart_item_key );
-				$inv             = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->get_item( $inv_id );
+				$reserved_others = \Opopw\Data\InventoryManager::get_instance()->get_cart_reserved_stock( $inv_id, $cart_item_key );
+				$inv             = \Opopw\Data\InventoryManager::get_instance()->get_item( $inv_id );
 
 				if ( ! $inv ) {
 					continue;
@@ -365,7 +365,7 @@ class CartManager extends Base {
 		}
 
 		foreach ( $totals as $inv_id => $amount ) {
-			$inv = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->get_item( $inv_id );
+			$inv = \Opopw\Data\InventoryManager::get_instance()->get_item( $inv_id );
 			if ( $inv && ! $inv['allow_backorders'] && $inv['stock_count'] < $amount ) {
 				opopw_log( sprintf( 'CartManager: ERROR: Out of stock validation failure for inventory "%s" (ID %d). Available: %f, Requested: %f', $inv['name'], $inv_id, $inv['stock_count'], $amount ), 'ERROR' );
 				/* translators: %s: inventory pool name */
@@ -671,7 +671,7 @@ class CartManager extends Base {
 			}
 
 			if ( ! empty( $all_intents ) ) {
-				$item->add_meta_data( '_ob_stock_intents', $all_intents );
+				$item->add_meta_data( '_opopw_stock_intents', $all_intents );
 				opopw_log( sprintf( 'CartManager: Added %d stock reduction intents to order line item.', count( $all_intents ) ), 'DEBUG' );
 			}
 		}
@@ -687,7 +687,7 @@ class CartManager extends Base {
 	public function reduce_inventory_stock( $order ) {
 		opopw_log( sprintf( 'CartManager: Reducing inventory stock for Order #%d', $order->get_id() ), 'INFO' );
 		foreach ( $order->get_items() as $item ) {
-			$intents = $item->get_meta( '_ob_stock_intents', true );
+			$intents = $item->get_meta( '_opopw_stock_intents', true );
 
 			if ( empty( $intents ) ) {
 				continue;
@@ -706,7 +706,7 @@ class CartManager extends Base {
 				$total_reduction = $this->calculate_total_intent_reduction( $intent, $quantity );
 				opopw_log( sprintf( 'CartManager: Dec stock intent for inventory ID %d by amount %f', $inv_id, $total_reduction ), 'DEBUG' );
 
-				$success = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->decrement_stock( $inv_id, $total_reduction );
+				$success = \Opopw\Data\InventoryManager::get_instance()->decrement_stock( $inv_id, $total_reduction );
 
 				if ( ! $success ) {
 					opopw_log( sprintf( 'CartManager: ERROR: Insufficient stock for inventory ID %d. Cannot reduce by %f.', $inv_id, $total_reduction ), 'ERROR' );
@@ -736,14 +736,14 @@ class CartManager extends Base {
 			return;
 		}
 
-		if ( '1' === $order->get_meta( '_ob_stock_restored', true ) ) {
+		if ( '1' === $order->get_meta( '_opopw_stock_restored', true ) ) {
 			return;
 		}
 
 		opopw_log( sprintf( 'CartManager: Restoring inventory stock for Order #%d', $order->get_id() ), 'INFO' );
 
 		foreach ( $order->get_items() as $item ) {
-			$intents = $item->get_meta( '_ob_stock_intents', true );
+			$intents = $item->get_meta( '_opopw_stock_intents', true );
 			if ( empty( $intents ) || ! is_array( $intents ) ) {
 				continue;
 			}
@@ -755,7 +755,7 @@ class CartManager extends Base {
 				$total_restoration = $this->calculate_total_intent_reduction( $intent, $quantity );
 				opopw_log( sprintf( 'CartManager: Restoring inventory ID %d by amount %f', $intent['id'], $total_restoration ), 'DEBUG' );
 
-				$success = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->increment_stock( $intent['id'], $total_restoration );
+				$success = \Opopw\Data\InventoryManager::get_instance()->increment_stock( $intent['id'], $total_restoration );
 				if ( $success ) {
 					opopw_log( sprintf( 'CartManager: SUCCESS: Incremented inventory ID %d by amount %f', $intent['id'], $total_restoration ), 'INFO' );
 				} else {
@@ -764,7 +764,7 @@ class CartManager extends Base {
 			}
 		}
 
-		$order->update_meta_data( '_ob_stock_restored', '1' );
+		$order->update_meta_data( '_opopw_stock_restored', '1' );
 		$order->save();
 	}
 
@@ -809,7 +809,7 @@ class CartManager extends Base {
 	 * @return bool
 	 */
 	private function check_stock_availability( $inventory_id, $requested_amount ) {
-		$inv = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->get_item( $inventory_id );
+		$inv = \Opopw\Data\InventoryManager::get_instance()->get_item( $inventory_id );
 		if ( ! $inv ) {
 			return true;
 		}
@@ -821,7 +821,7 @@ class CartManager extends Base {
 			return true;
 		}
 
-		$reserved  = \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->get_cart_reserved_stock( $inventory_id );
+		$reserved  = \Opopw\Data\InventoryManager::get_instance()->get_cart_reserved_stock( $inventory_id );
 		$available = $stock_count - $reserved;
 
 		return $available >= floatval( $requested_amount );
@@ -830,13 +830,13 @@ class CartManager extends Base {
 	/**
 	 * Helper: Get stock already reserved in cart.
 	 *
-	 * @deprecated Use \SmartProductOptionsAddons\Data\InventoryManager::get_cart_reserved_stock instead.
+	 * @deprecated Use \Opopw\Data\InventoryManager::get_cart_reserved_stock instead.
 	 * @param int    $inventory_id          The inventory ID.
 	 * @param string $exclude_cart_item_key The cart item key to exclude.
 	 * @return float
 	 */
 	private function get_cart_reserved_stock( $inventory_id, $exclude_cart_item_key = null ) {
-		return \SmartProductOptionsAddons\Data\InventoryManager::get_instance()->get_cart_reserved_stock( $inventory_id, $exclude_cart_item_key );
+		return \Opopw\Data\InventoryManager::get_instance()->get_cart_reserved_stock( $inventory_id, $exclude_cart_item_key );
 	}
 
 	/**

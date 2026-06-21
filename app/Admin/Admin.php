@@ -3,13 +3,13 @@
  * Admin — handles the primary admin UI and menu registration.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Admin
+ * @package    Opopw
+ * @subpackage Opopw/Admin
  */
 
-namespace SmartProductOptionsAddons\Admin;
+namespace Opopw\Admin;
 
-use SmartProductOptionsAddons\Core\Settings;
+use Opopw\Core\Settings;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,8 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * The admin-specific functionality of the plugin.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Admin
+ * @package    Opopw
+ * @subpackage Opopw/Admin
  */
 class Admin {
 
@@ -97,7 +97,7 @@ class Admin {
 			__( 'Options', 'optionbay-product-options-addons-woo' ),
 			__( 'Options', 'optionbay-product-options-addons-woo' ),
 			'manage_woocommerce',
-			'wpab-wpoa-options',
+			'opopw-options',
 			array( $this, 'add_setting_root_div' )
 		);
 
@@ -162,7 +162,7 @@ class Admin {
 		}
 
 		// Handle OptionBay - Product Options and Addons pages (Option Groups list/builder) under Products
-		if ( 'product_page_wpab-wpoa-options' === $screen->base ) {
+		if ( 'product_page_opopw-options' === $screen->base ) {
 			return true;
 		}
 
@@ -199,7 +199,7 @@ class Admin {
 	 */
 	public function add_setting_root_div() {
 		echo '<div id="' . esc_attr( OPOPW_PLUGIN_NAME ) . '">
-			<div class="wpab-wpoa-loader-container">
+			<div class="opopw-loader-container">
 				<p>' . esc_html__( 'Loading...', 'optionbay-product-options-addons-woo' ) . '</p>
 			</div>
 		</div>';
@@ -257,14 +257,14 @@ class Admin {
 					'dateFormat' => get_option( 'date_format' ),
 					'timeFormat' => get_option( 'time_format' ),
 				),
-				'plugin_settings' => \SmartProductOptionsAddons\Core\Settings::get_instance()->get_settings(),
+				'plugin_settings' => \Opopw\Core\Settings::get_instance()->get_settings(),
 				'products_url'    => admin_url( 'edit.php?post_type=product' ),
 				'settings_url'    => admin_url( 'admin.php?page=wc-settings&tab=products&section=optionbay-product-options-addons-woo' ),
 				'context'         => $context,
 			)
 		);
 
-		wp_localize_script( $handle, 'spoaPlugin_Localize', $localize );
+		wp_localize_script( $handle, 'opopwPluginLocalize', $localize );
 
 		$path_to_check = OPOPW_PATH . 'languages';
 		wp_set_script_translations(
@@ -293,7 +293,7 @@ class Admin {
 	 * Register the hooks for the admin area.
 	 *
 	 * @since    1.0.0
-	 * @param    \SmartProductOptionsAddons\Core\Plugin $plugin The Plugin instance.
+	 * @param    \Opopw\Core\Plugin $plugin The Plugin instance.
 	 * @return   void
 	 */
 	public function run( $plugin ) {

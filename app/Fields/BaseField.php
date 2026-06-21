@@ -3,11 +3,11 @@
  * Abstract base class for all field types.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Fields
+ * @package    Opopw
+ * @subpackage Opopw/Fields
  */
 
-namespace SmartProductOptionsAddons\Fields;
+namespace Opopw\Fields;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -18,8 +18,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Base field class.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Fields
+ * @package    Opopw
+ * @subpackage Opopw/Fields
  */
 abstract class BaseField implements InterfaceField {
 
@@ -86,7 +86,7 @@ abstract class BaseField implements InterfaceField {
 	 * @return string
 	 */
 	protected function get_html_id() {
-		return sprintf( 'ob-%d-%s', $this->group_id, esc_attr( $this->get( 'id' ) ) );
+		return sprintf( 'opopw-%d-%s', $this->group_id, esc_attr( $this->get( 'id' ) ) );
 	}
 
 	/**
@@ -114,10 +114,10 @@ abstract class BaseField implements InterfaceField {
 		}
 
 		// Initialize HTML container classes
-		$wrapper_classes   = array( 'ob-field' );
-		$wrapper_classes[] = 'ob-field--' . $field_type;
+		$wrapper_classes   = array( 'opopw-field' );
+		$wrapper_classes[] = 'opopw-field--' . $field_type;
 		if ( $is_hidden ) {
-			$wrapper_classes[] = 'ob-hidden';
+			$wrapper_classes[] = 'opopw-hidden';
 		}
 		if ( ! empty( $class_name ) ) {
 			$wrapper_classes[] = $class_name;
@@ -167,9 +167,9 @@ abstract class BaseField implements InterfaceField {
 		$label = $this->get( 'label' );
 		if ( ! empty( $label ) && ! in_array( $field_type, array( 'single_checkbox', 'heading', 'static_content' ), true ) ) {
 			$price_label   = $this->format_price_label( $this->get( 'price', 0 ), $this->get( 'price_type', 'none' ) );
-			$required_mark = $this->get( 'required' ) ? ' <abbr class="ob-required" title="' . esc_attr__( 'required', 'optionbay-product-options-addons-woo' ) . '">*</abbr>' : '';
+			$required_mark = $this->get( 'required' ) ? ' <abbr class="opopw-required" title="' . esc_attr__( 'required', 'optionbay-product-options-addons-woo' ) . '">*</abbr>' : '';
 			$html         .= sprintf(
-				'<label class="ob-field__label" for="%s">%s%s%s</label>',
+				'<label class="opopw-field__label" for="%s">%s%s%s</label>',
 				$this->get_html_id(),
 				esc_html( $label ),
 				$price_label,
@@ -178,7 +178,7 @@ abstract class BaseField implements InterfaceField {
 		}
 
 		// Render the abstract control content handled by the concrete subclass
-		$html .= '<div class="ob-field__input">';
+		$html .= '<div class="opopw-field__input">';
 		$html .= $this->render_input();
 		$html .= '</div>';
 
@@ -186,7 +186,7 @@ abstract class BaseField implements InterfaceField {
 		$description = $this->get( 'description' );
 		if ( ! empty( $description ) ) {
 			$html .= sprintf(
-				'<p class="ob-field__description">%s</p>',
+				'<p class="opopw-field__description">%s</p>',
 				esc_html( $description )
 			);
 		}
@@ -308,15 +308,15 @@ abstract class BaseField implements InterfaceField {
 		$abs_price = abs( $price );
 
 		if ( 'percentage' === $price_type ) {
-			$formatted = $prefix . number_format( $abs_price, \SmartProductOptionsAddons\Helper\WooCommerce::get_price_decimals(), \SmartProductOptionsAddons\Helper\WooCommerce::get_price_decimal_separator(), \SmartProductOptionsAddons\Helper\WooCommerce::get_price_thousand_separator() ) . '%';
+			$formatted = $prefix . number_format( $abs_price, \Opopw\Helper\WooCommerce::get_price_decimals(), \Opopw\Helper\WooCommerce::get_price_decimal_separator(), \Opopw\Helper\WooCommerce::get_price_thousand_separator() ) . '%';
 		} elseif ( function_exists( 'wc_price' ) ) {
 			$formatted = $prefix . wp_strip_all_tags( wc_price( $abs_price ) );
 		} else {
-			$formatted = $prefix . \SmartProductOptionsAddons\Helper\WooCommerce::get_currency_symbol() . number_format( $abs_price, \SmartProductOptionsAddons\Helper\WooCommerce::get_price_decimals(), \SmartProductOptionsAddons\Helper\WooCommerce::get_price_decimal_separator(), \SmartProductOptionsAddons\Helper\WooCommerce::get_price_thousand_separator() );
+			$formatted = $prefix . \Opopw\Helper\WooCommerce::get_currency_symbol() . number_format( $abs_price, \Opopw\Helper\WooCommerce::get_price_decimals(), \Opopw\Helper\WooCommerce::get_price_decimal_separator(), \Opopw\Helper\WooCommerce::get_price_thousand_separator() );
 		}
 
 		if ( $html ) {
-			return sprintf( ' <span class="ob-price-adjustment">(%s)</span>', $formatted );
+			return sprintf( ' <span class="opopw-price-adjustment">(%s)</span>', $formatted );
 		}
 
 		return sprintf( ' (%s)', $formatted );

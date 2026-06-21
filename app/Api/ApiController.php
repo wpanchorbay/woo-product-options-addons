@@ -3,11 +3,11 @@
  * Api Controller — Base class for all REST API endpoints.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Api
+ * @package    Opopw
+ * @subpackage Opopw/Api
  */
 
-namespace SmartProductOptionsAddons\Api;
+namespace Opopw\Api;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -24,8 +24,8 @@ use Rakit\Validation\Validator;
  * The parent class of all API controllers for this plugin.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Api
+ * @package    Opopw
+ * @subpackage Opopw/Api
  */
 class ApiController extends WP_REST_Controller {
 

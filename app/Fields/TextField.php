@@ -3,11 +3,11 @@
  * Text Field — Field type for single-line text input.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Fields
+ * @package    Opopw
+ * @subpackage Opopw/Fields
  */
 
-namespace SmartProductOptionsAddons\Fields;
+namespace Opopw\Fields;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -33,7 +33,7 @@ class TextField extends BaseField {
 			'type'  => 'text',
 			'id'    => $this->get_html_id(),
 			'name'  => $this->get_name(),
-			'class' => 'ob-input ob-input--text',
+			'class' => 'opopw-input opopw-input--text',
 		);
 
 		$placeholder = $this->get( 'placeholder' );

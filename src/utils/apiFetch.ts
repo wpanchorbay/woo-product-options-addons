@@ -8,11 +8,11 @@ declare global {
 		/**
 		 * The main data object localized from PHP by wp_localize_script.
 		 */
-		spoaPlugin_Localize?: PluginStore;
+		opopwPluginLocalize?: PluginStore;
 	}
 }
 // Get the nonce and root URL that we localized from PHP.
-const { nonce, rest_url: restUrl } = window?.spoaPlugin_Localize || {};
+const { nonce, rest_url: restUrl } = window?.opopwPluginLocalize || {};
 if ( nonce ) {
 	apiFetch.use( apiFetch.createNonceMiddleware( nonce ) );
 }

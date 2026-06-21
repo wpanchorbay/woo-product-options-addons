@@ -1,13 +1,13 @@
 <?php
 /**
- * AddonGroup — Registers the ob_option_group Custom Post Type and its meta.
+ * AddonGroup — Registers the opopw_option_group Custom Post Type and its meta.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 
-namespace SmartProductOptionsAddons\Core;
+namespace Opopw\Core;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -15,14 +15,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Registers the ob_option_group Custom Post Type.
+ * Registers the opopw_option_group Custom Post Type.
  *
  * Each Option Group stores a form schema (fields, pricing, conditions)
  * as JSON in post meta, and group-level display settings separately.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 class AddonGroup extends Base {
 
@@ -32,7 +32,7 @@ class AddonGroup extends Base {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	const POST_TYPE = 'ob_option_group';
+	const POST_TYPE = 'opopw_option_group';
 
 	/**
 	 * Post meta key for the form schema JSON.
@@ -40,7 +40,7 @@ class AddonGroup extends Base {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	const META_SCHEMA = '_ob_schema';
+	const META_SCHEMA = '_opopw_schema';
 
 	/**
 	 * Post meta key for group-level settings JSON.
@@ -48,7 +48,7 @@ class AddonGroup extends Base {
 	 * @since 1.0.0
 	 * @var string
 	 */
-	const META_SETTINGS = '_ob_settings';
+	const META_SETTINGS = '_opopw_settings';
 
 	/**
 	 * Register the hooks for this component.
@@ -64,7 +64,7 @@ class AddonGroup extends Base {
 	}
 
 	/**
-	 * Register the ob_option_group Custom Post Type.
+	 * Register the opopw_option_group Custom Post Type.
 	 *
 	 * Registers a hidden CPT that isn't publicly queryable or visible
 	 * in the standard WordPress admin menu, because the React SPA manages it.

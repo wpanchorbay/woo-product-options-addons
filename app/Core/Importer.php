@@ -3,14 +3,14 @@
  * Importer — Service for processing imported JSON data.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 
-namespace SmartProductOptionsAddons\Core;
+namespace Opopw\Core;
 
-use SmartProductOptionsAddons\Data\DbManager;
-use SmartProductOptionsAddons\Data\InventoryManager;
+use Opopw\Data\DbManager;
+use Opopw\Data\InventoryManager;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {

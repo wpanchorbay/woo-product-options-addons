@@ -3,11 +3,11 @@
  * Export Import Controller — REST API handling for data migration.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Api
+ * @package    Opopw
+ * @subpackage Opopw/Api
  */
 
-namespace SmartProductOptionsAddons\Api;
+namespace Opopw\Api;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -17,8 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 use WP_REST_Request;
 use WP_REST_Response;
 use WP_Error;
-use SmartProductOptionsAddons\Core\Exporter;
-use SmartProductOptionsAddons\Core\Importer;
+use Opopw\Core\Exporter;
+use Opopw\Core\Importer;
 
 /**
  * Export Import Controller
@@ -26,8 +26,8 @@ use SmartProductOptionsAddons\Core\Importer;
  * Serves export payload and processes import payload.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Api
+ * @package    Opopw
+ * @subpackage Opopw/Api
  */
 class ExportImportController extends ApiController {
 

@@ -3,11 +3,11 @@
  * Database Manager — Handles the creation and management of custom database tables.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Data
+ * @package    Opopw
+ * @subpackage Opopw/Data
  */
 
-namespace SmartProductOptionsAddons\Data;
+namespace Opopw\Data;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -76,7 +76,7 @@ class DbManager {
 	 */
 	public static function get_assignments_table() {
 		global $wpdb;
-		return $wpdb->prefix . 'wpab_product_options_addons_assignments';
+		return $wpdb->prefix . 'opopw_assignments';
 	}
 
 	/**
@@ -87,7 +87,7 @@ class DbManager {
 	 */
 	public static function get_inventory_table() {
 		global $wpdb;
-		return $wpdb->prefix . 'wpab_product_options_addons_inventory';
+		return $wpdb->prefix . 'opopw_inventory';
 	}
 
 	/**
@@ -168,7 +168,7 @@ class DbManager {
 		);
 
 		if ( false !== $result ) {
-			wp_cache_set( 'wpab_wpoa_assignments_version', time(), 'wpab_wpoa_assignments' );
+			wp_cache_set( 'opopw_assignments_version', time(), 'opopw_assignments' );
 		}
 
 		return $result;
@@ -218,7 +218,7 @@ class DbManager {
 		opopw_log( "Successfully inserted {$inserted} assignments for group {$group_id}", 'INFO' );
 
 		if ( $inserted > 0 ) {
-			wp_cache_set( 'wpab_wpoa_assignments_version', time(), 'wpab_wpoa_assignments' );
+			wp_cache_set( 'opopw_assignments_version', time(), 'opopw_assignments' );
 		}
 
 		return $inserted;
@@ -279,10 +279,10 @@ class DbManager {
 	 * @return array Ordered array of group IDs to display.
 	 */
 	public function get_groups_for_product( $product_id ) {
-		$version_cache = wp_cache_get( 'wpab_wpoa_assignments_version', 'wpab_wpoa_assignments' );
+		$version_cache = wp_cache_get( 'opopw_assignments_version', 'opopw_assignments' );
 		$version       = $version_cache ? $version_cache : 1;
 		$cache_key     = "product_groups_{$product_id}_{$version}";
-		$cached        = wp_cache_get( $cache_key, 'wpab_wpoa_assignments' );
+		$cached        = wp_cache_get( $cache_key, 'opopw_assignments' );
 
 		if ( false !== $cached ) {
 			return $cached;
@@ -325,7 +325,7 @@ class DbManager {
 			$group_ids[] = absint( $row['group_id'] );
 		}
 
-		wp_cache_set( $cache_key, $group_ids, 'wpab_wpoa_assignments', 3600 );
+		wp_cache_set( $cache_key, $group_ids, 'opopw_assignments', 3600 );
 
 		opopw_log( 'Resolved ' . count( $group_ids ) . " group(s) for product {$product_id}", 'DEBUG' );
 

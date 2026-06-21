@@ -3,18 +3,18 @@
  * Plugin — The main plugin bootstrap class.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 
-namespace SmartProductOptionsAddons\Core;
+namespace Opopw\Core;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-use SmartProductOptionsAddons\Helper\Loader;
+use Opopw\Helper\Loader;
 
 /**
  * The core plugin class.
@@ -23,8 +23,8 @@ use SmartProductOptionsAddons\Helper\Loader;
  * public-facing site hooks.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 class Plugin {
 

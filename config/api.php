@@ -3,11 +3,11 @@
  * API Configuration
  *
  * Use this file to register your API controllers.
- * Each controller must extend SmartProductOptionsAddons\Api\ApiController
+ * Each controller must extend Opopw\Api\ApiController
  * and implement get_instance() and run().
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
+ * @package    Opopw
  */
 
 // Exit if accessed directly.
@@ -16,9 +16,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 return array(
-	\SmartProductOptionsAddons\Api\SettingsController::class,
-	\SmartProductOptionsAddons\Api\AddonGroupController::class,
-	\SmartProductOptionsAddons\Api\ResourceController::class,
-	\SmartProductOptionsAddons\Api\InventoryController::class,
-	\SmartProductOptionsAddons\Api\ExportImportController::class,
+	\Opopw\Api\SettingsController::class,
+	\Opopw\Api\AddonGroupController::class,
+	\Opopw\Api\ResourceController::class,
+	\Opopw\Api\InventoryController::class,
+	\Opopw\Api\ExportImportController::class,
 );

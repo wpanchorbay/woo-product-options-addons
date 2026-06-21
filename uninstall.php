@@ -3,7 +3,7 @@
  * Fired when the user clicks "Delete" for the plugin.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
+ * @package    Opopw
  */
 
 // If uninstall not called from WordPress, then exit.
@@ -34,14 +34,14 @@ function opopw_run_uninstall() {
 }
 
 /**
- * Delete all custom posts of type ob_option_group.
+ * Delete all custom posts of type opopw_option_group.
  *
  * @since 1.0.0
  */
 function opopw_delete_custom_posts() {
 	$posts = get_posts(
 		array(
-			'post_type'   => 'ob_option_group',
+			'post_type'   => 'opopw_option_group',
 			'post_status' => 'any',
 			'numberposts' => -1,
 			'fields'      => 'ids',
@@ -64,8 +64,8 @@ function opopw_drop_custom_tables() {
 	global $wpdb;
 
 	$tables = array(
-		$wpdb->prefix . 'wpab_product_options_addons_assignments',
-		$wpdb->prefix . 'wpab_product_options_addons_inventory',
+		$wpdb->prefix . 'opopw_assignments',
+		$wpdb->prefix . 'opopw_inventory',
 	);
 
 	foreach ( $tables as $table ) {
@@ -94,8 +94,8 @@ function opopw_remove_capabilities() {
 
 	foreach ( $editable_roles as $role_name => $role_info ) {
 		$role = get_role( $role_name );
-		if ( $role && $role->has_cap( 'manage_wpab_options_addons' ) ) {
-			$role->remove_cap( 'manage_wpab_options_addons' );
+		if ( $role && $role->has_cap( 'manage_opopw_options_addons' ) ) {
+			$role->remove_cap( 'manage_opopw_options_addons' );
 		}
 	}
 }

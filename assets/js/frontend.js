@@ -12,12 +12,12 @@
 (function ($) {
   "use strict";
   // Bail if no schema data was hydrated by PHP
-  if (typeof window.spoaSchema === "undefined") {
+  if (typeof window.opopwSchema === "undefined") {
 
     return;
   }
 
-  var OB = window.spoaSchema;
+  var OB = window.opopwSchema;
   var schemas = OB.schemas || {};
   var basePrice = parseFloat(OB.basePrice) || 0;
 
@@ -29,8 +29,8 @@
    * Get the current value of a field by its field ID.
    */
   function getFieldValue(groupId, fieldId) {
-    var $wrapper = $('#spoa-options').find(
-      '.ob-field[data-group-id="' +
+    var $wrapper = $('#opopw-options').find(
+      '.opopw-field[data-group-id="' +
       groupId +
       '"][data-field-id="' +
       fieldId +
@@ -178,8 +178,8 @@
       var shouldShow =
         action === "show" ? conditionMet : !conditionMet;
 
-      var $field = $('#spoa-options').find(
-        '.ob-field[data-group-id="' +
+      var $field = $('#opopw-options').find(
+        '.opopw-field[data-group-id="' +
         groupId +
         '"][data-field-id="' +
         field.id +
@@ -187,9 +187,9 @@
       );
 
       if (shouldShow) {
-        $field.removeClass("ob-hidden");
+        $field.removeClass("opopw-hidden");
       } else {
-        $field.addClass("ob-hidden");
+        $field.addClass("opopw-hidden");
         // Clear values of hidden fields
         $field.find("input, select, textarea").each(function () {
           var $el = $(this);
@@ -218,15 +218,15 @@
       if (!groupData.fields) return;
 
       $.each(groupData.fields, function (_, field) {
-        var $wrapper = $('#spoa-options').find(
-          '.ob-field[data-group-id="' +
+        var $wrapper = $('#opopw-options').find(
+          '.opopw-field[data-group-id="' +
           groupId +
           '"][data-field-id="' +
           field.id +
           '"]'
         );
 
-        if ($wrapper.length > 1 && window.SPOA_DEBUG) {
+        if ($wrapper.length > 1 && window.OPOPW_DEBUG) {
           console.warn("Pricing Error: Multiple elements found for Field ID:", field.id, "Group ID:", groupId);
         }
 
@@ -308,8 +308,8 @@
       if (!groupData.fields) return;
 
       $.each(groupData.fields, function (_, field) {
-        var $fieldWrapper = $('#spoa-options').find(
-          '.ob-field[data-group-id="' + groupId + '"][data-field-id="' + field.id + '"]'
+        var $fieldWrapper = $('#opopw-options').find(
+          '.opopw-field[data-group-id="' + groupId + '"][data-field-id="' + field.id + '"]'
         );
         if (!$fieldWrapper.length) return;
 
@@ -321,13 +321,13 @@
             var remaining = inv.stock - (inv.reserved || 0);
 
             if (remaining < reductionAmount) {
-              $fieldWrapper.find("input, select, textarea").prop("disabled", true).addClass("ob-out-of-stock");
-              if ($fieldWrapper.find(".ob-stock-badge").length === 0) {
-                $fieldWrapper.find(".ob-field__label").append(' <span class="ob-stock-badge out-of-stock">' + (__("Out of stock", "optionbay-product-options-addons-woo")) + '</span>');
+              $fieldWrapper.find("input, select, textarea").prop("disabled", true).addClass("opopw-out-of-stock");
+              if ($fieldWrapper.find(".opopw-stock-badge").length === 0) {
+                $fieldWrapper.find(".opopw-field__label").append(' <span class="opopw-stock-badge out-of-stock">' + (__("Out of stock", "optionbay-product-options-addons-woo")) + '</span>');
               }
             } else {
-              $fieldWrapper.find("input, select, textarea").prop("disabled", false).removeClass("ob-out-of-stock");
-              $fieldWrapper.find(".ob-stock-badge").remove();
+              $fieldWrapper.find("input, select, textarea").prop("disabled", false).removeClass("opopw-out-of-stock");
+              $fieldWrapper.find(".opopw-stock-badge").remove();
             }
           }
         }
@@ -369,7 +369,7 @@
       return $wrapper.find('input[value="' + value + '"]');
     }
     if (type === 'color_swatch' || type === 'image_swatch') {
-      return $wrapper.find('.ob-swatch-input[value="' + value + '"]');
+      return $wrapper.find('.opopw-swatch-input[value="' + value + '"]');
     }
     return null;
   }
@@ -382,8 +382,8 @@
       }
       $el.prop("disabled", true).text($el.data("originalText") + " (" + __("Out of stock", "optionbay-product-options-addons-woo") + ")");
     } else {
-      $el.prop("disabled", true).addClass("ob-out-of-stock");
-      getOptionLabel($el).addClass('ob-option-disabled').attr('title', __("Out of stock", "optionbay-product-options-addons-woo"));
+      $el.prop("disabled", true).addClass("opopw-out-of-stock");
+      getOptionLabel($el).addClass('opopw-option-disabled').attr('title', __("Out of stock", "optionbay-product-options-addons-woo"));
     }
   }
 
@@ -395,8 +395,8 @@
         $el.text($el.data("originalText"));
       }
     } else {
-      $el.prop("disabled", false).removeClass("ob-out-of-stock");
-      getOptionLabel($el).removeClass('ob-option-disabled').removeAttr('title');
+      $el.prop("disabled", false).removeClass("opopw-out-of-stock");
+      getOptionLabel($el).removeClass('opopw-option-disabled').removeAttr('title');
     }
   }
 
@@ -415,7 +415,7 @@
    * Trigger a custom event when totals are updated
    */
   function triggerTotalsUpdated(total) {
-    $(document.body).trigger("smart_product_options_addons_totals_updated", [total, basePrice]);
+    $(document.body).trigger("opopw_totals_updated", [total, basePrice]);
   }
 
   /**
@@ -438,7 +438,7 @@
   function updatePriceDisplay(addonTotal) {
     var finalTotal = basePrice + addonTotal;
 
-    var $totalEl = $(".spoa-live-total");
+    var $totalEl = $(".opopw-live-total");
 
     if (addonTotal > 0) {
       $totalEl.show();
@@ -497,15 +497,15 @@
       $.each(groupData.fields, function (_, field) {
         if (!field.required) return;
 
-        var $wrapper = $('#spoa-options').find(
-          '.ob-field[data-group-id="' +
+        var $wrapper = $('#opopw-options').find(
+          '.opopw-field[data-group-id="' +
           groupId +
           '"][data-field-id="' +
           field.id +
           '"]'
         );
 
-        if ($wrapper.length > 1 && window.SPOA_DEBUG) {
+        if ($wrapper.length > 1 && window.OPOPW_DEBUG) {
           console.warn("Validation Error: Multiple elements found for Field ID:", field.id, "Group ID:", groupId);
         }
 
@@ -524,9 +524,9 @@
     });
 
     if (isValid) {
-      $btn.prop("disabled", false).removeClass("disabled ob-btn-disabled");
+      $btn.prop("disabled", false).removeClass("disabled opopw-btn-disabled");
     } else {
-      $btn.prop("disabled", true).addClass("disabled ob-btn-disabled");
+      $btn.prop("disabled", true).addClass("disabled opopw-btn-disabled");
     }
   }
 
@@ -539,7 +539,7 @@
     if (!$form.length) return;
 
     // Delegated listener for all field changes
-    $form.on("change input", ".ob-field input, .ob-field select, .ob-field textarea", function () {
+    $form.on("change input", ".opopw-field input, .opopw-field select, .opopw-field textarea", function () {
       // 1. Evaluate conditional logic for ALL groups (to catch cross-group dependencies)
       $.each(schemas, function (groupId) {
         evaluateConditions(String(groupId));

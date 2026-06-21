@@ -1,6 +1,6 @@
 <?php
 
-namespace SmartProductOptionsAddons\Helper;
+namespace Opopw\Helper;
 
 // Exit if accessed directly.
 if (!defined('ABSPATH')) {
@@ -13,8 +13,8 @@ if (!defined('ABSPATH')) {
  * Encapsulates direct calls to WooCommerce functions to ensure compatibility and safe usage.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Helper
+ * @package    Opopw
+ * @subpackage Opopw/Helper
  */
 class WooCommerce
 {

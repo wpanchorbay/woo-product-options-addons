@@ -3,11 +3,11 @@
  * WC Settings Tab — integrates OptionBay - Product Options and Addons settings into WooCommerce settings.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Admin
+ * @package    Opopw
+ * @subpackage Opopw/Admin
  */
 
-namespace SmartProductOptionsAddons\Admin;
+namespace Opopw\Admin;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {

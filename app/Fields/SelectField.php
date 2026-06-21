@@ -3,11 +3,11 @@
  * Select Field — Field type for dropdown selections.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Fields
+ * @package    Opopw
+ * @subpackage Opopw/Fields
  */
 
-namespace SmartProductOptionsAddons\Fields;
+namespace Opopw\Fields;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -34,7 +34,7 @@ class SelectField extends BaseField {
 		$options  = $this->get( 'options', array() );
 
 		$html = sprintf(
-			'<select id="%s" name="%s" class="ob-input ob-input--select"%s>',
+			'<select id="%s" name="%s" class="opopw-input opopw-input--select"%s>',
 			$this->get_html_id(),
 			$this->get_name(),
 			$required

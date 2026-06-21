@@ -3,11 +3,11 @@
  * Pricing Engine — Orchestrates the calculation of add-on prices using various strategies.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Pricing
+ * @package    Opopw
+ * @subpackage Opopw/Pricing
  */
 
-namespace SmartProductOptionsAddons\Pricing;
+namespace Opopw\Pricing;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -20,8 +20,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Resolves the correct pricing strategy and executes it.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Pricing
+ * @package    Opopw
+ * @subpackage Opopw/Pricing
  */
 class PricingEngine {
 

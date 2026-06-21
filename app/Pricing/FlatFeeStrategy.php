@@ -3,11 +3,11 @@
  * Flat Fee Pricing Strategy — Adds a fixed amount to the product price.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Pricing
+ * @package    Opopw
+ * @subpackage Opopw/Pricing
  */
 
-namespace SmartProductOptionsAddons\Pricing;
+namespace Opopw\Pricing;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

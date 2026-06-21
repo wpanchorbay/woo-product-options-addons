@@ -3,12 +3,12 @@
  * Register all actions and filters for the plugin.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Helper
+ * @package    Opopw
+ * @subpackage Opopw/Helper
  * @author     WPAnchorBay <wpanchorbay@gmail.com>
  */
 
-namespace SmartProductOptionsAddons\Helper;
+namespace Opopw\Helper;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -19,8 +19,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Register all actions and filters for the plugin.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Helper
+ * @package    Opopw
+ * @subpackage Opopw/Helper
  */
 class Loader {
 

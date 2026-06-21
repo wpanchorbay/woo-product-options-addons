@@ -7,24 +7,24 @@ namespace Composer\Autoload;
 class ComposerStaticInit5e2ccdd4e9c1b45ba4720c46bc8066bd
 {
     public static $prefixLengthsPsr4 = array (
-        'S' => 
-        array (
-            'SmartProductOptionsAddons\\' => 26,
-        ),
         'R' => 
         array (
             'Rakit\\Validation\\' => 17,
         ),
+        'O' => 
+        array (
+            'Opopw\\' => 6,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'SmartProductOptionsAddons\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/app',
-        ),
         'Rakit\\Validation\\' => 
         array (
             0 => __DIR__ . '/..' . '/rakit/validation/src',
+        ),
+        'Opopw\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/app',
         ),
     );
 

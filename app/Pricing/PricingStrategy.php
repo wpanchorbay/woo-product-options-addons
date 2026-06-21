@@ -3,11 +3,11 @@
  * Pricing Strategy Interface — Blueprint for all price calculation logic.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Pricing
+ * @package    Opopw
+ * @subpackage Opopw/Pricing
  */
 
-namespace SmartProductOptionsAddons\Pricing;
+namespace Opopw\Pricing;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;

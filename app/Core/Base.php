@@ -6,12 +6,12 @@
  * for child classes to register their actions and filters.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  * @author     WPAnchorBay <wpanchorbay@gmail.com>
  */
 
-namespace SmartProductOptionsAddons\Core;
+namespace Opopw\Core;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -22,8 +22,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  * Abstract base class for the plugin's core components.
  *
  * @since      1.0.0
- * @package    SmartProductOptionsAddons
- * @subpackage SmartProductOptionsAddons/Core
+ * @package    Opopw
+ * @subpackage Opopw/Core
  */
 abstract class Base {
 
