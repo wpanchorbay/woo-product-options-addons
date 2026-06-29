@@ -21,6 +21,8 @@
   var schemas = OB.schemas || {};
   var basePrice = parseFloat(OB.basePrice) || 0;
   var originalImageAttr = null;
+  var isResettingFromThumbnail = false;
+  var lastInteractedOption = null;
 
 
 
@@ -531,13 +533,11 @@
     }
   }
 
-
-
   function captureOriginalImage() {
     var $gallery = $(".woocommerce-product-gallery");
     if (!$gallery.length) return;
 
-    var $img = $gallery.find(".woocommerce-product-gallery__image img, .woocommerce-product-gallery__image--placeholder img, .woocommerce-product-gallery__wrapper img, .woocommerce-product-gallery img").first();
+    var $img = $gallery.find(".woocommerce-product-gallery__wrapper .woocommerce-product-gallery__image img, .woocommerce-product-gallery__image--placeholder img, .woocommerce-product-gallery img").first();
     var $link = $img.parent("a");
     if (!$link.length) {
       $link = $gallery.find(".woocommerce-product-gallery__image a, .woocommerce-product-gallery__image--placeholder a, .woocommerce-product-gallery__wrapper a").first();
@@ -562,17 +562,140 @@
     }
   }
 
-  function handleImageSwap() {
-    if (!originalImageAttr) {
-      captureOriginalImage();
-    }
-    if (!originalImageAttr) return;
+  function getCleanFilename(url) {
+    if (!url) return "";
+    var parts = url.split('/');
+    var filename = parts[parts.length - 1];
+    return filename.replace(/-\d+x\d+(\.[a-z0-9]+)$/i, '$1');
+  }
 
-    var targetImage = null;
+  function getLinkedImages() {
+    var images = [];
+    var seen = {};
 
     $.each(schemas, function (groupId, groupData) {
       if (!groupData.fields) return;
+      $.each(groupData.fields, function (_, field) {
+        if (field.options) {
+          $.each(field.options, function (_, opt) {
+            if (opt.linked_image_url) {
+              var src = opt.linked_image_single_url || opt.linked_image_url;
+              if (!seen[src]) {
+                images.push({
+                  src: src,
+                  srcset: opt.linked_image_srcset || "",
+                  large: opt.linked_image_url,
+                  width: opt.linked_image_width || "",
+                  height: opt.linked_image_height || "",
+                  optionValue: opt.value,
+                  fieldId: field.id,
+                  groupId: groupId
+                });
+                seen[src] = true;
+              }
+            }
+          });
+        }
+      });
+    });
 
+    return images;
+  }
+
+  function appendOptionImagesToGallery() {
+    var images = getLinkedImages();
+    if (images.length === 0) return;
+
+    var $gallery = $(".woocommerce-product-gallery");
+    if (!$gallery.length) return;
+
+    var $wrapper = $gallery.find(".woocommerce-product-gallery__wrapper");
+    if (!$wrapper.length) return;
+
+    var flexslider = $gallery.data("flexslider");
+
+    $.each(images, function(idx, imgData) {
+      var cleanSrc = getCleanFilename(imgData.src);
+      var exists = false;
+      
+      $wrapper.find("img").each(function() {
+        if (getCleanFilename($(this).attr("src")) === cleanSrc) {
+          exists = true;
+          return false;
+        }
+      });
+      if (exists) return;
+
+      var $slide = $('<div class="woocommerce-product-gallery__image"></div>');
+      $slide.attr({
+        "data-thumb": imgData.src,
+        "data-option-val": imgData.optionValue,
+        "data-field-id": imgData.fieldId,
+        "data-group-id": imgData.groupId
+      });
+
+      var $a = $("<a></a>").attr("href", imgData.large);
+      var $img = $("<img />").attr({
+        src: imgData.src,
+        srcset: imgData.srcset,
+        "data-src": imgData.large,
+        "data-large_image": imgData.large,
+        "data-large_image_width": imgData.width,
+        "data-large_image_height": imgData.height,
+        width: imgData.width || 416,
+        height: imgData.height || 416
+      });
+
+      $a.append($img);
+      $slide.append($a);
+
+      if (flexslider && typeof flexslider.addSlide === "function") {
+        flexslider.addSlide($slide);
+      } else {
+        $wrapper.append($slide);
+      }
+    });
+  }
+
+  function handleImageSwap() {
+    var targetImage = null;
+
+    if (lastInteractedOption) {
+      var opt = lastInteractedOption;
+      var $fieldWrapper = $('#opopw-options').find(
+        '.opopw-field[data-group-id="' + opt.groupId + '"][data-field-id="' + opt.fieldId + '"]'
+      );
+      var isVisible = $fieldWrapper.length && $fieldWrapper.is(":visible");
+      if (isVisible) {
+        var $input = $fieldWrapper.find('input[value="' + opt.value + '"], select');
+        var isSelected = false;
+        if ($input.is("select")) {
+          isSelected = ($input.val() === opt.value);
+        } else if ($input.is('[type="radio"]') || $input.is('[type="checkbox"]')) {
+          isSelected = $input.prop("checked");
+        }
+        
+        if (isSelected) {
+          var groupData = schemas[opt.groupId];
+          if (groupData && groupData.fields) {
+            $.each(groupData.fields, function(_, field) {
+              if (String(field.id) === String(opt.fieldId)) {
+                var optSchema = findOptionSchema(field, opt.value);
+                if (optSchema) {
+                  targetImage = optSchema;
+                }
+                return false;
+              }
+            });
+          }
+        }
+      }
+    }
+
+    if (!targetImage) {
+
+    $.each(schemas, function (groupId, groupData) {
+      if (!groupData.fields) return;
       $.each(groupData.fields, function (_, field) {
         var $wrapper = $('#opopw-options').find(
           '.opopw-field[data-group-id="' +
@@ -619,77 +742,166 @@
         }
       });
     });
+  }
 
     var $gallery = $(".woocommerce-product-gallery");
-    var $img = $gallery.find(".woocommerce-product-gallery__image img, .woocommerce-product-gallery__image--placeholder img, .woocommerce-product-gallery__wrapper img, .woocommerce-product-gallery img").first();
-    var $link = $img.parent("a");
-    if (!$link.length) {
-      $link = $gallery.find(".woocommerce-product-gallery__image a, .woocommerce-product-gallery__image--placeholder a, .woocommerce-product-gallery__wrapper a").first();
-    }
+    var flexslider = $gallery.data("flexslider");
 
-    if (!$img.length) return;
+    if (flexslider) {
+      if (targetImage) {
+        var targetSrc = targetImage.linked_image_single_url || targetImage.linked_image_url;
+        var cleanTarget = getCleanFilename(targetSrc);
+        var targetIndex = 0;
 
-    if (targetImage) {
-      var newSrc = targetImage.linked_image_single_url || targetImage.linked_image_url;
-      var newSrcset = targetImage.linked_image_srcset || "";
-      var newLargeSrc = targetImage.linked_image_url;
-      var newWidth = targetImage.linked_image_width || "";
-      var newHeight = targetImage.linked_image_height || "";
+        $gallery.find(".woocommerce-product-gallery__wrapper > .woocommerce-product-gallery__image").each(function(idx) {
+          var $imgEl = $(this).find("img").first();
+          if ($imgEl.length && (getCleanFilename($imgEl.attr("src")) === cleanTarget || getCleanFilename($imgEl.attr("data-large_image")) === cleanTarget)) {
+            targetIndex = idx;
+            return false;
+          }
+        });
 
-      $img.addClass("opopw-image-swapping");
-
-      $img.attr("src", newSrc);
-      if (newSrcset) {
-        $img.attr("srcset", newSrcset);
+        if (flexslider.currentSlide !== targetIndex) {
+          flexslider.flexAnimate(targetIndex);
+        }
       } else {
-        $img.removeAttr("srcset");
+        if (!isResettingFromThumbnail) {
+          if (flexslider.currentSlide !== 0) {
+            flexslider.flexAnimate(0);
+          }
+        }
       }
-      $img.attr("data-src", newSrc);
-      $img.attr("data-large_image", newLargeSrc);
-      if (newWidth) $img.attr("data-large_image_width", newWidth);
-      if (newHeight) $img.attr("data-large_image_height", newHeight);
+    } else {
+      // Fallback: Swap Slide 0 attributes directly for non-slider themes
+      var $img = $gallery.find(".woocommerce-product-gallery__wrapper .woocommerce-product-gallery__image img, .woocommerce-product-gallery__image--placeholder img, .woocommerce-product-gallery img").first();
+      if (!$img.length) return;
 
-      if ($link.length) {
-        $link.attr("href", newLargeSrc);
+      var $link = $img.parent("a");
+      if (!$link.length) {
+        $link = $gallery.find(".woocommerce-product-gallery__image a, .woocommerce-product-gallery__image--placeholder a, .woocommerce-product-gallery__wrapper a").first();
       }
 
-      if (typeof $.fn.easyZoom === "function" && $gallery.data("easyZoom")) {
-        var api = $gallery.data("easyZoom");
-        if (api && typeof api.teardown === "function" && typeof api.init === "function") {
-          api.teardown();
-          api.init();
+      if (targetImage) {
+        var newSrc = targetImage.linked_image_single_url || targetImage.linked_image_url;
+        var newSrcset = targetImage.linked_image_srcset || "";
+        var newLargeSrc = targetImage.linked_image_url;
+
+        $img.addClass("opopw-image-swapping");
+
+        $img.attr("src", newSrc);
+        if (newSrcset) {
+          $img.attr("srcset", newSrcset);
+        } else {
+          $img.removeAttr("srcset");
+        }
+        $img.removeAttr("sizes");
+        $img.attr("data-src", newLargeSrc);
+        $img.attr("data-large_image", newLargeSrc);
+        $img.attr("data-large_image_width", targetImage.linked_image_width || "");
+        $img.attr("data-large_image_height", targetImage.linked_image_height || "");
+
+        if ($link.length) {
+          $link.attr("href", newLargeSrc);
+        }
+
+        setTimeout(function() {
+          $img.removeClass("opopw-image-swapping");
+        }, 200);
+      } else if (originalImageAttr) {
+        var orig = originalImageAttr;
+        $img.addClass("opopw-image-swapping");
+
+        $img.attr("src", orig.img.src);
+        if (orig.img.srcset) {
+          $img.attr("srcset", orig.img.srcset);
+        } else {
+          $img.removeAttr("srcset");
+        }
+        if (orig.img.sizes) $img.attr("sizes", orig.img.sizes);
+        $img.attr("data-src", orig.img["data-src"]);
+        $img.attr("data-large_image", orig.img["data-large_image"]);
+        $img.attr("data-large_image_width", orig.img["data-large_image_width"]);
+        $img.attr("data-large_image_height", orig.img["data-large_image_height"]);
+
+        if ($link.length && orig.link) {
+          $link.attr("href", orig.link.href);
+          $link.attr("title", orig.link.title);
+        }
+
+        setTimeout(function() {
+          $img.removeClass("opopw-image-swapping");
+        }, 200);
+      }
+    }
+  }
+
+  function bindThumbnailFormSync() {
+    var $gallery = $(".woocommerce-product-gallery");
+    
+    $gallery.on("click.opopw-sync", ".flex-control-thumbs li, .thumbnails .zoom", function() {
+      var $li = $(this);
+      var idx = $li.index();
+      
+      var $slides = $gallery.find(".woocommerce-product-gallery__wrapper > .woocommerce-product-gallery__image");
+      var $slide = $slides.eq(idx);
+      if (!$slide.length) return;
+
+      var optVal = $slide.attr("data-option-val");
+      var fieldId = $slide.attr("data-field-id");
+      var groupId = $slide.attr("data-group-id");
+
+      var flexslider = $gallery.data("flexslider");
+      if (flexslider && typeof flexslider.flexAnimate === "function") {
+        if (flexslider.currentSlide !== idx) {
+          flexslider.flexAnimate(idx);
         }
       }
 
-      setTimeout(function() {
-        $img.removeClass("opopw-image-swapping");
-      }, 200);
+      if (optVal && fieldId && groupId) {
+        lastInteractedOption = { groupId: groupId, fieldId: fieldId, value: optVal };
+        var $fieldWrapper = $('#opopw-options').find(
+          '.opopw-field[data-group-id="' + groupId + '"][data-field-id="' + fieldId + '"]'
+        );
 
-    } else {
-      var orig = originalImageAttr;
-      $img.addClass("opopw-image-swapping");
-
-      $img.attr("src", orig.img.src);
-      if (orig.img.srcset) {
-        $img.attr("srcset", orig.img.srcset);
+        if ($fieldWrapper.length) {
+          var $fieldInput = $fieldWrapper.find('input[value="' + optVal + '"], select');
+          if ($fieldInput.is("select")) {
+            if ($fieldInput.val() !== optVal) {
+              $fieldInput.val(optVal).trigger("change");
+            }
+          } else if ($fieldInput.is('[type="radio"]') || $fieldInput.is('[type="checkbox"]')) {
+            if (!$fieldInput.prop("checked")) {
+              $fieldInput.prop("checked", true).trigger("change");
+            }
+          }
+        }
       } else {
-        $img.removeAttr("srcset");
-      }
-      if (orig.img.sizes) $img.attr("sizes", orig.img.sizes);
-      $img.attr("data-src", orig.img["data-src"]);
-      $img.attr("data-large_image", orig.img["data-large_image"]);
-      $img.attr("data-large_image_width", orig.img["data-large_image_width"]);
-      $img.attr("data-large_image_height", orig.img["data-large_image_height"]);
+        // Clicked native gallery image: clear option fields that have linked images
+        isResettingFromThumbnail = true;
+        $.each(schemas, function (groupId, groupData) {
+          if (!groupData.fields) return;
+          $.each(groupData.fields, function (_, field) {
+            var $fieldWrapper = $('#opopw-options').find(
+              '.opopw-field[data-group-id="' + groupId + '"][data-field-id="' + field.id + '"]'
+            );
+            if (!$fieldWrapper.length || !$fieldWrapper.is(":visible")) return;
 
-      if ($link.length && orig.link) {
-        $link.attr("href", orig.link.href);
-        $link.attr("title", orig.link.title);
+            if (field.type === "select") {
+              var $select = $fieldWrapper.find("select");
+              if ($select.find("option:selected").attr("data-linked-image")) {
+                $select.val("").trigger("change");
+              }
+            } else if (field.type === "radio" || field.type === "color_swatch" || field.type === "image_swatch") {
+              var $checked = $fieldWrapper.find('input[type="radio"]:checked');
+              if ($checked.attr("data-linked-image")) {
+                $checked.prop("checked", false).trigger("change");
+              }
+            }
+          });
+        });
+        isResettingFromThumbnail = false;
       }
-
-      setTimeout(function() {
-        $img.removeClass("opopw-image-swapping");
-      }, 200);
-    }
+    });
   }
 
   function findOptionSchema(field, value) {
@@ -710,9 +922,43 @@
     if (!$form.length) return;
 
     captureOriginalImage();
+    appendOptionImagesToGallery();
+    bindThumbnailFormSync();
 
     // Delegated listener for all field changes
     $form.on("change input", ".opopw-field input, .opopw-field select, .opopw-field textarea", function () {
+      var $field = $(this).closest(".opopw-field");
+      var groupId = $field.attr("data-group-id");
+      var fieldId = $field.attr("data-field-id");
+      var val = $(this).val();
+      if ($(this).is('[type="radio"]') || $(this).is('[type="checkbox"]')) {
+        if (!$(this).prop("checked")) {
+          val = "";
+        } else {
+          val = $(this).val();
+        }
+      }
+
+      var hasImg = false;
+      var groupData = schemas[groupId];
+      if (groupData && groupData.fields) {
+        $.each(groupData.fields, function(_, f) {
+          if (String(f.id) === String(fieldId)) {
+            var optSchema = findOptionSchema(f, val);
+            if (optSchema && optSchema.linked_image_url) {
+              hasImg = true;
+            }
+            return false;
+          }
+        });
+      }
+
+      if (hasImg) {
+        lastInteractedOption = { groupId: groupId, fieldId: fieldId, value: val };
+      } else if (lastInteractedOption && lastInteractedOption.groupId === groupId && lastInteractedOption.fieldId === fieldId) {
+        lastInteractedOption = null;
+      }
+
       // 1. Evaluate conditional logic for ALL groups (to catch cross-group dependencies)
       $.each(schemas, function (groupId) {
         evaluateConditions(String(groupId));

@@ -409,9 +409,44 @@
 }
 
 /* ─── Image Swap Transition ────────────────────────────────────────── */
-.woocommerce-product-gallery__image img {
+.woocommerce-product-gallery__image img:not(.zoomImg) {
     transition: opacity 0.2s ease-in-out;
 }
 .woocommerce-product-gallery__image img.opopw-image-swapping {
     opacity: 0.2;
+}
+
+/* ─── Custom Gallery Thumbnails ────────────────────────────────────── */
+.opopw-custom-thumbs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 12px;
+    padding: 0;
+    list-style: none;
+}
+
+.opopw-custom-thumbs li {
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-radius: var(--opopw-radius);
+    overflow: hidden;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.opopw-custom-thumbs li:hover {
+    transform: scale(1.05);
+}
+
+.opopw-custom-thumbs li.active {
+    border-color: var(--opopw-primary);
+}
+
+.opopw-custom-thumbs li img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }

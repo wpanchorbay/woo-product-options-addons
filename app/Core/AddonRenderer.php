@@ -408,7 +408,7 @@ class AddonRenderer extends Base {
 			'opopw-frontend',
 			OPOPW_URL . 'assets/css/frontend.css',
 			array(),
-			OPOPW_VERSION
+			time()
 		);
 
 		// Frontend JS
@@ -416,7 +416,7 @@ class AddonRenderer extends Base {
 			'opopw-frontend',
 			OPOPW_URL . 'assets/js/frontend.js',
 			array( 'jquery' ),
-			OPOPW_VERSION,
+			time(),
 			true
 		);
 
