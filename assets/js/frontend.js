@@ -612,6 +612,12 @@
     var $wrapper = $gallery.find(".woocommerce-product-gallery__wrapper");
     if (!$wrapper.length) return;
 
+    var $placeholder = $gallery.find(".woocommerce-product-gallery__image--placeholder");
+    if ($placeholder.length) {
+      $placeholder.remove();
+      $gallery.removeClass("woocommerce-product-gallery--without-images");
+    }
+
     var flexslider = $gallery.data("flexslider");
 
     $.each(images, function(idx, imgData) {
@@ -655,6 +661,10 @@
         $wrapper.append($slide);
       }
     });
+
+    if (!flexslider && typeof $.fn.wc_product_gallery !== "undefined") {
+      $gallery.wc_product_gallery();
+    }
   }
 
   function handleImageSwap() {
@@ -746,28 +756,31 @@
 
     var $gallery = $(".woocommerce-product-gallery");
     var flexslider = $gallery.data("flexslider");
+    var hasFlexsliderLib = (typeof $.fn.flexslider !== "undefined");
 
-    if (flexslider) {
-      if (targetImage) {
-        var targetSrc = targetImage.linked_image_single_url || targetImage.linked_image_url;
-        var cleanTarget = getCleanFilename(targetSrc);
-        var targetIndex = 0;
+    if (hasFlexsliderLib) {
+      if (flexslider) {
+        if (targetImage) {
+          var targetSrc = targetImage.linked_image_single_url || targetImage.linked_image_url;
+          var cleanTarget = getCleanFilename(targetSrc);
+          var targetIndex = 0;
 
-        $gallery.find(".woocommerce-product-gallery__wrapper > .woocommerce-product-gallery__image").each(function(idx) {
-          var $imgEl = $(this).find("img").first();
-          if ($imgEl.length && (getCleanFilename($imgEl.attr("src")) === cleanTarget || getCleanFilename($imgEl.attr("data-large_image")) === cleanTarget)) {
-            targetIndex = idx;
-            return false;
+          $gallery.find(".woocommerce-product-gallery__wrapper > .woocommerce-product-gallery__image").each(function(idx) {
+            var $imgEl = $(this).find("img").first();
+            if ($imgEl.length && (getCleanFilename($imgEl.attr("src")) === cleanTarget || getCleanFilename($imgEl.attr("data-large_image")) === cleanTarget)) {
+              targetIndex = idx;
+              return false;
+            }
+          });
+
+          if (flexslider.currentSlide !== targetIndex) {
+            flexslider.flexAnimate(targetIndex);
           }
-        });
-
-        if (flexslider.currentSlide !== targetIndex) {
-          flexslider.flexAnimate(targetIndex);
-        }
-      } else {
-        if (!isResettingFromThumbnail) {
-          if (flexslider.currentSlide !== 0) {
-            flexslider.flexAnimate(0);
+        } else {
+          if (!isResettingFromThumbnail) {
+            if (flexslider.currentSlide !== 0) {
+              flexslider.flexAnimate(0);
+            }
           }
         }
       }
