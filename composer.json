@@ -15,7 +15,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Opopw\\": "app/"
+            "Opopw\\": "app/",
+            "WPAB\\DeactivationFeedback\\": "vendor/deactivation-feedback/src/"
         }
     }
 }
